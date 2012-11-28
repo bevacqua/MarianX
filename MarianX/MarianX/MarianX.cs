@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -11,6 +12,7 @@ namespace MarianX
 	{
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
+		Texture2D eiffel;
 
 		public MarianX()
 		{
@@ -37,10 +39,8 @@ namespace MarianX
 		/// </summary>
 		protected override void LoadContent()
 		{
-			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
-
-			// TODO: use this.Content to load your game content here
+			eiffel = Content.Load<Texture2D>("Backgrounds/Eiffel");
 		}
 
 		/// <summary>
@@ -76,9 +76,15 @@ namespace MarianX
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
-			// TODO: Add your drawing code here
+			spriteBatch.Begin();
+			spriteBatch.Draw(eiffel, new Vector2(0, 0), Color.White);
+			spriteBatch.End();
 
 			base.Draw(gameTime);
 		}
+	}
+
+	public class Sprite
+	{
 	}
 }
