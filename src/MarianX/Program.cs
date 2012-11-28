@@ -8,7 +8,7 @@ namespace MarianX
 		/// </summary>
 		private static void Main(string[] args)
 		{
-			using (MarianX game = new MarianX())
+			using (Core.MarianX game = new Core.MarianX())
 			{
 				game.Run();
 			}

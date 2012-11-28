@@ -107,10 +107,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\ContentBasedGame.cs" />
     <Compile Include="Extensions\GameTime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="MarianX.cs" />
+    <Compile Include="Core\MarianX.cs" />
     <Compile Include="Sprites\Content.cs" />
     <Compile Include="Sprites\IGameContent.cs" />
     <Compile Include="Sprites\ScrollingBackground.cs" />

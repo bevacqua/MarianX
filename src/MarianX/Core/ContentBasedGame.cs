@@ -2,21 +2,22 @@ using System.Collections.Generic;
 using MarianX.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
-namespace MarianX
+namespace MarianX.Core
 {
-	public class MarianX : Game
+	public class ContentBasedGame : Game
 	{
-		private readonly GraphicsDeviceManager graphics;
-		private SpriteBatch spriteBatch;
 		private readonly IList<IGameContent> contents;
+		private SpriteBatch spriteBatch;
 
-		public MarianX()
+		public ContentBasedGame()
 		{
-			graphics = new GraphicsDeviceManager(this);
-			Content.RootDirectory = "Content";
 			contents = new List<IGameContent>();
+		}
+
+		protected void AddContent(IGameContent gameContent)
+		{
+			contents.Add(gameContent);
 		}
 
 		/// <summary>
@@ -27,20 +28,6 @@ namespace MarianX
 		/// </summary>
 		protected override void Initialize()
 		{
-			IList<string> backgroundAssets = new[]
-			{
-				"Backgrounds/congress",
-				"Backgrounds/eiffel",
-				"Backgrounds/island",
-				"Backgrounds/louvre",
-				"Backgrounds/ny",
-				"Backgrounds/opera",
-				"Backgrounds/panama"
-			};
-			var background = new ScrollingBackground(backgroundAssets);
-
-			contents.Add(background);
-
 			foreach (IGameContent content in contents)
 			{
 				content.Initialize();
@@ -55,7 +42,7 @@ namespace MarianX
 		/// </summary>
 		protected override void LoadContent()
 		{
-			spriteBatch = new SpriteBatch(graphics.GraphicsDevice);
+			spriteBatch = new SpriteBatch(GraphicsDevice);
 
 			foreach (IGameContent content in contents)
 			{
@@ -75,6 +62,8 @@ namespace MarianX
 			{
 				content.Unload();
 			}
+
+			base.UnloadContent();
 		}
 
 		/// <summary>
@@ -84,12 +73,6 @@ namespace MarianX
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update(GameTime gameTime)
 		{
-			// Allows the game to exit
-			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-			{
-				Exit();
-			}
-
 			foreach (IGameContent content in contents)
 			{
 				content.Update(gameTime);
@@ -104,7 +87,7 @@ namespace MarianX
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime)
 		{
-			GraphicsDevice.Clear(Color.CornflowerBlue);
+			GraphicsDevice.Clear(Color.Transparent);
 
 			foreach (IGameContent content in contents)
 			{
