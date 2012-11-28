@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarianX", "MarianX\MarianX\MarianX.csproj", "{E0BA7B0D-94D8-452C-BF76-D14BD8D9BEBB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarianX", "MarianX\MarianX.csproj", "{E0BA7B0D-94D8-452C-BF76-D14BD8D9BEBB}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "MarianXContent", "MarianX\MarianXContent\MarianXContent.contentproj", "{BB9C6F07-7AE3-4EE1-A25D-034919038757}"
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "MarianXContent", "MarianXContent\MarianXContent.contentproj", "{BB9C6F07-7AE3-4EE1-A25D-034919038757}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
