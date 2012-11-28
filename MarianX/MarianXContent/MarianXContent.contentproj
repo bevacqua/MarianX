@@ -42,13 +42,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Backgrounds\eiffel.jpg">
-      <Name>eiffel</Name>
+    <Compile Include="Backgrounds\congress.jpg">
+      <Name>congress</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Backgrounds\congress.jpg">
-      <Name>congress</Name>
+    <Compile Include="Backgrounds\eiffel.jpg">
+      <Name>eiffel</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

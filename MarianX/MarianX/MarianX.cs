@@ -12,9 +12,10 @@ namespace MarianX
 	/// </summary>
 	public class MarianX : Game
 	{
-		GraphicsDeviceManager graphics;
-		SpriteBatch spriteBatch;
-		Texture2D eiffel;
+		private readonly GraphicsDeviceManager graphics;
+		private SpriteBatch spriteBatch;
+
+		private ScrollingBackground background;
 
 		public MarianX()
 		{
@@ -30,7 +31,18 @@ namespace MarianX
 		/// </summary>
 		protected override void Initialize()
 		{
-			// TODO: Add your initialization logic here
+			IList<string> backgroundAssets = new[]
+			{
+				"Backgrounds/congress",
+				"Backgrounds/eiffel",
+				"Backgrounds/island",
+				"Backgrounds/louvre",
+				"Backgrounds/ny",
+				"Backgrounds/opera",
+				"Backgrounds/panama"
+			};
+			background = new ScrollingBackground(backgroundAssets);
+			background.Initialize();
 
 			base.Initialize();
 		}
@@ -41,8 +53,11 @@ namespace MarianX
 		/// </summary>
 		protected override void LoadContent()
 		{
-			spriteBatch = new SpriteBatch(GraphicsDevice);
-			eiffel = Content.Load<Texture2D>("Backgrounds/Eiffel");
+			spriteBatch = new SpriteBatch(graphics.GraphicsDevice);
+
+			background.Load(Content);
+
+			base.LoadContent();
 		}
 
 		/// <summary>
@@ -63,9 +78,11 @@ namespace MarianX
 		{
 			// Allows the game to exit
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-				this.Exit();
+			{
+				Exit();
+			}
 
-			// TODO: Add your update logic here
+			background.Update(gameTime);
 
 			base.Update(gameTime);
 		}
@@ -78,9 +95,7 @@ namespace MarianX
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
-			spriteBatch.Begin();
-			spriteBatch.Draw(eiffel, new Vector2(0, 0), Color.White);
-			spriteBatch.End();
+			background.Draw(spriteBatch);
 
 			base.Draw(gameTime);
 		}
@@ -179,6 +194,8 @@ namespace MarianX
 
 			foreach (Sprite sprite in sprites)
 			{
+				sprite.Load(content);
+
 				if (previous != null)
 				{
 					sprite.Position = new Vector2(previous.Position.X + previous.ActualSize.Width, previous.Position.Y);
