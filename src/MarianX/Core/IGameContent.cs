@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MarianX.Sprites
+namespace MarianX.Core
 {
 	public interface IGameContent
 	{

@@ -1,19 +1,20 @@
+using MarianX.Core;
 using MarianX.Extensions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MarianX.Sprites
+namespace MarianX.Contents
 {
 	public class Sprite : Content, IGameContent
 	{
 		public Vector2 Position;
-		public Vector2 Direction;
+		public Direction Direction;
 		public Vector2 Speed;
-		
+
 		public Color Tint { get; set; }
 
 		public Sprite(string assetName)
-			:base(assetName)
+			: base(assetName)
 		{
 			Position = Vector2.Zero;
 			Tint = Color.White;
@@ -22,7 +23,7 @@ namespace MarianX.Sprites
 		public virtual void Initialize()
 		{
 		}
-		
+
 		public virtual void Update(GameTime gameTime)
 		{
 			float time = gameTime.GetElapsedSeconds();

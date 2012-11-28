@@ -34,7 +34,7 @@ namespace MarianX.Core
 			var background = new ScrollingBackground(backgroundAssets);
 
 			AddContent(background);
-
+			
 			base.Initialize();
 		}
 

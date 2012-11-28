@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using MarianX.Contents;
+using MarianX.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,14 +21,13 @@ namespace MarianX.Sprites
 
 		public void Initialize()
 		{
-			Vector2 direction = new Vector2(-1, 0);
 			Vector2 speed = new Vector2(160, 0);
 
 			foreach (string assetName in assetNames)
 			{
 				Sprite sprite = new Sprite(assetName)
 				{
-					Direction = direction,
+					Direction = Direction.Left,
 					Speed = speed
 				};
 				sprites.Add(sprite);
