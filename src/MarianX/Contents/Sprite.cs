@@ -8,8 +8,8 @@ namespace MarianX.Contents
 	public class Sprite : Content, IGameContent
 	{
 		public Vector2 Position;
-		public Direction Direction;
 		public Vector2 Speed;
+		public Direction Direction;
 
 		public Color Tint { get; set; }
 
@@ -17,6 +17,8 @@ namespace MarianX.Contents
 			: base(assetName)
 		{
 			Position = Vector2.Zero;
+			Speed = Vector2.Zero;
+			Direction = Direction.None;
 			Tint = Color.White;
 		}
 

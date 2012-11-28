@@ -14,19 +14,26 @@ namespace MarianX.Contents
 			return x.Vector * y;
 		}
 
-		public static readonly Direction Left;
 		public static readonly Direction None;
+		public static readonly Direction Left;
+		public static readonly Direction Right;
+		public static readonly Direction Up;
+		public static readonly Direction Down;
 
 		static Direction()
 		{
-			None = new Direction { Vector = Vector2.Zero };
-			Left = new Direction { Vector = new Vector2(-1, 0) };
+			None = new Direction(Vector2.Zero);
+			Left = new Direction(new Vector2(-1, 0));
+			Right = new Direction(new Vector2(1, 0));
+			Up = new Direction(new Vector2(0, -1));
+			Down = new Direction(new Vector2(0, 1));
 		}
 
 		private Vector2 Vector { get; set; }
 
-		private Direction()
+		private Direction(Vector2 vector)
 		{
+			Vector = vector;
 		}
 	}
 }

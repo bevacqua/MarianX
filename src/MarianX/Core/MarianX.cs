@@ -32,9 +32,11 @@ namespace MarianX.Core
 				"Backgrounds/panama"
 			};
 			var background = new ScrollingBackground(backgroundAssets);
+			var marian = new Marian();
 
 			AddContent(background);
-			
+			AddContent(marian);
+
 			base.Initialize();
 		}
 
