@@ -15,6 +15,7 @@ TestResults
 # Local cache files
 _ReSharper*
 *.cache
+*.cachefile
 *.debug.css
 
 # local environment configuration files

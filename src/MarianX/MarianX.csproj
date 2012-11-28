@@ -107,9 +107,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\GameTime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="MarianX.cs" />
+    <Compile Include="Sprites\Content.cs" />
+    <Compile Include="Sprites\IGameContent.cs" />
+    <Compile Include="Sprites\ScrollingBackground.cs" />
+    <Compile Include="Sprites\Sprite.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
