@@ -4,10 +4,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MarianX.Sprites
 {
-	public class Mobile : Sprite
+	public class Mobile : SpriteSheet
 	{
-		public Mobile(string assetName)
-			: base(assetName)
+		public Mobile(string assetName, SpriteSheetSettings settings)
+			: base(assetName, settings)
 		{
 		}
 

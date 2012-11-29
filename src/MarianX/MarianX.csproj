@@ -107,6 +107,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contents\FrameSet.cs" />
+    <Compile Include="Contents\SpriteSheet.cs" />
+    <Compile Include="Contents\SpriteSheetSettings.cs" />
     <Compile Include="Core\ContentBasedGame.cs" />
     <Compile Include="Extensions\GameTime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
