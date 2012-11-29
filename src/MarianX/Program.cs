@@ -1,3 +1,5 @@
+using MarianX.Core;
+
 namespace MarianX
 {
 #if WINDOWS || XBOX
@@ -8,7 +10,7 @@ namespace MarianX
 		/// </summary>
 		private static void Main(string[] args)
 		{
-			using (Core.MarianX game = new Core.MarianX())
+			using (GameCore game = new GameCore())
 			{
 				game.Run();
 			}

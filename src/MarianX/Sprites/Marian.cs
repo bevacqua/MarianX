@@ -1,34 +1,45 @@
 using System.Collections.Generic;
 using MarianX.Contents;
+using MarianX.Keyboard;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace MarianX.Sprites
 {
 	public class Marian : Mobile
 	{
+		private const string ASSET_NAME = "marian";
+		private const int FRAME_WIDTH = 48;
+		private const int FRAME_HEIGHT = 64;
+
+		private const int IDLE = 0;
+		private const int RIGHT_WALK = 1;
+		private const int LEFT_WALK = 2;
+
 		private static readonly SpriteSheetSettings settings;
 
 		static Marian()
 		{
 			settings = new SpriteSheetSettings
 			{
-				Width = 48,
-				Height = 64,
+				Width = FRAME_WIDTH,
+				Height = FRAME_HEIGHT,
 				FrameSets = new List<FrameSet>
 				{
-					new FrameSet {Count = 2}
+					new FrameSet {Row = 0, Frames = 1},
+					new FrameSet {Row = 1, Frames = 3},
+					new FrameSet {Row = 1, Frames = 3, Effects = SpriteEffects.FlipHorizontally}
 				}
 			};
 		}
 
-		private const string ASSET_NAME = "marian";
 		private KeyboardState _keyboardState;
 
-		public Marian()
+		public Marian(Viewport viewport)
 			: base(ASSET_NAME, settings)
 		{
-			Position = new Vector2(125, 245);
+			Position = new Vector2(125, viewport.Height - FRAME_HEIGHT);
 			Speed = new Vector2(160, 80);
 		}
 
@@ -44,24 +55,25 @@ namespace MarianX.Sprites
 		private void UpdateMovement(KeyboardState keyboardState)
 		{
 			var kb = new KeyboardConfiguration(keyboardState);
-			if (kb.IsShortcutDown(Action.Left))
+			if (kb.IsShortcutDown(Action.Right))
 			{
-				Direction = Direction.Left;
+				if (Direction != Direction.Right)
+				{
+					SetFrameSet(RIGHT_WALK);
+					Direction = Direction.Right;
+				}
 			}
-			else if (kb.IsShortcutDown(Action.Right))
+			else if (kb.IsShortcutDown(Action.Left))
 			{
-				Direction = Direction.Right;
+				if (Direction != Direction.Left)
+				{
+					SetFrameSet(LEFT_WALK);
+					Direction = Direction.Left;
+				}
 			}
-			else if (kb.IsShortcutDown(Action.Jump))
+			else if (Direction != Direction.None)
 			{
-				Direction = Direction.Up;
-			}
-			else if (kb.IsShortcutDown(Action.Crutch))
-			{
-				Direction = Direction.Down;
-			}
-			else
-			{
+				SetFrameSet(IDLE);
 				Direction = Direction.None;
 			}
 		}

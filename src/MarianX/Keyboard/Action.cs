@@ -1,4 +1,4 @@
-namespace MarianX.Sprites
+namespace MarianX.Keyboard
 {
 	public enum Action
 	{

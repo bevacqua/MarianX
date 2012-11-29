@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -7,10 +8,10 @@ namespace MarianX.Contents
 	public class SpriteSheet : Sprite
 	{
 		private readonly SpriteSheetSettings settings;
+		private readonly Queue<int> frameSetQueue;
 
 		private TimeSpan elapsed;
 		private int frame;
-		private int frameSetIndex;
 		private FrameSet frameSet;
 
 		public SpriteSheet(string assetName, SpriteSheetSettings settings)
@@ -21,6 +22,8 @@ namespace MarianX.Contents
 				throw new ArgumentNullException("settings");
 			}
 			this.settings = settings;
+
+			frameSetQueue = new Queue<int>();
 		}
 
 		public override void Initialize()
@@ -40,9 +43,17 @@ namespace MarianX.Contents
 				elapsed = TimeSpan.Zero;
 			}
 
-			if (frame > frameSet.Count - 1 && frameSet.Loop)
+			if (frame > frameSet.Frames - 1)
 			{
-				frame = 0;
+				if (frameSetQueue.Count != 0)
+				{
+					int next = frameSetQueue.Dequeue();
+					SetFrameSet(next);
+				}
+				else if (frameSet.Loop)
+				{
+					frame = 0;
+				}
 			}
 
 			base.Update(gameTime);
@@ -52,10 +63,10 @@ namespace MarianX.Contents
 		{
 			int offset = settings.Guides ? 1 : 0;
 			int x = frame * (settings.Width + offset);
-			int y = frameSetIndex * (settings.Height + offset);
+			int y = frameSet.Row * (settings.Height + offset);
 
 			Rectangle sprite = new Rectangle(x, y, settings.Width, settings.Height);
-			spriteBatch.Draw(Texture, Position, sprite, Tint, 0.0f, Vector2.Zero, Scale, SpriteEffects.None, 0);
+			spriteBatch.Draw(Texture, Position, sprite, Tint, 0.0f, Vector2.Zero, Scale, frameSet.Effects, 0.0f);
 		}
 
 		public void SetFrameSet(int index)
@@ -64,11 +75,28 @@ namespace MarianX.Contents
 			{
 				throw new ArgumentOutOfRangeException("index");
 			}
-			frameSetIndex = index;
 			frameSet = settings.FrameSets[index];
 			frame = 0;
 
 			elapsed = TimeSpan.Zero;
+		}
+
+		public void SetFrameSetQueue(int[] indexes, bool clearQueue = true)
+		{
+			if (indexes.Length == 0)
+			{
+				throw new ArgumentOutOfRangeException("indexes");
+			}
+			if (clearQueue)
+			{
+				frameSetQueue.Clear();
+			}
+			foreach (int index in indexes)
+			{
+				frameSetQueue.Enqueue(index);
+			}
+			int next = frameSetQueue.Dequeue();
+			SetFrameSet(next);
 		}
 	}
 }

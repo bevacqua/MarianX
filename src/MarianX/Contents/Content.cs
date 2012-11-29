@@ -18,7 +18,7 @@ namespace MarianX.Contents
 		{
 			this.assetName = assetName;
 
-			Scale = 1f;
+			Scale = 1.0f;
 		}
 
 		public Texture2D Texture

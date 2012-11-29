@@ -5,12 +5,13 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MarianX.Core
 {
-	public class MarianX : ContentBasedGame
+	public class GameCore : ContentBasedGame
 	{
-		public MarianX()
+		public GameCore()
 		{
-			new GraphicsDeviceManager(this);
+			Window.Title = "Tre Altre Volte";
 			Content.RootDirectory = "Content";
+			new GraphicsDeviceManager(this);
 		}
 
 		/// <summary>
@@ -32,7 +33,7 @@ namespace MarianX.Core
 				"Backgrounds/panama"
 			};
 			var background = new ScrollingBackground(backgroundAssets);
-			var marian = new Marian();
+			var marian = new Marian(GraphicsDevice.Viewport);
 
 			AddContent(background);
 			AddContent(marian);

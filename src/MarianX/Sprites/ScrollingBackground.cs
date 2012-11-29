@@ -21,17 +21,13 @@ namespace MarianX.Sprites
 
 		public void Initialize()
 		{
-			Vector2 speed = new Vector2(160, 0);
-
 			foreach (string assetName in assetNames)
 			{
-				Sprite sprite = new Sprite(assetName)
-				{
-					Direction = Direction.Left,
-					Speed = speed
-				};
+				Sprite sprite = new Sprite(assetName);
 				sprites.Add(sprite);
 			}
+
+			//UpdateMovement();
 		}
 
 		public void Load(ContentManager content)
@@ -63,6 +59,17 @@ namespace MarianX.Sprites
 
 				sprite.Update(gameTime);
 				previous = sprite;
+			}
+		}
+
+		private void UpdateMovement()
+		{
+			Vector2 speed = new Vector2(160, 0);
+
+			foreach (Sprite sprite in sprites)
+			{
+				sprite.Direction = Direction.Left;
+				sprite.Speed = speed;
 			}
 		}
 
