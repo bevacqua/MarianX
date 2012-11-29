@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
 
-namespace MarianX.Keyboard
+namespace MarianX.Input
 {
 	public class KeyboardConfiguration
 	{

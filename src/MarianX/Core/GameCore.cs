@@ -22,17 +22,7 @@ namespace MarianX.Core
 		/// </summary>
 		protected override void Initialize()
 		{
-			IList<string> backgroundAssets = new[]
-			{
-				"Backgrounds/congress",
-				"Backgrounds/eiffel",
-				"Backgrounds/island",
-				"Backgrounds/louvre",
-				"Backgrounds/ny",
-				"Backgrounds/opera",
-				"Backgrounds/panama"
-			};
-			var background = new ScrollingBackground(backgroundAssets);
+			var background = new CityBackground();
 			var marian = new Marian(GraphicsDevice.Viewport);
 
 			AddContent(background);
