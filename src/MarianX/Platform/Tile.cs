@@ -10,7 +10,19 @@ namespace MarianX.Platform
 
 		public bool Impassable { get; set; }
 
-		public Vector2 Position { get; set; }
+		private Point position;
+
+		public Point Position
+		{
+			get { return position; }
+			set
+			{
+				position = value;
+				Bounds = new Rectangle(position.X, position.Y, Width, Height);
+			}
+		}
+
+		public Rectangle Bounds { get; private set; }
 
 		public int SlopeLeft { get; set; }
 		public int SlopeRight { get; set; }

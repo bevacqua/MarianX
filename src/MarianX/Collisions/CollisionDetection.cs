@@ -8,13 +8,27 @@ namespace MarianX.Collisions
 	{
 		public bool CanMove(AxisAlignedBoundingBox boundingBox, Vector2 interpolation)
 		{
-			TileMatrix matrix = TileMatrix.Instance;
-
 			Rectangle bounds = boundingBox.Bounds;
 
 			bounds.Offset(interpolation);
 
-			return matrix.CanFit(boundingBox, bounds);
+			return CanFitInMatrix(bounds);
+		}
+
+		private bool CanFitInMatrix(Rectangle bounds)
+		{
+			TileMatrix matrix = TileMatrix.Instance;
+			Tile[] intersection = matrix.Intersect(bounds);
+
+			foreach (Tile tile in intersection)
+			{
+				if (tile.Impassable)
+				{
+					return false;
+				}
+			}
+
+			return true;
 		}
 	}
 }

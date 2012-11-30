@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using MarianX.Collisions;
 using Microsoft.Xna.Framework;
 
 namespace MarianX.Platform
@@ -24,57 +22,35 @@ namespace MarianX.Platform
 		{
 		}
 
+		/// <summary>
+		/// Rows, then Columns.
+		/// </summary>
 		public Tile[][] Tiles { get; private set; }
 
-		public Tile[] GetTiles(AxisAlignedBoundingBox boundingBox)
+		public IList<Tile> Intersect(Rectangle bounds)
 		{
-			IList<Tile> tiles = new List<Tile>();
+			IList<Tile> intersection = new List<Tile>();
 
-			int x = (int)boundingBox.Position.X / Tile.Width;
-			int y = (int)boundingBox.Position.Y / Tile.Height;
+			// calculate possible tile bounds to improve performance.
+			int rowStart = bounds.Top / Tile.Height - 1;
+			int rowItems = bounds.Height / Tile.Height + 2;
+			
+			int colStart = bounds.Left / Tile.Width - 1;
+			int colItems = bounds.Width / Tile.Width + 2;
 
-			for (int xo = 0; xo < AxisAlignedBoundingBox.TilesWide; xo++)
+			foreach (Tile[] row in Tiles.Skip(rowStart).Take(rowItems))
 			{
-				for (int yo = 0; yo < AxisAlignedBoundingBox.TilesHigh; yo++)
+				foreach (Tile tile in row.Skip(colStart).Take(colItems))
 				{
-					Tile tile = Tiles[x + xo][y + yo];
-					tiles.Add(tile);
+					bool intersects = tile.Bounds.Intersects(bounds);
+					if (intersects)
+					{
+						intersection.Add(tile);
+					}
 				}
 			}
 
-			Tile[] position = tiles.ToArray();
-			return position;
-		}
-
-		private Tile GetTile(Vector2 position)
-		{
-			int x = (int)position.X / Tile.Width;
-			int y = (int)position.Y / Tile.Height;
-			Tile tile = Tiles[x][y];
-			return tile;
-		}
-
-		public Tile GetNextTile(Vector2 edge, Vector2 interpolation, Axis axis)
-		{
-			if (axis == Axis.X)
-			{
-				int x = (int)(edge.X + interpolation.X) / Tile.Width;
-				return GetTile(new Vector2(x, edge.Y));
-			}
-			else if (axis == Axis.Y)
-			{
-				int y = (int)(edge.Y + interpolation.Y) / Tile.Height;
-				return GetTile(new Vector2(edge.X, y));
-			}
-			else
-			{
-				throw new NotSupportedException("axis not supported.");
-			}
-		}
-
-		public bool CanFit(AxisAlignedBoundingBox boundingBox, Rectangle position)
-		{
-			throw new NotImplementedException();
+			return intersection;
 		}
 	}
 }
