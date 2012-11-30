@@ -1,3 +1,4 @@
+using MarianX.Interface;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 
@@ -5,8 +6,8 @@ namespace MarianX.Platform
 {
 	public class Tile
 	{
-		public const int Width = 24;
-		public const int Height = 24;
+		public const int Width = MagicNumbers.TileWidth;
+		public const int Height = MagicNumbers.TileHeight;
 
 		public bool Impassable { get; set; }
 

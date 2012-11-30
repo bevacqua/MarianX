@@ -107,10 +107,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Collisions\Axis.cs" />
     <Compile Include="Collisions\AxisAlignedBoundingBox.cs" />
     <Compile Include="Collisions\CollisionDetection.cs" />
+    <Compile Include="Collisions\Movement.cs" />
     <Compile Include="Collisions\MarianBoundingBox.cs" />
+    <Compile Include="Configuration\MagicNumbers.cs" />
     <Compile Include="Contents\FrameSet.cs" />
     <Compile Include="Contents\SpriteSheet.cs" />
     <Compile Include="Contents\SpriteSheetSettings.cs" />
@@ -119,16 +120,19 @@
     <Compile Include="Extensions\GameTime.cs" />
     <Compile Include="Platform\Tile.cs" />
     <Compile Include="Platform\TileMatrix.cs" />
+    <Compile Include="Platform\TileMatrixMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Core\GameCore.cs" />
     <Compile Include="Contents\Content.cs" />
     <Compile Include="Contents\Direction.cs" />
-    <Compile Include="Core\IGameContent.cs" />
+    <Compile Include="Interface\IGameContent.cs" />
     <Compile Include="Input\Action.cs" />
     <Compile Include="Input\KeyboardConfiguration.cs" />
     <Compile Include="Sprites\AnimationState.cs" />
     <Compile Include="Sprites\CityBackground.cs" />
+    <Compile Include="Interface\IHitBox.cs" />
+    <Compile Include="Sprites\TileBackground.cs" />
     <Compile Include="Sprites\Mobile.cs" />
     <Compile Include="Sprites\Marian.cs" />
     <Compile Include="Sprites\ScrollingBackground.cs" />

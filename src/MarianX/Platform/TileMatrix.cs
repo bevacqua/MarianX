@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using MarianX.Core;
 using Microsoft.Xna.Framework;
 
 namespace MarianX.Platform
 {
-	public sealed class TileMatrix
+	public sealed class TileMatrix : TileMatrixMetadata
 	{
 		private static readonly TileMatrix instance;
 
@@ -15,33 +16,34 @@ namespace MarianX.Platform
 
 		static TileMatrix()
 		{
-			instance = new TileMatrix();
+			Game game = GameCore.Instance;
+			instance = new TileMatrix(game.Window.ClientBounds);
 		}
 
-		private TileMatrix()
+		private TileMatrix(Rectangle size)
+			: base(size)
 		{
 		}
-
-		/// <summary>
-		/// Rows, then Columns.
-		/// </summary>
-		public Tile[][] Tiles { get; private set; }
 
 		public IList<Tile> Intersect(Rectangle bounds)
 		{
 			IList<Tile> intersection = new List<Tile>();
 
 			// calculate possible tile bounds to improve performance.
-			int rowStart = bounds.Top / Tile.Height - 1;
-			int rowItems = bounds.Height / Tile.Height + 2;
-			
-			int colStart = bounds.Left / Tile.Width - 1;
+			int colStart = Math.Max(0, bounds.Left / Tile.Width - 1);
 			int colItems = bounds.Width / Tile.Width + 2;
+			int colLength = Math.Min(Tiles.GetLength(0), colStart + colItems);
 
-			foreach (Tile[] row in Tiles.Skip(rowStart).Take(rowItems))
+			int rowStart = Math.Max(0, bounds.Top / Tile.Height - 1);
+			int rowItems = bounds.Height / Tile.Height + 2;
+			int rowLength = Math.Min(Tiles.GetLength(1), rowStart + rowItems);
+
+			for (int x = colStart; x < colLength; x++)
 			{
-				foreach (Tile tile in row.Skip(colStart).Take(colItems))
+				for (int y = rowStart; y < rowLength; y++)
 				{
+					Tile tile = Tiles[x, y];
+
 					bool intersects = tile.Bounds.Intersects(bounds);
 					if (intersects)
 					{

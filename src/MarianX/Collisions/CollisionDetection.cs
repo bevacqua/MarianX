@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using MarianX.Extensions;
 using MarianX.Platform;
 using Microsoft.Xna.Framework;
@@ -18,7 +19,7 @@ namespace MarianX.Collisions
 		private bool CanFitInMatrix(Rectangle bounds)
 		{
 			TileMatrix matrix = TileMatrix.Instance;
-			Tile[] intersection = matrix.Intersect(bounds);
+			IList<Tile> intersection = matrix.Intersect(bounds);
 
 			foreach (Tile tile in intersection)
 			{

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using MarianX.Collisions;
 using MarianX.Contents;
 using MarianX.Input;
+using MarianX.Interface;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -10,8 +12,8 @@ namespace MarianX.Sprites
 	public class Marian : Mobile
 	{
 		private const string AssetName = "marian";
-		private const int FrameWidth = 48;
-		private const int FrameHeight = 72;
+		private const int FrameWidth = MagicNumbers.MarianFrameWidth;
+		private const int FrameHeight = MagicNumbers.MarianFrameHeight;
 
 		private const int Idle = 0;
 		private const int WalkRight = 1;
@@ -39,6 +41,7 @@ namespace MarianX.Sprites
 		public Marian(Viewport viewport)
 			: base(AssetName, settings)
 		{
+			BoundingBox = new MarianBoundingBox();
 			Position = new Vector2(125, viewport.Height - FrameHeight);
 			Speed = new Vector2(160, 80);
 		}

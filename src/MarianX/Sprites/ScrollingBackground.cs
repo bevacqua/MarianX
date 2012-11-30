@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MarianX.Contents;
 using MarianX.Core;
+using MarianX.Interface;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -27,7 +28,7 @@ namespace MarianX.Sprites
 				sprites.Add(sprite);
 			}
 
-			//UpdateMovement();
+			// UpdateMovement(); // TODO: update alongside character, same with TileBackground
 		}
 
 		public void Load(ContentManager content)
@@ -37,7 +38,7 @@ namespace MarianX.Sprites
 			foreach (Sprite sprite in sprites)
 			{
 				sprite.Load(content);
-					
+
 				if (previous != null)
 				{
 					sprite.Position = new Vector2(previous.Position.X + previous.ActualSize.Width, previous.Position.Y);
@@ -54,7 +55,8 @@ namespace MarianX.Sprites
 			{
 				if (sprite.Position.X < -sprite.ActualSize.Width)
 				{
-					sprite.Position.X = previous.Position.X + previous.ActualSize.Width;
+					float x = previous.Position.X + previous.ActualSize.Width;
+					sprite.Position = new Vector2(x, sprite.Position.Y);
 				}
 
 				sprite.Update(gameTime);

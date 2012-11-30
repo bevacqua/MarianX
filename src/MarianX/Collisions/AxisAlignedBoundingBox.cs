@@ -1,4 +1,5 @@
 using MarianX.Platform;
+using MarianX.Sprites;
 using Microsoft.Xna.Framework;
 
 namespace MarianX.Collisions
@@ -20,6 +21,13 @@ namespace MarianX.Collisions
 				int h = HitBoxHeight * Tile.Height;
 				return new Rectangle(x, y, w, h);
 			}
+		}
+
+		public void UpdatePosition(Mobile mobile)
+		{
+			int x = mobile.ActualSize.Center.X - HitBoxWidth / 2;
+			int y = mobile.ActualSize.Center.X - HitBoxWidth / 2;
+			Position = new Vector2(x, y);
 		}
 	}
 }

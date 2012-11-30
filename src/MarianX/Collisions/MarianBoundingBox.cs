@@ -1,11 +1,13 @@
+using MarianX.Interface;
+
 namespace MarianX.Collisions
 {
-	public class MarianBoundingBox:AxisAlignedBoundingBox
+	public class MarianBoundingBox : AxisAlignedBoundingBox
 	{
 		public MarianBoundingBox()
 		{
-			HitBoxWidth = 1;
-			HitBoxHeight = 2;
+			HitBoxWidth = MagicNumbers.MarianHitBoxWidth;
+			HitBoxHeight = MagicNumbers.MarianHitBoxHeight;
 		}
 	}
 }

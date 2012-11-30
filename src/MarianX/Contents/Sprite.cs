@@ -1,5 +1,5 @@
-using MarianX.Core;
 using MarianX.Extensions;
+using MarianX.Interface;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -7,7 +7,7 @@ namespace MarianX.Contents
 {
 	public class Sprite : Content, IGameContent
 	{
-		public Vector2 Position;
+		public virtual Vector2 Position { get; set; }
 		public Vector2 Speed;
 		public Direction Direction;
 
@@ -16,7 +16,6 @@ namespace MarianX.Contents
 		public Sprite(string assetName)
 			: base(assetName)
 		{
-			Position = Vector2.Zero;
 			Speed = Vector2.Zero;
 			Direction = Direction.None;
 			Tint = Color.White;
@@ -24,12 +23,19 @@ namespace MarianX.Contents
 
 		public virtual void Initialize()
 		{
+			Position = Vector2.Zero;
 		}
 
 		public virtual void Update(GameTime gameTime)
 		{
 			float time = gameTime.GetElapsedSeconds();
-			Position += Direction * Speed * time;
+			Vector2 interpolation = Direction * Speed * time;
+			UpdatePosition(interpolation);
+		}
+
+		public virtual void UpdatePosition(Vector2 interpolation)
+		{
+			Position += interpolation;
 		}
 
 		public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
