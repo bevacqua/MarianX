@@ -9,13 +9,13 @@ namespace MarianX.Sprites
 {
 	public class Marian : Mobile
 	{
-		private const string ASSET_NAME = "marian";
-		private const int FRAME_WIDTH = 48;
-		private const int FRAME_HEIGHT = 64;
+		private const string AssetName = "marian";
+		private const int FrameWidth = 48;
+		private const int FrameHeight = 72;
 
-		private const int IDLE = 0;
-		private const int RIGHT_WALK = 1;
-		private const int LEFT_WALK = 2;
+		private const int Idle = 0;
+		private const int WalkRight = 1;
+		private const int WalkLeft = 2;
 
 		private static readonly SpriteSheetSettings settings;
 
@@ -23,8 +23,8 @@ namespace MarianX.Sprites
 		{
 			settings = new SpriteSheetSettings
 			{
-				Width = FRAME_WIDTH,
-				Height = FRAME_HEIGHT,
+				Width = FrameWidth,
+				Height = FrameHeight,
 				FrameSets = new List<FrameSet>
 				{
 					new FrameSet {Row = 0, Frames = 1},
@@ -37,9 +37,9 @@ namespace MarianX.Sprites
 		private KeyboardState _keyboardState;
 
 		public Marian(Viewport viewport)
-			: base(ASSET_NAME, settings)
+			: base(AssetName, settings)
 		{
-			Position = new Vector2(125, viewport.Height - FRAME_HEIGHT);
+			Position = new Vector2(125, viewport.Height - FrameHeight);
 			Speed = new Vector2(160, 80);
 		}
 
@@ -59,7 +59,7 @@ namespace MarianX.Sprites
 			{
 				if (Direction != Direction.Right)
 				{
-					SetFrameSet(RIGHT_WALK);
+					SetFrameSet(WalkRight);
 					Direction = Direction.Right;
 				}
 			}
@@ -67,13 +67,13 @@ namespace MarianX.Sprites
 			{
 				if (Direction != Direction.Left)
 				{
-					SetFrameSet(LEFT_WALK);
+					SetFrameSet(WalkLeft);
 					Direction = Direction.Left;
 				}
 			}
 			else if (Direction != Direction.None)
 			{
-				SetFrameSet(IDLE);
+				SetFrameSet(Idle);
 				Direction = Direction.None;
 			}
 		}
