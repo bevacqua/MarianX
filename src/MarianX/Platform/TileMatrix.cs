@@ -72,5 +72,9 @@ namespace MarianX.Platform
 			}
 		}
 
+		public bool CanFit(AxisAlignedBoundingBox boundingBox, Rectangle position)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

@@ -110,10 +110,12 @@
     <Compile Include="Collisions\Axis.cs" />
     <Compile Include="Collisions\AxisAlignedBoundingBox.cs" />
     <Compile Include="Collisions\CollisionDetection.cs" />
+    <Compile Include="Collisions\MarianBoundingBox.cs" />
     <Compile Include="Contents\FrameSet.cs" />
     <Compile Include="Contents\SpriteSheet.cs" />
     <Compile Include="Contents\SpriteSheetSettings.cs" />
     <Compile Include="Core\ContentBasedGame.cs" />
+    <Compile Include="Extensions\Rectangle.cs" />
     <Compile Include="Extensions\GameTime.cs" />
     <Compile Include="Platform\Tile.cs" />
     <Compile Include="Platform\TileMatrix.cs" />

@@ -1,3 +1,4 @@
+using MarianX.Extensions;
 using MarianX.Platform;
 using Microsoft.Xna.Framework;
 
@@ -9,24 +10,11 @@ namespace MarianX.Collisions
 		{
 			TileMatrix matrix = TileMatrix.Instance;
 
-			//// TODO: get edges as each tile in the AABB, considering direction (from interpolation), and axis.
+			Rectangle bounds = boundingBox.Bounds;
 
-			//foreach (Tile tile in tiles)
-			//{
-			//    var x = matrix.GetNextTile(edge, interpolation, Axis.X);
-			//    if (x == null || x.Impassable)
-			//    {
-			//        return false;
-			//    }
+			bounds.Offset(interpolation);
 
-			//    var y = matrix.GetNextTile(edge, interpolation, Axis.Y);
-			//    if (y == null || y.Impassable)
-			//    {
-			//        return false;
-			//    }
-			//}
-
-			return true;
+			return matrix.CanFit(boundingBox, bounds);
 		}
 	}
 }

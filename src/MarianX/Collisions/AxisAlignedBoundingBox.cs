@@ -5,8 +5,8 @@ namespace MarianX.Collisions
 {
 	public class AxisAlignedBoundingBox
 	{
-		public const int TilesWide = 1;
-		public const int TilesHigh = 2;
+		public int HitBoxWidth { get; protected set; }
+		public int HitBoxHeight { get; protected set; }
 
 		public Vector2 Position;
 
@@ -16,8 +16,8 @@ namespace MarianX.Collisions
 			{
 				int x = (int)Position.X;
 				int y = (int)Position.Y;
-				int w = TilesWide * Tile.Width;
-				int h = TilesHigh * Tile.Height;
+				int w = HitBoxWidth * Tile.Width;
+				int h = HitBoxHeight * Tile.Height;
 				return new Rectangle(x, y, w, h);
 			}
 		}
