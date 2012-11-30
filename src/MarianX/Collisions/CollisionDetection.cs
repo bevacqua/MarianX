@@ -10,10 +10,9 @@ namespace MarianX.Collisions
 		public bool CanMove(AxisAlignedBoundingBox boundingBox, Vector2 interpolation)
 		{
 			Rectangle bounds = boundingBox.Bounds;
+			Rectangle to = bounds.Offset(interpolation);
 
-			bounds.Offset(interpolation);
-
-			return CanFitInMatrix(bounds);
+			return CanFitInMatrix(to);
 		}
 
 		private bool CanFitInMatrix(Rectangle bounds)

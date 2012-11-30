@@ -23,11 +23,39 @@ namespace MarianX.Collisions
 			}
 		}
 
+		protected int OffsetX
+		{
+			get { return HitBoxWidth * Tile.Width / 2; }
+		}
+
+		protected int OffsetY
+		{
+			get { return HitBoxHeight * Tile.Height / 2; }
+		}
+
 		public void UpdatePosition(Mobile mobile)
 		{
-			int x = mobile.ActualSize.Center.X - HitBoxWidth / 2;
-			int y = mobile.ActualSize.Center.X - HitBoxWidth / 2;
-			Position = new Vector2(x, y);
+			float x = mobile.Position.X + mobile.ContentWidth / 2.0f;
+			float y = mobile.Position.Y + mobile.ContentHeight / 2.0f;
+			Vector2 center = new Vector2(x, y);
+			Vector2 position = OffsetPosition(center, -1);
+			Position = position;
+		}
+
+		public Vector2 GetPosition(Mobile mobile)
+		{
+			Vector2 center = OffsetPosition(Position, 1);
+			float x = center.X - mobile.ContentWidth / 2.0f;
+			float y = center.Y - mobile.ContentHeight / 2.0f;
+			return new Vector2(x, y);
+		}
+
+		private Vector2 OffsetPosition(Vector2 source, int multiplier)
+		{
+			Vector2 position = source;
+			position.X += OffsetX * multiplier;
+			position.Y += OffsetY * multiplier;
+			return position;
 		}
 	}
 }

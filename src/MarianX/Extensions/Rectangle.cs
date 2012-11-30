@@ -4,9 +4,11 @@ namespace MarianX.Extensions
 {
 	public static class RectangleExtensions
 	{
-		public static void Offset(this Rectangle rectangle, Vector2 offset)
+		public static Rectangle Offset(this Rectangle rectangle, Vector2 offset)
 		{
-			rectangle.Offset((int)offset.X, (int)offset.Y);
+			int x = rectangle.X + (int)offset.X;
+			int y = rectangle.Y + (int)offset.Y;
+			return new Rectangle(x, y, rectangle.Width, rectangle.Height);
 		}
 	}
 }

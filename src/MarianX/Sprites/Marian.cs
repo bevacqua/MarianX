@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MarianX.Sprites
 {
-	public class Marian : Mobile
+	public class Marian : DiagnosticMobile
 	{
 		private const string AssetName = "marian";
 		private const int FrameWidth = MagicNumbers.MarianFrameWidth;
@@ -36,14 +36,24 @@ namespace MarianX.Sprites
 			};
 		}
 
+		private readonly Viewport viewport;
+
 		private KeyboardState _keyboardState;
 
 		public Marian(Viewport viewport)
 			: base(AssetName, settings)
 		{
+			this.viewport = viewport;
+
 			BoundingBox = new MarianBoundingBox();
-			Position = new Vector2(125, viewport.Height - FrameHeight);
 			Speed = new Vector2(160, 80);
+		}
+
+		public override void Initialize()
+		{
+			base.Initialize();
+
+			Position = new Vector2(125, viewport.Height - FrameHeight);
 		}
 
 		public override void Update(GameTime gameTime)

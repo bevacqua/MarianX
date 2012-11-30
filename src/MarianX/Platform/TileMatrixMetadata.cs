@@ -23,13 +23,16 @@ namespace MarianX.Platform
 					Tiles[x, y] = DefaultTileMetadata(x, y);
 				}
 			}
+
+			for(int y=0;y<rows;y++)
+			Tiles[14, y].Impassable = true;
 		}
 
 		private Tile DefaultTileMetadata(int x, int y)
 		{
 			Tile tile = new Tile
 			{
-				Position = new Point(x, y)
+				Position = new Point(x * Tile.Width, y * Tile.Height)
 			};
 			return tile;
 		}

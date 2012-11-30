@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using MarianX.Contents;
-using MarianX.Core;
 using MarianX.Interface;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -20,7 +19,7 @@ namespace MarianX.Sprites
 			sprites = new List<Sprite>();
 		}
 
-		public void Initialize()
+		public virtual void Initialize()
 		{
 			foreach (string assetName in assetNames)
 			{
@@ -31,7 +30,7 @@ namespace MarianX.Sprites
 			// UpdateMovement(); // TODO: update alongside character, same with TileBackground
 		}
 
-		public void Load(ContentManager content)
+		public virtual void Load(ContentManager content)
 		{
 			Sprite previous = null;
 
@@ -47,7 +46,7 @@ namespace MarianX.Sprites
 			}
 		}
 
-		public void Update(GameTime gameTime)
+		public virtual  void Update(GameTime gameTime)
 		{
 			Sprite previous = sprites.Last();
 
@@ -64,7 +63,7 @@ namespace MarianX.Sprites
 			}
 		}
 
-		private void UpdateMovement()
+		protected virtual void UpdateMovement()
 		{
 			Vector2 speed = new Vector2(160, 0);
 
@@ -75,7 +74,7 @@ namespace MarianX.Sprites
 			}
 		}
 
-		public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+		public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
 			spriteBatch.Begin();
 
@@ -87,7 +86,7 @@ namespace MarianX.Sprites
 			spriteBatch.End();
 		}
 
-		public void Unload()
+		public virtual void Unload()
 		{
 		}
 	}

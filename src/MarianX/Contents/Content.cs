@@ -41,6 +41,9 @@ namespace MarianX.Contents
 			}
 		}
 
+		public virtual int ContentWidth { get { return TextureSize.Width; } }
+		public virtual int ContentHeight { get { return TextureSize.Height; } }
+
 		private void InvalidateTextureScale()
 		{
 			if (texture == null)
@@ -51,7 +54,7 @@ namespace MarianX.Contents
 			else
 			{
 				TextureSize = Texture.Bounds;
-				ActualSize = new Rectangle(0, 0, (int)(TextureSize.Width * Scale), (int)(TextureSize.Height * Scale));
+				ActualSize = new Rectangle(0, 0, (int)(ContentWidth * Scale), (int)(ContentHeight * Scale));
 			}
 		}
 

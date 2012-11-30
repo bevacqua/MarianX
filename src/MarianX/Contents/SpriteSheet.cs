@@ -14,6 +14,16 @@ namespace MarianX.Contents
 		private int frame;
 		private FrameSet frameSet;
 
+		public override int ContentWidth
+		{
+			get { return settings.Width; }
+		}
+
+		public override int ContentHeight
+		{
+			get { return settings.Height; }
+		}
+
 		public SpriteSheet(string assetName, SpriteSheetSettings settings)
 			: base(assetName)
 		{

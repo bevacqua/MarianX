@@ -93,6 +93,7 @@
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.configuration" />
     <Reference Include="System.Xml">
       <Private>False</Private>
     </Reference>
@@ -115,6 +116,7 @@
     <Compile Include="Contents\FrameSet.cs" />
     <Compile Include="Contents\SpriteSheet.cs" />
     <Compile Include="Contents\SpriteSheetSettings.cs" />
+    <Compile Include="Core\Config.cs" />
     <Compile Include="Core\ContentBasedGame.cs" />
     <Compile Include="Extensions\Rectangle.cs" />
     <Compile Include="Extensions\GameTime.cs" />
@@ -132,6 +134,8 @@
     <Compile Include="Sprites\AnimationState.cs" />
     <Compile Include="Sprites\CityBackground.cs" />
     <Compile Include="Interface\IHitBox.cs" />
+    <Compile Include="Sprites\DiagnosticMobile.cs" />
+    <Compile Include="Sprites\Square.cs" />
     <Compile Include="Sprites\TileBackground.cs" />
     <Compile Include="Sprites\Mobile.cs" />
     <Compile Include="Sprites\Marian.cs" />
@@ -185,6 +189,7 @@
     <None Include="..\..\README.md">
       <Link>README.md</Link>
     </None>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
