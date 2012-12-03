@@ -46,7 +46,6 @@ namespace MarianX.Sprites
 			this.viewport = viewport;
 
 			BoundingBox = new MarianBoundingBox();
-			Speed = new Vector2(160, 80);
 		}
 
 		public override void Initialize()
@@ -67,6 +66,8 @@ namespace MarianX.Sprites
 
 		private void UpdateMovement(KeyboardState keyboardState)
 		{
+			Direction previous = Direction;
+
 			var kb = new KeyboardConfiguration(keyboardState);
 			if (kb.IsShortcutDown(Action.Right))
 			{
@@ -88,6 +89,11 @@ namespace MarianX.Sprites
 			{
 				SetFrameSet(Idle);
 				Direction = Direction.None;
+			}
+
+			if (Direction != previous)
+			{
+				Speed = Vector2.Zero;
 			}
 		}
 	}

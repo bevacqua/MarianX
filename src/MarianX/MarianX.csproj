@@ -118,6 +118,7 @@
     <Compile Include="Contents\SpriteSheetSettings.cs" />
     <Compile Include="Core\Config.cs" />
     <Compile Include="Core\ContentBasedGame.cs" />
+    <Compile Include="Extensions\Vector2.cs" />
     <Compile Include="Extensions\Rectangle.cs" />
     <Compile Include="Extensions\GameTime.cs" />
     <Compile Include="Platform\Tile.cs" />
@@ -131,7 +132,6 @@
     <Compile Include="Interface\IGameContent.cs" />
     <Compile Include="Input\Action.cs" />
     <Compile Include="Input\KeyboardConfiguration.cs" />
-    <Compile Include="Sprites\AnimationState.cs" />
     <Compile Include="Sprites\CityBackground.cs" />
     <Compile Include="Interface\IHitBox.cs" />
     <Compile Include="Sprites\DiagnosticMobile.cs" />

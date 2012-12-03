@@ -35,22 +35,26 @@ namespace MarianX.Collisions
 
 		public void UpdatePosition(Mobile mobile)
 		{
-			float x = mobile.Position.X + mobile.ContentWidth / 2.0f;
-			float y = mobile.Position.Y + mobile.ContentHeight / 2.0f;
-			Vector2 center = new Vector2(x, y);
-			Vector2 position = OffsetPosition(center, -1);
+			Vector2 center = CalculateOffset(mobile, mobile.Position, 1);
+			Vector2 position = Offset(center, -1);
 			Position = position;
 		}
 
 		public Vector2 GetPosition(Mobile mobile)
 		{
-			Vector2 center = OffsetPosition(Position, 1);
-			float x = center.X - mobile.ContentWidth / 2.0f;
-			float y = center.Y - mobile.ContentHeight / 2.0f;
+			Vector2 center = Offset(Position, 1);
+			Vector2 position = CalculateOffset(mobile, center, -1);
+			return position;
+		}
+
+		private Vector2 CalculateOffset(Mobile mobile, Vector2 from, int multiplier)
+		{
+			float x = from.X + mobile.ContentWidth / 2.0f * multiplier;
+			float y = from.Y + mobile.ContentHeight / 2.0f * multiplier;
 			return new Vector2(x, y);
 		}
 
-		private Vector2 OffsetPosition(Vector2 source, int multiplier)
+		private Vector2 Offset(Vector2 source, int multiplier)
 		{
 			Vector2 position = source;
 			position.X += OffsetX * multiplier;

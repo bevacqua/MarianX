@@ -7,9 +7,10 @@ namespace MarianX.Contents
 {
 	public class Sprite : Content, IGameContent
 	{
-		public virtual Vector2 Position { get; set; }
 		public Vector2 Speed;
-		public Direction Direction;
+
+		public virtual Vector2 Position { get; set; }
+		public Direction Direction { get; set; }
 
 		public Color Tint { get; set; }
 
@@ -28,12 +29,18 @@ namespace MarianX.Contents
 
 		public virtual void Update(GameTime gameTime)
 		{
-			float time = gameTime.GetElapsedSeconds();
-			Vector2 interpolation = Direction * Speed * time;
+			Vector2 interpolation = CalculateInterpolation(gameTime);
 			UpdatePosition(interpolation);
 		}
 
-		public virtual void UpdatePosition(Vector2 interpolation)
+		protected virtual Vector2 CalculateInterpolation(GameTime gameTime)
+		{
+			float time = gameTime.GetElapsedSeconds();
+			Vector2 interpolation = Direction * Speed * time;
+			return interpolation;
+		}
+
+		protected virtual void UpdatePosition(Vector2 interpolation)
 		{
 			Position += interpolation;
 		}

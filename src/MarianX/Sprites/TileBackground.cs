@@ -21,17 +21,15 @@ namespace MarianX.Sprites
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
 			base.Draw(gameTime, spriteBatch);
-
-			DiagnosticGrid(spriteBatch);
+			DrawDiagnosticTileGrid(spriteBatch);
 		}
 
-		private void DiagnosticGrid(SpriteBatch spriteBatch)
+		private void DrawDiagnosticTileGrid(SpriteBatch spriteBatch)
 		{
 			if (!Config.DiagnosticBackground)
 			{
 				return;
 			}
-
 			spriteBatch.Begin();
 
 			TileMatrix matrix = TileMatrix.Instance;

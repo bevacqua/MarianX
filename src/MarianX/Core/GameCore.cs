@@ -1,3 +1,4 @@
+using MarianX.Platform;
 using MarianX.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -12,7 +13,7 @@ namespace MarianX.Core
 		{
 			Window.Title = "Tre Altre Volte";
 			Content.RootDirectory = "Content";
-			
+
 			new GraphicsDeviceManager(this)
 			{
 				PreferredBackBufferWidth = 800,
@@ -26,6 +27,7 @@ namespace MarianX.Core
 			var background = new TileBackground();
 			var marian = new Marian(GraphicsDevice.Viewport);
 
+			TileMatrix.Initialize(Window.ClientBounds);
 			AddContent(background);
 			AddContent(marian);
 

@@ -7,17 +7,16 @@ namespace MarianX.Platform
 {
 	public sealed class TileMatrix : TileMatrixMetadata
 	{
-		private static readonly TileMatrix instance;
+		private static TileMatrix instance;
 
 		public static TileMatrix Instance
 		{
 			get { return instance; }
 		}
 
-		static TileMatrix()
+		public static void Initialize(Rectangle bounds)
 		{
-			Game game = GameCore.Instance;
-			instance = new TileMatrix(game.Window.ClientBounds);
+			instance = new TileMatrix(bounds);
 		}
 
 		private TileMatrix(Rectangle size)

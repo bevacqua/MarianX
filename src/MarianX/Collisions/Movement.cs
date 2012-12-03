@@ -14,7 +14,9 @@ namespace MarianX.Collisions
 			if (canMove)
 			{
 				aabb.Position.X += interpolation.X;
-				aabb.Position.Y += interpolation.Y; // Y, slopes?
+				aabb.Position.Y += interpolation.Y; // TODO: Y, slopes?
+
+				canMove = cd.CanMove(aabb, -interpolation);
 			}
 
 			return canMove;

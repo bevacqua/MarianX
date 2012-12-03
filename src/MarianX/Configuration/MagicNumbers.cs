@@ -1,3 +1,5 @@
+using Microsoft.Xna.Framework;
+
 namespace MarianX.Interface
 {
 	public class MagicNumbers
@@ -10,5 +12,8 @@ namespace MarianX.Interface
 
 		public const int MarianHitBoxWidth = 1;
 		public const int MarianHitBoxHeight = 2;
+
+		public static readonly Vector2 SpeedLimit = new Vector2(320, 1024);
+		public static readonly Vector2 MarianAcceleration = new Vector2(120, 320);
 	}
 }

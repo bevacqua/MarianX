@@ -1,4 +1,3 @@
-using System.Configuration;
 using MarianX.Contents;
 using MarianX.Core;
 using Microsoft.Xna.Framework;
@@ -16,7 +15,11 @@ namespace MarianX.Sprites
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
 			base.Draw(gameTime, spriteBatch);
+			DrawDiagnosticHitBox(spriteBatch);
+		}
 
+		private void DrawDiagnosticHitBox(SpriteBatch spriteBatch)
+		{
 			if (!Config.Diagnostic)
 			{
 				return;
