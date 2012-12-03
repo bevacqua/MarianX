@@ -135,6 +135,7 @@
     <Compile Include="Sprites\CityBackground.cs" />
     <Compile Include="Interface\IHitBox.cs" />
     <Compile Include="Sprites\DiagnosticMobile.cs" />
+    <Compile Include="Sprites\PlayerState.cs" />
     <Compile Include="Sprites\Square.cs" />
     <Compile Include="Sprites\TileBackground.cs" />
     <Compile Include="Sprites\Mobile.cs" />

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework.Input;
 
 namespace MarianX.Input
@@ -29,6 +30,13 @@ namespace MarianX.Input
 		{
 			Keys combination = config[action];
 			return keyboardState.IsKeyDown(combination);
+		}
+
+		public bool IsUntouched()
+		{
+			Keys[] keys = keyboardState.GetPressedKeys();
+			bool touched = config.Values.Any(keys.Contains);
+			return !touched;
 		}
 	}
 }

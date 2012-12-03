@@ -29,7 +29,7 @@ namespace MarianX.Sprites
 		public Mobile(string assetName, SpriteSheetSettings settings)
 			: base(assetName, settings)
 		{
-			movement = new Movement();
+			movement = new Movement(new CollisionDetection());
 			Acceleration = MagicNumbers.MarianAcceleration;
 		}
 

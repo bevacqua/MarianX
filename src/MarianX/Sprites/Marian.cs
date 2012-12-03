@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using MarianX.Collisions;
 using MarianX.Contents;
 using MarianX.Input;
@@ -27,7 +26,7 @@ namespace MarianX.Sprites
 			{
 				Width = FrameWidth,
 				Height = FrameHeight,
-				FrameSets = new List<FrameSet>
+				FrameSets = new[]
 				{
 					new FrameSet {Row = 0, Frames = 1},
 					new FrameSet {Row = 1, Frames = 3},
@@ -38,7 +37,7 @@ namespace MarianX.Sprites
 
 		private readonly Viewport viewport;
 
-		private KeyboardState _keyboardState;
+		public PlayerState State { get; protected set; }
 
 		public Marian(Viewport viewport)
 			: base(AssetName, settings)
@@ -52,7 +51,7 @@ namespace MarianX.Sprites
 		{
 			base.Initialize();
 
-			Position = new Vector2(125, viewport.Height - FrameHeight);
+			Position = new Vector2(MagicNumbers.StartX, viewport.Height - FrameHeight);
 		}
 
 		public override void Update(GameTime gameTime)
@@ -60,7 +59,6 @@ namespace MarianX.Sprites
 			KeyboardState keyboardState = Keyboard.GetState();
 			UpdateMovement(keyboardState);
 
-			_keyboardState = keyboardState;
 			base.Update(gameTime);
 		}
 
@@ -68,10 +66,13 @@ namespace MarianX.Sprites
 		{
 			Direction previous = Direction;
 
+			// TODO: jump, states, jump animation no loop, etc. movement changes to support?
+			// gravity, ..platform to allow the player to walk on it.
+
 			var kb = new KeyboardConfiguration(keyboardState);
 			if (kb.IsShortcutDown(Action.Right))
 			{
-				if (Direction != Direction.Right)
+				if (previous != Direction.Right)
 				{
 					SetFrameSet(WalkRight);
 					Direction = Direction.Right;
@@ -79,13 +80,13 @@ namespace MarianX.Sprites
 			}
 			else if (kb.IsShortcutDown(Action.Left))
 			{
-				if (Direction != Direction.Left)
+				if (previous != Direction.Left)
 				{
 					SetFrameSet(WalkLeft);
 					Direction = Direction.Left;
 				}
 			}
-			else if (Direction != Direction.None)
+			else if (previous != Direction.None)
 			{
 				SetFrameSet(Idle);
 				Direction = Direction.None;
