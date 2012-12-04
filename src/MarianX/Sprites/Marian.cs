@@ -116,7 +116,7 @@ namespace MarianX.Sprites
 			if (kb.IsShortcutDown(Action.Jump))
 			{
 				SetFrameSet(lastFacedLeft ? JumpLeft : JumpRight);
-				Speed.Y = 30; // Speed should lower with accel until == 0?
+				Speed.Y = MagicNumbers.MarianJumpSpeed;
 			}
 
 			if (kb.IsShortcutDown(Action.Right))

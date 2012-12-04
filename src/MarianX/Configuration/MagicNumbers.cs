@@ -19,5 +19,8 @@ namespace MarianX.Configuration
 		public static readonly Vector2 MarianAcceleration = new Vector2(120, 320);
 
 		public static readonly Vector2 Gravity = new Vector2(0, 70);
+
+		public const int MarianJumpSpeed = 30;
+		public const int MarianGravityPullSpeed = -3;
 	}
 }

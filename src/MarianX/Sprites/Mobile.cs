@@ -60,11 +60,10 @@ namespace MarianX.Sprites
 		{
 			float time = gameTime.GetElapsedSeconds();
 			
-			if (Speed.Y < 0)
+			if (Speed.Y < 0) // pull out of jump state.
 			{
-				Speed.Y -= 3;
+				Speed.Y += MagicNumbers.MarianGravityPullSpeed;
 			}
-
 			return MagicNumbers.Gravity * time;
 		}
 
