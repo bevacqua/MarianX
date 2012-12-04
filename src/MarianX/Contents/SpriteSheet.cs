@@ -8,7 +8,7 @@ namespace MarianX.Contents
 	public class SpriteSheet : Sprite
 	{
 		private readonly SpriteSheetSettings settings;
-		private readonly Queue<int> frameSetQueue;
+		private readonly Queue<FrameSet> frameSetQueue;
 
 		private TimeSpan elapsed;
 		private int frame;
@@ -33,14 +33,7 @@ namespace MarianX.Contents
 			}
 			this.settings = settings;
 
-			frameSetQueue = new Queue<int>();
-		}
-
-		public override void Initialize()
-		{
-			SetFrameSet(0);
-
-			base.Initialize();
+			frameSetQueue = new Queue<FrameSet>();
 		}
 
 		public override void Update(GameTime gameTime)
@@ -57,7 +50,7 @@ namespace MarianX.Contents
 			{
 				if (frameSetQueue.Count != 0)
 				{
-					int next = frameSetQueue.Dequeue();
+					FrameSet next = frameSetQueue.Dequeue();
 					SetFrameSet(next);
 				}
 				else if (frameSet.Loop)
@@ -83,19 +76,19 @@ namespace MarianX.Contents
 			spriteBatch.Draw(Texture, Position, sprite, Tint, 0.0f, Vector2.Zero, Scale, frameSet.Effects, 0.0f);
 		}
 
-		public void SetFrameSet(int index)
+		public void SetFrameSet(FrameSet set)
 		{
-			if (index > settings.FrameSets.Count - 1)
+			if (set == null)
 			{
-				throw new ArgumentOutOfRangeException("index");
+				throw new ArgumentNullException("set");
 			}
-			frameSet = settings.FrameSets[index];
-			frame = frameSet.Start;
+			frameSet = set;
+			frame = set.Start;
 
 			elapsed = TimeSpan.Zero;
 		}
 
-		public void SetFrameSetQueue(int[] indexes, bool clearQueue = true)
+		public void SetFrameSetQueue(FrameSet[] indexes, bool clearQueue = true)
 		{
 			if (indexes.Length == 0)
 			{
@@ -105,11 +98,11 @@ namespace MarianX.Contents
 			{
 				frameSetQueue.Clear();
 			}
-			foreach (int index in indexes)
+			foreach (FrameSet set in indexes)
 			{
-				frameSetQueue.Enqueue(index);
+				frameSetQueue.Enqueue(set);
 			}
-			int next = frameSetQueue.Dequeue();
+			FrameSet next = frameSetQueue.Dequeue();
 			SetFrameSet(next);
 		}
 	}

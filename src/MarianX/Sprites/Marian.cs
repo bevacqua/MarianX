@@ -16,14 +16,14 @@ namespace MarianX.Sprites
 		private const int FrameWidth = MagicNumbers.MarianFrameWidth;
 		private const int FrameHeight = MagicNumbers.MarianFrameHeight;
 
-		private const int IdleRight = 0;
-		private const int IdleLeft = 1;
-		private const int WalkRight = 2;
-		private const int WalkLeft = 3;
-		private const int JumpRight = 4;
-		private const int JumpLeft = 5;
-		private const int SteerRight = 6;
-		private const int SteerLeft = 7;
+		private readonly FrameSet idleRight = new FrameSet { Row = 0, Frames = 1 };
+		private readonly FrameSet idleLeft = new FrameSet { Row = 0, Frames = 1, Effects = SpriteEffects.FlipHorizontally };
+		private readonly FrameSet walkRight = new FrameSet { Row = 1, Frames = 3 };
+		private readonly FrameSet walkLeft = new FrameSet { Row = 1, Frames = 3, Effects = SpriteEffects.FlipHorizontally };
+		private readonly FrameSet jumpRight = new FrameSet { Row = 2, Frames = 4, Loop = false };
+		private readonly FrameSet jumpLeft = new FrameSet { Row = 2, Frames = 4, Loop = false, Effects = SpriteEffects.FlipHorizontally };
+		private readonly FrameSet steerRight = new FrameSet { Row = 2, Frames = 1, Start = 3, Loop = false };
+		private readonly FrameSet steerLeft = new FrameSet { Row = 2, Frames = 1, Start = 3, Loop = false, Effects = SpriteEffects.FlipHorizontally };
 
 		private static readonly SpriteSheetSettings settings;
 
@@ -32,18 +32,7 @@ namespace MarianX.Sprites
 			settings = new SpriteSheetSettings
 			{
 				Width = FrameWidth,
-				Height = FrameHeight,
-				FrameSets = new[]
-				{
-					new FrameSet {Row = 0, Frames = 1},
-					new FrameSet {Row = 0, Frames = 1, Effects = SpriteEffects.FlipHorizontally},
-					new FrameSet {Row = 1, Frames = 3},
-					new FrameSet {Row = 1, Frames = 3, Effects = SpriteEffects.FlipHorizontally},
-					new FrameSet {Row = 2, Frames = 4, Loop = false},
-					new FrameSet {Row = 2, Frames = 4, Loop = false, Effects = SpriteEffects.FlipHorizontally},
-					new FrameSet {Row = 2, Frames = 1, Start = 3, Loop = false},
-					new FrameSet {Row = 2, Frames = 1, Start = 3, Loop = false, Effects = SpriteEffects.FlipHorizontally},
-				}
+				Height = FrameHeight
 			};
 		}
 
@@ -60,6 +49,8 @@ namespace MarianX.Sprites
 
 		public override void Initialize()
 		{
+			SetFrameSet(idleRight);
+
 			base.Initialize();
 
 			float startY = viewport.Height - FrameHeight - Tile.Height * 2;
@@ -82,7 +73,7 @@ namespace MarianX.Sprites
 
 			if (wasAirborne && !result.HasFlag(MoveResult.Y))
 			{
-				SetFrameSet(lastFacedLeft ? IdleLeft : IdleRight);
+				SetFrameSet(lastFacedLeft ? idleLeft : idleRight);
 				Direction = Direction.None;
 			}
 			return result;
@@ -115,7 +106,7 @@ namespace MarianX.Sprites
 
 			if (kb.IsShortcutDown(Action.Jump))
 			{
-				SetFrameSet(lastFacedLeft ? JumpLeft : JumpRight);
+				SetFrameSet(lastFacedLeft ? jumpLeft : jumpRight);
 				Speed.Y = MagicNumbers.MarianJumpSpeed;
 			}
 
@@ -123,7 +114,7 @@ namespace MarianX.Sprites
 			{
 				if (previous != Direction.Right)
 				{
-					SetFrameSet(WalkRight);
+					SetFrameSet(walkRight);
 					Direction = Direction.Right;
 					lastFacedLeft = false;
 				}
@@ -132,14 +123,14 @@ namespace MarianX.Sprites
 			{
 				if (previous != Direction.Left)
 				{
-					SetFrameSet(WalkLeft);
+					SetFrameSet(walkLeft);
 					Direction = Direction.Left;
 					lastFacedLeft = true;
 				}
 			}
 			else if (previous != Direction.None)
 			{
-				SetFrameSet(lastFacedLeft ? IdleLeft : IdleRight);
+				SetFrameSet(lastFacedLeft ? idleLeft : idleRight);
 				Direction = Direction.None;
 			}
 		}
@@ -152,7 +143,7 @@ namespace MarianX.Sprites
 			{
 				if (previous != Direction.Right)
 				{
-					SetFrameSet(SteerRight);
+					SetFrameSet(steerRight);
 					Direction = Direction.Right;
 					lastFacedLeft = false;
 				}
@@ -161,14 +152,14 @@ namespace MarianX.Sprites
 			{
 				if (previous != Direction.Left)
 				{
-					SetFrameSet(SteerLeft);
+					SetFrameSet(steerLeft);
 					Direction = Direction.Left;
 					lastFacedLeft = true;
 				}
 			}
 			else if (previous != Direction.None)
 			{
-				SetFrameSet(SteerRight);
+				SetFrameSet(steerRight);
 				Direction = Direction.None;
 			}
 		}
