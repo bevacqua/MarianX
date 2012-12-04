@@ -1,6 +1,8 @@
 using MarianX.Collisions;
+using MarianX.Configuration;
 using MarianX.Contents;
-using MarianX.Input;
+using MarianX.Core;
+using MarianX.Enum;
 using MarianX.Interface;
 using MarianX.Platform;
 using Microsoft.Xna.Framework;
@@ -20,6 +22,8 @@ namespace MarianX.Sprites
 		private const int WalkLeft = 2;
 		private const int JumpRight = 3;
 		private const int JumpLeft = 4;
+		private const int SteerRight = 5;
+		private const int SteerLeft = 6;
 
 		private static readonly SpriteSheetSettings settings;
 
@@ -36,14 +40,14 @@ namespace MarianX.Sprites
 					new FrameSet {Row = 1, Frames = 3, Effects = SpriteEffects.FlipHorizontally},
 					new FrameSet {Row = 2, Frames = 4, Loop = false},
 					new FrameSet {Row = 2, Frames = 4, Loop = false, Effects = SpriteEffects.FlipHorizontally},
+					new FrameSet {Row = 2, Frames = 1, Start = 3, Loop = false},
+					new FrameSet {Row = 2, Frames = 1, Start = 3, Loop = false, Effects = SpriteEffects.FlipHorizontally},
 				}
 			};
 		}
 
 		private readonly Viewport viewport;
-
-		public PlayerState State { get; protected set; }
-
+		
 		public Marian(Viewport viewport)
 			: base(AssetName, settings)
 		{
@@ -73,14 +77,30 @@ namespace MarianX.Sprites
 			Direction previous = Direction;
 
 			var kb = new KeyboardConfiguration(keyboardState);
-			if (State == PlayerState.Surfaced)
+
+			if (State == HitBoxState.Surfaced)
 			{
 				UpdateMovementSurfaced(kb);
-				// TODO: jump, states, movement changes to support?
 			}
-			else if (State == PlayerState.Airborne)
+			else if (State == HitBoxState.Airborne)
 			{
 				UpdateMovementAirborne(kb);
+			}
+			
+			if (Direction != previous)
+			{
+				Speed = Vector2.Zero;
+			}
+		}
+
+		private void UpdateMovementSurfaced(KeyboardConfiguration kb)
+		{
+			Direction previous = Direction;
+
+			if (kb.IsShortcutDown(Action.Jump))
+			{
+				SetFrameSet(JumpRight);
+				Speed.Y = 30; // Speed should lower with accel until == 0?
 			}
 
 			if (kb.IsShortcutDown(Action.Right))
@@ -104,26 +124,33 @@ namespace MarianX.Sprites
 				SetFrameSet(Idle);
 				Direction = Direction.None;
 			}
-
-			if (Direction != previous)
-			{
-				Speed = Vector2.Zero;
-			}
-		}
-
-		private void UpdateMovementSurfaced(KeyboardConfiguration kb)
-		{
-			if (kb.IsShortcutDown(Action.Jump))
-			{
-				SetFrameSet(JumpRight);
-				Speed.Y = 30; // Speed should lower with accel until == 0? 
-				State = PlayerState.Airborne; // TODO: set surfaced again when colliding on Y (on the top of a surface).
-				// and set it back to airborne when not colliding on a surface. move both to CD.
-			}
 		}
 
 		private void UpdateMovementAirborne(KeyboardConfiguration kb)
 		{
+			Direction previous = Direction;
+
+			if (kb.IsShortcutDown(Action.Right))
+			{
+				if (previous != Direction.Right)
+				{
+					SetFrameSet(SteerRight);
+					Direction = Direction.Right;
+				}
+			}
+			else if (kb.IsShortcutDown(Action.Left))
+			{
+				if (previous != Direction.Left)
+				{
+					SetFrameSet(SteerLeft);
+					Direction = Direction.Left;
+				}
+			}
+			else if (previous != Direction.None)
+			{
+				SetFrameSet(SteerRight);
+				Direction = Direction.None;
+			}
 		}
 	}
 }

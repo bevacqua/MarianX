@@ -1,5 +1,7 @@
 using MarianX.Collisions;
+using MarianX.Configuration;
 using MarianX.Contents;
+using MarianX.Enum;
 using MarianX.Extensions;
 using MarianX.Interface;
 using Microsoft.Xna.Framework;
@@ -12,7 +14,8 @@ namespace MarianX.Sprites
 		private readonly Movement movement;
 		public Vector2 Acceleration { get; protected set; }
 
-		public AxisAlignedBoundingBox BoundingBox { get; set; }
+		public AxisAlignedBoundingBox BoundingBox { get; protected set; }
+		public HitBoxState State { get; set; }
 
 		private Vector2 position;
 
@@ -62,14 +65,15 @@ namespace MarianX.Sprites
 
 		protected override void UpdatePosition(Vector2 interpolation)
 		{
-			bool moved = movement.Move(this, interpolation);
-			if (moved)
-			{
-				position = BoundingBox.GetPosition(this);
-			}
-			else // collided.
+			MoveResult result = movement.Move(this, interpolation);
+
+			if (result.HasFlag(MoveResult.Blocked)) // collided.
 			{
 				Speed = Vector2.Zero;
+			}
+			else
+			{
+				position = BoundingBox.GetPosition(this);
 			}
 		}
 

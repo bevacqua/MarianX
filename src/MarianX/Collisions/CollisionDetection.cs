@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using MarianX.Contents;
+using MarianX.Enum;
 using MarianX.Extensions;
 using MarianX.Platform;
 using Microsoft.Xna.Framework;
@@ -7,32 +9,34 @@ namespace MarianX.Collisions
 {
 	public class CollisionDetection
 	{
-		public event OnTopOfSurface OnTopOfSurface;
-
-		public bool CanMove(AxisAlignedBoundingBox boundingBox, Vector2 interpolation)
+		public MoveResult CanMove(Rectangle bounds, Vector2 interpolation)
 		{
-			Rectangle bounds = boundingBox.Bounds;
-			Rectangle to = bounds.Offset(interpolation);
+			Rectangle xTarget = bounds.Offset(interpolation * Direction.Right);
+			Rectangle yTarget = bounds.Offset(interpolation * Direction.Down);
 
-			bool canMove = CanFitInMatrix(to);
-			if (!canMove && interpolation.Y > 0)
+			bool canMoveOnAxisX = CanFitInMatrix(xTarget);
+			bool canMoveOnAxisY = CanFitInMatrix(yTarget);
+			if (!canMoveOnAxisX && !canMoveOnAxisY)
 			{
-				OnTopOfSurfaceArgs args = new OnTopOfSurfaceArgs
-				{
-					BoundingBox = boundingBox,
-					Interpolation = interpolation
-				};
-				RaiseOnTopOfSurface(args);
+				return MoveResult.Blocked;
 			}
-			return canMove;
-		}
+			Rectangle target = bounds.Offset(interpolation);
 
-		private void RaiseOnTopOfSurface(OnTopOfSurfaceArgs args)
-		{
-			if (OnTopOfSurface != null)
+			bool canMove = CanFitInMatrix(target);
+			if (canMove)
 			{
-				OnTopOfSurface(this, args);
+				return MoveResult.X | MoveResult.Y;
 			}
+			else if (canMoveOnAxisX)
+			{
+				return MoveResult.X;
+			}
+			else if (canMoveOnAxisY)
+			{
+				return MoveResult.Y;
+			}
+
+			return MoveResult.Blocked;
 		}
 
 		private bool CanFitInMatrix(Rectangle bounds)
@@ -50,13 +54,5 @@ namespace MarianX.Collisions
 
 			return true;
 		}
-	}
-
-	public delegate void OnTopOfSurface(object sender, OnTopOfSurfaceArgs args);
-
-	public class OnTopOfSurfaceArgs
-	{
-		public AxisAlignedBoundingBox BoundingBox { get; set; }
-		public Vector2 Interpolation { get; set; }
 	}
 }

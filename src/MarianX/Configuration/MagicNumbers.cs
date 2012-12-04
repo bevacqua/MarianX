@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 
-namespace MarianX.Interface
+namespace MarianX.Configuration
 {
 	public class MagicNumbers
 	{

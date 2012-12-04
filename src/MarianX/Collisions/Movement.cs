@@ -1,5 +1,7 @@
 using System;
+using MarianX.Enum;
 using MarianX.Interface;
+using MarianX.Sprites;
 using Microsoft.Xna.Framework;
 
 namespace MarianX.Collisions
@@ -17,18 +19,28 @@ namespace MarianX.Collisions
 			this.collisionDetection = collisionDetection;
 		}
 
-		public bool Move(IHitBox hitBox, Vector2 interpolation)
+		public MoveResult Move(IHitBox hitBox, Vector2 interpolation)
 		{
 			AxisAlignedBoundingBox aabb = hitBox.BoundingBox;
 
-			bool canMove = collisionDetection.CanMove(aabb, interpolation);
-			if (canMove)
+			MoveResult result = collisionDetection.CanMove(aabb.Bounds, interpolation);
+
+			if (result.HasFlag(MoveResult.X))
 			{
 				aabb.Position.X += interpolation.X;
-				aabb.Position.Y += interpolation.Y; // TODO: Y, slopes?
 			}
 
-			return canMove;
+			if (result.HasFlag(MoveResult.Y))
+			{
+				hitBox.State = HitBoxState.Airborne;
+				aabb.Position.Y += interpolation.Y;
+			}
+			else
+			{
+				hitBox.State = HitBoxState.Surfaced;
+			}
+
+			return result;
 		}
 	}
 }

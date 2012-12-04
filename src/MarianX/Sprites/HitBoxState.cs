@@ -1,6 +1,6 @@
 namespace MarianX.Sprites
 {
-	public enum PlayerState
+	public enum HitBoxState
 	{
 		Surfaced,
 		Airborne

@@ -1,3 +1,4 @@
+using MarianX.Configuration;
 using MarianX.Interface;
 
 namespace MarianX.Collisions

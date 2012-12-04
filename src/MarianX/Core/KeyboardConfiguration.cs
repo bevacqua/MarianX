@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using MarianX.Enum;
 using Microsoft.Xna.Framework.Input;
 
-namespace MarianX.Input
+namespace MarianX.Core
 {
 	public class KeyboardConfiguration
 	{

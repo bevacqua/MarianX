@@ -53,7 +53,7 @@ namespace MarianX.Contents
 				elapsed = TimeSpan.Zero;
 			}
 
-			if (frame > frameSet.Frames - 1)
+			if (frame > frameSet.Length - 1)
 			{
 				if (frameSetQueue.Count != 0)
 				{
@@ -62,7 +62,7 @@ namespace MarianX.Contents
 				}
 				else if (frameSet.Loop)
 				{
-					frame = 0;
+					frame = frameSet.Start;
 				}
 				else
 				{
@@ -90,7 +90,7 @@ namespace MarianX.Contents
 				throw new ArgumentOutOfRangeException("index");
 			}
 			frameSet = settings.FrameSets[index];
-			frame = 0;
+			frame = frameSet.Start;
 
 			elapsed = TimeSpan.Zero;
 		}

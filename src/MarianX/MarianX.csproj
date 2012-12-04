@@ -112,6 +112,7 @@
     <Compile Include="Collisions\CollisionDetection.cs" />
     <Compile Include="Collisions\Movement.cs" />
     <Compile Include="Collisions\MarianBoundingBox.cs" />
+    <Compile Include="Enum\MoveResult.cs" />
     <Compile Include="Configuration\MagicNumbers.cs" />
     <Compile Include="Contents\FrameSet.cs" />
     <Compile Include="Contents\SpriteSheet.cs" />
@@ -130,12 +131,12 @@
     <Compile Include="Contents\Content.cs" />
     <Compile Include="Contents\Direction.cs" />
     <Compile Include="Interface\IGameContent.cs" />
-    <Compile Include="Input\Action.cs" />
-    <Compile Include="Input\KeyboardConfiguration.cs" />
+    <Compile Include="Enum\Action.cs" />
+    <Compile Include="Core\KeyboardConfiguration.cs" />
     <Compile Include="Sprites\CityBackground.cs" />
     <Compile Include="Interface\IHitBox.cs" />
     <Compile Include="Sprites\DiagnosticMobile.cs" />
-    <Compile Include="Sprites\PlayerState.cs" />
+    <Compile Include="Sprites\HitBoxState.cs" />
     <Compile Include="Sprites\Square.cs" />
     <Compile Include="Sprites\TileBackground.cs" />
     <Compile Include="Sprites\Mobile.cs" />

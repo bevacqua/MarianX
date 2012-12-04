@@ -1,4 +1,5 @@
 using System;
+using MarianX.Configuration;
 using MarianX.Interface;
 using Microsoft.Xna.Framework;
 

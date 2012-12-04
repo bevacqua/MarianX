@@ -1,4 +1,4 @@
-namespace MarianX.Input
+namespace MarianX.Enum
 {
 	public enum Action
 	{
