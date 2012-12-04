@@ -7,12 +7,32 @@ namespace MarianX.Collisions
 {
 	public class CollisionDetection
 	{
+		public event OnTopOfSurface OnTopOfSurface;
+
 		public bool CanMove(AxisAlignedBoundingBox boundingBox, Vector2 interpolation)
 		{
 			Rectangle bounds = boundingBox.Bounds;
 			Rectangle to = bounds.Offset(interpolation);
 
-			return CanFitInMatrix(to);
+			bool canMove = CanFitInMatrix(to);
+			if (!canMove && interpolation.Y > 0)
+			{
+				OnTopOfSurfaceArgs args = new OnTopOfSurfaceArgs
+				{
+					BoundingBox = boundingBox,
+					Interpolation = interpolation
+				};
+				RaiseOnTopOfSurface(args);
+			}
+			return canMove;
+		}
+
+		private void RaiseOnTopOfSurface(OnTopOfSurfaceArgs args)
+		{
+			if (OnTopOfSurface != null)
+			{
+				OnTopOfSurface(this, args);
+			}
 		}
 
 		private bool CanFitInMatrix(Rectangle bounds)
@@ -30,5 +50,13 @@ namespace MarianX.Collisions
 
 			return true;
 		}
+	}
+
+	public delegate void OnTopOfSurface(object sender, OnTopOfSurfaceArgs args);
+
+	public class OnTopOfSurfaceArgs
+	{
+		public AxisAlignedBoundingBox BoundingBox { get; set; }
+		public Vector2 Interpolation { get; set; }
 	}
 }
