@@ -24,8 +24,10 @@ namespace MarianX.Platform
 				}
 			}
 
-			for (int y = 0; y < rows; y++)
-				Tiles[14, y].Impassable = true;
+			Tiles[14, rows - 2].Impassable = true;
+
+			for (int x = 0; x < cols; x++)
+				Tiles[x, rows - 1].Impassable = true;
 		}
 
 		private Tile DefaultTileMetadata(int x, int y)

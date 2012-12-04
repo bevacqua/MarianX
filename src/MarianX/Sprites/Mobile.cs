@@ -35,6 +35,13 @@ namespace MarianX.Sprites
 
 		protected override Vector2 CalculateInterpolation(GameTime gameTime)
 		{
+			Vector2 interpolation = CalculateSpeedThroughAcceleration(gameTime);
+			Vector2 gravity = GetGravityVector(gameTime);
+			return interpolation + gravity;
+		}
+
+		private Vector2 CalculateSpeedThroughAcceleration(GameTime gameTime)
+		{
 			Vector2 targetSpeed = Direction.TargetSpeed;
 			Vector2 direction = Direction.Sign(Speed);
 
@@ -44,6 +51,13 @@ namespace MarianX.Sprites
 			float time = gameTime.GetElapsedSeconds();
 			Vector2 interpolation = Speed * time;
 			return interpolation;
+		}
+
+		private Vector2 GetGravityVector(GameTime gameTime)
+		{
+			float time = gameTime.GetElapsedSeconds();
+			// TODO: unless special case, lower speed on Y axis?
+			return MagicNumbers.Gravity * time;
 		}
 
 		protected override void UpdatePosition(Vector2 interpolation)

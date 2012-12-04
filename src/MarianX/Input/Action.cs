@@ -4,7 +4,6 @@ namespace MarianX.Input
 	{
 		Left,
 		Right,
-		Jump,
-		Crutch
+		Jump
 	}
 }

@@ -14,8 +14,7 @@ namespace MarianX.Input
 			{
 				{Action.Left, Keys.Left},
 				{Action.Right, Keys.Right},
-				{Action.Jump, Keys.Up},
-				{Action.Crutch, Keys.Down}
+				{Action.Jump, Keys.Up}
 			};
 		}
 

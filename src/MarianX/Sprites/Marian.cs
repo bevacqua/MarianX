@@ -2,6 +2,7 @@ using MarianX.Collisions;
 using MarianX.Contents;
 using MarianX.Input;
 using MarianX.Interface;
+using MarianX.Platform;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -17,6 +18,8 @@ namespace MarianX.Sprites
 		private const int Idle = 0;
 		private const int WalkRight = 1;
 		private const int WalkLeft = 2;
+		private const int JumpRight = 3;
+		private const int JumpLeft = 4;
 
 		private static readonly SpriteSheetSettings settings;
 
@@ -30,7 +33,9 @@ namespace MarianX.Sprites
 				{
 					new FrameSet {Row = 0, Frames = 1},
 					new FrameSet {Row = 1, Frames = 3},
-					new FrameSet {Row = 1, Frames = 3, Effects = SpriteEffects.FlipHorizontally}
+					new FrameSet {Row = 1, Frames = 3, Effects = SpriteEffects.FlipHorizontally},
+					new FrameSet {Row = 2, Frames = 4, Loop = false},
+					new FrameSet {Row = 2, Frames = 4, Loop = false, Effects = SpriteEffects.FlipHorizontally},
 				}
 			};
 		}
@@ -51,7 +56,8 @@ namespace MarianX.Sprites
 		{
 			base.Initialize();
 
-			Position = new Vector2(MagicNumbers.StartX, viewport.Height - FrameHeight);
+			float startY = viewport.Height - FrameHeight - Tile.Height * 2;
+			Position = new Vector2(MagicNumbers.StartX, startY);
 		}
 
 		public override void Update(GameTime gameTime)
@@ -66,10 +72,17 @@ namespace MarianX.Sprites
 		{
 			Direction previous = Direction;
 
-			// TODO: jump, states, jump animation no loop, etc. movement changes to support?
-			// gravity, ..platform to allow the player to walk on it.
-
 			var kb = new KeyboardConfiguration(keyboardState);
+			if (State == PlayerState.Surfaced)
+			{
+				UpdateMovementSurfaced(kb);
+				// TODO: jump, states, movement changes to support?
+			}
+			else if (State == PlayerState.Airborne)
+			{
+				UpdateMovementAirborne(kb);
+			}
+
 			if (kb.IsShortcutDown(Action.Right))
 			{
 				if (previous != Direction.Right)
@@ -96,6 +109,21 @@ namespace MarianX.Sprites
 			{
 				Speed = Vector2.Zero;
 			}
+		}
+
+		private void UpdateMovementSurfaced(KeyboardConfiguration kb)
+		{
+			if (kb.IsShortcutDown(Action.Jump))
+			{
+				SetFrameSet(JumpRight);
+				Speed.Y = 30; // Speed should lower with accel until == 0? 
+				State = PlayerState.Airborne; // TODO: set surfaced again when colliding on Y (on the top of a surface).
+				// and set it back to airborne when not colliding on a surface. move both to CD.
+			}
+		}
+
+		private void UpdateMovementAirborne(KeyboardConfiguration kb)
+		{
 		}
 	}
 }

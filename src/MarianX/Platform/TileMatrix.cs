@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using MarianX.Core;
 using Microsoft.Xna.Framework;
 
 namespace MarianX.Platform

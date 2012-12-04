@@ -64,6 +64,10 @@ namespace MarianX.Contents
 				{
 					frame = 0;
 				}
+				else
+				{
+					frame--; // stay on last frame.
+				}
 			}
 
 			base.Update(gameTime);
