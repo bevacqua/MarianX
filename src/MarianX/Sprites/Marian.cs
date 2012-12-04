@@ -3,7 +3,6 @@ using MarianX.Configuration;
 using MarianX.Contents;
 using MarianX.Core;
 using MarianX.Enum;
-using MarianX.Interface;
 using MarianX.Platform;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,13 +16,14 @@ namespace MarianX.Sprites
 		private const int FrameWidth = MagicNumbers.MarianFrameWidth;
 		private const int FrameHeight = MagicNumbers.MarianFrameHeight;
 
-		private const int Idle = 0;
-		private const int WalkRight = 1;
-		private const int WalkLeft = 2;
-		private const int JumpRight = 3;
-		private const int JumpLeft = 4;
-		private const int SteerRight = 5;
-		private const int SteerLeft = 6;
+		private const int IdleRight = 0;
+		private const int IdleLeft = 1;
+		private const int WalkRight = 2;
+		private const int WalkLeft = 3;
+		private const int JumpRight = 4;
+		private const int JumpLeft = 5;
+		private const int SteerRight = 6;
+		private const int SteerLeft = 7;
 
 		private static readonly SpriteSheetSettings settings;
 
@@ -36,6 +36,7 @@ namespace MarianX.Sprites
 				FrameSets = new[]
 				{
 					new FrameSet {Row = 0, Frames = 1},
+					new FrameSet {Row = 0, Frames = 1, Effects = SpriteEffects.FlipHorizontally},
 					new FrameSet {Row = 1, Frames = 3},
 					new FrameSet {Row = 1, Frames = 3, Effects = SpriteEffects.FlipHorizontally},
 					new FrameSet {Row = 2, Frames = 4, Loop = false},
@@ -47,7 +48,8 @@ namespace MarianX.Sprites
 		}
 
 		private readonly Viewport viewport;
-		
+		private bool lastFacedLeft;
+
 		public Marian(Viewport viewport)
 			: base(AssetName, settings)
 		{
@@ -72,6 +74,20 @@ namespace MarianX.Sprites
 			base.Update(gameTime);
 		}
 
+		protected override MoveResult UpdatePosition(Vector2 interpolation)
+		{
+			var wasAirborne = State == HitBoxState.Airborne;
+
+			MoveResult result = base.UpdatePosition(interpolation);
+
+			if (wasAirborne && !result.HasFlag(MoveResult.Y))
+			{
+				SetFrameSet(lastFacedLeft ? IdleLeft : IdleRight);
+				Direction = Direction.None;
+			}
+			return result;
+		}
+
 		private void UpdateMovement(KeyboardState keyboardState)
 		{
 			Direction previous = Direction;
@@ -86,7 +102,7 @@ namespace MarianX.Sprites
 			{
 				UpdateMovementAirborne(kb);
 			}
-			
+
 			if (Direction != previous)
 			{
 				Speed = Vector2.Zero;
@@ -99,7 +115,7 @@ namespace MarianX.Sprites
 
 			if (kb.IsShortcutDown(Action.Jump))
 			{
-				SetFrameSet(JumpRight);
+				SetFrameSet(lastFacedLeft ? JumpLeft : JumpRight);
 				Speed.Y = 30; // Speed should lower with accel until == 0?
 			}
 
@@ -109,6 +125,7 @@ namespace MarianX.Sprites
 				{
 					SetFrameSet(WalkRight);
 					Direction = Direction.Right;
+					lastFacedLeft = false;
 				}
 			}
 			else if (kb.IsShortcutDown(Action.Left))
@@ -117,11 +134,12 @@ namespace MarianX.Sprites
 				{
 					SetFrameSet(WalkLeft);
 					Direction = Direction.Left;
+					lastFacedLeft = true;
 				}
 			}
 			else if (previous != Direction.None)
 			{
-				SetFrameSet(Idle);
+				SetFrameSet(lastFacedLeft ? IdleLeft : IdleRight);
 				Direction = Direction.None;
 			}
 		}
@@ -136,6 +154,7 @@ namespace MarianX.Sprites
 				{
 					SetFrameSet(SteerRight);
 					Direction = Direction.Right;
+					lastFacedLeft = false;
 				}
 			}
 			else if (kb.IsShortcutDown(Action.Left))
@@ -144,6 +163,7 @@ namespace MarianX.Sprites
 				{
 					SetFrameSet(SteerLeft);
 					Direction = Direction.Left;
+					lastFacedLeft = true;
 				}
 			}
 			else if (previous != Direction.None)

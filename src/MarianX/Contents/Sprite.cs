@@ -1,3 +1,4 @@
+using MarianX.Enum;
 using MarianX.Extensions;
 using MarianX.Interface;
 using Microsoft.Xna.Framework;
@@ -40,9 +41,10 @@ namespace MarianX.Contents
 			return interpolation;
 		}
 
-		protected virtual void UpdatePosition(Vector2 interpolation)
+		protected virtual MoveResult UpdatePosition(Vector2 interpolation)
 		{
 			Position += interpolation;
+			return MoveResult.None;
 		}
 
 		public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)

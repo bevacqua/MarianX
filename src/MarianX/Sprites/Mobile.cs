@@ -59,11 +59,16 @@ namespace MarianX.Sprites
 		private Vector2 GetGravityVector(GameTime gameTime)
 		{
 			float time = gameTime.GetElapsedSeconds();
-			// TODO: unless special case, lower speed on Y axis?
+			
+			if (Speed.Y < 0)
+			{
+				Speed.Y -= 3;
+			}
+
 			return MagicNumbers.Gravity * time;
 		}
 
-		protected override void UpdatePosition(Vector2 interpolation)
+		protected override MoveResult UpdatePosition(Vector2 interpolation)
 		{
 			MoveResult result = movement.Move(this, interpolation);
 
@@ -75,6 +80,7 @@ namespace MarianX.Sprites
 			{
 				position = BoundingBox.GetPosition(this);
 			}
+			return result;
 		}
 
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
