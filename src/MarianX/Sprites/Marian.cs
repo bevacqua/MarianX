@@ -38,15 +38,12 @@ namespace MarianX.Sprites
 			};
 		}
 
-		private readonly Viewport viewport;
 		private bool lastFacedLeft;
 		private TimeSpan lastJumpStarted;
 
-		public Marian(Viewport viewport)
+		public Marian()
 			: base(AssetName, settings)
 		{
-			this.viewport = viewport;
-
 			BoundingBox = new MarianBoundingBox();
 		}
 
@@ -56,8 +53,7 @@ namespace MarianX.Sprites
 
 			base.Initialize();
 
-			float startY = viewport.Height - FrameHeight - Tile.Height * 15;
-			Position = new Vector2(MagicNumbers.StartX, startY);
+			Position = new Vector2(MagicNumbers.StartX, MagicNumbers.StartY);
 		}
 
 		public override void Update(GameTime gameTime)

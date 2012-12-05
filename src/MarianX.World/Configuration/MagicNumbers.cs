@@ -15,6 +15,7 @@ namespace MarianX.World.Configuration
 		public const int MarianHitBoxHeight = 2;
 
 		public const float StartX = 125;
+		public const float StartY = 450;
 
 		public static readonly Vector2 SpeedLimit = new Vector2(320, 1024);
 		public static readonly Vector2 MarianAcceleration = new Vector2(120, 320);
@@ -24,6 +25,6 @@ namespace MarianX.World.Configuration
 		public const int MarianJumpSpeed = 30;
 		public const int MarianGravityPullSpeed = -3;
 
-		public static readonly TimeSpan MarianJumpWindow = TimeSpan.FromMilliseconds(200);
+		public static readonly TimeSpan MarianJumpWindow = TimeSpan.FromMilliseconds(450);
 	}
 }

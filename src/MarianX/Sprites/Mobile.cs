@@ -56,6 +56,7 @@ namespace MarianX.Sprites
 			return interpolation;
 		}
 
+		// TODO: use acceleration for this as well.
 		private Vector2 GetGravityVector(GameTime gameTime)
 		{
 			float time = gameTime.GetElapsedSeconds();

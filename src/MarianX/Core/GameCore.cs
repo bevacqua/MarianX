@@ -25,7 +25,7 @@ namespace MarianX.Core
 		protected override void Initialize()
 		{
 			var background = new TileBackground();
-			var marian = new Marian(GraphicsDevice.Viewport);
+			var marian = new Marian();
 
 			TileMatrix.Initialize("Content/map.csv");
 			AddContent(background);
