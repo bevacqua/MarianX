@@ -14,16 +14,15 @@ namespace MarianX.World.Configuration
 		public const int MarianHitBoxWidth = 1;
 		public const int MarianHitBoxHeight = 2;
 
-		public const float StartX = 125;
+		public const float StartX = 85;
 		public const float StartY = 450;
 
-		public static readonly Vector2 SpeedLimit = new Vector2(320, 1024);
-		public static readonly Vector2 MarianAcceleration = new Vector2(120, 320);
+		public static readonly Vector2 SpeedLimit = new Vector2(560, 680);
+		public static readonly Vector2 MarianAcceleration = new Vector2(120, 180);
 
 		public static readonly Vector2 Gravity = new Vector2(0, 110);
 
-		public const int MarianJumpSpeed = 30;
-		public const int MarianGravityPullSpeed = -3;
+		public const int MarianJumpSpeed = 100;
 
 		public static readonly TimeSpan MarianJumpWindow = TimeSpan.FromMilliseconds(450);
 	}

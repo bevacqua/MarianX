@@ -45,6 +45,7 @@ namespace MarianX.Sprites
 			: base(AssetName, settings)
 		{
 			BoundingBox = new MarianBoundingBox();
+			OnStaticCollision += Marian_OnStaticCollision;
 		}
 
 		public override void Initialize()
@@ -76,6 +77,11 @@ namespace MarianX.Sprites
 				Direction = Direction.None;
 			}
 			return result;
+		}
+
+		private void Marian_OnStaticCollision(object sender, EventArgs args)
+		{
+			SetFrameSet(lastFacedLeft ? idleLeft : idleRight);
 		}
 
 		private void UpdateMovement(KeyboardState keyboardState, GameTime gameTime)

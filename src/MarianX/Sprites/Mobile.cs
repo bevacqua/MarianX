@@ -1,6 +1,8 @@
+using System;
 using MarianX.Collisions;
 using MarianX.Contents;
 using MarianX.Enum;
+using MarianX.Events;
 using MarianX.Interface;
 using MarianX.World.Configuration;
 using MarianX.World.Extensions;
@@ -16,6 +18,8 @@ namespace MarianX.Sprites
 
 		public AxisAlignedBoundingBox BoundingBox { get; protected set; }
 		public HitBoxState State { get; set; }
+
+		public event OnStaticCollision OnStaticCollision;
 
 		private Vector2 position;
 
@@ -38,34 +42,23 @@ namespace MarianX.Sprites
 
 		protected override Vector2 CalculateInterpolation(GameTime gameTime)
 		{
-			Vector2 interpolation = CalculateSpeedThroughAcceleration(gameTime);
-			Vector2 gravity = GetGravityVector(gameTime);
+			Vector2 gravity = CalculateInterpolationInDirection(Direction.Down, gameTime);
+			Vector2 interpolation = CalculateInterpolationInDirection(Direction, gameTime);
 			return interpolation + gravity;
 		}
 
-		private Vector2 CalculateSpeedThroughAcceleration(GameTime gameTime)
+		private Vector2 CalculateInterpolationInDirection(Direction direction, GameTime gameTime)
 		{
-			Vector2 targetSpeed = Direction.TargetSpeed;
-			Vector2 direction = Direction.Sign(Speed);
+			Vector2 targetSpeed = direction.TargetSpeed;
+			Vector2 sign = direction.Sign(Speed);
 
-			Vector2 updatedSpeed = Speed + Acceleration * direction;
-			Speed = updatedSpeed.BoundBy(targetSpeed);
+			Vector2 updatedSpeed = Speed + Acceleration * sign;
+			Vector2 limitedSpeed = updatedSpeed.BoundBy(targetSpeed);
+			Speed = limitedSpeed;
 
 			float time = gameTime.GetElapsedSeconds();
-			Vector2 interpolation = Speed * time;
+			Vector2 interpolation = limitedSpeed * time;
 			return interpolation;
-		}
-
-		// TODO: use acceleration for this as well.
-		private Vector2 GetGravityVector(GameTime gameTime)
-		{
-			float time = gameTime.GetElapsedSeconds();
-			
-			if (Speed.Y < 0) // pull out of jump state.
-			{
-				Speed.Y += MagicNumbers.MarianGravityPullSpeed;
-			}
-			return MagicNumbers.Gravity * time;
 		}
 
 		protected override MoveResult UpdatePosition(Vector2 interpolation)
@@ -74,7 +67,9 @@ namespace MarianX.Sprites
 
 			if (result.HasFlag(MoveResult.Blocked)) // collided.
 			{
+				Direction = Direction.None;
 				Speed = Vector2.Zero;
+				RaiseStaticCollision(this, new EventArgs());
 			}
 			else
 			{
@@ -88,6 +83,12 @@ namespace MarianX.Sprites
 			spriteBatch.Begin();
 			base.Draw(gameTime, spriteBatch);
 			spriteBatch.End();
+		}
+
+		protected void RaiseStaticCollision(object sender, EventArgs args)
+		{
+			if (OnStaticCollision != null)
+				OnStaticCollision(sender, args);
 		}
 	}
 }

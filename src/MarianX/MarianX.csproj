@@ -130,6 +130,7 @@
     <Compile Include="Interface\IHitBox.cs" />
     <Compile Include="Sprites\DiagnosticMobile.cs" />
     <Compile Include="Sprites\HitBoxState.cs" />
+    <Compile Include="Events\OnStaticCollision.cs" />
     <Compile Include="Sprites\Square.cs" />
     <Compile Include="Sprites\TileBackground.cs" />
     <Compile Include="Sprites\Mobile.cs" />
@@ -189,7 +190,9 @@
     <None Include="..\..\README.md">
       <Link>README.md</Link>
     </None>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
