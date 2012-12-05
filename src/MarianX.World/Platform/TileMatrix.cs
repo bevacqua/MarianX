@@ -13,13 +13,13 @@ namespace MarianX.World.Platform
 			get { return instance; }
 		}
 
-		public static void Initialize(Rectangle bounds)
+		public static void Initialize(string path)
 		{
-			instance = new TileMatrix(bounds);
+			instance = new TileMatrix(path);
 		}
 
-		private TileMatrix(Rectangle size)
-			: base(size)
+		private TileMatrix(string path)
+			: base(path)
 		{
 		}
 

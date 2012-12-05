@@ -1,5 +1,3 @@
-using Microsoft.Xna.Framework.Audio;
-
 namespace MarianX.World.Platform
 {
 	public class TileType
@@ -10,6 +8,6 @@ namespace MarianX.World.Platform
 		public int SlopeLeft { get; set; }
 		public int SlopeRight { get; set; }
 
-		public SoundEffect Sound { get; set; }
+		public string Sound { get; set; }
 	}
 }

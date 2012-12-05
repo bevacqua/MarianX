@@ -1,4 +1,8 @@
-using Microsoft.Xna.Framework;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using AutoMapper;
+using CsvHelper;
 
 namespace MarianX.World.Platform
 {
@@ -9,34 +13,26 @@ namespace MarianX.World.Platform
 		/// </summary>
 		public Tile[,] Tiles { get; private set; }
 
-		public TileMatrixMetadata(Rectangle size)
+		public TileMatrixMetadata(string path)
 		{
-			int rows = size.Height / Tile.Height;
-			int cols = size.Width / Tile.Width;
-
-			Tiles = new Tile[cols, rows];
-
-			for (int x = 0; x < cols; x++)
+			using (Stream stream = File.OpenRead(path))
+			using (TextReader textReader = new StreamReader(stream))
+			using (CsvReader csvReader = new CsvReader(textReader))
 			{
-				for (int y = 0; y < rows; y++)
+				IList<TileRecord> records = csvReader.GetRecords<TileRecord>().ToArray();
+
+				int cols = records.Max(t => t.X) + 1;
+				int rows = records.Max(t => t.Y) + 1;
+
+				Tiles = new Tile[cols, rows];
+
+				foreach (TileRecord record in records)
 				{
-					Tiles[x, y] = DefaultTileMetadata(x, y);
+					Tile tile = Mapper.Map<TileRecord, Tile>(record);
+
+					Tiles[record.X, record.Y] = tile;
 				}
 			}
-
-			Tiles[14, rows - 2].Impassable = true;
-
-			for (int x = 0; x < cols; x++)
-				Tiles[x, rows - 1].Impassable = true;
-		}
-
-		private Tile DefaultTileMetadata(int x, int y)
-		{
-			Tile tile = new Tile
-			{
-				Position = new Point(x * Tile.Width, y * Tile.Height)
-			};
-			return tile;
 		}
 	}
 }

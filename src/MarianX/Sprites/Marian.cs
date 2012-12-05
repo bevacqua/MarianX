@@ -53,7 +53,7 @@ namespace MarianX.Sprites
 
 			base.Initialize();
 
-			float startY = viewport.Height - FrameHeight - Tile.Height * 2;
+			float startY = viewport.Height - FrameHeight - Tile.Height * 15;
 			Position = new Vector2(MagicNumbers.StartX, startY);
 		}
 

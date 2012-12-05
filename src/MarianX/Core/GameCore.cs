@@ -27,7 +27,7 @@ namespace MarianX.Core
 			var background = new TileBackground();
 			var marian = new Marian(GraphicsDevice.Viewport);
 
-			TileMatrix.Initialize(Window.ClientBounds);
+			TileMatrix.Initialize("Content/map.csv");
 			AddContent(background);
 			AddContent(marian);
 

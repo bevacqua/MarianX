@@ -81,12 +81,19 @@ namespace MarianX.Map
 				}
 			}
 
-			bitmap.Save("map.png", ImageFormat.Png);
+			string png = "map.png";
+
+			if (File.Exists(png))
+			{
+				File.Delete(png);
+			}
+
+			bitmap.Save(png, ImageFormat.Png);
 		}
 
 		private static void SaveTileMatrix(TileType[,] map)
 		{
-			IList<Tile> tiles = new List<Tile>();
+			IList<TileRecord> records = new List<TileRecord>();
 
 			int cols = map.GetLength(0);
 			int rows = map.GetLength(1);
@@ -96,23 +103,35 @@ namespace MarianX.Map
 				for (int y = 0; y < rows; y++)
 				{
 					TileType type = map[x, y];
-					Tile tile = new Tile
+					TileRecord record = new TileRecord
 					{
 						Impassable = type.Impassable,
-						Position = new Microsoft.Xna.Framework.Point(x * Tile.Width, y * Tile.Height)
+						Type = type.Type,
+						SlopeLeft = type.SlopeLeft,
+						SlopeRight = type.SlopeRight,
+						Sound = type.Sound,
+						X = x,
+						Y = y
 					};
 
-					tiles.Add(tile);
+					records.Add(record);
 				}
 			}
 
-			using (Stream stream = File.OpenWrite("map.csv"))
+			string csv = "map.csv";
+
+			if (File.Exists(csv))
+			{
+				File.Delete(csv);
+			}
+
+			using (Stream stream = File.OpenWrite(csv))
 			using (TextWriter textWriter = new StreamWriter(stream))
 			using (CsvWriter csvWriter = new CsvWriter(textWriter))
 			{
-				foreach (Tile tile in tiles)
+				foreach (TileRecord record in records)
 				{
-					csvWriter.WriteRecord(tile);
+					csvWriter.WriteRecord(record);
 				}
 			}
 		}

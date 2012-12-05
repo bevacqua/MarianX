@@ -10,7 +10,7 @@ namespace MarianX.Sprites
 	{
 		private static readonly IList<string> backgroundAssets = new[]
 		{
-			"Backgrounds/tilematrix"
+			"map"
 		};
 
 		public TileBackground()
