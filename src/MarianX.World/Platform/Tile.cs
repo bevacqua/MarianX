@@ -1,4 +1,4 @@
-using MarianX.Configuration;
+using MarianX.World.Configuration;
 using Microsoft.Xna.Framework;
 
 namespace MarianX.World.Platform

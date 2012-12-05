@@ -1,5 +1,5 @@
-using MarianX.Configuration;
 using MarianX.Interface;
+using MarianX.World.Configuration;
 
 namespace MarianX.Collisions
 {

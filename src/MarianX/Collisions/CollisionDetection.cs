@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using MarianX.Contents;
 using MarianX.Enum;
-using MarianX.Extensions;
+using MarianX.World.Extensions;
 using MarianX.World.Platform;
 using Microsoft.Xna.Framework;
 

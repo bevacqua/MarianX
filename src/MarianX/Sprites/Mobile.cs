@@ -1,9 +1,9 @@
 using MarianX.Collisions;
-using MarianX.Configuration;
 using MarianX.Contents;
 using MarianX.Enum;
-using MarianX.Extensions;
 using MarianX.Interface;
+using MarianX.World.Configuration;
+using MarianX.World.Extensions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

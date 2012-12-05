@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Xna.Framework;
 
-namespace MarianX.Extensions
+namespace MarianX.World.Extensions
 {
 	public static class Vector2Extensions
 	{

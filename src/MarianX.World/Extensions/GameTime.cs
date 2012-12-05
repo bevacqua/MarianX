@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 
-namespace MarianX.Extensions
+namespace MarianX.World.Extensions
 {
 	public static class GameTimeExtensions
 	{

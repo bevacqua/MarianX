@@ -147,8 +147,9 @@
       <Name>MarianX.World</Name>
     </ProjectReference>
     <ProjectReference Include="..\MarianXContent\MarianXContent.contentproj">
-      <Name>MarianXContent</Name>
+      <Name>MarianXContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
+      <Project>{BB9C6F07-7AE3-4EE1-A25D-034919038757}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

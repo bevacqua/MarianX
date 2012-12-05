@@ -1,12 +1,14 @@
+using System;
 using MarianX.Collisions;
-using MarianX.Configuration;
 using MarianX.Contents;
 using MarianX.Core;
 using MarianX.Enum;
+using MarianX.World.Configuration;
 using MarianX.World.Platform;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Action = MarianX.Enum.Action;
 
 namespace MarianX.Sprites
 {
@@ -38,6 +40,7 @@ namespace MarianX.Sprites
 
 		private readonly Viewport viewport;
 		private bool lastFacedLeft;
+		private TimeSpan lastJumpStarted;
 
 		public Marian(Viewport viewport)
 			: base(AssetName, settings)
@@ -60,7 +63,7 @@ namespace MarianX.Sprites
 		public override void Update(GameTime gameTime)
 		{
 			KeyboardState keyboardState = Keyboard.GetState();
-			UpdateMovement(keyboardState);
+			UpdateMovement(keyboardState, gameTime);
 
 			base.Update(gameTime);
 		}
@@ -79,7 +82,7 @@ namespace MarianX.Sprites
 			return result;
 		}
 
-		private void UpdateMovement(KeyboardState keyboardState)
+		private void UpdateMovement(KeyboardState keyboardState, GameTime gameTime)
 		{
 			Direction previous = Direction;
 
@@ -87,11 +90,11 @@ namespace MarianX.Sprites
 
 			if (State == HitBoxState.Surfaced)
 			{
-				UpdateMovementSurfaced(kb);
+				UpdateMovementSurfaced(kb, gameTime);
 			}
 			else if (State == HitBoxState.Airborne)
 			{
-				UpdateMovementAirborne(kb);
+				UpdateMovementAirborne(kb, gameTime);
 			}
 
 			if (Direction != previous)
@@ -100,7 +103,7 @@ namespace MarianX.Sprites
 			}
 		}
 
-		private void UpdateMovementSurfaced(KeyboardConfiguration kb)
+		private void UpdateMovementSurfaced(KeyboardConfiguration kb, GameTime gameTime)
 		{
 			Direction previous = Direction;
 
@@ -108,9 +111,9 @@ namespace MarianX.Sprites
 			{
 				SetFrameSet(lastFacedLeft ? jumpLeft : jumpRight);
 				Speed.Y = MagicNumbers.MarianJumpSpeed;
+				lastJumpStarted = gameTime.TotalGameTime;
 			}
-
-			if (kb.IsShortcutDown(Action.Right))
+			else if (kb.IsShortcutDown(Action.Right))
 			{
 				if (previous != Direction.Right)
 				{
@@ -135,9 +138,22 @@ namespace MarianX.Sprites
 			}
 		}
 
-		private void UpdateMovementAirborne(KeyboardConfiguration kb)
+		private void UpdateMovementAirborne(KeyboardConfiguration kb, GameTime gameTime)
 		{
 			Direction previous = Direction;
+
+			if (kb.IsShortcutDown(Action.Jump))
+			{
+				if (lastJumpStarted == TimeSpan.Zero)
+				{
+					return;
+				}
+				if (gameTime.TotalGameTime - lastJumpStarted < MagicNumbers.MarianJumpWindow)
+				{
+					SetFrameSet(lastFacedLeft ? jumpLeft : jumpRight);
+					Speed.Y = MagicNumbers.MarianJumpSpeed;
+				}
+			}
 
 			if (kb.IsShortcutDown(Action.Right))
 			{

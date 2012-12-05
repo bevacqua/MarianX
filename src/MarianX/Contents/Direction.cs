@@ -1,6 +1,6 @@
 using System;
-using MarianX.Configuration;
 using MarianX.Interface;
+using MarianX.World.Configuration;
 using Microsoft.Xna.Framework;
 
 namespace MarianX.Contents
