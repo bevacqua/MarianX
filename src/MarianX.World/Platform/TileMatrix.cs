@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace MarianX.Platform
+namespace MarianX.World.Platform
 {
 	public sealed class TileMatrix : TileMatrixMetadata
 	{

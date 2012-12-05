@@ -1,0 +1,4 @@
+Type,Impassable,SlopeLeft,SlopeRight,Sound
+blank,false,0,0,
+dirt,true,0,0,
+grass,true,0,0,

@@ -3,7 +3,7 @@ using MarianX.Configuration;
 using MarianX.Contents;
 using MarianX.Core;
 using MarianX.Enum;
-using MarianX.Platform;
+using MarianX.World.Platform;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;

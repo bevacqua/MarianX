@@ -1,5 +1,5 @@
-using MarianX.Platform;
 using MarianX.Sprites;
+using MarianX.World.Platform;
 using Microsoft.Xna.Framework;
 
 namespace MarianX.Collisions

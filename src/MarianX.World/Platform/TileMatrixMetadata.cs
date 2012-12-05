@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 
-namespace MarianX.Platform
+namespace MarianX.World.Platform
 {
 	public class TileMatrixMetadata
 	{

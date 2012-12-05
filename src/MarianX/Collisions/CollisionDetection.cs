@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using MarianX.Contents;
 using MarianX.Enum;
 using MarianX.Extensions;
-using MarianX.Platform;
+using MarianX.World.Platform;
 using Microsoft.Xna.Framework;
 
 namespace MarianX.Collisions

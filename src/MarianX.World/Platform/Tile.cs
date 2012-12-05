@@ -1,16 +1,12 @@
 using MarianX.Configuration;
-using MarianX.Interface;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 
-namespace MarianX.Platform
+namespace MarianX.World.Platform
 {
-	public class Tile
+	public class Tile : TileType
 	{
 		public const int Width = MagicNumbers.TileWidth;
 		public const int Height = MagicNumbers.TileHeight;
-
-		public bool Impassable { get; set; }
 
 		private Point position;
 
@@ -25,10 +21,5 @@ namespace MarianX.Platform
 		}
 
 		public Rectangle Bounds { get; private set; }
-
-		public int SlopeLeft { get; set; }
-		public int SlopeRight { get; set; }
-
-		public SoundEffect Sound { get; set; }
 	}
 }
