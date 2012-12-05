@@ -74,7 +74,7 @@ namespace MarianX.Sprites
 
 			MoveResult result = base.UpdatePosition(interpolation);
 
-			if (wasAirborne && !result.HasFlag(MoveResult.Y))
+			if (wasAirborne && State != HitBoxState.Airborne)
 			{
 				SetFrameSet(lastFacedLeft ? idleLeft : idleRight);
 				Direction = Direction.None;
