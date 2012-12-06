@@ -1,6 +1,6 @@
 namespace MarianX.Enum
 {
-	public enum Action
+	public enum ActionKey
 	{
 		Left,
 		Right,

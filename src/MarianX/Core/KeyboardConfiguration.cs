@@ -7,15 +7,15 @@ namespace MarianX.Core
 {
 	public class KeyboardConfiguration
 	{
-		private static IDictionary<Action, Keys> config;
+		private static IDictionary<ActionKey, Keys> config;
 
 		static KeyboardConfiguration()
 		{
-			config = new Dictionary<Action, Keys>
+			config = new Dictionary<ActionKey, Keys>
 			{
-				{Action.Left, Keys.Left},
-				{Action.Right, Keys.Right},
-				{Action.Jump, Keys.Up}
+				{ActionKey.Left, Keys.Left},
+				{ActionKey.Right, Keys.Right},
+				{ActionKey.Jump, Keys.Up}
 			};
 		}
 
@@ -26,17 +26,10 @@ namespace MarianX.Core
 			this.keyboardState = keyboardState;
 		}
 
-		public bool IsShortcutDown(Action action)
+		public bool IsKeyDown(ActionKey key)
 		{
-			Keys combination = config[action];
+			Keys combination = config[key];
 			return keyboardState.IsKeyDown(combination);
-		}
-
-		public bool IsUntouched()
-		{
-			Keys[] keys = keyboardState.GetPressedKeys();
-			bool touched = config.Values.Any(keys.Contains);
-			return !touched;
 		}
 	}
 }

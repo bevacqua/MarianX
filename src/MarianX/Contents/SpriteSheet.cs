@@ -73,7 +73,7 @@ namespace MarianX.Contents
 			int y = frameSet.Row * (settings.Height + offset);
 
 			Rectangle sprite = new Rectangle(x, y, settings.Width, settings.Height);
-			spriteBatch.Draw(Texture, Position, sprite, Tint, 0.0f, Vector2.Zero, Scale, frameSet.Effects, 0.0f);
+			spriteBatch.Draw(Texture, Position, sprite, Tint, Tilt, Vector2.Zero, Scale, frameSet.Effects, 0.0f);
 		}
 
 		public void SetFrameSet(FrameSet set)

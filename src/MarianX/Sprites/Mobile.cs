@@ -1,8 +1,6 @@
-using System;
 using MarianX.Collisions;
 using MarianX.Contents;
 using MarianX.Enum;
-using MarianX.Events;
 using MarianX.Interface;
 using MarianX.World.Configuration;
 using MarianX.World.Extensions;
@@ -14,12 +12,10 @@ namespace MarianX.Sprites
 	public class Mobile : SpriteSheet, IHitBox
 	{
 		private readonly Movement movement;
-		public Vector2 Acceleration { get; protected set; }
 
+		public Vector2 Acceleration { get; protected set; }
 		public AxisAlignedBoundingBox BoundingBox { get; protected set; }
 		public HitBoxState State { get; set; }
-
-		public event OnStaticCollision OnStaticCollision;
 
 		private Vector2 position;
 
@@ -69,7 +65,6 @@ namespace MarianX.Sprites
 			{
 				Direction = Direction.None;
 				Speed = Vector2.Zero;
-				RaiseStaticCollision(this, new EventArgs());
 			}
 			else
 			{
@@ -83,12 +78,6 @@ namespace MarianX.Sprites
 			spriteBatch.Begin();
 			base.Draw(gameTime, spriteBatch);
 			spriteBatch.End();
-		}
-
-		protected void RaiseStaticCollision(object sender, EventArgs args)
-		{
-			if (OnStaticCollision != null)
-				OnStaticCollision(sender, args);
 		}
 	}
 }

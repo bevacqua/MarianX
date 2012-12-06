@@ -4,56 +4,26 @@ using MarianX.Contents;
 using MarianX.Core;
 using MarianX.Enum;
 using MarianX.World.Configuration;
-using MarianX.World.Platform;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Action = MarianX.Enum.Action;
 
 namespace MarianX.Sprites
 {
-	public class Marian : DiagnosticMobile
+	public class Marian : AnimatedPlayerMobile
 	{
 		private const string AssetName = "marian";
-		private const int FrameWidth = MagicNumbers.MarianFrameWidth;
-		private const int FrameHeight = MagicNumbers.MarianFrameHeight;
 
-		private readonly FrameSet idleRight = new FrameSet { Row = 0, Frames = 1 };
-		private readonly FrameSet idleLeft = new FrameSet { Row = 0, Frames = 1, Effects = SpriteEffects.FlipHorizontally };
-		private readonly FrameSet walkRight = new FrameSet { Row = 1, Frames = 3 };
-		private readonly FrameSet walkLeft = new FrameSet { Row = 1, Frames = 3, Effects = SpriteEffects.FlipHorizontally };
-		private readonly FrameSet jumpRight = new FrameSet { Row = 2, Frames = 4, Loop = false };
-		private readonly FrameSet jumpLeft = new FrameSet { Row = 2, Frames = 4, Loop = false, Effects = SpriteEffects.FlipHorizontally };
-		private readonly FrameSet steerRight = new FrameSet { Row = 2, Frames = 1, Start = 3, Loop = false };
-		private readonly FrameSet steerLeft = new FrameSet { Row = 2, Frames = 1, Start = 3, Loop = false, Effects = SpriteEffects.FlipHorizontally };
-
-		private static readonly SpriteSheetSettings settings;
-
-		static Marian()
-		{
-			settings = new SpriteSheetSettings
-			{
-				Width = FrameWidth,
-				Height = FrameHeight
-			};
-		}
-
-		private bool lastFacedLeft;
 		private TimeSpan lastJumpStarted;
 
 		public Marian()
-			: base(AssetName, settings)
+			: base(AssetName)
 		{
 			BoundingBox = new MarianBoundingBox();
-			OnStaticCollision += Marian_OnStaticCollision;
 		}
 
 		public override void Initialize()
 		{
-			SetFrameSet(idleRight);
-
 			base.Initialize();
-
 			Position = new Vector2(MagicNumbers.StartX, MagicNumbers.StartY);
 		}
 
@@ -73,15 +43,9 @@ namespace MarianX.Sprites
 
 			if (wasAirborne && State != HitBoxState.Airborne)
 			{
-				SetFrameSet(lastFacedLeft ? idleLeft : idleRight);
 				Direction = Direction.None;
 			}
 			return result;
-		}
-
-		private void Marian_OnStaticCollision(object sender, EventArgs args)
-		{
-			SetFrameSet(lastFacedLeft ? idleLeft : idleRight);
 		}
 
 		private void UpdateMovement(KeyboardState keyboardState, GameTime gameTime)
@@ -107,44 +71,29 @@ namespace MarianX.Sprites
 
 		private void UpdateMovementSurfaced(KeyboardConfiguration kb, GameTime gameTime)
 		{
-			Direction previous = Direction;
-
-			if (kb.IsShortcutDown(Action.Jump))
+			if (kb.IsKeyDown(ActionKey.Jump))
 			{
-				SetFrameSet(lastFacedLeft ? jumpLeft : jumpRight);
+				JumpAnimation();
 				Speed.Y = MagicNumbers.MarianJumpSpeed;
 				lastJumpStarted = gameTime.TotalGameTime;
 			}
-			else if (kb.IsShortcutDown(Action.Right))
+			else if (kb.IsKeyDown(ActionKey.Right))
 			{
-				if (previous != Direction.Right)
-				{
-					SetFrameSet(walkRight);
-					Direction = Direction.Right;
-					lastFacedLeft = false;
-				}
+				Direction = Direction.Right;
 			}
-			else if (kb.IsShortcutDown(Action.Left))
+			else if (kb.IsKeyDown(ActionKey.Left))
 			{
-				if (previous != Direction.Left)
-				{
-					SetFrameSet(walkLeft);
-					Direction = Direction.Left;
-					lastFacedLeft = true;
-				}
+				Direction = Direction.Left;
 			}
-			else if (previous != Direction.None)
+			else
 			{
-				SetFrameSet(lastFacedLeft ? idleLeft : idleRight);
 				Direction = Direction.None;
 			}
 		}
 
 		private void UpdateMovementAirborne(KeyboardConfiguration kb, GameTime gameTime)
 		{
-			Direction previous = Direction;
-
-			if (kb.IsShortcutDown(Action.Jump))
+			if (kb.IsKeyDown(ActionKey.Jump))
 			{
 				if (lastJumpStarted == TimeSpan.Zero)
 				{
@@ -152,32 +101,20 @@ namespace MarianX.Sprites
 				}
 				if (gameTime.TotalGameTime - lastJumpStarted < MagicNumbers.MarianJumpWindow)
 				{
-					SetFrameSet(lastFacedLeft ? jumpLeft : jumpRight);
-					Speed.Y = MagicNumbers.MarianJumpSpeed;
+					Speed.Y += MagicNumbers.MarianJumpSpeed;
 				}
 			}
 
-			if (kb.IsShortcutDown(Action.Right))
+			if (kb.IsKeyDown(ActionKey.Right))
 			{
-				if (previous != Direction.Right)
-				{
-					SetFrameSet(steerRight);
-					Direction = Direction.Right;
-					lastFacedLeft = false;
-				}
+				Direction = Direction.Right;
 			}
-			else if (kb.IsShortcutDown(Action.Left))
+			else if (kb.IsKeyDown(ActionKey.Left))
 			{
-				if (previous != Direction.Left)
-				{
-					SetFrameSet(steerLeft);
-					Direction = Direction.Left;
-					lastFacedLeft = true;
-				}
+				Direction = Direction.Left;
 			}
-			else if (previous != Direction.None)
+			else
 			{
-				SetFrameSet(steerRight);
 				Direction = Direction.None;
 			}
 		}

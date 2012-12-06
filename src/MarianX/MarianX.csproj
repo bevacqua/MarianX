@@ -124,13 +124,13 @@
     <Compile Include="Contents\Content.cs" />
     <Compile Include="Contents\Direction.cs" />
     <Compile Include="Interface\IGameContent.cs" />
-    <Compile Include="Enum\Action.cs" />
+    <Compile Include="Enum\ActionKey.cs" />
     <Compile Include="Core\KeyboardConfiguration.cs" />
+    <Compile Include="Sprites\AnimatedPlayerMobile.cs" />
     <Compile Include="Sprites\CityBackground.cs" />
     <Compile Include="Interface\IHitBox.cs" />
     <Compile Include="Sprites\DiagnosticMobile.cs" />
     <Compile Include="Sprites\HitBoxState.cs" />
-    <Compile Include="Events\OnStaticCollision.cs" />
     <Compile Include="Sprites\Square.cs" />
     <Compile Include="Sprites\TileBackground.cs" />
     <Compile Include="Sprites\Mobile.cs" />

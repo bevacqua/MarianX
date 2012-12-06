@@ -8,8 +8,8 @@ namespace MarianX.World.Configuration
 		public const int TileWidth = 24;
 		public const int TileHeight = 24;
 
-		public const int MarianFrameWidth = 48;
-		public const int MarianFrameHeight = 72;
+		public const int FrameWidth = 48;
+		public const int FrameHeight = 72;
 
 		public const int MarianHitBoxWidth = 1;
 		public const int MarianHitBoxHeight = 2;
@@ -19,8 +19,6 @@ namespace MarianX.World.Configuration
 
 		public static readonly Vector2 SpeedLimit = new Vector2(560, 680);
 		public static readonly Vector2 MarianAcceleration = new Vector2(120, 180);
-
-		public static readonly Vector2 Gravity = new Vector2(0, 110);
 
 		public const int MarianJumpSpeed = 100;
 

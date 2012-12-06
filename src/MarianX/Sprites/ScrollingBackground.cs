@@ -24,10 +24,9 @@ namespace MarianX.Sprites
 			foreach (string assetName in assetNames)
 			{
 				Sprite sprite = new Sprite(assetName);
+				sprite.Initialize();
 				sprites.Add(sprite);
 			}
-
-			// UpdateMovement(); // TODO: update alongside character, same with TileBackground
 		}
 
 		public virtual void Load(ContentManager content)
@@ -46,7 +45,7 @@ namespace MarianX.Sprites
 			}
 		}
 
-		public virtual  void Update(GameTime gameTime)
+		public virtual void Update(GameTime gameTime)
 		{
 			Sprite previous = sprites.Last();
 
@@ -60,17 +59,6 @@ namespace MarianX.Sprites
 
 				sprite.Update(gameTime);
 				previous = sprite;
-			}
-		}
-
-		protected virtual void UpdateMovement()
-		{
-			Vector2 speed = new Vector2(160, 0);
-
-			foreach (Sprite sprite in sprites)
-			{
-				sprite.Direction = Direction.Left;
-				sprite.Speed = speed;
 			}
 		}
 
