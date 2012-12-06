@@ -14,7 +14,24 @@ namespace MarianX.Mobiles
 	{
 		private const string AssetName = "marian";
 
-		private TimeSpan lastJumpStarted;
+		private TimeSpan? lastJumpStarted;
+		private Vector2? jumpStartPosition;
+
+		public override Direction Direction
+		{
+			get
+			{
+				return base.Direction;
+			}
+			set
+			{
+				if (Direction == value)
+				{
+					return;
+				}
+				base.Direction = value;
+			}
+		}
 
 		public Marian()
 			: base(AssetName)
@@ -42,28 +59,19 @@ namespace MarianX.Mobiles
 
 			MoveResult result = base.UpdatePosition(interpolation);
 
-			if (wasAirborne && State != HitBoxState.Airborne)
+			if (wasAirborne)
 			{
-				Direction = Direction.None;
+				if (jumpStartPosition.HasValue && jumpStartPosition.Value.Y < Position.Y)
+				{
+					jumpStartPosition = null; // avoid repetition.
+					FallEffects();
+				}
+				if (State != HitBoxState.Airborne)
+				{
+					Direction = Direction.None;
+				}
 			}
 			return result;
-		}
-
-		public override Direction Direction
-		{
-			get
-			{
-				return base.Direction;
-			}
-			set
-			{
-				if (Direction == value)
-				{
-					return;
-				}
-				base.Direction = value;
-				Speed.X = Vector2.Zero.X;
-			}
 		}
 
 		private void UpdateMovement(KeyboardState keyboardState, GameTime gameTime)
@@ -87,6 +95,7 @@ namespace MarianX.Mobiles
 				JumpEffects();
 				Speed.Y = MagicNumbers.JumpSpeed;
 				lastJumpStarted = gameTime.TotalGameTime;
+				jumpStartPosition = Position;
 			}
 			else if (kb.IsKeyDown(ActionKey.Right))
 			{
@@ -106,11 +115,11 @@ namespace MarianX.Mobiles
 		{
 			if (kb.IsKeyDown(ActionKey.Jump))
 			{
-				if (lastJumpStarted == TimeSpan.Zero) // sanity.
+				if (!lastJumpStarted.HasValue) // sanity.
 				{
 					return;
 				}
-				if (gameTime.TotalGameTime - lastJumpStarted < MagicNumbers.JumpWindow)
+				if (gameTime.TotalGameTime - lastJumpStarted.Value < MagicNumbers.JumpWindow)
 				{
 					Speed.Y = MagicNumbers.JumpSpeed / 2;
 				}

@@ -13,7 +13,7 @@ namespace MarianX.Mobiles
 		private readonly Movement movement;
 
 		public AxisAlignedBoundingBox BoundingBox { get; protected set; }
-		public HitBoxState State { get; set; }
+		public virtual HitBoxState State { get; set; }
 
 		private Vector2 position;
 

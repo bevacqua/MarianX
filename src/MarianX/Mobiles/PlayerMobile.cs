@@ -59,5 +59,10 @@ namespace MarianX.Mobiles
 			animation.Jump();
 			soundManager.Jump();
 		}
+
+		protected void FallEffects()
+		{
+			soundManager.Fall();
+		}
 	}
 }
