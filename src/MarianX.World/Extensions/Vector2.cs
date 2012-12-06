@@ -12,24 +12,24 @@ namespace MarianX.World.Extensions
 			return new Vector2(x, y);
 		}
 
-		public static Vector2 BoundBy(this Vector2 vector, Vector2 limit)
+		public static Vector2 Constrained(this Vector2 vector, Vector2 negative, Vector2 positive)
 		{
-			if (limit.X > 0 && vector.X > limit.X)
+			if (vector.X < negative.X)
 			{
-				vector.X = limit.X;
+				vector.X = negative.X;
 			}
-			else if (limit.X < 0 && vector.X < limit.X)
+			else if (vector.X > positive.X)
 			{
-				vector.X = limit.X;
+				vector.X = positive.X;
 			}
 
-			if (limit.Y > 0 && vector.Y > limit.Y)
+			if (vector.Y < negative.Y)
 			{
-				vector.Y = limit.Y;
+				vector.Y = negative.Y;
 			}
-			else if (limit.Y < 0 && vector.Y < limit.Y)
+			else if (vector.Y > positive.Y)
 			{
-				vector.Y = limit.Y;
+				vector.Y = positive.Y;
 			}
 
 			return vector;

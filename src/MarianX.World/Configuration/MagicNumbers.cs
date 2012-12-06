@@ -17,15 +17,16 @@ namespace MarianX.World.Configuration
 		public const float StartX = 85;
 		public const float StartY = 450;
 
-		// TODO: switch from accel to percentage base?
-		public static readonly Vector2 Acceleration = new Vector2(25, 120);
+		public static readonly Vector2 PositiveLimit = new Vector2(275, 240);
+		public static readonly Vector2 NegativeLimit = new Vector2(-275, -420);
 
-		public static readonly Vector2 SpeedLimit = new Vector2(275, 480);
-		public static readonly Vector2 GravityLimit = new Vector2(0, 680);
+		public static readonly Vector2 DefaultAcceleration = new Vector2(4000, 2000);
+		public static readonly Vector2 GravityAcceleration = new Vector2(0, 8000);
 
-		public const int JumpSpeed = -350;
-		public const float AerialSpeedPenaltyOnX = 4.3f;
+		public const int JumpSpeed = -420;
+		public const float AerialSpeedPenaltyOnX = 2.5f;
+		public const float AerialAccelerationPenaltyOnX = 1.5f;
 
-		public static readonly TimeSpan JumpWindow = TimeSpan.FromMilliseconds(450);
+		public static readonly TimeSpan JumpWindow = TimeSpan.FromMilliseconds(650);
 	}
 }

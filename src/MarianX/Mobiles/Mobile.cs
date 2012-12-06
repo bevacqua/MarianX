@@ -1,3 +1,4 @@
+using System;
 using MarianX.Collisions;
 using MarianX.Contents;
 using MarianX.Enum;
@@ -14,7 +15,6 @@ namespace MarianX.Mobiles
 	{
 		private readonly Movement movement;
 
-		public Vector2 Acceleration { get; protected set; }
 		public AxisAlignedBoundingBox BoundingBox { get; protected set; }
 		public HitBoxState State { get; set; }
 
@@ -34,36 +34,47 @@ namespace MarianX.Mobiles
 			: base(assetName, settings)
 		{
 			movement = new Movement(new CollisionDetection());
-			Acceleration = MagicNumbers.Acceleration;
 		}
 
 		protected override Vector2 CalculateInterpolation(GameTime gameTime)
 		{
-			Vector2 gravity = CalculateSpeedOnDirection(Direction.Down, gameTime, false);
-			Vector2 interpolation = CalculateSpeedOnDirection(Direction, gameTime, true);
+			Vector2 velocity = CalculateSpeedOnDirection(Direction, gameTime);
+			Vector2 gravity = CalculateSpeedOnDirection(Direction.Down, gameTime);
 
-			return interpolation + gravity;
+			Vector2 target = Speed + gravity + velocity;
+
+			Speed = ConstrainSpeed(target);
+
+			float time = gameTime.GetElapsedSeconds();
+			return Speed * time;
 		}
 
-		private Vector2 CalculateSpeedOnDirection(Direction direction, GameTime gameTime, bool assign)
+		private Vector2 CalculateSpeedOnDirection(Direction direction, GameTime gameTime)
 		{
-			Vector2 targetSpeed = direction.TargetSpeed;
-			Vector2 sign = direction.Sign(Speed);
+			float time = gameTime.GetElapsedSeconds();
+			Vector2 accel = direction.Acceleration;
 
 			if (State == HitBoxState.Airborne)
 			{
-				targetSpeed.X /= MagicNumbers.AerialSpeedPenaltyOnX;
+				accel.X /= MagicNumbers.AerialAccelerationPenaltyOnX;
 			}
 
-			Vector2 updatedSpeed = Speed + Acceleration * sign;
-			Vector2 limitedSpeed = updatedSpeed.BoundBy(targetSpeed);
+			return accel * direction * (float)Math.Pow(time, 2);
+		}
 
-			if (assign)
+		private Vector2 ConstrainSpeed(Vector2 target)
+		{
+			Vector2 negative = MagicNumbers.NegativeLimit;
+			Vector2 positive = MagicNumbers.PositiveLimit;
+
+			if (State == HitBoxState.Airborne)
 			{
-				Speed = limitedSpeed;
+				negative.X /= MagicNumbers.AerialSpeedPenaltyOnX;
+				positive.X /= MagicNumbers.AerialSpeedPenaltyOnX;
 			}
-			float time = gameTime.GetElapsedSeconds();
-			return limitedSpeed * time;
+
+			Vector2 constrained = target.Constrained(negative, positive);
+			return constrained;
 		}
 
 		protected override MoveResult UpdatePosition(Vector2 interpolation)
