@@ -8,15 +8,13 @@ namespace MarianX.Contents
 	{
 		public static Vector2 operator *(Direction x, Vector2 y)
 		{
-			return x.Vector * y;
+			return x.vector * y;
 		}
 
 		public static Vector2 operator *(Vector2 y, Direction x)
 		{
-			return x.Vector * y;
+			return x.vector * y;
 		}
-
-		private static readonly Vector2 SpeedLimit;
 
 		public static readonly Direction None;
 		public static readonly Direction Left;
@@ -26,31 +24,27 @@ namespace MarianX.Contents
 
 		static Direction()
 		{
-			SpeedLimit = MagicNumbers.SpeedLimit;
 			None = new Direction(Vector2.Zero);
 			Left = new Direction(new Vector2(-1, 0));
 			Right = new Direction(new Vector2(1, 0));
 			Up = new Direction(new Vector2(0, -1));
-			Down = new Direction(new Vector2(0, 1));
+			Down = new Direction(new Vector2(0, 1), MagicNumbers.GravityLimit);
 		}
 
-		private Vector2 vector;
+		private readonly Vector2 vector;
 
-		private Vector2 Vector
+		public Vector2 Limit { get; private set; }
+
+		public Vector2 TargetSpeed
 		{
-			get { return vector; }
-			set
-			{
-				vector = value;
-				TargetSpeed = value * SpeedLimit;
-			}
+			get { return vector * Limit; }
 		}
 
-		public Vector2 TargetSpeed { get; private set; }
-
-		private Direction(Vector2 vector)
+		private Direction(Vector2 vector, Vector2? limit = null)
 		{
-			Vector = vector;
+			this.vector = vector;
+
+			Limit = limit ?? MagicNumbers.SpeedLimit;
 		}
 
 		public Vector2 Sign(Vector2 currentSpeed)

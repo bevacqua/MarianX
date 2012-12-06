@@ -11,8 +11,8 @@ namespace MarianX.Collisions
 	{
 		public MoveResult CanMove(Rectangle bounds, Vector2 interpolation)
 		{
-			Rectangle xTarget = bounds.Offset(interpolation * Direction.Right);
-			Rectangle yTarget = bounds.Offset(interpolation * Direction.Down);
+			Rectangle xTarget = bounds.Extend(interpolation * Direction.Right);
+			Rectangle yTarget = bounds.Extend(interpolation * Direction.Down);
 
 			bool canMoveOnAxisX = CanFitInMatrix(xTarget);
 			bool canMoveOnAxisY = CanFitInMatrix(yTarget);
@@ -20,7 +20,7 @@ namespace MarianX.Collisions
 			{
 				return MoveResult.Blocked;
 			}
-			Rectangle target = bounds.Offset(interpolation);
+			Rectangle target = bounds.Extend(interpolation);
 
 			bool canMove = CanFitInMatrix(target);
 			if (canMove)

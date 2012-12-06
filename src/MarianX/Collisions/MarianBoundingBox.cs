@@ -6,12 +6,12 @@ namespace MarianX.Collisions
 	{
 		public override int HitBoxWidth
 		{
-			get { return MagicNumbers.MarianHitBoxWidth; }
+			get { return MagicNumbers.HitBoxWidth; }
 		}
 
 		public override int HitBoxHeight
 		{
-			get { return MagicNumbers.MarianHitBoxHeight; }
+			get { return MagicNumbers.HitBoxHeight; }
 		}
 	}
 }

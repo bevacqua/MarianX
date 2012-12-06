@@ -45,7 +45,7 @@ namespace MarianX.Mobiles
 				base.Direction = value;
 
 				UpdateFace();
-				UpdateAnimation(value);
+				UpdateAnimation();
 			}
 		}
 
@@ -72,11 +72,11 @@ namespace MarianX.Mobiles
 			}
 		}
 
-		private void UpdateAnimation(Direction value)
+		protected void UpdateAnimation()
 		{
 			if (State == HitBoxState.Surfaced)
 			{
-				if (value == Direction.None)
+				if (Direction == Direction.None)
 				{
 					SetFrameSet(lastFacedLeft ? idleLeft : idleRight);
 				}

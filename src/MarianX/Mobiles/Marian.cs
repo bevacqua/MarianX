@@ -45,6 +45,7 @@ namespace MarianX.Mobiles
 			if (wasAirborne && State != HitBoxState.Airborne)
 			{
 				Direction = Direction.None;
+				UpdateAnimation();
 			}
 			return result;
 		}
@@ -62,7 +63,7 @@ namespace MarianX.Mobiles
 					return;
 				}
 				base.Direction = value;
-				Speed = Vector2.Zero;
+				Speed.X = Vector2.Zero.X;
 			}
 		}
 
@@ -85,7 +86,7 @@ namespace MarianX.Mobiles
 			if (kb.IsKeyDown(ActionKey.Jump))
 			{
 				JumpAnimation();
-				Speed.Y = MagicNumbers.MarianJumpSpeed;
+				Speed.Y = MagicNumbers.JumpSpeed;
 				lastJumpStarted = gameTime.TotalGameTime;
 			}
 			else if (kb.IsKeyDown(ActionKey.Right))
@@ -110,9 +111,9 @@ namespace MarianX.Mobiles
 				{
 					return;
 				}
-				if (gameTime.TotalGameTime - lastJumpStarted < MagicNumbers.MarianJumpWindow)
+				if (gameTime.TotalGameTime - lastJumpStarted < MagicNumbers.JumpWindow)
 				{
-					Speed.Y = MagicNumbers.MarianJumpSpeed;
+					Speed.Y = MagicNumbers.JumpSpeed / 2;
 				}
 			}
 

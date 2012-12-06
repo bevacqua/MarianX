@@ -34,28 +34,36 @@ namespace MarianX.Mobiles
 			: base(assetName, settings)
 		{
 			movement = new Movement(new CollisionDetection());
-			Acceleration = MagicNumbers.MarianAcceleration;
+			Acceleration = MagicNumbers.Acceleration;
 		}
 
 		protected override Vector2 CalculateInterpolation(GameTime gameTime)
 		{
-			Vector2 gravity = CalculateInterpolationInDirection(Direction.Down, gameTime);
-			Vector2 interpolation = CalculateInterpolationInDirection(Direction, gameTime);
+			Vector2 gravity = CalculateSpeedOnDirection(Direction.Down, gameTime, false);
+			Vector2 interpolation = CalculateSpeedOnDirection(Direction, gameTime, true);
+
 			return interpolation + gravity;
 		}
 
-		private Vector2 CalculateInterpolationInDirection(Direction direction, GameTime gameTime)
+		private Vector2 CalculateSpeedOnDirection(Direction direction, GameTime gameTime, bool assign)
 		{
 			Vector2 targetSpeed = direction.TargetSpeed;
 			Vector2 sign = direction.Sign(Speed);
 
+			if (State == HitBoxState.Airborne)
+			{
+				targetSpeed.X /= MagicNumbers.AerialSpeedPenaltyOnX;
+			}
+
 			Vector2 updatedSpeed = Speed + Acceleration * sign;
 			Vector2 limitedSpeed = updatedSpeed.BoundBy(targetSpeed);
-			Speed = limitedSpeed;
 
+			if (assign)
+			{
+				Speed = limitedSpeed;
+			}
 			float time = gameTime.GetElapsedSeconds();
-			Vector2 interpolation = limitedSpeed * time;
-			return interpolation;
+			return limitedSpeed * time;
 		}
 
 		protected override MoveResult UpdatePosition(Vector2 interpolation)
