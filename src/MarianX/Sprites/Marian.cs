@@ -95,7 +95,7 @@ namespace MarianX.Sprites
 		{
 			if (kb.IsKeyDown(ActionKey.Jump))
 			{
-				if (lastJumpStarted == TimeSpan.Zero)
+				if (lastJumpStarted == TimeSpan.Zero) // sanity.
 				{
 					return;
 				}
