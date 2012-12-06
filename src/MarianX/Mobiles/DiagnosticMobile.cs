@@ -1,9 +1,10 @@
 using MarianX.Contents;
 using MarianX.Core;
+using MarianX.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MarianX.Sprites
+namespace MarianX.Mobiles
 {
 	public class DiagnosticMobile : Mobile
 	{

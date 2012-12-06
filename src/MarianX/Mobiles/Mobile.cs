@@ -2,12 +2,13 @@ using MarianX.Collisions;
 using MarianX.Contents;
 using MarianX.Enum;
 using MarianX.Interface;
+using MarianX.Sprites;
 using MarianX.World.Configuration;
 using MarianX.World.Extensions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MarianX.Sprites
+namespace MarianX.Mobiles
 {
 	public class Mobile : SpriteSheet, IHitBox
 	{

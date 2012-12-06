@@ -3,11 +3,12 @@ using MarianX.Collisions;
 using MarianX.Contents;
 using MarianX.Core;
 using MarianX.Enum;
+using MarianX.Sprites;
 using MarianX.World.Configuration;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace MarianX.Sprites
+namespace MarianX.Mobiles
 {
 	public class Marian : AnimatedPlayerMobile
 	{

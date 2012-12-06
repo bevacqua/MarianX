@@ -126,15 +126,15 @@
     <Compile Include="Interface\IGameContent.cs" />
     <Compile Include="Enum\ActionKey.cs" />
     <Compile Include="Core\KeyboardConfiguration.cs" />
-    <Compile Include="Sprites\AnimatedPlayerMobile.cs" />
+    <Compile Include="Mobiles\AnimatedPlayerMobile.cs" />
     <Compile Include="Sprites\CityBackground.cs" />
     <Compile Include="Interface\IHitBox.cs" />
-    <Compile Include="Sprites\DiagnosticMobile.cs" />
+    <Compile Include="Mobiles\DiagnosticMobile.cs" />
     <Compile Include="Sprites\HitBoxState.cs" />
     <Compile Include="Sprites\Square.cs" />
     <Compile Include="Sprites\TileBackground.cs" />
-    <Compile Include="Sprites\Mobile.cs" />
-    <Compile Include="Sprites\Marian.cs" />
+    <Compile Include="Mobiles\Mobile.cs" />
+    <Compile Include="Mobiles\Marian.cs" />
     <Compile Include="Sprites\ScrollingBackground.cs" />
     <Compile Include="Contents\Sprite.cs" />
   </ItemGroup>

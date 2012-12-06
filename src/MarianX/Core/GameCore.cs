@@ -1,3 +1,4 @@
+using MarianX.Mobiles;
 using MarianX.Sprites;
 using MarianX.World.Platform;
 using Microsoft.Xna.Framework;
@@ -11,7 +12,7 @@ namespace MarianX.Core
 
 		public GameCore()
 		{
-			Window.Title = "Tre Altre Volte";
+			Window.Title = "Tre Altre Volte (e tutto questo)";
 			Content.RootDirectory = "Content";
 
 			new GraphicsDeviceManager(this)
