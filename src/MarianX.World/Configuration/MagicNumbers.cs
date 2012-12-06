@@ -20,7 +20,7 @@ namespace MarianX.World.Configuration
 		public static readonly Vector2 SpeedLimit = new Vector2(560, 680);
 		public static readonly Vector2 MarianAcceleration = new Vector2(120, 180);
 
-		public const int MarianJumpSpeed = 100000;
+		public const int MarianJumpSpeed = -500;
 
 		public static readonly TimeSpan MarianJumpWindow = TimeSpan.FromMilliseconds(450);
 	}

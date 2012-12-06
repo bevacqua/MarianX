@@ -112,7 +112,7 @@ namespace MarianX.Mobiles
 				}
 				if (gameTime.TotalGameTime - lastJumpStarted < MagicNumbers.MarianJumpWindow)
 				{
-					Speed.Y += MagicNumbers.MarianJumpSpeed;
+					Speed.Y = MagicNumbers.MarianJumpSpeed;
 				}
 			}
 
