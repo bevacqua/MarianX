@@ -9,7 +9,7 @@ namespace MarianX.World.Extensions
 		/// </summary>
 		public static Rectangle Extend(this Rectangle rectangle, Vector2 vector)
 		{
-			int x = (int) vector.X;
+			int x = (int)vector.X;
 			if (x < 0)
 			{
 				rectangle.X -= x;

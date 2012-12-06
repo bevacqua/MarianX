@@ -1,22 +1,19 @@
-using System;
 using MarianX.Enum;
 using MarianX.Interface;
 using MarianX.Sprites;
 using Microsoft.Xna.Framework;
 
-namespace MarianX.Collisions
+namespace MarianX.Physics
 {
 	public class Movement
 	{
 		private readonly CollisionDetection collisionDetection;
+		private readonly InterpolationCalculator interpolationCalculator;
 
-		public Movement(CollisionDetection collisionDetection)
+		public Movement(CollisionDetection collisionDetection, InterpolationCalculator interpolationCalculator)
 		{
-			if (collisionDetection == null)
-			{
-				throw new ArgumentNullException("collisionDetection");
-			}
 			this.collisionDetection = collisionDetection;
+			this.interpolationCalculator = interpolationCalculator;
 		}
 
 		public MoveResult Move(IHitBox hitBox, Vector2 interpolation)
@@ -41,6 +38,11 @@ namespace MarianX.Collisions
 			}
 
 			return result;
+		}
+
+		public Vector2 Interpolated(GameTime gameTime)
+		{
+			return interpolationCalculator.CalculateInterpolation(gameTime);
 		}
 	}
 }

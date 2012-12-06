@@ -2,7 +2,7 @@ using MarianX.Mobiles;
 using MarianX.World.Platform;
 using Microsoft.Xna.Framework;
 
-namespace MarianX.Collisions
+namespace MarianX.Physics
 {
 	public abstract class AxisAlignedBoundingBox
 	{

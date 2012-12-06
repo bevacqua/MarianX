@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\MagicNumbers.cs" />
+    <Compile Include="Extensions\Enumerable.cs" />
     <Compile Include="Extensions\GameTime.cs" />
     <Compile Include="Extensions\Rectangle.cs" />
     <Compile Include="Extensions\Vector2.cs" />

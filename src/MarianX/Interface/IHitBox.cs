@@ -1,4 +1,4 @@
-using MarianX.Collisions;
+using MarianX.Physics;
 using MarianX.Sprites;
 
 namespace MarianX.Interface

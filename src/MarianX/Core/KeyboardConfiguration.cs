@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using MarianX.Enum;
 using Microsoft.Xna.Framework.Input;
 
@@ -7,7 +6,7 @@ namespace MarianX.Core
 {
 	public class KeyboardConfiguration
 	{
-		private static IDictionary<ActionKey, Keys> config;
+		private static readonly IDictionary<ActionKey, Keys> config;
 
 		static KeyboardConfiguration()
 		{

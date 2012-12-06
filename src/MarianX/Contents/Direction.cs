@@ -1,4 +1,3 @@
-using System;
 using MarianX.World.Configuration;
 using Microsoft.Xna.Framework;
 

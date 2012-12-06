@@ -1,6 +1,6 @@
 using MarianX.World.Configuration;
 
-namespace MarianX.Collisions
+namespace MarianX.Physics
 {
 	public class MarianBoundingBox : AxisAlignedBoundingBox
 	{

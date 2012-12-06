@@ -5,7 +5,7 @@ using MarianX.World.Extensions;
 using MarianX.World.Platform;
 using Microsoft.Xna.Framework;
 
-namespace MarianX.Collisions
+namespace MarianX.Physics
 {
 	public class CollisionDetection
 	{
@@ -41,6 +41,8 @@ namespace MarianX.Collisions
 
 		private bool CanFitInMatrix(Rectangle bounds)
 		{
+			bounds.Inflate(1, 1); // prevent rounding issues.
+
 			TileMatrix matrix = TileMatrix.Instance;
 			IList<Tile> intersection = matrix.Intersect(bounds);
 

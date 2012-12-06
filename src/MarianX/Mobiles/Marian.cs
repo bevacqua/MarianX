@@ -1,8 +1,8 @@
 using System;
-using MarianX.Collisions;
 using MarianX.Contents;
 using MarianX.Core;
 using MarianX.Enum;
+using MarianX.Physics;
 using MarianX.Sprites;
 using MarianX.World.Configuration;
 using Microsoft.Xna.Framework;
@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MarianX.Mobiles
 {
-	public class Marian : AnimatedPlayerMobile
+	public class Marian : PlayerMobile
 	{
 		private const string AssetName = "marian";
 
@@ -45,7 +45,6 @@ namespace MarianX.Mobiles
 			if (wasAirborne && State != HitBoxState.Airborne)
 			{
 				Direction = Direction.None;
-				UpdateAnimation();
 			}
 			return result;
 		}
@@ -85,7 +84,7 @@ namespace MarianX.Mobiles
 		{
 			if (kb.IsKeyDown(ActionKey.Jump))
 			{
-				JumpAnimation();
+				JumpEffects();
 				Speed.Y = MagicNumbers.JumpSpeed;
 				lastJumpStarted = gameTime.TotalGameTime;
 			}
