@@ -1,14 +1,17 @@
-using MarianX.Interface;
 using MarianX.World.Configuration;
 
 namespace MarianX.Collisions
 {
 	public class MarianBoundingBox : AxisAlignedBoundingBox
 	{
-		public MarianBoundingBox()
+		public override int HitBoxWidth
 		{
-			HitBoxWidth = MagicNumbers.MarianHitBoxWidth;
-			HitBoxHeight = MagicNumbers.MarianHitBoxHeight;
+			get { return MagicNumbers.MarianHitBoxWidth; }
+		}
+
+		public override int HitBoxHeight
+		{
+			get { return MagicNumbers.MarianHitBoxHeight; }
 		}
 	}
 }

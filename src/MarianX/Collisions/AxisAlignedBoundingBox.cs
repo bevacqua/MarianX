@@ -1,14 +1,13 @@
 using MarianX.Mobiles;
-using MarianX.Sprites;
 using MarianX.World.Platform;
 using Microsoft.Xna.Framework;
 
 namespace MarianX.Collisions
 {
-	public class AxisAlignedBoundingBox
+	public abstract class AxisAlignedBoundingBox
 	{
-		public int HitBoxWidth { get; protected set; }
-		public int HitBoxHeight { get; protected set; }
+		public abstract int HitBoxWidth { get; }
+		public abstract int HitBoxHeight { get; }
 
 		public Vector2 Position;
 

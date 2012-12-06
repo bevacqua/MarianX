@@ -49,10 +49,25 @@ namespace MarianX.Mobiles
 			return result;
 		}
 
+		public override Direction Direction
+		{
+			get
+			{
+				return base.Direction;
+			}
+			set
+			{
+				if (Direction == value)
+				{
+					return;
+				}
+				base.Direction = value;
+				Speed = Vector2.Zero;
+			}
+		}
+
 		private void UpdateMovement(KeyboardState keyboardState, GameTime gameTime)
 		{
-			Direction previous = Direction;
-
 			var kb = new KeyboardConfiguration(keyboardState);
 
 			if (State == HitBoxState.Surfaced)
@@ -62,11 +77,6 @@ namespace MarianX.Mobiles
 			else if (State == HitBoxState.Airborne)
 			{
 				UpdateMovementAirborne(kb, gameTime);
-			}
-
-			if (Direction != previous)
-			{
-				Speed = Vector2.Zero;
 			}
 		}
 
