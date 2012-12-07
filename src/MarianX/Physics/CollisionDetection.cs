@@ -41,7 +41,7 @@ namespace MarianX.Physics
 
 		private bool CanFitInMatrix(Rectangle bounds)
 		{
-			bounds.Inflate(1, 1); // prevent rounding issues.
+			bounds.Inflate(20, 20); // prevent rounding issues.
 
 			TileMatrix matrix = TileMatrix.Instance;
 			IList<Tile> intersection = matrix.Intersect(bounds);

@@ -1,11 +1,12 @@
 using MarianX.Contents;
+using MarianX.Diagnostics;
 using MarianX.Effects;
 using MarianX.World.Configuration;
 using Microsoft.Xna.Framework.Content;
 
 namespace MarianX.Mobiles
 {
-	public class PlayerMobile : Mobile
+	public class PlayerMobile : DiagnosticMobile
 	{
 		private static readonly SpriteSheetSettings settings;
 

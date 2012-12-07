@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MarianX.Core
 {
-	public class GameCore : ContentBasedGame
+	public class GameCore : DebuggableGame
 	{
 		public static GameCore Instance { get; private set; }
 

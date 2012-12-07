@@ -108,6 +108,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contents\Font.cs" />
+    <Compile Include="Diagnostics\DebuggableGame.cs" />
+    <Compile Include="Diagnostics\Diagnostics.cs" />
     <Compile Include="Physics\AxisAlignedBoundingBox.cs" />
     <Compile Include="Physics\CollisionDetection.cs" />
     <Compile Include="Physics\Movement.cs" />
@@ -127,14 +130,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="Core\GameCore.cs" />
     <Compile Include="Contents\Content.cs" />
-    <Compile Include="Contents\Direction.cs" />
+    <Compile Include="Physics\Direction.cs" />
     <Compile Include="Interface\IGameContent.cs" />
     <Compile Include="Enum\ActionKey.cs" />
     <Compile Include="Core\KeyboardConfiguration.cs" />
     <Compile Include="Mobiles\PlayerMobile.cs" />
     <Compile Include="Sprites\CityBackground.cs" />
     <Compile Include="Interface\IHitBox.cs" />
-    <Compile Include="Mobiles\DiagnosticMobile.cs" />
+    <Compile Include="Diagnostics\DiagnosticMobile.cs" />
     <Compile Include="Sprites\HitBoxState.cs" />
     <Compile Include="Sprites\Square.cs" />
     <Compile Include="Sprites\TileBackground.cs" />

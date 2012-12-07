@@ -1,0 +1,44 @@
+using MarianX.Interface;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace MarianX.Sprites
+{
+	public class Font : IGameContent
+	{
+		public static implicit operator SpriteFont(Font x)
+		{
+			return x.sprite;
+		}
+
+		private readonly string name;
+		private SpriteFont sprite;
+
+		public Font(string name)
+		{
+			this.name = name;
+		}
+
+		public void Initialize()
+		{
+		}
+
+		public void Load(ContentManager content)
+		{
+			sprite = content.Load<SpriteFont>(name);
+		}
+
+		public void Update(GameTime gameTime)
+		{
+		}
+
+		public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+		{
+		}
+
+		public void Unload()
+		{
+		}
+	}
+}

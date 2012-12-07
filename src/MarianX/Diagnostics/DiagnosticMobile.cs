@@ -1,16 +1,23 @@
 using MarianX.Contents;
 using MarianX.Core;
+using MarianX.Mobiles;
 using MarianX.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MarianX.Mobiles
+namespace MarianX.Diagnostics
 {
 	public class DiagnosticMobile : Mobile
 	{
 		public DiagnosticMobile(string assetName, SpriteSheetSettings settings)
 			: base(assetName, settings)
 		{
+		}
+
+		public override void Update(GameTime gameTime)
+		{
+			base.Update(gameTime);
+			Diagnostics.Write("Position: {0}", Position);
 		}
 
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

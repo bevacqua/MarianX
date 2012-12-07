@@ -8,7 +8,8 @@ namespace MarianX.Core
 	public class ContentBasedGame : Game
 	{
 		private readonly IList<IGameContent> contents;
-		private SpriteBatch spriteBatch;
+
+		protected SpriteBatch spriteBatch { get; private set; }
 
 		public ContentBasedGame()
 		{

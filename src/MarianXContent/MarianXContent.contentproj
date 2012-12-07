@@ -94,6 +94,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fonts\Diagnostic.spritefont">
+      <Name>Diagnostic</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
     <None Include="map.csv">
       <Name>map</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
