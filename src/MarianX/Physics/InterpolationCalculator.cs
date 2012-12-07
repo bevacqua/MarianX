@@ -24,6 +24,13 @@ namespace MarianX.Physics
 
 			Vector2 target = mobile.Speed + gravity + velocity;
 
+			if (mobile.Speed.X + velocity.X > 0 && mobile.Direction == Direction.Left||
+				mobile.Speed.X + velocity.X < 0 && mobile.Direction == Direction.Right)
+			{
+				mobile.Speed.X /= MagicNumbers.DirectionChangeSpeedPenalty;
+				target = mobile.Speed + gravity + velocity;
+			}
+
 			mobile.Speed = ConstrainSpeed(target);
 
 			float time = gameTime.GetElapsedSeconds();
@@ -40,7 +47,8 @@ namespace MarianX.Physics
 				accel.X /= MagicNumbers.AerialAccelerationPenaltyOnX;
 			}
 
-			return accel * direction * (float)Math.Pow(time, 2);
+			Vector2 velocity = accel * direction * (float)Math.Pow(time, 2);
+			return velocity;
 		}
 
 		private Vector2 ConstrainSpeed(Vector2 target)

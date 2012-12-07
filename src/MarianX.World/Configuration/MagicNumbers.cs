@@ -17,16 +17,18 @@ namespace MarianX.World.Configuration
 		public const float StartX = 85;
 		public const float StartY = 450;
 
-		public static readonly Vector2 PositiveLimit = new Vector2(275, 240);
-		public static readonly Vector2 NegativeLimit = new Vector2(-275, -420);
+		public static readonly Vector2 PositiveLimit = new Vector2(500, 350);
+		public static readonly Vector2 NegativeLimit = new Vector2(-500, -320);
 
-		public static readonly Vector2 DefaultAcceleration = new Vector2(4000, 2000);
-		public static readonly Vector2 GravityAcceleration = new Vector2(0, 8000);
+		public static readonly Vector2 DefaultAcceleration = new Vector2(8000, 0);
+		public static readonly Vector2 GravityAcceleration = new Vector2(0, 10000);
 
-		public const int JumpSpeed = -420;
-		public const float AerialSpeedPenaltyOnX = 2.5f;
-		public const float AerialAccelerationPenaltyOnX = 1.5f;
+		public const int JumpSpeed = -210;
+		public const float AerialSpeedPenaltyOnX = 1.3f;
+		public const float AerialAccelerationPenaltyOnX = 0.75f;
 
-		public static readonly TimeSpan JumpWindow = TimeSpan.FromMilliseconds(650);
+		public static readonly TimeSpan JumpWindow = TimeSpan.FromMilliseconds(400);
+
+		public const float DirectionChangeSpeedPenalty = 1.1f;
 	}
 }
