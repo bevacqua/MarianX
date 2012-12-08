@@ -140,6 +140,7 @@
     <Compile Include="Diagnostics\DiagnosticMobile.cs" />
     <Compile Include="Sprites\HitBoxState.cs" />
     <Compile Include="Sprites\Square.cs" />
+    <Compile Include="Sprites\SquareGrid.cs" />
     <Compile Include="Sprites\TileBackground.cs" />
     <Compile Include="Mobiles\Mobile.cs" />
     <Compile Include="Mobiles\Marian.cs" />

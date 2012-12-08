@@ -28,17 +28,22 @@ namespace MarianX.Sprites
 		public void Draw(SpriteBatch spriteBatch, Vector2 position)
 		{
 			GraphicsDevice device = GameCore.Instance.GraphicsDevice;
-			Texture2D rectangle = new Texture2D(device, Bounds.Width, Bounds.Height);
+			Texture2D texture = new Texture2D(device, Bounds.Width, Bounds.Height);
+			Color[] data = GetData();
 
+			texture.SetData(data);
+
+			spriteBatch.Draw(texture, position, Color * Alpha);
+		}
+
+		public Color[] GetData()
+		{
 			Color[] data = new Color[Bounds.Width * Bounds.Height];
 			for (int i = 0; i < data.Length; ++i)
 			{
 				data[i] = Color;
 			}
-
-			rectangle.SetData(data);
-
-			spriteBatch.Draw(rectangle, position, Color * Alpha);
+			return data;
 		}
 	}
 }
