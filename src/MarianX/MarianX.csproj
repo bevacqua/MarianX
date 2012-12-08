@@ -113,6 +113,7 @@
     <Compile Include="Diagnostics\Diagnostics.cs" />
     <Compile Include="Physics\AxisAlignedBoundingBox.cs" />
     <Compile Include="Physics\CollisionDetection.cs" />
+    <Compile Include="Physics\DiagnosticCollisionDetection.cs" />
     <Compile Include="Physics\Movement.cs" />
     <Compile Include="Physics\MarianBoundingBox.cs" />
     <Compile Include="Effects\PlayerSoundManager.cs" />

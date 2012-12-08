@@ -10,7 +10,7 @@ namespace MarianX.Mobiles
 {
 	public class Mobile : SpriteSheet, IHitBox
 	{
-		private readonly Movement movement;
+		public Movement Movement { get; protected set; }
 
 		public AxisAlignedBoundingBox BoundingBox { get; protected set; }
 		public virtual HitBoxState State { get; set; }
@@ -30,17 +30,17 @@ namespace MarianX.Mobiles
 		public Mobile(string assetName, SpriteSheetSettings settings)
 			: base(assetName, settings)
 		{
-			movement = new Movement(new CollisionDetection(), new InterpolationCalculator(this));
+			Movement = new Movement(new DiagnosticCollisionDetection(), new InterpolationCalculator(this));
 		}
 
 		protected override Vector2 CalculateInterpolation(GameTime gameTime)
 		{
-			return movement.Interpolated(gameTime);
+			return Movement.Interpolated(gameTime);
 		}
 
 		protected override MoveResult UpdatePosition(Vector2 interpolation)
 		{
-			MoveResult result = movement.Move(this, interpolation);
+			MoveResult result = Movement.Move(this, interpolation);
 
 			if (result.HasFlag(MoveResult.Blocked)) // collided.
 			{

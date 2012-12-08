@@ -7,20 +7,20 @@ namespace MarianX.Physics
 {
 	public class Movement
 	{
-		private readonly CollisionDetection collisionDetection;
-		private readonly InterpolationCalculator interpolationCalculator;
+		public CollisionDetection CollisionDetection { get; private set; }
+		public InterpolationCalculator InterpolationCalculator { get; private set; }
 
 		public Movement(CollisionDetection collisionDetection, InterpolationCalculator interpolationCalculator)
 		{
-			this.collisionDetection = collisionDetection;
-			this.interpolationCalculator = interpolationCalculator;
+			CollisionDetection = collisionDetection;
+			InterpolationCalculator = interpolationCalculator;
 		}
 
 		public MoveResult Move(IHitBox hitBox, Vector2 interpolation)
 		{
 			AxisAlignedBoundingBox aabb = hitBox.BoundingBox;
 
-			MoveResult result = collisionDetection.CanMove(aabb.Bounds, interpolation);
+			MoveResult result = CollisionDetection.CanMove(aabb.Bounds, interpolation);
 
 			if (result.HasFlag(MoveResult.X))
 			{
@@ -42,7 +42,7 @@ namespace MarianX.Physics
 
 		public Vector2 Interpolated(GameTime gameTime)
 		{
-			return interpolationCalculator.CalculateInterpolation(gameTime);
+			return InterpolationCalculator.CalculateInterpolation(gameTime);
 		}
 	}
 }

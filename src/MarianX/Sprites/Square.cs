@@ -33,7 +33,7 @@ namespace MarianX.Sprites
 
 			texture.SetData(data);
 
-			spriteBatch.Draw(texture, position, Color * Alpha);
+			spriteBatch.Draw(texture, position, Color.White);
 		}
 
 		public Color[] GetData()
@@ -41,7 +41,7 @@ namespace MarianX.Sprites
 			Color[] data = new Color[Bounds.Width * Bounds.Height];
 			for (int i = 0; i < data.Length; ++i)
 			{
-				data[i] = Color;
+				data[i] = Color * Alpha;
 			}
 			return data;
 		}

@@ -1,3 +1,4 @@
+using MarianX.Interface;
 using MarianX.Mobiles;
 using MarianX.Sprites;
 using MarianX.World.Platform;
@@ -31,6 +32,12 @@ namespace MarianX.Core
 			TileMatrix.Initialize("Content/map.csv");
 			AddContent(background);
 			AddContent(marian);
+
+			var collisionDetection = marian.Movement.CollisionDetection as IGameContent;
+			if (collisionDetection != null)
+			{
+				AddContent(collisionDetection);
+			}
 
 			base.Initialize();
 		}

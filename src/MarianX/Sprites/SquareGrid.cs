@@ -12,6 +12,7 @@ namespace MarianX.Sprites
 	public class SquareGrid
 	{
 		private readonly IList<Square> squares;
+
 		private Texture2D texture;
 
 		public SquareGrid(IList<Square> squares)
@@ -26,25 +27,23 @@ namespace MarianX.Sprites
 
 			int w = last.Bounds.X + last.Bounds.Width;
 			int h = last.Bounds.Y + last.Bounds.Height;
-			Texture2D texture = new Texture2D(device, w, h);
+			Texture2D graphic = new Texture2D(device, w, h);
 
 			foreach (Square square in squares)
 			{
 				Color[] data = square.GetData();
-				texture.SetData(0, square.Bounds, data, 0, data.Length);
+				graphic.SetData(0, square.Bounds, data, 0, data.Length);
 			}
-
-			return texture; // so that it can be cached.
+			return graphic;
 		}
 
-		public void Draw(SpriteBatch spriteBatch, Vector2 position)
+		public void Draw(SpriteBatch spriteBatch, Vector2? position = null)
 		{
 			if (texture == null)
 			{
 				texture = GetTexture();
 			}
-			float alpha = squares.Average(s => s.Alpha);
-			spriteBatch.Draw(texture, position, Color.White * alpha);
+			spriteBatch.Draw(texture, position ?? Vector2.Zero, Color.White);
 		}
 	}
 }

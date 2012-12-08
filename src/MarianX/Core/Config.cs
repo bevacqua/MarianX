@@ -9,11 +9,6 @@ namespace MarianX.Core
 			get { return Bool(Get("Diagnostic")) ?? false; }
 		}
 
-		public static bool DiagnosticBackground
-		{
-			get { return Bool(Get("DiagnosticBackground")) ?? false; }
-		}
-
 		private static string Get(string property)
 		{
 			return ConfigurationManager.AppSettings[property];

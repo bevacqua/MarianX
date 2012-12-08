@@ -20,7 +20,7 @@ namespace MarianX.Sprites
 
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
-			if (Config.DiagnosticBackground)
+			if (Config.Diagnostic)
 			{
 				DrawDiagnosticTileGrid(spriteBatch);
 				return;
@@ -57,7 +57,7 @@ namespace MarianX.Sprites
 			}
 			
 			spriteBatch.Begin();
-			diagnosticTextureGrid.Draw(spriteBatch, Vector2.Zero);
+			diagnosticTextureGrid.Draw(spriteBatch);
 			spriteBatch.End();
 		}
 	}

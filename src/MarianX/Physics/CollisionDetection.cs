@@ -39,10 +39,16 @@ namespace MarianX.Physics
 			return MoveResult.Blocked;
 		}
 
-		private bool CanFitInMatrix(Rectangle bounds)
+		protected virtual IList<Tile> GetIntersection(Rectangle bounds)
 		{
 			TileMatrix matrix = TileMatrix.Instance;
 			IList<Tile> intersection = matrix.Intersect(bounds);
+			return intersection;
+		}
+
+		protected virtual bool CanFitInMatrix(Rectangle bounds)
+		{
+			IList<Tile> intersection = GetIntersection(bounds);
 
 			foreach (Tile tile in intersection)
 			{
