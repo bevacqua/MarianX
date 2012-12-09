@@ -19,7 +19,6 @@ namespace MarianX.Physics
 		public MoveResult Move(IHitBox hitBox, Vector2 interpolation)
 		{
 			AxisAlignedBoundingBox aabb = hitBox.BoundingBox;
-
 			MoveResult result = CollisionDetection.CanMove(aabb.Bounds, interpolation);
 
 			if (result.HasFlag(MoveResult.X))
@@ -37,12 +36,14 @@ namespace MarianX.Physics
 				hitBox.State = HitBoxState.Surfaced;
 			}
 
-			var reverse = CollisionDetection.CanMove(aabb.Bounds, -interpolation);
-			if (reverse == MoveResult.Blocked) // fix issue when moving on X axis.
+			if (interpolation.X < 0) // fix issue when moving on X axis to the left.
 			{
-				aabb.Position.X -= interpolation.X;
+				var reverse = CollisionDetection.CanMove(aabb.Bounds, -interpolation);
+				if (reverse == MoveResult.Blocked)
+				{
+					aabb.Position.X -= interpolation.X;
+				}
 			}
-
 			return result;
 		}
 
