@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\FragmentedPersistance.cs" />
     <Compile Include="Builder\MapBuilder.cs" />
     <Compile Include="Builder\Persistance.cs" />
     <Compile Include="Builder\TileMatrixBuilder.cs" />

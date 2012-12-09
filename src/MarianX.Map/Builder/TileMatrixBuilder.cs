@@ -21,8 +21,8 @@ namespace MarianX.Map.Builder
 
 		public TileType[,] CreateTileMap(TileType[] tileTypes)
 		{
-			int cols = 33;
-			int rows = 25;
+			int cols = 33 * 6;
+			int rows = 45;
 
 			var map = new TileType[cols, rows];
 
@@ -43,21 +43,28 @@ namespace MarianX.Map.Builder
 		{
 			TileType tile = tileTypes[0];
 
-			if (y == rows - 2)
+			if (x > 100 && x < 106)
+			{
+				return tile;
+			}
+			if (y == rows - 22)
 			{
 				tile = tileTypes[2];
 			}
-			else if (y == rows - 1)
+			else if (y == rows - 21)
 			{
 				tile = tileTypes[1];
 			}
-			else if (x > 6 && x < 14 && y == rows - 3)
+			else if ((x > 35 && x < 55) || (x > 60 && x < 110))
 			{
-				tile = tileTypes[3];
-			}
-			else if (x > 6 && x < 14 && y == rows - 4)
-			{
-				tile = tileTypes[4];
+				if (y == rows - 3)
+				{
+					tile = tileTypes[3];
+				}
+				else if (y == rows - 4)
+				{
+					tile = tileTypes[4];
+				}
 			}
 
 			return tile;

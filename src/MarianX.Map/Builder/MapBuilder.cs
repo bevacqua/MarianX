@@ -17,8 +17,8 @@ namespace MarianX.Map.Builder
 				string path = string.Format("graphics/tiles/{0}.png", tileType);
 				return File.OpenRead(path);
 			};
-			Persistance persistance = new Persistance(getTileFileStream);
-			persistance.SaveTileMap(map, "map.png");
+			FragmentedPersistance persistance = new FragmentedPersistance(getTileFileStream);
+			persistance.SaveTileMap(map, "map{0}.png");
 			persistance.SaveTileMatrix(map, "map.csv");
 		}
 	}

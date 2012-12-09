@@ -17,7 +17,7 @@ namespace MarianX.Map.Builder
 			this.getTileFileStream = getTileFileStream;
 		}
 
-		public void SaveTileMap(TileType[,] map, string path)
+		public virtual void SaveTileMap(TileType[,] map, string path)
 		{
 			int cols = map.GetLength(0);
 			int rows = map.GetLength(1);
@@ -29,14 +29,7 @@ namespace MarianX.Map.Builder
 			{
 				for (int y = 0; y < rows; y++)
 				{
-					TileType tile = map[x, y];
-					
-					using (Stream stream = getTileFileStream(tile.Type))
-					{
-						Image texture = new Bitmap(stream);
-						TextureBrush brush = new TextureBrush(texture);
-						graphics.FillRectangle(brush, x * Tile.Width, y * Tile.Height, Tile.Width, Tile.Height);
-					}
+					Fill(graphics, map[x, y], x, y);
 				}
 			}
 
@@ -46,6 +39,16 @@ namespace MarianX.Map.Builder
 			}
 
 			bitmap.Save(path, ImageFormat.Png);
+		}
+
+		protected void Fill(Graphics graphics, TileType tile, int x, int y)
+		{
+			using (Stream stream = getTileFileStream(tile.Type))
+			{
+				Image texture = new Bitmap(stream);
+				TextureBrush brush = new TextureBrush(texture);
+				graphics.FillRectangle(brush, x * Tile.Width, y * Tile.Height, Tile.Width, Tile.Height);
+			}
 		}
 
 		public void SaveTileMatrix(TileType[,] map, string path)
