@@ -1,4 +1,5 @@
 using MarianX.Diagnostics;
+using MarianX.Effects;
 using MarianX.Interface;
 using MarianX.Mobiles;
 using MarianX.Sprites;
@@ -12,8 +13,12 @@ namespace MarianX.Core
 	{
 		public static GameCore Instance { get; private set; }
 
+		private readonly ViewportManager viewportManager;
+
 		public GameCore()
 		{
+			Instance = this;
+
 			Window.Title = "Tre Altre Volte (e tutto questo)";
 			Content.RootDirectory = "Content";
 
@@ -24,17 +29,20 @@ namespace MarianX.Core
 			};
 
 			IsMouseVisible = true;
-			Instance = this;
+			viewportManager = new ViewportManager();
 		}
 
 		protected override void Initialize()
 		{
+			viewportManager.Initialize();
 			var background = new TileBackground();
 			var marian = new Marian();
 
+			marian.Move += viewportManager.CharacterMove;
+
 			TileMatrix.Initialize("Content/map.csv");
-			AddContent(background);
-			AddContent(marian);
+			AddManagedContent(background);
+			AddManagedContent(marian);
 
 			var collisionDetection = marian.Movement.CollisionDetection as IGameContent;
 			if (collisionDetection != null)
@@ -43,6 +51,12 @@ namespace MarianX.Core
 			}
 
 			base.Initialize();
+		}
+
+		protected void AddManagedContent(IGameContent content)
+		{
+			base.AddContent(content);
+			viewportManager.Manage(content);
 		}
 
 		protected override void Update(GameTime gameTime)

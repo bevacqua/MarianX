@@ -16,7 +16,7 @@ namespace MarianX.Core
 			contents = new List<IGameContent>();
 		}
 
-		protected void AddContent(IGameContent gameContent)
+		protected virtual void AddContent(IGameContent gameContent)
 		{
 			contents.Add(gameContent);
 		}

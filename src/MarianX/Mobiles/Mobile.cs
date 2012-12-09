@@ -15,15 +15,35 @@ namespace MarianX.Mobiles
 		public AxisAlignedBoundingBox BoundingBox { get; protected set; }
 		public virtual HitBoxState State { get; set; }
 
-		private Vector2 position;
-
 		public override Vector2 Position
 		{
-			get { return position; }
+			get
+			{
+				return base.Position;
+			}
 			set
 			{
-				position = value;
-				BoundingBox.UpdatePosition(this);
+				if (Position != value)
+				{
+					Vector2 oldPosition = Position;
+					base.Position = value;
+					BoundingBox.UpdatePosition(this);
+					RaiseMoved(oldPosition, value);
+				}
+			}
+		}
+
+		public event Move Move;
+
+		private void RaiseMoved(Vector2 oldPosition, Vector2 currentPosition)
+		{
+			if (Move != null)
+			{
+				Move(this, new MoveEventArgs
+				{
+					From = oldPosition,
+					To = currentPosition
+				});
 			}
 		}
 
@@ -49,7 +69,7 @@ namespace MarianX.Mobiles
 			}
 			else
 			{
-				position = BoundingBox.GetPosition(this);
+				Position = BoundingBox.GetPosition(this);
 			}
 			return result;
 		}

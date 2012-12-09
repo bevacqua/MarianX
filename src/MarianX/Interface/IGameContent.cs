@@ -11,5 +11,7 @@ namespace MarianX.Interface
 		void Update(GameTime gameTime);
 		void Draw(GameTime gameTime, SpriteBatch spriteBatch);
 		void Unload();
+		void UpdateScreenPosition(Vector2 screenPosition);
+		Vector2 Position { get; }
 	}
 }

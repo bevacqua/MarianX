@@ -1,3 +1,4 @@
+using System;
 using MarianX.Interface;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -39,6 +40,16 @@ namespace MarianX.Contents
 
 		public void Unload()
 		{
+		}
+
+		public void UpdateScreenPosition(Vector2 screenPosition)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Vector2 Position
+		{
+			get { throw new NotImplementedException(); }
 		}
 	}
 }

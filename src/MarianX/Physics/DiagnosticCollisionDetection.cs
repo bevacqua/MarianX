@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using MarianX.Core;
 using MarianX.Interface;
@@ -103,7 +104,7 @@ namespace MarianX.Physics
 		public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
 			spriteBatch.Begin();
-			
+
 			if (movementGrid != null)
 			{
 				movementGrid.Draw(spriteBatch);
@@ -122,6 +123,16 @@ namespace MarianX.Physics
 
 		public void Unload()
 		{
+		}
+
+		public void UpdateScreenPosition(Vector2 screenPosition)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Vector2 Position
+		{
+			get { throw new NotImplementedException(); }
 		}
 	}
 }

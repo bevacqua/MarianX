@@ -13,6 +13,8 @@ namespace MarianX.Sprites
 		private readonly IList<string> assetNames;
 		private readonly IList<Sprite> sprites;
 
+		public Vector2 Position { get; private set; }
+
 		public ScrollingBackground(IList<string> assetNames)
 		{
 			this.assetNames = assetNames;
@@ -37,7 +39,11 @@ namespace MarianX.Sprites
 			{
 				sprite.Load(content);
 
-				if (previous != null)
+				if (previous == null)
+				{
+					Position = Vector2.Zero;
+				}
+				else
 				{
 					sprite.Position = new Vector2(previous.Position.X + previous.ActualSize.Width, previous.Position.Y);
 				}
@@ -76,6 +82,14 @@ namespace MarianX.Sprites
 
 		public virtual void Unload()
 		{
+		}
+
+		public void UpdateScreenPosition(Vector2 screenPosition)
+		{
+			foreach (Sprite sprite in sprites)
+			{
+				sprite.ScreenPosition = screenPosition;
+			}
 		}
 	}
 }

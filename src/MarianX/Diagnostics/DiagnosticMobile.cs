@@ -42,13 +42,13 @@ namespace MarianX.Diagnostics
 			};
 			hitBox.Draw(spriteBatch, BoundingBox.Position);
 
-			//Square spriteBox = new Square
-			//{
-			//    Alpha = 0.4f,
-			//    Color = Color.OrangeRed,
-			//    Bounds = new Rectangle(0, 0, ContentWidth, ContentHeight)
-			//};
-			//spriteBox.Draw(spriteBatch, Position);
+			Square spriteBox = new Square
+			{
+				Alpha = 0.4f,
+				Color = Color.OrangeRed,
+				Bounds = new Rectangle(0, 0, ContentWidth, ContentHeight)
+			};
+			spriteBox.Draw(spriteBatch, Position);
 
 			spriteBatch.End();
 		}

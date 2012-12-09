@@ -32,5 +32,10 @@ namespace MarianX.World.Configuration
 		public const float DirectionChangeSpeedPenalty = 1.1f;
 
 		public const float Friction = 4.4f;
+
+		public const int RelativeScreenLeft = 144;
+		public const int RelativeScreenRight = 144;
+		public const int RelativeScreenTop = 144;
+		public const int RelativeScreenBottom = 144;
 	}
 }

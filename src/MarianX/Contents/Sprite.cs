@@ -14,6 +14,8 @@ namespace MarianX.Contents
 		public virtual Vector2 Position { get; set; }
 		public virtual Direction Direction { get; set; }
 
+		public virtual Vector2 ScreenPosition { get; set; }
+
 		public Color Tint { get; set; }
 		public float Tilt { get; set; }
 
@@ -49,9 +51,14 @@ namespace MarianX.Contents
 			return MoveResult.None;
 		}
 
+		public void UpdateScreenPosition(Vector2 screenPosition)
+		{
+			ScreenPosition = screenPosition;
+		}
+
 		public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(Texture, Position, Texture.Bounds, Tint, Tilt, Vector2.Zero, Scale, SpriteEffects.None, 0);
+			spriteBatch.Draw(Texture, ScreenPosition, Texture.Bounds, Tint, Tilt, Vector2.Zero, Scale, SpriteEffects.None, 0);
 		}
 
 		public virtual void Unload()

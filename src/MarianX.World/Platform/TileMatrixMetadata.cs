@@ -13,6 +13,9 @@ namespace MarianX.World.Platform
 		/// </summary>
 		public Tile[,] Tiles { get; private set; }
 
+		public int Width { get; private set; }
+		public int Height { get; private set; }
+
 		public TileMatrixMetadata(string path)
 		{
 			using (Stream stream = File.OpenRead(path))
@@ -23,6 +26,9 @@ namespace MarianX.World.Platform
 
 				int cols = records.Max(t => t.X) + 1;
 				int rows = records.Max(t => t.Y) + 1;
+
+				Width = cols * Tile.Width;
+				Height = rows * Tile.Height;
 
 				Tiles = new Tile[cols, rows];
 
