@@ -31,6 +31,6 @@ namespace MarianX.World.Configuration
 
 		public const float DirectionChangeSpeedPenalty = 1.1f;
 
-		public const float Friction = 3.4f;
+		public const float Friction = 4.4f;
 	}
 }

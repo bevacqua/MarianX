@@ -21,36 +21,48 @@ namespace MarianX.Physics
 			Vector2 velocity = CalculateSpeedOnDirection(mobile.Direction, gameTime);
 			Vector2 gravity = CalculateSpeedOnDirection(Direction.Down, gameTime);
 
-			HorizontalSpeedChanges(velocity);
-
 			Vector2 target = mobile.Speed + gravity + velocity;
 
-			mobile.Speed = ConstrainSpeed(target);
+			Vector2 afterHorizontal = HorizontalSpeedChanges(target, velocity);
+			Vector2 afterVertical = VerticalSpeedChanges(afterHorizontal, gravity);
+
+			mobile.Speed = ConstrainSpeed(afterVertical);
 
 			float time = gameTime.GetElapsedSeconds();
 			return mobile.Speed * time;
 		}
 
-		private void HorizontalSpeedChanges(Vector2 velocity)
+		private Vector2 HorizontalSpeedChanges(Vector2 target, Vector2 velocity)
 		{
-			if (mobile.Speed.X + velocity.X > 0 && mobile.Direction == Direction.Left ||
-				mobile.Speed.X + velocity.X < 0 && mobile.Direction == Direction.Right)
+			if (target.X + velocity.X > 0 && mobile.Direction == Direction.Left ||
+				target.X + velocity.X < 0 && mobile.Direction == Direction.Right)
 			{
-				mobile.Speed.X /= MagicNumbers.DirectionChangeSpeedPenalty;
+				target.X /= MagicNumbers.DirectionChangeSpeedPenalty;
 			}
 
-			if (mobile.State == HitBoxState.Surfaced && mobile.Direction == Direction.None && mobile.Speed.X != 0)
+			if (mobile.State == HitBoxState.Surfaced && mobile.Direction == Direction.None && target.X != 0)
 			{
-				if (mobile.Speed.X < 0)
+				if (target.X < 0)
 				{
-					mobile.Speed.X = Math.Min(mobile.Speed.X + MagicNumbers.Friction, 0);
+					target.X = Math.Min(target.X + MagicNumbers.Friction, 0);
 
 				}
-				else if (mobile.Speed.X > 0)
+				else if (target.X > 0)
 				{
-					mobile.Speed.X = Math.Max(mobile.Speed.X - MagicNumbers.Friction, 0);
+					target.X = Math.Max(target.X - MagicNumbers.Friction, 0);
 				}
 			}
+
+			return target;
+		}
+
+		private Vector2 VerticalSpeedChanges(Vector2 target, Vector2 gravity)
+		{
+			if (mobile.State == HitBoxState.Surfaced && gravity.Y > 0)
+			{
+				target -= gravity;
+			}
+			return target;
 		}
 
 		private Vector2 CalculateSpeedOnDirection(Direction direction, GameTime gameTime)
