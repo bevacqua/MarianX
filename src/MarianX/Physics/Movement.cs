@@ -37,6 +37,12 @@ namespace MarianX.Physics
 				hitBox.State = HitBoxState.Surfaced;
 			}
 
+			var reverse = CollisionDetection.CanMove(aabb.Bounds, -interpolation);
+			if (reverse == MoveResult.Blocked) // fix issue when moving on X axis.
+			{
+				aabb.Position.X -= interpolation.X;
+			}
+
 			return result;
 		}
 

@@ -53,9 +53,9 @@ namespace MarianX.Physics
 
 				Square square = new Square
 				{
-					Alpha = 0.4f,
+					Alpha = 0.7f,
 					Bounds = tile.Bounds,
-					Color = intersects ? Color.Ivory : Color.MintCream
+					Color = intersects ? Color.MediumPurple : Color.MintCream
 				};
 				squares.Add(square);
 			}

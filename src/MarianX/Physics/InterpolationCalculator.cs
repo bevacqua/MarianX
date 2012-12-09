@@ -32,6 +32,20 @@ namespace MarianX.Physics
 			return mobile.Speed * time;
 		}
 
+		private Vector2 CalculateSpeedOnDirection(Direction direction, GameTime gameTime)
+		{
+			float time = gameTime.GetElapsedSeconds();
+			Vector2 accel = direction.Acceleration;
+
+			if (mobile.State == HitBoxState.Airborne)
+			{
+				accel.X /= MagicNumbers.AerialAccelerationPenaltyOnX;
+			}
+
+			Vector2 velocity = accel * direction * (float)Math.Pow(time, 2);
+			return velocity;
+		}
+
 		private Vector2 HorizontalSpeedChanges(Vector2 target, Vector2 velocity)
 		{
 			if (target.X + velocity.X > 0 && mobile.Direction == Direction.Left ||
@@ -63,20 +77,6 @@ namespace MarianX.Physics
 				target -= gravity;
 			}
 			return target;
-		}
-
-		private Vector2 CalculateSpeedOnDirection(Direction direction, GameTime gameTime)
-		{
-			float time = gameTime.GetElapsedSeconds();
-			Vector2 accel = direction.Acceleration;
-
-			if (mobile.State == HitBoxState.Airborne)
-			{
-				accel.X /= MagicNumbers.AerialAccelerationPenaltyOnX;
-			}
-
-			Vector2 velocity = accel * direction * (float)Math.Pow(time, 2);
-			return velocity;
 		}
 
 		private Vector2 ConstrainSpeed(Vector2 target)
