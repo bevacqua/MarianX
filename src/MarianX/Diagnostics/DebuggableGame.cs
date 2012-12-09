@@ -1,9 +1,10 @@
 using System.Collections.Generic;
-using MarianX.Sprites;
+using MarianX.Contents;
+using MarianX.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MarianX.Core
+namespace MarianX.Diagnostics
 {
 	public class DebuggableGame : ContentBasedGame
 	{

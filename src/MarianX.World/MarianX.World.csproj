@@ -85,8 +85,8 @@
     <Compile Include="Configuration\MagicNumbers.cs" />
     <Compile Include="Extensions\Enumerable.cs" />
     <Compile Include="Extensions\GameTime.cs" />
-    <Compile Include="Extensions\Rectangle.cs" />
     <Compile Include="Extensions\Vector2.cs" />
+    <Compile Include="Physics\FloatRectangle.cs" />
     <Compile Include="Platform\TileRecord.cs" />
     <Compile Include="Platform\Tile.cs" />
     <Compile Include="Platform\TileMatrix.cs" />

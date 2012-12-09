@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using MarianX.Contents;
 using MarianX.Enum;
-using MarianX.World.Extensions;
+using MarianX.World.Physics;
 using MarianX.World.Platform;
 using Microsoft.Xna.Framework;
 
@@ -9,10 +8,10 @@ namespace MarianX.Physics
 {
 	public class CollisionDetection
 	{
-		public MoveResult CanMove(Rectangle bounds, Vector2 interpolation)
+		public MoveResult CanMove(FloatRectangle bounds, Vector2 interpolation)
 		{
-			Rectangle xTarget = bounds.Extend(interpolation * Direction.Right);
-			Rectangle yTarget = bounds.Extend(interpolation * Direction.Down);
+			FloatRectangle xTarget = bounds.Extended(interpolation * Direction.Right);
+			FloatRectangle yTarget = bounds.Extended(interpolation * Direction.Down);
 
 			bool canMoveOnAxisX = CanFitInMatrix(xTarget);
 			bool canMoveOnAxisY = CanFitInMatrix(yTarget);
@@ -20,7 +19,7 @@ namespace MarianX.Physics
 			{
 				return MoveResult.Blocked;
 			}
-			Rectangle target = bounds.Extend(interpolation);
+			FloatRectangle target = bounds.Extended(interpolation);
 
 			bool canMove = CanFitInMatrix(target);
 			if (canMove)
@@ -39,14 +38,14 @@ namespace MarianX.Physics
 			return MoveResult.Blocked;
 		}
 
-		protected virtual IList<Tile> GetIntersection(Rectangle bounds)
+		protected virtual IList<Tile> GetIntersection(FloatRectangle bounds)
 		{
 			TileMatrix matrix = TileMatrix.Instance;
 			IList<Tile> intersection = matrix.Intersect(bounds);
 			return intersection;
 		}
 
-		protected virtual bool CanFitInMatrix(Rectangle bounds)
+		protected virtual bool CanFitInMatrix(FloatRectangle bounds)
 		{
 			IList<Tile> intersection = GetIntersection(bounds);
 

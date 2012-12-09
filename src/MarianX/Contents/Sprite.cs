@@ -1,5 +1,6 @@
 using MarianX.Enum;
 using MarianX.Interface;
+using MarianX.Physics;
 using MarianX.World.Extensions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

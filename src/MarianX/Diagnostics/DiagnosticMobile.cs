@@ -38,7 +38,7 @@ namespace MarianX.Diagnostics
 			{
 				Alpha = 0.8f,
 				Color = Color.OrangeRed,
-				Bounds = BoundingBox.Bounds
+				Bounds = (Rectangle)BoundingBox.Bounds
 			};
 			hitBox.Draw(spriteBatch, BoundingBox.Position);
 

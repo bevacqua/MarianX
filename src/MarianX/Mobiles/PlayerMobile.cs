@@ -1,6 +1,7 @@
 using MarianX.Contents;
 using MarianX.Diagnostics;
 using MarianX.Effects;
+using MarianX.Physics;
 using MarianX.World.Configuration;
 using Microsoft.Xna.Framework.Content;
 

@@ -22,11 +22,13 @@ namespace MarianX.Sprites
 
 		private Texture2D GetTexture()
 		{
+			if (squares.Count == 0)
+			{
+				return null;
+			}
+			int w = squares.Max(s => s.Bounds.X + s.Bounds.Width);
+			int h = squares.Max(s => s.Bounds.Y + s.Bounds.Height);
 			GraphicsDevice device = GameCore.Instance.GraphicsDevice;
-			Square last = squares.Last(); // assume the last square is actually the furthest one.
-
-			int w = last.Bounds.X + last.Bounds.Width;
-			int h = last.Bounds.Y + last.Bounds.Height;
 			Texture2D graphic = new Texture2D(device, w, h);
 
 			foreach (Square square in squares)
@@ -39,6 +41,10 @@ namespace MarianX.Sprites
 
 		public void Draw(SpriteBatch spriteBatch, Vector2? position = null)
 		{
+			if (squares.Count == 0)
+			{
+				return;
+			}
 			if (texture == null)
 			{
 				texture = GetTexture();

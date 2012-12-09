@@ -1,5 +1,6 @@
 using MarianX.Contents;
 using MarianX.Mobiles;
+using MarianX.Physics;
 using MarianX.Sprites;
 using Microsoft.Xna.Framework.Graphics;
 

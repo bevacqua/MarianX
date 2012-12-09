@@ -1,3 +1,4 @@
+using MarianX.Diagnostics;
 using MarianX.Interface;
 using MarianX.Mobiles;
 using MarianX.Sprites;
@@ -21,6 +22,8 @@ namespace MarianX.Core
 				PreferredBackBufferWidth = 800,
 				PreferredBackBufferHeight = 600
 			};
+
+			IsMouseVisible = true;
 			Instance = this;
 		}
 

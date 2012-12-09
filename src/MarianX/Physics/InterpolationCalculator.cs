@@ -1,5 +1,4 @@
 using System;
-using MarianX.Contents;
 using MarianX.Mobiles;
 using MarianX.Sprites;
 using MarianX.World.Configuration;
@@ -22,19 +21,36 @@ namespace MarianX.Physics
 			Vector2 velocity = CalculateSpeedOnDirection(mobile.Direction, gameTime);
 			Vector2 gravity = CalculateSpeedOnDirection(Direction.Down, gameTime);
 
-			Vector2 target = mobile.Speed + gravity + velocity;
+			HorizontalSpeedChanges(velocity);
 
-			if (mobile.Speed.X + velocity.X > 0 && mobile.Direction == Direction.Left||
-				mobile.Speed.X + velocity.X < 0 && mobile.Direction == Direction.Right)
-			{
-				mobile.Speed.X /= MagicNumbers.DirectionChangeSpeedPenalty;
-				target = mobile.Speed + gravity + velocity;
-			}
+			Vector2 target = mobile.Speed + gravity + velocity;
 
 			mobile.Speed = ConstrainSpeed(target);
 
 			float time = gameTime.GetElapsedSeconds();
 			return mobile.Speed * time;
+		}
+
+		private void HorizontalSpeedChanges(Vector2 velocity)
+		{
+			if (mobile.Speed.X + velocity.X > 0 && mobile.Direction == Direction.Left ||
+				mobile.Speed.X + velocity.X < 0 && mobile.Direction == Direction.Right)
+			{
+				mobile.Speed.X /= MagicNumbers.DirectionChangeSpeedPenalty;
+			}
+
+			if (mobile.State == HitBoxState.Surfaced && mobile.Direction == Direction.None && mobile.Speed.X != 0)
+			{
+				if (mobile.Speed.X < 0)
+				{
+					mobile.Speed.X = Math.Min(mobile.Speed.X + MagicNumbers.Friction, 0);
+
+				}
+				else if (mobile.Speed.X > 0)
+				{
+					mobile.Speed.X = Math.Max(mobile.Speed.X - MagicNumbers.Friction, 0);
+				}
+			}
 		}
 
 		private Vector2 CalculateSpeedOnDirection(Direction direction, GameTime gameTime)

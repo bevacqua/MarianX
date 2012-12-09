@@ -30,5 +30,7 @@ namespace MarianX.World.Configuration
 		public static readonly TimeSpan JumpWindow = TimeSpan.FromMilliseconds(400);
 
 		public const float DirectionChangeSpeedPenalty = 1.1f;
+
+		public const float Friction = 3.4f;
 	}
 }

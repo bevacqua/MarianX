@@ -1,4 +1,5 @@
 using MarianX.Mobiles;
+using MarianX.World.Physics;
 using MarianX.World.Platform;
 using Microsoft.Xna.Framework;
 
@@ -11,15 +12,15 @@ namespace MarianX.Physics
 
 		public Vector2 Position;
 
-		public Rectangle Bounds
+		public FloatRectangle Bounds
 		{
 			get
 			{
-				int x = (int)Position.X;
-				int y = (int)Position.Y;
-				int w = HitBoxWidth * Tile.Width;
-				int h = HitBoxHeight * Tile.Height;
-				return new Rectangle(x, y, w, h);
+				float x = Position.X;
+				float y = Position.Y;
+				float w = HitBoxWidth * Tile.Width;
+				float h = HitBoxHeight * Tile.Height;
+				return new FloatRectangle(x, y, w, h);
 			}
 		}
 
