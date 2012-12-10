@@ -140,13 +140,12 @@
     <Compile Include="Enum\ActionKey.cs" />
     <Compile Include="Core\KeyboardConfiguration.cs" />
     <Compile Include="Mobiles\PlayerMobile.cs" />
-    <Compile Include="Sprites\CityBackground.cs" />
     <Compile Include="Interface\IHitBox.cs" />
     <Compile Include="Diagnostics\DiagnosticMobile.cs" />
     <Compile Include="Sprites\HitBoxState.cs" />
     <Compile Include="Sprites\Square.cs" />
     <Compile Include="Sprites\SquareGrid.cs" />
-    <Compile Include="Sprites\TileBackground.cs" />
+    <Compile Include="Sprites\MapBackground.cs" />
     <Compile Include="Mobiles\Mobile.cs" />
     <Compile Include="Mobiles\Marian.cs" />
     <Compile Include="Sprites\ScrollingBackground.cs" />

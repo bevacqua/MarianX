@@ -35,12 +35,12 @@ namespace MarianX.Core
 		protected override void Initialize()
 		{
 			viewportManager.Initialize();
-			var background = new TileBackground();
+			var background = new MapBackground("Content/Map/map.idx", "Map/map_{0}_{1}");
 			var marian = new Marian();
 
 			marian.Move += viewportManager.CharacterMove;
 
-			TileMatrix.Initialize("Content/map.csv");
+			TileMatrix.Initialize("Content/Map/map.csv");
 			AddManagedContent(background);
 			AddManagedContent(marian);
 

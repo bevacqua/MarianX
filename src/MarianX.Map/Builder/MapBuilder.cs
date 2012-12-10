@@ -18,7 +18,8 @@ namespace MarianX.Map.Builder
 				return File.OpenRead(path);
 			};
 			FragmentedPersistance persistance = new FragmentedPersistance(getTileFileStream);
-			persistance.SaveTileMap(map, "map{0}.png");
+			persistance.SaveFragmentMetadata(map, "map.idx");
+			persistance.SaveTileMap(map, "map_{0}_{1}.png");
 			persistance.SaveTileMatrix(map, "map.csv");
 		}
 	}

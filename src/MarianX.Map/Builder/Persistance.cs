@@ -22,14 +22,19 @@ namespace MarianX.Map.Builder
 			int cols = map.GetLength(0);
 			int rows = map.GetLength(1);
 
-			Bitmap bitmap = new Bitmap(Tile.Width * cols, Tile.Height * rows);
+			BuildBitmap(map, 0, 0, cols, rows, path);
+		}
+
+		protected void BuildBitmap(TileType[,] map, int startX, int startY, int width, int height, string path)
+		{
+			Bitmap bitmap = new Bitmap(Tile.Width * width, Tile.Height * height);
 			Graphics graphics = Graphics.FromImage(bitmap);
 
-			for (int x = 0; x < cols; x++)
+			for (int x = startX; x < startX + width; x++)
 			{
-				for (int y = 0; y < rows; y++)
+				for (int y = startY; y < startY + height; y++)
 				{
-					Fill(graphics, map[x, y], x, y);
+					Fill(graphics, map[x, y], x - startX, y - startY);
 				}
 			}
 
