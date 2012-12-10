@@ -29,7 +29,7 @@ namespace MarianX.Map.Builder
 
 				if (i == mapWidth - 1)
 				{
-					w = colTotal - fragmentWidth * i;
+					// w = colTotal - fragmentWidth * i;
 				}
 
 				for (int j = 0; j < mapHeight; j++)
@@ -39,7 +39,7 @@ namespace MarianX.Map.Builder
 
 					if (j == mapHeight - 1)
 					{
-						h = rowTotal - fragmentHeight * j;
+						// h = rowTotal - fragmentHeight * j;
 					}
 
 					string path = string.Format(format, i, j);

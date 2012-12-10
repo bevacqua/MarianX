@@ -143,6 +143,13 @@
     <Compile Include="Interface\IHitBox.cs" />
     <Compile Include="Diagnostics\DiagnosticMobile.cs" />
     <Compile Include="Sprites\HitBoxState.cs" />
+    <Compile Include="Sprites\Resources\Error.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Error.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Sprites\ScrollingBackgroundAsset.cs" />
+    <Compile Include="Sprites\ScrollingBackgroundSprite.cs" />
     <Compile Include="Sprites\Square.cs" />
     <Compile Include="Sprites\SquareGrid.cs" />
     <Compile Include="Sprites\MapBackground.cs" />
@@ -208,6 +215,12 @@
     </None>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Sprites\Resources\Error.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Error.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

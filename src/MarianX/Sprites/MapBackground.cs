@@ -15,13 +15,13 @@ namespace MarianX.Sprites
 
 		public MapBackground(string path, string format)
 		{
-			IList<string> assetNames = FindAssetNames(path, format);
+			IList<ScrollingBackgroundAsset> assetNames = FindAssetNames(path, format);
 			scrollingBackground = new ScrollingBackground(assetNames);
 		}
 
-		private IList<string> FindAssetNames(string path, string format)
+		private IList<ScrollingBackgroundAsset> FindAssetNames(string path, string format)
 		{
-			IList<string> assetNames = new List<string>();
+			IList<ScrollingBackgroundAsset> assetNames = new List<ScrollingBackgroundAsset>();
 
 			using (Stream stream = File.OpenRead(path))
 			using (TextReader reader = new StreamReader(stream))
@@ -36,7 +36,13 @@ namespace MarianX.Sprites
 				{
 					for (int y = 0; y < h; y++)
 					{
-						assetNames.Add(string.Format(format, x, y));
+						string name = string.Format(format, x, y);
+						assetNames.Add(new ScrollingBackgroundAsset
+						{
+							Name = name,
+							X = x,
+							Y = y
+						});
 					}
 				}
 			}

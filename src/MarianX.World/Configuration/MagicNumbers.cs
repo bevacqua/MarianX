@@ -33,8 +33,8 @@ namespace MarianX.World.Configuration
 
 		public const float Friction = 4.4f;
 
-		public const int RelativeScreenLeft = 144;
-		public const int RelativeScreenRight = 144;
+		public const int RelativeScreenLeft = 288;
+		public const int RelativeScreenRight = 288;
 		public const int RelativeScreenTop = 144;
 		public const int RelativeScreenBottom = 144;
 	}

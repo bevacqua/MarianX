@@ -30,9 +30,12 @@ namespace MarianX.Map.Builder
 			Bitmap bitmap = new Bitmap(Tile.Width * width, Tile.Height * height);
 			Graphics graphics = Graphics.FromImage(bitmap);
 
-			for (int x = startX; x < startX + width; x++)
+			int lengthX = map.GetLength(0);
+			int lengthY = map.GetLength(1);
+
+			for (int x = startX; x < startX + width && x < lengthX; x++)
 			{
-				for (int y = startY; y < startY + height; y++)
+				for (int y = startY; y < startY + height && y < lengthY; y++)
 				{
 					Fill(graphics, map[x, y], x - startX, y - startY);
 				}
