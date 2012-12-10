@@ -30,8 +30,8 @@ namespace MarianX.Map.Builder
 			Bitmap bitmap = new Bitmap(Tile.Width * width, Tile.Height * height);
 			Graphics graphics = Graphics.FromImage(bitmap);
 
-			int lengthX = map.GetLength(0);
-			int lengthY = map.GetLength(1);
+			int lengthX = map.GetLength(0); // just for array-bounds sanity check.
+			int lengthY = map.GetLength(1); // just for array-bounds sanity check.
 
 			for (int x = startX; x < startX + width && x < lengthX; x++)
 			{

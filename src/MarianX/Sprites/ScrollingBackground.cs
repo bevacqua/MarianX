@@ -30,20 +30,6 @@ namespace MarianX.Sprites
 				sprite.Initialize();
 				sprites.Add(sprite);
 			}
-
-			Validate();
-		}
-
-		private void Validate()
-		{
-			// scrolling background makes a few assumptions, validate on them.
-			bool width = sprites.All(s => sprites.All(sprite => sprite.ActualSize.Width == s.ActualSize.Width));
-			bool height = sprites.All(s => sprites.All(sprite => sprite.ActualSize.Height == s.ActualSize.Height));
-
-			if (!width || !height)
-			{
-				throw new InvalidOperationException(Error.ScrollingBackground_AssetDimensions);
-			}
 		}
 
 		public virtual void Load(ContentManager content)
@@ -51,6 +37,31 @@ namespace MarianX.Sprites
 			foreach (ScrollingBackgroundSprite sprite in sprites)
 			{
 				sprite.Load(content);
+			}
+
+			Arrange();
+		}
+
+		private void Arrange()
+		{
+			foreach (ScrollingBackgroundSprite sprite in sprites)
+			{
+				int x = 0;
+				int y = 0;
+
+				for (int i = 0; i < sprite.Asset.X; i++)
+				{
+					var pX = sprites.Single(s => s.Asset.X == i && s.Asset.Y == sprite.Asset.Y);
+					x += pX.ActualSize.Width;
+				}
+
+				for (int j = 0; j < sprite.Asset.Y; j++)
+				{
+					var pY = sprites.Single(s => s.Asset.Y == j && s.Asset.X == sprite.Asset.X);
+					y += pY.ActualSize.Height;
+				}
+
+				sprite.Position = new Vector2(x, y);
 			}
 		}
 
