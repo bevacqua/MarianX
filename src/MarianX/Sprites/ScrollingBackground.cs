@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using MarianX.Interface;
-using MarianX.Sprites.Resources;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -46,40 +44,22 @@ namespace MarianX.Sprites
 		{
 			foreach (ScrollingBackgroundSprite sprite in sprites)
 			{
-				int x = 0;
-				int y = 0;
+				int x = sprites.Where(s => 
+					s.Asset.X < sprite.Asset.X && 
+					s.Asset.Y == sprite.Asset.Y
+				).Sum(s => s.ActualSize.Width);
 
-				for (int i = 0; i < sprite.Asset.X; i++)
-				{
-					var pX = sprites.Single(s => s.Asset.X == i && s.Asset.Y == sprite.Asset.Y);
-					x += pX.ActualSize.Width;
-				}
-
-				for (int j = 0; j < sprite.Asset.Y; j++)
-				{
-					var pY = sprites.Single(s => s.Asset.Y == j && s.Asset.X == sprite.Asset.X);
-					y += pY.ActualSize.Height;
-				}
-
+				int y = sprites.Where(s => 
+					s.Asset.Y < sprite.Asset.Y && 
+					s.Asset.X == sprite.Asset.X
+				).Sum(s => s.ActualSize.Height);
+				
 				sprite.Position = new Vector2(x, y);
 			}
 		}
 
 		public virtual void Update(GameTime gameTime)
 		{
-			ScrollingBackgroundSprite previous = sprites.Last();
-
-			foreach (ScrollingBackgroundSprite sprite in sprites)
-			{
-				if (sprite.Position.X < -sprite.ActualSize.Width)
-				{
-					float x = previous.Position.X + previous.ActualSize.Width;
-					sprite.Position = new Vector2(x, sprite.Position.Y);
-				}
-
-				sprite.Update(gameTime);
-				previous = sprite;
-			}
 		}
 
 		public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -102,7 +82,9 @@ namespace MarianX.Sprites
 		{
 			foreach (ScrollingBackgroundSprite sprite in sprites)
 			{
-				sprite.ScreenPosition = screenPosition;
+				// relativize the portion of background to the provided ScreenPosition.
+				Vector2 relativeScreenPosition = screenPosition + sprite.Position;
+				sprite.UpdateScreenPosition(relativeScreenPosition);
 			}
 		}
 	}
