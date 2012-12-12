@@ -56,7 +56,7 @@ namespace MarianX.Effects
 			int left = MagicNumbers.RelativeScreenLeft;
 			if (relative.X < left)
 			{
-				float x = position.X - left - relative.X;
+				float x = position.X + relative.X - left;
 				position.X = Math.Max(x, 0);
 			}
 
