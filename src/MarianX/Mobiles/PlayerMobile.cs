@@ -56,6 +56,11 @@ namespace MarianX.Mobiles
 			soundManager.Load(content);
 		}
 
+		protected void IdleEffects()
+		{
+			animation.Update(); // invalidate.
+		}
+
 		protected void JumpEffects()
 		{
 			animation.Jump();
@@ -65,6 +70,12 @@ namespace MarianX.Mobiles
 		protected void FallEffects()
 		{
 			soundManager.Fall();
+		}
+
+		protected void DeathEffects()
+		{
+			animation.Die();
+			// TODO: sounds
 		}
 	}
 }

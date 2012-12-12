@@ -23,24 +23,33 @@ namespace MarianX.Physics
 			FloatRectangle xTarget = bounds.Extended(interpolation * Direction.Right);
 			FloatRectangle yTarget = bounds.Extended(interpolation * Direction.Down);
 
-			bool canMoveOnAxisX = CanFitInMatrix(xTarget);
-			bool canMoveOnAxisY = CanFitInMatrix(yTarget);
-			if (!canMoveOnAxisX && !canMoveOnAxisY)
+			bool? canMoveOnAxisX = CanFitInMatrix(xTarget);
+			bool? canMoveOnAxisY = CanFitInMatrix(yTarget);
+			
+			if (!canMoveOnAxisX.HasValue || !canMoveOnAxisY.HasValue)
+			{
+				return MoveResult.Died;
+			}
+			if (!canMoveOnAxisX.Value && !canMoveOnAxisY.Value)
 			{
 				return MoveResult.Blocked;
 			}
 			FloatRectangle target = bounds.Extended(interpolation);
 
-			bool canMove = CanFitInMatrix(target);
-			if (canMove)
+			bool? canMove = CanFitInMatrix(target);
+			if (!canMove.HasValue)
+			{
+				return MoveResult.Died;
+			}
+			if (canMove.Value)
 			{
 				return MoveResult.X | MoveResult.Y;
 			}
-			else if (canMoveOnAxisX)
+			else if (canMoveOnAxisX.Value)
 			{
 				return MoveResult.X;
 			}
-			else if (canMoveOnAxisY)
+			else if (canMoveOnAxisY.Value)
 			{
 				return MoveResult.Y;
 			}
@@ -55,12 +64,16 @@ namespace MarianX.Physics
 			return intersection;
 		}
 
-		protected virtual bool CanFitInMatrix(FloatRectangle bounds)
+		protected virtual bool? CanFitInMatrix(FloatRectangle bounds)
 		{
 			IList<Tile> intersection = GetIntersection(bounds);
 
 			foreach (Tile tile in intersection)
 			{
+				if (tile.Deathly)
+				{
+					return null; // died.
+				}
 				if (tile.Impassable)
 				{
 					return false;

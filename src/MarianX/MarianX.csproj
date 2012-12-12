@@ -112,8 +112,10 @@
     <Compile Include="Diagnostics\DebuggableGame.cs" />
     <Compile Include="Diagnostics\Diagnostics.cs" />
     <Compile Include="Effects\ViewportManager.cs" />
+    <Compile Include="Events\AnimationComplete.cs" />
+    <Compile Include="Events\AnimationCompleteArgs.cs" />
     <Compile Include="Events\Move.cs" />
-    <Compile Include="Events\MoveEventArgs.cs" />
+    <Compile Include="Events\MoveArgs.cs" />
     <Compile Include="Mobiles\Npc.cs" />
     <Compile Include="Physics\AxisAlignedBoundingBox.cs" />
     <Compile Include="Physics\CollisionDetection.cs" />

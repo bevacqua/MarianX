@@ -1,9 +1,9 @@
 using System;
 using Microsoft.Xna.Framework;
 
-namespace MarianX.Mobiles
+namespace MarianX.Events
 {
-	public class MoveEventArgs : EventArgs
+	public class MoveArgs : EventArgs
 	{
 		public Vector2 From { get; set; }
 		public Vector2 To { get; set; }

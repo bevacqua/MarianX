@@ -16,6 +16,8 @@ namespace MarianX.Effects
 		private readonly FrameSet jumpLeft = new FrameSet { Row = 2, Frames = 4, Loop = false, Effects = SpriteEffects.FlipHorizontally };
 		private readonly FrameSet steerRight = new FrameSet { Row = 2, Frames = 1, Start = 3, Loop = false };
 		private readonly FrameSet steerLeft = new FrameSet { Row = 2, Frames = 1, Start = 3, Loop = false, Effects = SpriteEffects.FlipHorizontally };
+		private readonly FrameSet deathRight = new FrameSet { Row = 3, Frames = 16, Loop = false };
+		private readonly FrameSet deathLeft = new FrameSet { Row = 3, Frames = 16, Loop = false, Effects = SpriteEffects.FlipHorizontally };
 
 		private bool lastFacedLeft;
 		private readonly Mobile mobile;
@@ -64,6 +66,11 @@ namespace MarianX.Effects
 		public void Jump()
 		{
 			mobile.SetFrameSet(lastFacedLeft ? jumpLeft : jumpRight);
+		}
+
+		public void Die()
+		{
+			mobile.SetFrameSet(lastFacedLeft ? deathLeft : deathRight);
 		}
 	}
 }

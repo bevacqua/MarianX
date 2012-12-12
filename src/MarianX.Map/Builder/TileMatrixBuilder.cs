@@ -49,11 +49,30 @@ namespace MarianX.Map.Builder
 			}
 			if (y == rows - 22)
 			{
-				tile = tileTypes[2];
+				if (x > 20 && x < 25)
+				{
+					tile = tileTypes[0];
+				}
+				else
+				{
+					tile = tileTypes[2];
+				}
 			}
-			else if (y >= rows - 21 && y < rows - 9)
+			
+			if (y >= rows - 21 && y < rows - 9)
 			{
-				tile = tileTypes[1];
+				if (x > 20 && x < 25 && y == rows - 21)
+				{
+					tile = tileTypes[5];
+				}
+				else if (x > 20 && x < 25 && y == rows - 20)
+				{
+					tile = tileTypes[6];
+				}
+				else
+				{
+					tile = tileTypes[1];
+				}
 			}
 			else if ((x > 35 && x < 55) || (x > 60 && x < 110))
 			{

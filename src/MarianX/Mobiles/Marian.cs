@@ -1,6 +1,7 @@
 using System;
 using MarianX.Core;
 using MarianX.Enum;
+using MarianX.Events;
 using MarianX.Physics;
 using MarianX.Sprites;
 using MarianX.World.Configuration;
@@ -41,7 +42,17 @@ namespace MarianX.Mobiles
 		public override void Initialize()
 		{
 			base.Initialize();
+			SetStartPosition();
+			AnimationComplete += Marian_AnimationComplete;
+		}
+
+		private void SetStartPosition()
+		{
+			State = HitBoxState.Airborne;
+			Speed = Vector2.Zero;
+			Direction = Direction.None;
 			Position = new Vector2(MagicNumbers.StartX, MagicNumbers.StartY);
+			IdleEffects();
 		}
 
 		public override void Update(GameTime gameTime)
@@ -58,16 +69,22 @@ namespace MarianX.Mobiles
 
 			MoveResult result = base.UpdatePosition(interpolation);
 
-			if (wasAirborne)
+			if (result == MoveResult.Died)
+			{
+				State = HitBoxState.Dead;
+				DeathEffects();
+			}
+			else if (wasAirborne)
 			{
 				if (jumpStartPosition.HasValue && jumpStartPosition.Value.Y < Position.Y)
 				{
 					jumpStartPosition = null; // avoid repetition.
 					FallEffects();
 				}
-				if (State != HitBoxState.Airborne)
+				if (State == HitBoxState.Surfaced)
 				{
 					Direction = Direction.None;
+					IdleEffects();
 				}
 			}
 			return result;
@@ -135,6 +152,14 @@ namespace MarianX.Mobiles
 			else
 			{
 				Direction = Direction.None;
+			}
+		}
+
+		private void Marian_AnimationComplete(object sender, AnimationCompleteArgs args)
+		{
+			if (State == HitBoxState.Dead)
+			{
+				SetStartPosition();
 			}
 		}
 	}

@@ -3,6 +3,7 @@ namespace MarianX.Sprites
 	public enum HitBoxState
 	{
 		Surfaced,
-		Airborne
+		Airborne,
+		Dead
 	}
 }

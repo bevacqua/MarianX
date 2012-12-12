@@ -1,4 +1,6 @@
-namespace MarianX.Mobiles
+using MarianX.Mobiles;
+
+namespace MarianX.Events
 {
-	public delegate void Move(Mobile sender, MoveEventArgs args);
+	public delegate void Move(Mobile sender, MoveArgs args);
 }

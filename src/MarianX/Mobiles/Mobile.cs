@@ -1,5 +1,6 @@
 using MarianX.Contents;
 using MarianX.Enum;
+using MarianX.Events;
 using MarianX.Interface;
 using MarianX.Physics;
 using MarianX.Sprites;
@@ -39,7 +40,7 @@ namespace MarianX.Mobiles
 		{
 			if (Move != null)
 			{
-				Move(this, new MoveEventArgs
+				Move(this, new MoveArgs
 				{
 					From = oldPosition,
 					To = currentPosition

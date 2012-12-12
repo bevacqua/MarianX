@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using MarianX.Events;
+using MarianX.Mobiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -13,6 +15,7 @@ namespace MarianX.Contents
 		private TimeSpan elapsed;
 		private int frame;
 		private FrameSet frameSet;
+		private bool signaledAnimationCompleted;
 
 		public override int ContentWidth
 		{
@@ -60,6 +63,12 @@ namespace MarianX.Contents
 				else
 				{
 					frame--; // stay on last frame.
+
+					if (!signaledAnimationCompleted)
+					{
+						signaledAnimationCompleted = true;
+						InvokeAnimationComplete(new AnimationCompleteArgs());
+					}
 				}
 			}
 
@@ -76,16 +85,23 @@ namespace MarianX.Contents
 			spriteBatch.Draw(Texture, ScreenPosition, sprite, Tint, Tilt, Vector2.Zero, Scale, frameSet.Effects, 0.0f);
 		}
 
-		public void SetFrameSet(FrameSet set)
+		public void SetFrameSet(FrameSet set, bool allowRedundancy = false)
 		{
 			if (set == null)
 			{
 				throw new ArgumentNullException("set");
 			}
+
+			if (!allowRedundancy && frameSet == set) // avoid redundancy.
+			{
+				return;
+			}
+
 			frameSet = set;
 			frame = set.Start;
 
 			elapsed = TimeSpan.Zero;
+			signaledAnimationCompleted = false;
 		}
 
 		public void SetFrameSetQueue(FrameSet[] indexes, bool clearQueue = true)
@@ -105,5 +121,15 @@ namespace MarianX.Contents
 			FrameSet next = frameSetQueue.Dequeue();
 			SetFrameSet(next);
 		}
+
+		private void InvokeAnimationComplete(AnimationCompleteArgs args)
+		{
+			if (AnimationComplete != null)
+			{
+				AnimationComplete(this, args);
+			}
+		}
+
+		protected event AnimationComplete AnimationComplete;
 	}
 }

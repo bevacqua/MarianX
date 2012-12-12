@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using MarianX.Core;
+using MarianX.Events;
 using MarianX.Interface;
 using MarianX.Mobiles;
 using MarianX.World.Configuration;
@@ -38,7 +39,7 @@ namespace MarianX.Effects
 			contents.Add(content);
 		}
 
-		public void CharacterMove(Mobile sender, MoveEventArgs args)
+		public void CharacterMove(Mobile sender, MoveArgs args)
 		{
 			UpdateRelativePosition(sender);
 

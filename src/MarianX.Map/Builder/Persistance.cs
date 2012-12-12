@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using AutoMapper;
 using CsvHelper;
 using MarianX.World.Platform;
 
@@ -71,17 +72,10 @@ namespace MarianX.Map.Builder
 				for (int y = 0; y < rows; y++)
 				{
 					TileType type = map[x, y];
-					TileRecord record = new TileRecord
-					{
-						Impassable = type.Impassable,
-						Type = type.Type,
-						SlopeLeft = type.SlopeLeft,
-						SlopeRight = type.SlopeRight,
-						Sound = type.Sound,
-						X = x,
-						Y = y
-					};
+					TileRecord record = Mapper.Map<TileType, TileRecord>(type);
 
+					record.X = x;
+					record.Y = y;
 					records.Add(record);
 				}
 			}

@@ -1,3 +1,5 @@
+using AutoMapper;
+
 namespace MarianX.World.Platform
 {
 	public class TileType
@@ -9,5 +11,12 @@ namespace MarianX.World.Platform
 		public int SlopeRight { get; set; }
 
 		public string Sound { get; set; }
+
+		public bool Deathly { get; set; }
+
+		static TileType()
+		{
+			Mapper.CreateMap<TileType, TileRecord>();
+		}
 	}
 }

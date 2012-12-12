@@ -9,5 +9,6 @@ namespace MarianX.Enum
 		X		= 1 << 0,
 		Y		= 1 << 1,
 		Blocked = 1 << 2,
+		Died	= 1 << 3
 	}
 }
