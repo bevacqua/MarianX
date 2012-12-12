@@ -51,7 +51,7 @@ namespace MarianX.Map.Builder
 			{
 				tile = tileTypes[2];
 			}
-			else if (y == rows - 21)
+			else if (y >= rows - 21 && y < rows - 9)
 			{
 				tile = tileTypes[1];
 			}
