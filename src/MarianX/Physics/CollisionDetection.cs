@@ -10,6 +10,16 @@ namespace MarianX.Physics
 	{
 		public MoveResult CanMove(FloatRectangle bounds, Vector2 interpolation)
 		{
+			if (bounds.X - interpolation.X < Tile.Width)
+			{
+				return MoveResult.Blocked;
+			}
+
+			if (bounds.Y - interpolation.Y < Tile.Height)
+			{
+				return MoveResult.Blocked;
+			}
+
 			FloatRectangle xTarget = bounds.Extended(interpolation * Direction.Right);
 			FloatRectangle yTarget = bounds.Extended(interpolation * Direction.Down);
 

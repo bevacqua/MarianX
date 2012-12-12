@@ -17,10 +17,12 @@ namespace MarianX.Map.Builder
 				string path = string.Format("graphics/tiles/{0}.png", tileType);
 				return File.OpenRead(path);
 			};
-			FragmentedPersistance persistance = new FragmentedPersistance(getTileFileStream);
-			persistance.SaveFragmentMetadata(map, "map.idx");
-			persistance.SaveTileMap(map, "map_{0}_{1}.png");
-			persistance.SaveTileMatrix(map, "map.csv");
+			FragmentedPersistance fragmentedPersistance = new FragmentedPersistance(getTileFileStream);
+			fragmentedPersistance.SaveFragmentMetadata(map, "map.idx");
+			fragmentedPersistance.SaveTileMap(map, "map_{0}_{1}.png");
+			fragmentedPersistance.SaveTileMatrix(map, "map.csv");
+			Persistance persistance = new Persistance(getTileFileStream);
+			persistance.SaveTileMap(map, "map.png"); // full map for preview.
 		}
 	}
 }
