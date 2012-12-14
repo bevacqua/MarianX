@@ -90,7 +90,7 @@ namespace MarianX.Sprites
 			get { return scrollingBackground.Position; }
 		}
 
-		private SquareGrid diagnosticTextureGrid;
+		private ISquareGrid diagnosticTextureGrid;
 
 		private void DrawDiagnosticTileGrid(SpriteBatch spriteBatch)
 		{
@@ -115,7 +115,7 @@ namespace MarianX.Sprites
 					};
 					squares.Add(square);
 				}
-				diagnosticTextureGrid = new SquareGrid(squares);
+				diagnosticTextureGrid = new FragmentedSquareGrid(squares);
 			}
 
 			spriteBatch.Begin();

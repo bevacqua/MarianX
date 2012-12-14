@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using MarianX.Core;
+using MarianX.Interface;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -9,7 +10,7 @@ namespace MarianX.Sprites
 	/// <summary>
 	/// Merges a list of squares into a single draw call, drastically improving render performance.
 	/// </summary>
-	public class SquareGrid
+	public class SquareGrid : ISquareGrid
 	{
 		private readonly IList<Square> squares;
 
@@ -39,7 +40,7 @@ namespace MarianX.Sprites
 			return graphic;
 		}
 
-		public void Draw(SpriteBatch spriteBatch, Vector2? position = null)
+		public virtual void Draw(SpriteBatch spriteBatch, Vector2? offset = null)
 		{
 			if (squares.Count == 0)
 			{
@@ -49,7 +50,7 @@ namespace MarianX.Sprites
 			{
 				texture = GetTexture();
 			}
-			spriteBatch.Draw(texture, position ?? Vector2.Zero, Color.White);
+			spriteBatch.Draw(texture, offset ?? Vector2.Zero, Color.White);
 		}
 	}
 }

@@ -116,6 +116,7 @@
     <Compile Include="Events\AnimationCompleteArgs.cs" />
     <Compile Include="Events\Move.cs" />
     <Compile Include="Events\MoveArgs.cs" />
+    <Compile Include="Interface\ISquareGrid.cs" />
     <Compile Include="Mobiles\Npc.cs" />
     <Compile Include="Physics\AxisAlignedBoundingBox.cs" />
     <Compile Include="Physics\CollisionDetection.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Mobiles\PlayerMobile.cs" />
     <Compile Include="Interface\IHitBox.cs" />
     <Compile Include="Diagnostics\DiagnosticMobile.cs" />
+    <Compile Include="Sprites\FragmentedSquareGrid.cs" />
     <Compile Include="Sprites\HitBoxState.cs" />
     <Compile Include="Sprites\Resources\Error.Designer.cs">
       <AutoGen>True</AutoGen>
