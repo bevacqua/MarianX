@@ -52,7 +52,6 @@ namespace MarianX.Mobiles
 		public override void Load(ContentManager content)
 		{
 			base.Load(content);
-			animation.Load();
 			soundManager.Load(content);
 		}
 

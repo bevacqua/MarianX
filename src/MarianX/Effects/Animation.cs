@@ -27,11 +27,6 @@ namespace MarianX.Effects
 			this.mobile = mobile;
 		}
 
-		public void Load()
-		{
-			mobile.SetFrameSet(idleRight);
-		}
-
 		public void UpdateFace()
 		{
 			if (mobile.Direction == Direction.Left)

@@ -58,7 +58,7 @@ namespace MarianX.Map.Builder
 					tile = tileTypes[2];
 				}
 			}
-			
+
 			if (y >= rows - 21 && y < rows - 9)
 			{
 				if (x > 20 && x < 25 && y == rows - 21)
@@ -84,6 +84,11 @@ namespace MarianX.Map.Builder
 				{
 					tile = tileTypes[4];
 				}
+			}
+
+			if (x > 28 && x < 36 && y == 19)
+			{
+				tile = tileTypes[4];
 			}
 
 			return tile;
