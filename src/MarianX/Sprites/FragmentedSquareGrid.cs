@@ -103,7 +103,7 @@ namespace MarianX.Sprites
 			foreach (TextureFragment fragment in fragments)
 			{
 				Vector2 position = fragment.Relative + (offset ?? Vector2.Zero);
-				spriteBatch.Draw(fragment.Texture, position, Color.White);
+				spriteBatch.Draw(fragment.Texture, position, Color.White); // TODO: screen position?
 			}
 		}
 
