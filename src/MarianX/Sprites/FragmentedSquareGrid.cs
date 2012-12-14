@@ -30,7 +30,7 @@ namespace MarianX.Sprites
 			int totalWidth = squares.Max(s => s.Bounds.X + s.Bounds.Width);
 			int totalHeight = squares.Max(s => s.Bounds.Y + s.Bounds.Height);
 
-			IList<TextureFragment> fragments = new List<TextureFragment>();
+			IList<TextureFragment> textures = new List<TextureFragment>();
 
 			int remainingWidth = totalWidth;
 
@@ -57,19 +57,19 @@ namespace MarianX.Sprites
 					remainingHeight -= h;
 
 					GraphicsDevice device = GameCore.Instance.GraphicsDevice;
-					Texture2D t = new Texture2D(device, w, h);
-					Vector2 r = new Vector2(x, y);
+					Texture2D texture = new Texture2D(device, w, h);
+					Vector2 rel = new Vector2(x, y);
 					TextureFragment fragment = new TextureFragment
 					{
-						Texture = t,
-						Relative = r
+						Texture = texture,
+						Relative = rel
 					};
-					fragments.Add(fragment);
+					textures.Add(fragment);
 
 					foreach (Square square in squares)
 					{
-						Rectangle s = square.Bounds;
-						Rectangle rect = new Rectangle(s.X - (int)r.X, s.Y - (int)r.Y, s.Width, s.Height);
+						Rectangle src = square.Bounds;
+						Rectangle rect = new Rectangle(src.X - (int)rel.X, src.Y - (int)rel.Y, src.Width, src.Height);
 
 						if (rect.X + rect.Width > x + w || rect.Y + rect.Height > y + h)
 						{
@@ -82,12 +82,12 @@ namespace MarianX.Sprites
 						}
 
 						Color[] data = square.GetData();
-						t.SetData(0, rect, data, 0, data.Length);
+						texture.SetData(0, rect, data, 0, data.Length);
 					}
 				}
 			}
 
-			return fragments;
+			return textures;
 		}
 
 		public void Draw(SpriteBatch spriteBatch, Vector2? offset = null)
