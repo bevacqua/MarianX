@@ -32,6 +32,10 @@ namespace MarianX.Diagnostics
 		{
 			IList<Tile> tiles = base.GetIntersection(bounds);
 
+			movementGrid = null;
+			matchGrid = null;
+			intersectionGrid = null;
+
 			if (Config.Diagnostic)
 			{
 				HighlightMovement(bounds);
@@ -115,7 +119,7 @@ namespace MarianX.Diagnostics
 		public void UpdateOutput(GameTime gameTime)
 		{
 		}
-		
+
 		public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
 			spriteBatch.Begin();

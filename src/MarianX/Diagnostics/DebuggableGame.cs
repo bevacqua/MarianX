@@ -33,17 +33,24 @@ namespace MarianX.Diagnostics
 			KeyboardState keyboardState = Keyboard.GetState();
 			KeyboardConfiguration kb = new KeyboardConfiguration(keyboardState);
 
-			if (kb.IsKeyPressed(ActionKey.ToggleDebugMode, oldState))
+			if (kb.IsKeyPressed(ActionKey.ToggleDiagnosticMode, oldState))
 			{
-				debugMode = !debugMode;
+				Config.Diagnostic = !Config.Diagnostic;
 			}
 
-			if (kb.IsKeyPressed(ActionKey.UpdateInNextFrame, oldState))
+			if (Config.Diagnostic) // debug mode only available in diagnostic configuration.
 			{
-				debugMode = true;
-				updateInNextFrame = true;
-			}
+				if (kb.IsKeyPressed(ActionKey.ToggleDebugMode, oldState))
+				{
+					debugMode = !debugMode;
+				}
 
+				if (kb.IsKeyPressed(ActionKey.UpdateInNextFrame, oldState))
+				{
+					debugMode = true;
+					updateInNextFrame = true;
+				}
+			}
 			oldState = keyboardState;
 		}
 

@@ -4,9 +4,11 @@ namespace MarianX.Core
 {
 	public static class Config
 	{
-		public static bool Diagnostic
+		public static bool Diagnostic { get; set; }
+
+		static Config()
 		{
-			get { return Bool(Get("Diagnostic")) ?? false; }
+			Diagnostic = Bool(Get("Diagnostic")) ?? false;
 		}
 
 		private static string Get(string property)

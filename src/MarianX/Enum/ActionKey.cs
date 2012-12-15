@@ -7,6 +7,8 @@ namespace MarianX.Enum
 		Jump,
 		ToggleMusic,
 		ToggleDebugMode,
-		UpdateInNextFrame
+		UpdateInNextFrame,
+		Suicide,
+		ToggleDiagnosticMode
 	}
 }

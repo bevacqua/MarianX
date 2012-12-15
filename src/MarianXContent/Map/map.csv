@@ -1322,8 +1322,8 @@ X,Y,Type,Impassable,SlopeLeft,SlopeRight,Sound,Deathly
 29,15,blank,False,0,0,,False
 29,16,blank,False,0,0,,False
 29,17,blank,False,0,0,,False
-29,18,blank,False,0,0,,False
-29,19,stony,True,0,0,,False
+29,18,stony,True,0,0,,False
+29,19,grass,True,0,0,,False
 29,20,blank,False,0,0,,False
 29,21,blank,False,0,0,,False
 29,22,blank,False,0,0,,False
@@ -1367,8 +1367,8 @@ X,Y,Type,Impassable,SlopeLeft,SlopeRight,Sound,Deathly
 30,15,blank,False,0,0,,False
 30,16,blank,False,0,0,,False
 30,17,blank,False,0,0,,False
-30,18,blank,False,0,0,,False
-30,19,stony,True,0,0,,False
+30,18,stony,True,0,0,,False
+30,19,grass,True,0,0,,False
 30,20,blank,False,0,0,,False
 30,21,blank,False,0,0,,False
 30,22,blank,False,0,0,,False
@@ -1412,8 +1412,8 @@ X,Y,Type,Impassable,SlopeLeft,SlopeRight,Sound,Deathly
 31,15,blank,False,0,0,,False
 31,16,blank,False,0,0,,False
 31,17,blank,False,0,0,,False
-31,18,blank,False,0,0,,False
-31,19,stony,True,0,0,,False
+31,18,stony,True,0,0,,False
+31,19,grass,True,0,0,,False
 31,20,blank,False,0,0,,False
 31,21,blank,False,0,0,,False
 31,22,blank,False,0,0,,False
@@ -1457,8 +1457,8 @@ X,Y,Type,Impassable,SlopeLeft,SlopeRight,Sound,Deathly
 32,15,blank,False,0,0,,False
 32,16,blank,False,0,0,,False
 32,17,blank,False,0,0,,False
-32,18,blank,False,0,0,,False
-32,19,stony,True,0,0,,False
+32,18,stony,True,0,0,,False
+32,19,grass,True,0,0,,False
 32,20,blank,False,0,0,,False
 32,21,blank,False,0,0,,False
 32,22,blank,False,0,0,,False
@@ -1502,8 +1502,8 @@ X,Y,Type,Impassable,SlopeLeft,SlopeRight,Sound,Deathly
 33,15,blank,False,0,0,,False
 33,16,blank,False,0,0,,False
 33,17,blank,False,0,0,,False
-33,18,blank,False,0,0,,False
-33,19,stony,True,0,0,,False
+33,18,stony,True,0,0,,False
+33,19,grass,True,0,0,,False
 33,20,blank,False,0,0,,False
 33,21,blank,False,0,0,,False
 33,22,blank,False,0,0,,False
@@ -1547,8 +1547,8 @@ X,Y,Type,Impassable,SlopeLeft,SlopeRight,Sound,Deathly
 34,15,blank,False,0,0,,False
 34,16,blank,False,0,0,,False
 34,17,blank,False,0,0,,False
-34,18,blank,False,0,0,,False
-34,19,stony,True,0,0,,False
+34,18,stony,True,0,0,,False
+34,19,grass,True,0,0,,False
 34,20,blank,False,0,0,,False
 34,21,blank,False,0,0,,False
 34,22,blank,False,0,0,,False
@@ -1592,8 +1592,8 @@ X,Y,Type,Impassable,SlopeLeft,SlopeRight,Sound,Deathly
 35,15,blank,False,0,0,,False
 35,16,blank,False,0,0,,False
 35,17,blank,False,0,0,,False
-35,18,blank,False,0,0,,False
-35,19,stony,True,0,0,,False
+35,18,stony,True,0,0,,False
+35,19,grass,True,0,0,,False
 35,20,blank,False,0,0,,False
 35,21,blank,False,0,0,,False
 35,22,blank,False,0,0,,False

@@ -16,8 +16,10 @@ namespace MarianX.Core
 				{ActionKey.Right, Keys.Right},
 				{ActionKey.Jump, Keys.Up},
 				{ActionKey.ToggleMusic, Keys.F12},
+				{ActionKey.ToggleDiagnosticMode, Keys.F8},
 				{ActionKey.ToggleDebugMode, Keys.Divide},
 				{ActionKey.UpdateInNextFrame, Keys.Multiply},
+				{ActionKey.Suicide, Keys.Subtract},
 			};
 		}
 

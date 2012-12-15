@@ -16,6 +16,23 @@ namespace MarianX.Mobiles
 
 		private TimeSpan? lastJumpStarted;
 		private Vector2? jumpStartPosition;
+		private HitBoxState state;
+
+		public override HitBoxState State
+		{
+			get
+			{
+				return state;
+			}
+			set
+			{
+				if (State == HitBoxState.Dead) // ignore state changes when dead.
+				{
+					return;
+				}
+				state = value;
+			}
+		}
 
 		public override Direction Direction
 		{
@@ -48,7 +65,7 @@ namespace MarianX.Mobiles
 
 		private void SetStartPosition()
 		{
-			State = HitBoxState.Airborne;
+			state = HitBoxState.Airborne;
 			Speed = Vector2.Zero;
 			Direction = Direction.None;
 			Position = new Vector2(MagicNumbers.StartX, MagicNumbers.StartY);
@@ -74,9 +91,21 @@ namespace MarianX.Mobiles
 			UpdateMovement(gameTime);
 			base.UpdateOutput(gameTime);
 		}
+
+		private KeyboardState oldState;
+
 		private void UpdateMovement(GameTime gameTime)
 		{
 			var kb = new KeyboardConfiguration(keyboardState);
+
+			if (Config.Diagnostic)
+			{
+				if (kb.IsKeyPressed(ActionKey.Suicide, oldState))
+				{
+					Die();
+				}
+				oldState = keyboardState;
+			}
 
 			if (State == HitBoxState.Surfaced)
 			{
@@ -147,8 +176,7 @@ namespace MarianX.Mobiles
 
 			if (result == MoveResult.Died)
 			{
-				State = HitBoxState.Dead;
-				DeathEffects();
+				Die();
 			}
 			else if (wasAirborne)
 			{
@@ -165,7 +193,13 @@ namespace MarianX.Mobiles
 			}
 			return result;
 		}
-		
+
+		private void Die()
+		{
+			State = HitBoxState.Dead;
+			DeathEffects();
+		}
+
 		private void Marian_AnimationComplete(object sender, AnimationCompleteArgs args)
 		{
 			if (State == HitBoxState.Dead)

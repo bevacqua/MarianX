@@ -86,9 +86,16 @@ namespace MarianX.Map.Builder
 				}
 			}
 
-			if (x > 28 && x < 36 && y == 19)
+			if (x > 28 && x < 36)
 			{
-				tile = tileTypes[4];
+				if (y == 19)
+				{
+					tile = tileTypes[3];
+				}
+				else if (y == 18)
+				{
+					tile = tileTypes[4];
+				}
 			}
 
 			return tile;
