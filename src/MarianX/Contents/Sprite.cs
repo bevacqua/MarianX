@@ -32,7 +32,11 @@ namespace MarianX.Contents
 			Tint = Color.White;
 		}
 
-		public virtual void Update(GameTime gameTime)
+		public virtual void UpdateInput(GameTime gameTime)
+		{
+		}
+
+		public virtual void UpdateOutput(GameTime gameTime)
 		{
 			Vector2 interpolation = CalculateInterpolation(gameTime);
 			UpdatePosition(interpolation);

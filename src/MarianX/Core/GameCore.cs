@@ -61,14 +61,14 @@ namespace MarianX.Core
 			viewportManager.Manage(content);
 		}
 
-		protected override void Update(GameTime gameTime)
+		protected override void UpdateInput(GameTime gameTime)
 		{
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
 			{
 				Exit();
 			}
 
-			base.Update(gameTime);
+			base.UpdateInput(gameTime);
 		}
 	}
 }

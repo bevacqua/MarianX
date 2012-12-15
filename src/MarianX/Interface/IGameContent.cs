@@ -8,7 +8,8 @@ namespace MarianX.Interface
 	{
 		void Initialize();
 		void Load(ContentManager content);
-		void Update(GameTime gameTime);
+		void UpdateInput(GameTime gameTime);
+		void UpdateOutput(GameTime gameTime);
 		void Draw(GameTime gameTime, SpriteBatch spriteBatch);
 		void Unload();
 		void UpdateScreenPosition(Vector2 screenPosition);

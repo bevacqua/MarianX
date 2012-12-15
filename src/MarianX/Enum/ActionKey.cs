@@ -5,6 +5,8 @@ namespace MarianX.Enum
 		Left,
 		Right,
 		Jump,
-		ToggleMusic
+		ToggleMusic,
+		ToggleDebugMode,
+		UpdateInNextFrame
 	}
 }

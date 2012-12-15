@@ -108,10 +108,14 @@ namespace MarianX.Diagnostics
 		{
 		}
 
-		public void Update(GameTime gameTime)
+		public void UpdateInput(GameTime gameTime)
 		{
 		}
 
+		public void UpdateOutput(GameTime gameTime)
+		{
+		}
+		
 		public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
 			spriteBatch.Begin();

@@ -39,7 +39,7 @@ namespace MarianX.Contents
 			frameSetQueue = new Queue<FrameSet>();
 		}
 
-		public override void Update(GameTime gameTime)
+		public override void UpdateOutput(GameTime gameTime)
 		{
 			elapsed += gameTime.ElapsedGameTime;
 
@@ -72,7 +72,7 @@ namespace MarianX.Contents
 				}
 			}
 
-			base.Update(gameTime);
+			base.UpdateOutput(gameTime);
 		}
 
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

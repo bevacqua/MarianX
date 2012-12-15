@@ -58,7 +58,11 @@ namespace MarianX.Sprites
 			}
 		}
 
-		public virtual void Update(GameTime gameTime)
+		public virtual void UpdateInput(GameTime gameTime)
+		{
+		}
+
+		public virtual void UpdateOutput(GameTime gameTime)
 		{
 		}
 

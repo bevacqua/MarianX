@@ -30,7 +30,11 @@ namespace MarianX.Contents
 			sprite = content.Load<SpriteFont>(name);
 		}
 
-		public void Update(GameTime gameTime)
+		public void UpdateInput(GameTime gameTime)
+		{
+		}
+
+		public void UpdateOutput(GameTime gameTime)
 		{
 		}
 

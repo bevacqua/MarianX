@@ -1,62 +1,59 @@
-using System.Collections.Generic;
-using MarianX.Contents;
 using MarianX.Core;
+using MarianX.Enum;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace MarianX.Diagnostics
 {
-	public class DebuggableGame : ContentBasedGame
+	public class DebuggableGame : DiagnosticGame
 	{
-		private readonly Font font;
-		private readonly IDictionary<string, string> messages;
+		private bool debugMode;
+		private bool updateInNextFrame;
+		private KeyboardState oldState;
 
-		public DebuggableGame()
+		protected override void Update(GameTime gameTime)
 		{
-			messages = new Dictionary<string, string>();
-			font = new Font("Fonts/Diagnostic");
+			base.Update(gameTime);
+			updateInNextFrame = false; // only really matters for debug mode.
 		}
 
-		public void AddDiagnosticMessage(string title, string message, object[] args)
+		protected override void UpdateInput(GameTime gameTime)
 		{
-			if (Config.Diagnostic)
-			{
-				messages[title] = string.Format(message, args);
-			}
-		}
+			UpdateDebugInput();
 
-		protected override void Initialize()
-		{
-			AddContent(font);
-			base.Initialize();
-		}
-
-		protected override void Draw(GameTime gameTime)
-		{
-			base.Draw(gameTime);
-
-			if (!Config.Diagnostic)
+			if (debugMode && !updateInNextFrame)
 			{
 				return;
 			}
+			base.UpdateInput(gameTime);
+		}
 
-			spriteBatch.Begin();
+		private void UpdateDebugInput()
+		{
+			KeyboardState keyboardState = Keyboard.GetState();
+			KeyboardConfiguration kb = new KeyboardConfiguration(keyboardState);
 
-			SpriteFont spriteFont = font;
-			Vector2 position = new Vector2(8, 8);
-
-			foreach (var entry in messages)
+			if (kb.IsKeyPressed(ActionKey.ToggleDebugMode, oldState))
 			{
-				string message = string.Concat(entry.Key, " ", entry.Value);
-
-				spriteBatch.DrawString(spriteFont, message, position, Color.DarkViolet);
-
-				position.Y += spriteFont.MeasureString(message).Y;
+				debugMode = !debugMode;
 			}
 
-			messages.Clear();
+			if (kb.IsKeyPressed(ActionKey.UpdateInNextFrame, oldState))
+			{
+				debugMode = true;
+				updateInNextFrame = true;
+			}
 
-			spriteBatch.End();
+			oldState = keyboardState;
+		}
+
+		protected override void UpdateOutput(GameTime gameTime)
+		{
+			if (debugMode && !updateInNextFrame)
+			{
+				return;
+			}
+			base.UpdateOutput(gameTime);
 		}
 	}
 }

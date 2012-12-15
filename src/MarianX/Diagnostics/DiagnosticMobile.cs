@@ -14,9 +14,9 @@ namespace MarianX.Diagnostics
 		{
 		}
 
-		public override void Update(GameTime gameTime)
+		public override void UpdateOutput(GameTime gameTime)
 		{
-			base.Update(gameTime);
+			base.UpdateOutput(gameTime);
 			Diagnostics.Write("mpos", Position);
 			Diagnostics.Write("stat", State);
 			Diagnostics.Write(" dir", Direction.Vector);

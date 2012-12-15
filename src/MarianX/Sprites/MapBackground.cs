@@ -60,9 +60,14 @@ namespace MarianX.Sprites
 			scrollingBackground.Load(content);
 		}
 
-		public void Update(GameTime gameTime)
+		public void UpdateInput(GameTime gameTime)
 		{
-			scrollingBackground.Update(gameTime);
+			scrollingBackground.UpdateInput(gameTime);
+		}
+
+		public void UpdateOutput(GameTime gameTime)
+		{
+			scrollingBackground.UpdateOutput(gameTime);
 		}
 
 		public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

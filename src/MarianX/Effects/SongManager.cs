@@ -64,7 +64,7 @@ namespace MarianX.Effects
 		private bool stopping;
 		private KeyboardState oldState;
 
-		public void Update(GameTime gameTime)
+		public void UpdateInput(GameTime gameTime)
 		{
 			KeyboardState keyboardState = Keyboard.GetState();
 			KeyboardConfiguration kb = new KeyboardConfiguration(keyboardState);
@@ -83,6 +83,10 @@ namespace MarianX.Effects
 			}
 
 			oldState = keyboardState;
+		}
+
+		public void UpdateOutput(GameTime gameTime)
+		{
 		}
 
 		public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

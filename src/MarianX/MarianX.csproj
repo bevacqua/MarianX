@@ -110,6 +110,7 @@
   <ItemGroup>
     <Compile Include="Contents\Font.cs" />
     <Compile Include="Diagnostics\DebuggableGame.cs" />
+    <Compile Include="Diagnostics\DiagnosticGame.cs" />
     <Compile Include="Diagnostics\Diagnostics.cs" />
     <Compile Include="Effects\SongManager.cs" />
     <Compile Include="Effects\ViewportManager.cs" />

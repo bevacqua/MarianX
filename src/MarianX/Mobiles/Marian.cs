@@ -61,42 +61,20 @@ namespace MarianX.Mobiles
 			Flash();
 		}
 
-		public override void Update(GameTime gameTime)
-		{
-			KeyboardState keyboardState = Keyboard.GetState();
-			UpdateMovement(keyboardState, gameTime);
+		private KeyboardState keyboardState;
 
-			base.Update(gameTime);
+		public override void UpdateInput(GameTime gameTime)
+		{
+			keyboardState = Keyboard.GetState();
+			base.UpdateInput(gameTime);
 		}
 
-		protected override MoveResult UpdatePosition(Vector2 interpolation)
+		public override void UpdateOutput(GameTime gameTime)
 		{
-			var wasAirborne = State == HitBoxState.Airborne;
-
-			MoveResult result = base.UpdatePosition(interpolation);
-
-			if (result == MoveResult.Died)
-			{
-				State = HitBoxState.Dead;
-				DeathEffects();
-			}
-			else if (wasAirborne)
-			{
-				if (jumpStartPosition.HasValue && Position.Y > jumpStartPosition.Value.Y)
-				{
-					jumpStartPosition = null; // avoid repetition.
-					FallEffects();
-				}
-				if (State == HitBoxState.Surfaced)
-				{
-					Direction = Direction.None;
-					IdleEffects();
-				}
-			}
-			return result;
+			UpdateMovement(gameTime);
+			base.UpdateOutput(gameTime);
 		}
-
-		private void UpdateMovement(KeyboardState keyboardState, GameTime gameTime)
+		private void UpdateMovement(GameTime gameTime)
 		{
 			var kb = new KeyboardConfiguration(keyboardState);
 
@@ -161,6 +139,33 @@ namespace MarianX.Mobiles
 			}
 		}
 
+		protected override MoveResult UpdatePosition(Vector2 interpolation)
+		{
+			var wasAirborne = State == HitBoxState.Airborne;
+
+			MoveResult result = base.UpdatePosition(interpolation);
+
+			if (result == MoveResult.Died)
+			{
+				State = HitBoxState.Dead;
+				DeathEffects();
+			}
+			else if (wasAirborne)
+			{
+				if (jumpStartPosition.HasValue && Position.Y > jumpStartPosition.Value.Y)
+				{
+					jumpStartPosition = null; // avoid repetition.
+					FallEffects();
+				}
+				if (State == HitBoxState.Surfaced)
+				{
+					Direction = Direction.None;
+					IdleEffects();
+				}
+			}
+			return result;
+		}
+		
 		private void Marian_AnimationComplete(object sender, AnimationCompleteArgs args)
 		{
 			if (State == HitBoxState.Dead)

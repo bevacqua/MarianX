@@ -55,12 +55,26 @@ namespace MarianX.Core
 
 		protected override void Update(GameTime gameTime)
 		{
-			foreach (IGameContent content in contents)
-			{
-				content.Update(gameTime);
-			}
+			UpdateInput(gameTime);
+			UpdateOutput(gameTime);
 
 			base.Update(gameTime);
+		}
+
+		protected virtual void UpdateInput(GameTime gameTime)
+		{
+			foreach (IGameContent content in contents)
+			{
+				content.UpdateInput(gameTime);
+			}
+		}
+
+		protected virtual void UpdateOutput(GameTime gameTime)
+		{
+			foreach (IGameContent content in contents)
+			{
+				content.UpdateOutput(gameTime);
+			}
 		}
 
 		protected override void Draw(GameTime gameTime)
