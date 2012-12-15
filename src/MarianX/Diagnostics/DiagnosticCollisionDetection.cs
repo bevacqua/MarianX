@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using MarianX.Core;
+using MarianX.Enum;
 using MarianX.Interface;
+using MarianX.Physics;
 using MarianX.Sprites;
 using MarianX.World.Physics;
 using MarianX.World.Platform;
@@ -9,13 +11,22 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace MarianX.Physics
+namespace MarianX.Diagnostics
 {
 	public class DiagnosticCollisionDetection : CollisionDetection, IGameContent
 	{
 		private SquareGrid movementGrid;
 		private SquareGrid matchGrid;
 		private SquareGrid intersectionGrid;
+
+		public override MoveResult CanMove(FloatRectangle bounds, Vector2 interpolation)
+		{
+			MoveResult result = base.CanMove(bounds, interpolation);
+
+			Diagnostics.Write("rslt", result.ToString());
+
+			return result;
+		}
 
 		protected override IList<Tile> GetIntersection(FloatRectangle bounds)
 		{
@@ -127,7 +138,6 @@ namespace MarianX.Physics
 
 		public void UpdateScreenPosition(Vector2 screenPosition)
 		{
-			throw new NotImplementedException();
 		}
 
 		public Vector2 Position

@@ -1,4 +1,5 @@
 using MarianX.Contents;
+using MarianX.Diagnostics;
 using MarianX.Enum;
 using MarianX.Events;
 using MarianX.Interface;

@@ -8,7 +8,7 @@ namespace MarianX.Physics
 {
 	public class CollisionDetection
 	{
-		public MoveResult CanMove(FloatRectangle bounds, Vector2 interpolation)
+		public virtual MoveResult CanMove(FloatRectangle bounds, Vector2 interpolation)
 		{
 			if (bounds.X - interpolation.X < Tile.Width)
 			{
