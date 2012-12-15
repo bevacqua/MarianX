@@ -114,6 +114,7 @@
     <Compile Include="Diagnostics\Diagnostics.cs" />
     <Compile Include="Effects\SongManager.cs" />
     <Compile Include="Effects\ViewportManager.cs" />
+    <Compile Include="Enum\FitResult.cs" />
     <Compile Include="Events\AnimationComplete.cs" />
     <Compile Include="Events\AnimationCompleteArgs.cs" />
     <Compile Include="Events\Move.cs" />
