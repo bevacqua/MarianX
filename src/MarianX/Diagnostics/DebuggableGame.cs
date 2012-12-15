@@ -9,19 +9,19 @@ namespace MarianX.Diagnostics
 	public class DebuggableGame : ContentBasedGame
 	{
 		private readonly Font font;
-		private readonly IList<string> messages;
+		private readonly IDictionary<string, string> messages;
 
 		public DebuggableGame()
 		{
-			messages = new List<string>();
+			messages = new Dictionary<string, string>();
 			font = new Font("Fonts/Diagnostic");
 		}
 
-		public void AddDiagnosticMessage(string message, object[] args)
+		public void AddDiagnosticMessage(string title, string message, object[] args)
 		{
 			if (Config.Diagnostic)
 			{
-				messages.Add(string.Format(message, args));
+				messages[title] = string.Format(message, args);
 			}
 		}
 
@@ -44,10 +44,12 @@ namespace MarianX.Diagnostics
 
 			SpriteFont spriteFont = font;
 			Vector2 position = new Vector2(8, 8);
-			
-			foreach (string message in messages)
+
+			foreach (var entry in messages)
 			{
-				spriteBatch.DrawString(spriteFont, message, position, Color.Tomato);
+				string message = string.Concat(entry.Key, " ", entry.Value);
+
+				spriteBatch.DrawString(spriteFont, message, position, Color.DarkViolet);
 
 				position.Y += spriteFont.MeasureString(message).Y;
 			}

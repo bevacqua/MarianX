@@ -17,7 +17,16 @@ namespace MarianX.Diagnostics
 		public override void Update(GameTime gameTime)
 		{
 			base.Update(gameTime);
-			Diagnostics.Write("Position: {0}", Position);
+			WriteDiagnostic("mpos", Position);
+			Diagnostics.Write("stat", State.ToString());
+			WriteDiagnostic(" dir", Direction.Vector);
+			WriteDiagnostic(" acl", Direction.Acceleration);
+			WriteDiagnostic(" spd", Speed);
+		}
+
+		private void WriteDiagnostic(string key, Vector2 vector)
+		{
+			Diagnostics.Write(key, "X:{0:+0000.00;-0000.00} Y:{1:+0000.00;-0000.00}", vector.X, vector.Y);
 		}
 
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

@@ -22,7 +22,6 @@ namespace MarianX.Physics
 		}
 
 		public Vector2 Vector { get; private set; }
-		public Vector2 Limit { get; private set; }
 		public Vector2 Acceleration { get; private set; }
 
 		private Direction(Vector2 vector, Vector2? acceleration = null)
