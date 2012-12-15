@@ -23,33 +23,33 @@ namespace MarianX.Physics
 			FloatRectangle xTarget = bounds.Extended(interpolation * Direction.Right);
 			FloatRectangle yTarget = bounds.Extended(interpolation * Direction.Down);
 
-			bool? canMoveOnAxisX = CanFitInMatrix(xTarget);
-			bool? canMoveOnAxisY = CanFitInMatrix(yTarget);
-			
-			if (!canMoveOnAxisX.HasValue || !canMoveOnAxisY.HasValue)
+			FitResult fitX = CanFitInMatrix(xTarget);
+			FitResult fitY = CanFitInMatrix(yTarget);
+
+			if (fitX == FitResult.Mortal || fitY == FitResult.Mortal)
 			{
 				return MoveResult.Died;
 			}
-			if (!canMoveOnAxisX.Value && !canMoveOnAxisY.Value)
+			if (fitX == FitResult.Solid && fitY == FitResult.Solid)
 			{
 				return MoveResult.Blocked;
 			}
 			FloatRectangle target = bounds.Extended(interpolation);
 
-			bool? canMove = CanFitInMatrix(target);
-			if (!canMove.HasValue)
+			var fit = CanFitInMatrix(target);
+			if (fit == FitResult.Mortal)
 			{
 				return MoveResult.Died;
 			}
-			if (canMove.Value)
+			if (fit == FitResult.Ok)
 			{
 				return MoveResult.X | MoveResult.Y;
 			}
-			else if (canMoveOnAxisX.Value)
+			else if (fitX == FitResult.Ok)
 			{
 				return MoveResult.X;
 			}
-			else if (canMoveOnAxisY.Value)
+			else if (fitY == FitResult.Ok)
 			{
 				return MoveResult.Y;
 			}
@@ -64,7 +64,7 @@ namespace MarianX.Physics
 			return intersection;
 		}
 
-		protected virtual bool? CanFitInMatrix(FloatRectangle bounds)
+		protected virtual FitResult CanFitInMatrix(FloatRectangle bounds)
 		{
 			IList<Tile> intersection = GetIntersection(bounds);
 
@@ -72,15 +72,15 @@ namespace MarianX.Physics
 			{
 				if (tile.Deathly)
 				{
-					return null; // died.
+					return FitResult.Mortal; // died.
 				}
 				if (tile.Impassable)
 				{
-					return false;
+					return FitResult.Solid;
 				}
 			}
 
-			return true;
+			return FitResult.Ok;
 		}
 	}
 }
