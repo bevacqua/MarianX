@@ -14,11 +14,12 @@ namespace MarianX.Core
 			{
 				{ActionKey.Left, Keys.Left},
 				{ActionKey.Right, Keys.Right},
-				{ActionKey.Jump, Keys.Up}
+				{ActionKey.Jump, Keys.Up},
+				{ActionKey.ToggleMusic, Keys.F12},
 			};
 		}
 
-		private KeyboardState keyboardState;
+		private readonly KeyboardState keyboardState;
 
 		public KeyboardConfiguration(KeyboardState keyboardState)
 		{
@@ -27,8 +28,22 @@ namespace MarianX.Core
 
 		public bool IsKeyDown(ActionKey key)
 		{
+			bool down = IsKeyDown(key, keyboardState);
+			return down;
+		}
+
+		private bool IsKeyDown(ActionKey key, KeyboardState state)
+		{
 			Keys combination = config[key];
-			return keyboardState.IsKeyDown(combination);
+			return state.IsKeyDown(combination);
+		}
+
+		public bool IsKeyPressed(ActionKey key, KeyboardState oldState)
+		{
+			bool down = IsKeyDown(key);
+			bool wasDown = IsKeyDown(key, oldState);
+
+			return down && !wasDown;
 		}
 	}
 }

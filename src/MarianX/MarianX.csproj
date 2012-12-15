@@ -111,6 +111,7 @@
     <Compile Include="Contents\Font.cs" />
     <Compile Include="Diagnostics\DebuggableGame.cs" />
     <Compile Include="Diagnostics\Diagnostics.cs" />
+    <Compile Include="Effects\SongManager.cs" />
     <Compile Include="Effects\ViewportManager.cs" />
     <Compile Include="Events\AnimationComplete.cs" />
     <Compile Include="Events\AnimationCompleteArgs.cs" />

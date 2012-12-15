@@ -40,5 +40,11 @@ namespace MarianX.Effects
 			Current = effect.CreateInstance();
 			Current.Play();
 		}
+
+		public void Stop()
+		{
+			if (Current != null)
+				Current.Stop();
+		}
 	}
 }

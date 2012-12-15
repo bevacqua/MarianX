@@ -24,5 +24,13 @@ namespace MarianX.Effects
 		{
 			sound.Play();
 		}
+
+		public void StopAll()
+		{
+			foreach (Sound sound in sounds)
+			{
+				sound.Stop();
+			}
+		}
 	}
 }

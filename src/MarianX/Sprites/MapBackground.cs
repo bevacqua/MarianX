@@ -19,7 +19,7 @@ namespace MarianX.Sprites
 			scrollingBackground = new ScrollingBackground(assetNames);
 		}
 
-		private IList<ScrollingBackgroundAsset> FindAssetNames(string path, string format)
+		private IList<ScrollingBackgroundAsset> FindAssetNames(string path, string nameFormat)
 		{
 			IList<ScrollingBackgroundAsset> assetNames = new List<ScrollingBackgroundAsset>();
 
@@ -36,7 +36,7 @@ namespace MarianX.Sprites
 				{
 					for (int y = 0; y < h; y++)
 					{
-						string name = string.Format(format, x, y);
+						string name = string.Format(nameFormat, x, y);
 						assetNames.Add(new ScrollingBackgroundAsset
 						{
 							Name = name,

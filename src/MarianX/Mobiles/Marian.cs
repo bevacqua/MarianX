@@ -12,7 +12,7 @@ namespace MarianX.Mobiles
 {
 	public class Marian : PlayerMobile
 	{
-		private const string AssetName = "marian";
+		private const string AssetName = "Mobiles/marian";
 
 		private TimeSpan? lastJumpStarted;
 		private Vector2? jumpStartPosition;
@@ -55,6 +55,12 @@ namespace MarianX.Mobiles
 			IdleEffects();
 		}
 
+		private void SetRestartPosition()
+		{
+			SetStartPosition();
+			Flash();
+		}
+
 		public override void Update(GameTime gameTime)
 		{
 			KeyboardState keyboardState = Keyboard.GetState();
@@ -76,7 +82,7 @@ namespace MarianX.Mobiles
 			}
 			else if (wasAirborne)
 			{
-				if (jumpStartPosition.HasValue && jumpStartPosition.Value.Y < Position.Y)
+				if (jumpStartPosition.HasValue && Position.Y > jumpStartPosition.Value.Y)
 				{
 					jumpStartPosition = null; // avoid repetition.
 					FallEffects();
@@ -111,7 +117,7 @@ namespace MarianX.Mobiles
 				JumpEffects();
 				Speed.Y = MagicNumbers.JumpSpeed;
 				lastJumpStarted = gameTime.TotalGameTime;
-				jumpStartPosition = Position;
+				jumpStartPosition = Position + MagicNumbers.FallEffect;
 			}
 			else if (kb.IsKeyDown(ActionKey.Right))
 			{
@@ -159,7 +165,7 @@ namespace MarianX.Mobiles
 		{
 			if (State == HitBoxState.Dead)
 			{
-				SetStartPosition();
+				SetRestartPosition();
 			}
 		}
 	}

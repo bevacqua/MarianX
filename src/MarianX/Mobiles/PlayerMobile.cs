@@ -1,9 +1,12 @@
+using System;
 using MarianX.Contents;
 using MarianX.Diagnostics;
 using MarianX.Effects;
 using MarianX.Physics;
 using MarianX.World.Configuration;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace MarianX.Mobiles
 {
@@ -42,6 +45,8 @@ namespace MarianX.Mobiles
 		private readonly Animation animation;
 		private readonly PlayerSoundManager soundManager;
 
+		public bool Invulnerable { get; set; }
+
 		public PlayerMobile(string assetName)
 			: base(assetName, settings)
 		{
@@ -74,7 +79,48 @@ namespace MarianX.Mobiles
 		protected void DeathEffects()
 		{
 			animation.Die();
-			// TODO: sounds
+			soundManager.Die();
+		}
+
+		private Color tintBeforeFlash;
+		private DateTime flashStart;
+		private int flashFrame;
+		private bool hideFrame;
+
+		protected void Flash()
+		{
+			Invulnerable = true;
+			flashFrame = 0;
+			flashStart = DateTime.UtcNow;
+			tintBeforeFlash = Tint;
+			Tint = MagicNumbers.FlashTint;
+		}
+
+		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+		{
+			if (Invulnerable)
+			{
+				if (flashStart + MagicNumbers.Flash > DateTime.UtcNow)
+				{
+					hideFrame = ++flashFrame % MagicNumbers.FlashFrame == 0;
+					
+					if (hideFrame)
+					{
+						flashFrame = 0;
+					}
+				}
+				else
+				{
+					Invulnerable = false;
+					hideFrame = false;
+					Tint = tintBeforeFlash;
+				}
+			}
+
+			if (!hideFrame)
+			{
+				base.Draw(gameTime, spriteBatch);
+			}
 		}
 	}
 }

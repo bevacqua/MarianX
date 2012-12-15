@@ -49,6 +49,8 @@ namespace MarianX.Core
 			{
 				AddContent(collisionDetection);
 			}
+			IGameContent songManager = new SongManager();
+			AddContent(songManager);
 
 			base.Initialize();
 		}

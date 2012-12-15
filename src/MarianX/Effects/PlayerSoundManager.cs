@@ -20,7 +20,14 @@ namespace MarianX.Effects
 			"Sounds/jump3"
 		});
 
-		private static readonly IList<Sound> sounds = new[] { fall, jump };
+		private static readonly Sound die = new Sound(new[]
+		{
+			"Sounds/death0",
+			"Sounds/death1",
+			"Sounds/death2"
+		});
+
+		private static readonly IList<Sound> sounds = new[] { fall, jump, die };
 
 		public PlayerSoundManager()
 			: base(sounds)
@@ -35,6 +42,11 @@ namespace MarianX.Effects
 		public void Fall()
 		{
 			Play(fall);
+		}
+
+		public void Die()
+		{
+			Play(die);
 		}
 	}
 }

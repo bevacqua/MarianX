@@ -4,6 +4,7 @@ namespace MarianX.Enum
 	{
 		Left,
 		Right,
-		Jump
+		Jump,
+		ToggleMusic
 	}
 }
