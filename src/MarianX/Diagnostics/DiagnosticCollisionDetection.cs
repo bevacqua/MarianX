@@ -94,7 +94,7 @@ namespace MarianX.Diagnostics
 
 				Square square = new Square
 				{
-					Alpha = 0.3f,
+					Alpha = 1f,
 					Bounds = intersection,
 					Color = Color.DarkRed
 				};

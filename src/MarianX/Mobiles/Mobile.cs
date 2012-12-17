@@ -12,6 +12,8 @@ namespace MarianX.Mobiles
 {
 	public class Mobile : SpriteSheet, IHitBox
 	{
+		private readonly InterpolationCalculator interpolationCalculator;
+
 		public Movement Movement { get; protected set; }
 
 		public AxisAlignedBoundingBox BoundingBox { get; protected set; }
@@ -52,7 +54,8 @@ namespace MarianX.Mobiles
 		public Mobile(string assetName, SpriteSheetSettings settings)
 			: base(assetName, settings)
 		{
-			Movement = new Movement(new DiagnosticCollisionDetection(), new InterpolationCalculator(this));
+			interpolationCalculator = new InterpolationCalculator(this);
+			Movement = new Movement(new DiagnosticCollisionDetection(), interpolationCalculator);
 		}
 
 		protected override Vector2 CalculateInterpolation(GameTime gameTime)
@@ -60,7 +63,7 @@ namespace MarianX.Mobiles
 			return Movement.Interpolated(gameTime);
 		}
 
-		protected override MoveResult UpdatePosition(Vector2 interpolation)
+		protected override MoveResult UpdatePosition(GameTime gameTime, Vector2 interpolation)
 		{
 			MoveResult result = Movement.Move(this, interpolation);
 
@@ -72,6 +75,16 @@ namespace MarianX.Mobiles
 			else
 			{
 				Position = BoundingBox.GetPosition(this);
+
+				if (!result.HasFlag(MoveResult.X))
+				{
+					Speed.X = 0;
+				}
+
+				if (!result.HasFlag(MoveResult.Y))
+				{
+					Speed.Y = interpolationCalculator.CalculateGravitySpeed(gameTime).Y;
+				}
 			}
 			return result;
 		}

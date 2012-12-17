@@ -19,7 +19,7 @@ namespace MarianX.Physics
 		public virtual Vector2 CalculateInterpolation(GameTime gameTime)
 		{
 			Vector2 velocity = CalculateSpeedOnDirection(mobile.Direction, gameTime);
-			Vector2 gravity = CalculateSpeedOnDirection(Direction.Down, gameTime);
+			Vector2 gravity = CalculateGravitySpeed(gameTime);
 
 			Vector2 target = mobile.Speed + gravity + velocity;
 
@@ -30,6 +30,11 @@ namespace MarianX.Physics
 
 			float time = gameTime.GetElapsedSeconds();
 			return mobile.Speed * time;
+		}
+
+		public Vector2 CalculateGravitySpeed(GameTime gameTime)
+		{
+			return CalculateSpeedOnDirection(Direction.Down, gameTime);
 		}
 
 		private Vector2 CalculateSpeedOnDirection(Direction direction, GameTime gameTime)

@@ -43,5 +43,7 @@ namespace MarianX.World.Configuration
 		public const int FlashFrame = 7;
 
 		public static readonly Vector2 FallEffect = new Vector2(0, 24);
+
+		public const float AcceptableSurfaceDistance = 4;
 	}
 }

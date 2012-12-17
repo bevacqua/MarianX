@@ -1,6 +1,8 @@
 using MarianX.Enum;
 using MarianX.Interface;
 using MarianX.Sprites;
+using MarianX.World.Configuration;
+using MarianX.World.Physics;
 using Microsoft.Xna.Framework;
 
 namespace MarianX.Physics
@@ -19,14 +21,19 @@ namespace MarianX.Physics
 		public MoveResult Move(IHitBox hitBox, Vector2 interpolation)
 		{
 			AxisAlignedBoundingBox aabb = hitBox.BoundingBox;
-			MoveResult result = CollisionDetection.CanMove(aabb.Bounds, interpolation);
+			FloatRectangle bounds = aabb.Bounds;
 
-			if (result.HasFlag(MoveResult.X))
+			MoveResult result = CollisionDetection.CanMove(bounds, interpolation);
+
+			var moveX = result.HasFlag(MoveResult.X) && !result.HasFlag(MoveResult.BlockedOnX);
+			if (moveX)
 			{
 				aabb.Position.X += interpolation.X;
 			}
 
-			if (result.HasFlag(MoveResult.Y))
+			bool surfaced = CanSetSurfaced(hitBox);
+			var moveY = result.HasFlag(MoveResult.Y) && !result.HasFlag(MoveResult.BlockedOnY);
+			if (moveY || !surfaced)
 			{
 				hitBox.State = HitBoxState.Airborne;
 				aabb.Position.Y += interpolation.Y;
@@ -36,15 +43,35 @@ namespace MarianX.Physics
 				hitBox.State = HitBoxState.Surfaced;
 			}
 
-			if (interpolation.X < 0) // fix issue when moving on X axis to the left.
+			var reverse = CollisionDetection.CanMove(bounds, -interpolation);
+			if (reverse.HasFlag(MoveResult.BlockedOnX) && moveX) // fix issue when moving on X axis to the left.
 			{
-				var reverse = CollisionDetection.CanMove(aabb.Bounds, -interpolation);
-				if (reverse == MoveResult.Blocked)
-				{
-					aabb.Position.X -= interpolation.X;
-				}
+				aabb.Position.X -= interpolation.X;
+			}
+			if (reverse.HasFlag(MoveResult.BlockedOnY) && moveY) // fix issue when hitting an impassable on Y axis when jumping.
+			{
+				aabb.Position.Y -= interpolation.Y; // TODO blocked on Y+ Y-, X+ X-..
 			}
 			return result;
+		}
+
+		private bool CanSetSurfaced(IHitBox hitBox)
+		{
+			FloatRectangle bounds = hitBox.BoundingBox.Bounds;
+			float x = bounds.X;
+			float w = bounds.Width;
+			float y = bounds.Bottom;
+			float h = MagicNumbers.AcceptableSurfaceDistance;
+
+			var rectangle = new FloatRectangle(x, y, w, h);
+
+			var fit = CollisionDetection.CanFitInMatrix(rectangle);
+			if (fit == FitResult.Solid) // ensure that the surface actually blocks further movement.
+			{
+				return true;
+			}
+
+			return false;
 		}
 
 		public Vector2 Interpolated(GameTime gameTime)

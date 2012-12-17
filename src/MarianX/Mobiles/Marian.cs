@@ -168,11 +168,11 @@ namespace MarianX.Mobiles
 			}
 		}
 
-		protected override MoveResult UpdatePosition(Vector2 interpolation)
+		protected override MoveResult UpdatePosition(GameTime gameTime, Vector2 interpolation)
 		{
 			var wasAirborne = State == HitBoxState.Airborne;
 
-			MoveResult result = base.UpdatePosition(interpolation);
+			MoveResult result = base.UpdatePosition(gameTime, interpolation);
 
 			if (result == MoveResult.Died)
 			{

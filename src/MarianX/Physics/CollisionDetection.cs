@@ -10,14 +10,16 @@ namespace MarianX.Physics
 	{
 		public virtual MoveResult CanMove(FloatRectangle bounds, Vector2 interpolation)
 		{
+			MoveResult flags = MoveResult.None;
+
 			if (bounds.X - interpolation.X < Tile.Width)
 			{
-				return MoveResult.Blocked;
+				flags |= MoveResult.BlockedOnX;
 			}
 
 			if (bounds.Y - interpolation.Y < Tile.Height)
 			{
-				return MoveResult.Blocked;
+				flags |= MoveResult.BlockedOnY;
 			}
 
 			FloatRectangle xTarget = bounds.Extended(interpolation * Direction.Right);
@@ -28,7 +30,7 @@ namespace MarianX.Physics
 
 			if (fitX == FitResult.Mortal || fitY == FitResult.Mortal)
 			{
-				return MoveResult.Died;
+				return flags | MoveResult.Died;
 			}
 			if (fitX == FitResult.Solid && fitY == FitResult.Solid)
 			{
@@ -39,22 +41,32 @@ namespace MarianX.Physics
 			var fit = CanFitInMatrix(target);
 			if (fit == FitResult.Mortal)
 			{
-				return MoveResult.Died;
+				return flags | MoveResult.Died;
 			}
 			if (fit == FitResult.Ok)
 			{
-				return MoveResult.X | MoveResult.Y;
-			}
-			else if (fitX == FitResult.Ok)
-			{
-				return MoveResult.X;
-			}
-			else if (fitY == FitResult.Ok)
-			{
-				return MoveResult.Y;
+				return flags | MoveResult.X | MoveResult.Y;
 			}
 
-			return MoveResult.Blocked;
+			if (fitX == FitResult.Ok)
+			{
+				flags |= MoveResult.X;
+			}
+			else
+			{
+				flags |= MoveResult.BlockedOnX;
+			}
+
+			if (fitY == FitResult.Ok)
+			{
+				flags |= MoveResult.Y;
+			}
+			else
+			{
+				flags |= MoveResult.BlockedOnY;
+			}
+
+			return flags;
 		}
 
 		protected virtual IList<Tile> GetIntersection(FloatRectangle bounds)
@@ -64,7 +76,7 @@ namespace MarianX.Physics
 			return intersection;
 		}
 
-		protected virtual FitResult CanFitInMatrix(FloatRectangle bounds)
+		public virtual FitResult CanFitInMatrix(FloatRectangle bounds)
 		{
 			IList<Tile> intersection = GetIntersection(bounds);
 

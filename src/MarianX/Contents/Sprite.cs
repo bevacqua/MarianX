@@ -39,7 +39,7 @@ namespace MarianX.Contents
 		public virtual void UpdateOutput(GameTime gameTime)
 		{
 			Vector2 interpolation = CalculateInterpolation(gameTime);
-			UpdatePosition(interpolation);
+			UpdatePosition(gameTime, interpolation);
 		}
 
 		protected virtual Vector2 CalculateInterpolation(GameTime gameTime)
@@ -49,7 +49,7 @@ namespace MarianX.Contents
 			return interpolation;
 		}
 
-		protected virtual MoveResult UpdatePosition(Vector2 interpolation)
+		protected virtual MoveResult UpdatePosition(GameTime gameTime, Vector2 interpolation)
 		{
 			Position += interpolation;
 			return MoveResult.None;
