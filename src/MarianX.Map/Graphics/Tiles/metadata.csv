@@ -8,3 +8,8 @@ spikes,false,0,0,,false
 spikes_floor,true,0,0,,true
 lava,false,0,0,,false
 lava_floor,true,0,0,,true
+dirt_cliff_left,true,0,0,,false
+dirt_cliff_right,true,0,0,,false
+grass_block,true,0,0,,false
+grass_spikes_floor,true,0,0,,true
+stony_flowered,true,0,0,,false

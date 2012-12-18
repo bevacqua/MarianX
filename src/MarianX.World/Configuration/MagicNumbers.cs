@@ -20,9 +20,9 @@ namespace MarianX.World.Configuration
 		public static readonly Vector2 DefaultAcceleration = new Vector2(8000, 0);
 		public static readonly Vector2 GravityAcceleration = new Vector2(0, 10000);
 
-		public const int JumpSpeed = -315;
-		public const float AerialSpeedPenaltyOnX = 0.75f;
-		public const float AerialAccelerationPenaltyOnX = 0.75f;
+		public const int JumpSpeed = -300;
+		public const float AerialSpeedPenaltyOnX = 1.45f;
+		public const float AerialAccelerationPenaltyOnX = 1.30f;
 
 		public static readonly TimeSpan JumpWindow = TimeSpan.FromMilliseconds(400);
 

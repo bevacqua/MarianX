@@ -29,11 +29,11 @@ namespace MarianX.Map.Builder
 		{
 			int index = 0;
 
-			if (y == Rows - 7)
+			if (y == Rows - 3)
 			{
 				index = 4;
 			}
-			else if (y == Rows - 6)
+			else if (y >= Rows - 2)
 			{
 				index = 3;
 			}
