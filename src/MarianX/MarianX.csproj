@@ -150,6 +150,7 @@
     <Compile Include="Diagnostics\DiagnosticMobile.cs" />
     <Compile Include="Sprites\FragmentedSquareGrid.cs" />
     <Compile Include="Sprites\HitBoxState.cs" />
+    <Compile Include="Sprites\LevelBackground.cs" />
     <Compile Include="Sprites\Resources\Error.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

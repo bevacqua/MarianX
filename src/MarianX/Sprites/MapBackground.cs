@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MarianX.Sprites
 {
-	public class MapBackground : IGameContent
+	public abstract class MapBackground : IGameContent
 	{
 		private readonly ScrollingBackground scrollingBackground;
 
@@ -28,6 +28,7 @@ namespace MarianX.Sprites
 			{
 				string width = reader.ReadLine();
 				string height = reader.ReadLine();
+				string level = reader.ReadLine();
 
 				int w = int.Parse(width);
 				int h = int.Parse(height);
@@ -36,7 +37,7 @@ namespace MarianX.Sprites
 				{
 					for (int y = 0; y < h; y++)
 					{
-						string name = string.Format(nameFormat, x, y);
+						string name = string.Format(nameFormat, level, x, y);
 						assetNames.Add(new ScrollingBackgroundAsset
 						{
 							Name = name,

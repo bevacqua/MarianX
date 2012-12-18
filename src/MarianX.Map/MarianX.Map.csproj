@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builder\FragmentedPersistance.cs" />
+    <Compile Include="Builder\LevelOne.cs" />
     <Compile Include="Builder\MapBuilder.cs" />
     <Compile Include="Builder\Persistance.cs" />
     <Compile Include="Builder\TileMatrixBuilder.cs" />
@@ -62,6 +63,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Graphics\Tiles\blank.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Graphics\Tiles\lava_floor.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Graphics\Tiles\stony_spikes.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Graphics\Tiles\lava.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Graphics\Tiles\land.png">
@@ -82,6 +92,9 @@
     <Content Include="Graphics\Tiles\stony.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Graphics\Tiles\stony_spikes_floor.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="Graphics\Tiles\metadata.csv">
@@ -97,6 +110,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

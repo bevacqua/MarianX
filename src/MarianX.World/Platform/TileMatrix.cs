@@ -13,7 +13,7 @@ namespace MarianX.World.Platform
 			get { return instance; }
 		}
 
-		public static void Initialize(string path)
+		public static void Use(string path)
 		{
 			instance = new TileMatrix(path);
 		}

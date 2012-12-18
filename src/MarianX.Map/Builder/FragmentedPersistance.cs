@@ -48,7 +48,7 @@ namespace MarianX.Map.Builder
 			}
 		}
 
-		public void SaveFragmentMetadata(TileType[,] map, string path)
+		public void SaveFragmentMetadata(TileType[,] map, string path, int level)
 		{
 			int colTotal = map.GetLength(0);
 			int rowTotal = map.GetLength(1);
@@ -61,6 +61,7 @@ namespace MarianX.Map.Builder
 			{
 				writer.WriteLine(mapWidth);
 				writer.WriteLine(mapHeight);
+				writer.WriteLine(level);
 			}
 		}
 	}

@@ -35,13 +35,12 @@ namespace MarianX.Core
 		protected override void Initialize()
 		{
 			viewportManager.Initialize();
-			var background = new MapBackground("Content/Map/map.idx", "Map/map_{0}_{1}");
+			var levelOne = new LevelBackground(1);
 			var marian = new Marian();
 
 			marian.Move += viewportManager.CharacterMove;
 
-			TileMatrix.Initialize("Content/Map/map.csv");
-			AddManagedContent(background);
+			AddManagedContent(levelOne);
 			AddManagedContent(marian);
 
 			var collisionDetection = marian.Movement.CollisionDetection as IGameContent;
@@ -49,10 +48,19 @@ namespace MarianX.Core
 			{
 				AddContent(collisionDetection);
 			}
-			IGameContent songManager = new SongManager();
+
+			var songManager = new SongManager();
 			AddContent(songManager);
 
+			SetLevel(1);
+
 			base.Initialize();
+		}
+
+		public void SetLevel(int level)
+		{
+			string format = "Content/Map/level_{0}/map.csv";
+			TileMatrix.Use(string.Format(format, level));
 		}
 
 		protected void AddManagedContent(IGameContent content)
