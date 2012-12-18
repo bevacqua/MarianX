@@ -44,14 +44,19 @@ namespace MarianX.Core
 			InitializeMap();
 			InitializeMarian();
 			InitializeEffects();
-			SetLevel(0);
+			SetLevelByIndex(0);
 
 			base.Initialize();
 		}
 
 		private void InitializeMap()
 		{
-			levels.Add(new LevelBackground(1));
+			int levelCount = 2;
+
+			for (int i = 1; i <= levelCount; i++)
+			{
+				levels.Add(new LevelBackground(i));
+			}
 
 			foreach (LevelBackground level in levels)
 			{
@@ -65,8 +70,7 @@ namespace MarianX.Core
 			marian.Move += viewportManager.CharacterMove;
 
 			AddManagedContent(marian);
-
-
+			
 			var collisionDetection = marian.Movement.CollisionDetection as IGameContent;
 			if (collisionDetection != null)
 			{
@@ -79,10 +83,15 @@ namespace MarianX.Core
 			AddContent(new SongManager());
 		}
 
-		public void SetLevel(int index)
+		public void SetLevelByIndex(int index)
 		{
-			LevelBackground level = levels[index];
-			TileMatrix.Use(level);
+			foreach (LevelBackground level in levels)
+			{
+				level.Active = false;
+			}
+			LevelBackground target = levels[index];
+			TileMatrix.Use(target);
+			target.Active = true;
 
 			marian.Initialize();
 		}

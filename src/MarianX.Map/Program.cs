@@ -6,8 +6,8 @@ namespace MarianX.Map
 	{
 		public static void Main(string[] args)
 		{
-			MapBuilder builder = new MapBuilder();
-			builder.BuildAndSave();
+			var builder = new FullMapBuilder();
+			builder.FullBuild();
 		}
 	}
 }

@@ -54,7 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builder\FragmentedPersistance.cs" />
+    <Compile Include="Builder\FullMapBuilder.cs" />
     <Compile Include="Builder\LevelOne.cs" />
+    <Compile Include="Builder\LevelTwo.cs" />
     <Compile Include="Builder\MapBuilder.cs" />
     <Compile Include="Builder\Persistance.cs" />
     <Compile Include="Builder\TileMatrixBuilder.cs" />

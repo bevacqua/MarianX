@@ -17,7 +17,7 @@ namespace MarianX.Map.Builder
 
 		protected override int Columns
 		{
-			get { return 33 * 6; }
+			get { return 198; }
 		}
 
 		protected override int Rows

@@ -8,15 +8,20 @@ namespace MarianX.Map.Builder
 	{
 		private TileType[] tileTypes;
 
-		public void BuildAndSave()
+		public void BuildAndSave(TileMatrixBuilder[] levels)
 		{
+			if (levels == null || levels.Length == 0)
+			{
+				throw new ArgumentException("levels");
+			}
 			SetupDirectory();
 
-			LevelOne one = new LevelOne();
+			tileTypes = levels[0].LoadTileTypes("../graphics/tiles/metadata.csv");
 
-			tileTypes = one.LoadTileTypes("../graphics/tiles/metadata.csv");
-
-			BuildLevel(one);
+			foreach (TileMatrixBuilder level in levels)
+			{
+				BuildLevel(level);
+			}
 
 			CopyFilesOverToContent();
 		}
