@@ -8,7 +8,7 @@ namespace MarianX.Core
 
 		static Config()
 		{
-			Diagnostic = Bool(Get("Diagnostic")) ?? false;
+			Diagnostic = Bool(Get("Diagnostics")) ?? false;
 		}
 
 		private static string Get(string property)

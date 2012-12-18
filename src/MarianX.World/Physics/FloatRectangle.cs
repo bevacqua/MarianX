@@ -40,20 +40,22 @@ namespace MarianX.World.Physics
 			return new FloatRectangle(r.X, r.Y, r.Width, r.Height);
 		}
 
-		public FloatRectangle Extended(Vector2 vector)
+		public FloatRectangle Displaced(Vector2 vector)
 		{
 			FloatRectangle extended = new FloatRectangle(this);
 			var x = vector.X;
 			if (x < 0)
 			{
-				extended.X -= x;
+				extended.X += x;
+				x = -x;
 			}
 			extended.Width += x;
 
 			var y = vector.Y;
 			if (y < 0)
 			{
-				extended.Y -= y;
+				extended.Y += y;
+				y = -y;
 			}
 			extended.Height += y;
 
@@ -69,25 +71,25 @@ namespace MarianX.World.Physics
 			return false;
 		}
 
-		public static FloatRectangle Intersect(FloatRectangle value1, FloatRectangle value2)
+		public static FloatRectangle Intersect(FloatRectangle source, FloatRectangle target)
 		{
-			float num1 = value1.X + value1.Width;
-			float num2 = value2.X + value2.Width;
-			float num3 = value1.Y + value1.Height;
-			float num4 = value2.Y + value2.Height;
-			float num5 = value1.X > value2.X ? value1.X : value2.X;
-			float num6 = value1.Y > value2.Y ? value1.Y : value2.Y;
-			float num7 = num1 < num2 ? num1 : num2;
-			float num8 = num3 < num4 ? num3 : num4;
+			float sourceOffsetX = source.X + source.Width;
+			float targetOffsetX = target.X + target.Width;
+			float sourceOffsetY = source.Y + source.Height;
+			float targetOffsetY = target.Y + target.Height;
+			float highestX = source.X > target.X ? source.X : target.X;
+			float highestY = source.Y > target.Y ? source.Y : target.Y;
+			float highestOffsetX = sourceOffsetX < targetOffsetX ? sourceOffsetX : targetOffsetX;
+			float highestOffsetY = sourceOffsetY < targetOffsetY ? sourceOffsetY : targetOffsetY;
 
 			FloatRectangle rectangle;
 
-			if (num7 > num5 && num8 > num6)
+			if (highestOffsetX > highestX && highestOffsetY > highestY)
 			{
-				rectangle.X = num5;
-				rectangle.Y = num6;
-				rectangle.Width = num7 - num5;
-				rectangle.Height = num8 - num6;
+				rectangle.X = highestX;
+				rectangle.Y = highestY;
+				rectangle.Width = highestOffsetX - highestX;
+				rectangle.Height = highestOffsetY - highestY;
 			}
 			else
 			{
@@ -97,6 +99,11 @@ namespace MarianX.World.Physics
 				rectangle.Height = 0;
 			}
 			return rectangle;
+		}
+
+		public override string ToString()
+		{
+			return string.Format("X:{0}, Y:{1}, Width:{2}, Height:{3}", X, Y, Width, Height);
 		}
 	}
 }

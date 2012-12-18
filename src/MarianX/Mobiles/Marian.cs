@@ -174,6 +174,11 @@ namespace MarianX.Mobiles
 
 			MoveResult result = base.UpdatePosition(gameTime, interpolation);
 
+			if (!result.HasFlag(MoveResult.Y) || result.HasFlag(MoveResult.FlattenYSpeed)) // sanity.
+			{
+				lastJumpStarted = null;
+			}
+
 			if (result == MoveResult.Died)
 			{
 				Die();
@@ -196,8 +201,11 @@ namespace MarianX.Mobiles
 
 		private void Die()
 		{
-			State = HitBoxState.Dead;
-			DeathEffects();
+			if (State != HitBoxState.Dead) // sanity.
+			{
+				State = HitBoxState.Dead;
+				DeathEffects();
+			}
 		}
 
 		private void Marian_AnimationComplete(object sender, AnimationCompleteArgs args)

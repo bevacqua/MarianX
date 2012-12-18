@@ -1,3 +1,4 @@
+using MarianX.Diagnostics;
 using MarianX.Enum;
 using MarianX.Interface;
 using MarianX.Sprites;
@@ -21,37 +22,68 @@ namespace MarianX.Physics
 		public MoveResult Move(IHitBox hitBox, Vector2 interpolation)
 		{
 			AxisAlignedBoundingBox aabb = hitBox.BoundingBox;
-			FloatRectangle bounds = aabb.Bounds;
 
-			MoveResult result = CollisionDetection.CanMove(bounds, interpolation);
+			MoveResult result = CollisionDetection.CanMove(aabb.Bounds, interpolation, DetectionType.Collision);
 
-			var moveX = result.HasFlag(MoveResult.X) && !result.HasFlag(MoveResult.BlockedOnX);
+			var moveX = result.HasFlag(MoveResult.X)
+				&& !result.HasFlag(MoveResult.BlockedOnNegativeX)
+				&& !result.HasFlag(MoveResult.BlockedOnPositiveX);
+
 			if (moveX)
 			{
 				aabb.Position.X += interpolation.X;
 			}
 
 			bool surfaced = CanSetSurfaced(hitBox);
-			var moveY = result.HasFlag(MoveResult.Y) && !result.HasFlag(MoveResult.BlockedOnY);
-			if (moveY || !surfaced)
+			var moveY = result.HasFlag(MoveResult.Y)
+				&& !result.HasFlag(MoveResult.BlockedOnNegativeY)
+				&& !result.HasFlag(MoveResult.BlockedOnPositiveY);
+
+			if ((moveY || !surfaced) && !result.HasFlag(MoveResult.Died))
 			{
 				hitBox.State = HitBoxState.Airborne;
-				aabb.Position.Y += interpolation.Y;
 			}
 			else
 			{
 				hitBox.State = HitBoxState.Surfaced;
 			}
 
-			var reverse = CollisionDetection.CanMove(bounds, -interpolation);
-			if (reverse.HasFlag(MoveResult.BlockedOnX) && moveX) // fix issue when moving on X axis to the left.
+			if (moveY && !result.HasFlag(MoveResult.Died))
 			{
-				aabb.Position.X -= interpolation.X;
+				aabb.Position.Y += interpolation.Y;
 			}
-			if (reverse.HasFlag(MoveResult.BlockedOnY) && moveY) // fix issue when hitting an impassable on Y axis when jumping.
+
+			var reverse = CollisionDetection.CanMove(aabb.Bounds, -interpolation, DetectionType.Retrace);
+			if (moveX) // fix issue when moving on X axis to the left.
 			{
-				aabb.Position.Y -= interpolation.Y; // TODO blocked on Y+ Y-, X+ X-..
+				if (reverse.HasFlag(MoveResult.BlockedOnNegativeX) && interpolation.X > 0)
+				{
+					aabb.Position.X -= interpolation.X;
+					result &= ~MoveResult.X;
+				}
+				else if (reverse.HasFlag(MoveResult.BlockedOnPositiveX) && interpolation.X < 0)
+				{
+					aabb.Position.X -= interpolation.X;
+					result &= ~MoveResult.X;
+				}
 			}
+
+			if (moveY) // fix issue when hitting an impassable on Y axis when jumping.
+			{
+				if (reverse.HasFlag(MoveResult.BlockedOnNegativeY) && interpolation.Y > 0)
+				{
+					aabb.Position.Y -= interpolation.Y;
+					result &= ~MoveResult.Y;
+				}
+				else if (reverse.HasFlag(MoveResult.BlockedOnPositiveY) && interpolation.Y < 0)
+				{
+					aabb.Position.Y -= interpolation.Y;
+					result &= ~MoveResult.Y;
+				}
+			}
+
+			Diagnostic.Write("aabb", aabb.Position);
+
 			return result;
 		}
 
@@ -78,5 +110,11 @@ namespace MarianX.Physics
 		{
 			return InterpolationCalculator.CalculateInterpolation(gameTime);
 		}
+	}
+
+	public enum DetectionType
+	{
+		Collision,
+		Retrace
 	}
 }

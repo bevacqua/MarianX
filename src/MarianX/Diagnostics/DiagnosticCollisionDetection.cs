@@ -19,15 +19,6 @@ namespace MarianX.Diagnostics
 		private SquareGrid matchGrid;
 		private SquareGrid intersectionGrid;
 
-		public override MoveResult CanMove(FloatRectangle bounds, Vector2 interpolation)
-		{
-			MoveResult result = base.CanMove(bounds, interpolation);
-
-			Diagnostics.Write("rslt", result.ToString());
-
-			return result;
-		}
-
 		protected override IList<Tile> GetIntersection(FloatRectangle bounds)
 		{
 			IList<Tile> tiles = base.GetIntersection(bounds);

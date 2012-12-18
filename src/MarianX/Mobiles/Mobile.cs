@@ -76,12 +76,12 @@ namespace MarianX.Mobiles
 			{
 				Position = BoundingBox.GetPosition(this);
 
-				if (!result.HasFlag(MoveResult.X))
+				if (!result.HasFlag(MoveResult.X) || result.HasFlag(MoveResult.FlattenXSpeed))
 				{
 					Speed.X = 0;
 				}
 
-				if (!result.HasFlag(MoveResult.Y))
+				if (!result.HasFlag(MoveResult.Y) || result.HasFlag(MoveResult.FlattenYSpeed))
 				{
 					Speed.Y = interpolationCalculator.CalculateGravitySpeed(gameTime).Y;
 				}

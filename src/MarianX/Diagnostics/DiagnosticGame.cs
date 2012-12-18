@@ -14,7 +14,7 @@ namespace MarianX.Diagnostics
 		public DiagnosticGame()
 		{
 			messages = new Dictionary<string, string>();
-			font = new Font("Fonts/Diagnostic");
+			font = new Font("Fonts/Diagnostics");
 		}
 
 		public void AddDiagnosticMessage(string title, string message, object[] args)

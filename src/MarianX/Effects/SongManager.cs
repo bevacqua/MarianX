@@ -36,8 +36,6 @@ namespace MarianX.Effects
 				Song song = content.Load<Song>(assetName);
 				songs.Add(song);
 			}
-
-			PlayRandomSong();
 		}
 
 		private void MediaPlayer_MediaStateChanged(object sender, EventArgs e)
