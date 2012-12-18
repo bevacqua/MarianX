@@ -5,6 +5,7 @@ using MarianX.Events;
 using MarianX.Physics;
 using MarianX.Sprites;
 using MarianX.World.Configuration;
+using MarianX.World.Platform;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -54,13 +55,13 @@ namespace MarianX.Mobiles
 			: base(AssetName)
 		{
 			BoundingBox = new MarianBoundingBox();
+			AnimationComplete += Marian_AnimationComplete;
 		}
 
 		public override void Initialize()
 		{
 			base.Initialize();
 			SetStartPosition();
-			AnimationComplete += Marian_AnimationComplete;
 		}
 
 		private void SetStartPosition()
@@ -68,7 +69,7 @@ namespace MarianX.Mobiles
 			state = HitBoxState.Airborne;
 			Speed = Vector2.Zero;
 			Direction = Direction.None;
-			Position = new Vector2(MagicNumbers.StartX, MagicNumbers.StartY);
+			Position = TileMatrix.Instance.StartPosition;
 			IdleEffects();
 		}
 

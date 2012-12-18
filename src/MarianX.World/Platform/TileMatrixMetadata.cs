@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using AutoMapper;
 using CsvHelper;
+using Microsoft.Xna.Framework;
 
 namespace MarianX.World.Platform
 {
@@ -16,7 +17,9 @@ namespace MarianX.World.Platform
 		public int Width { get; private set; }
 		public int Height { get; private set; }
 
-		public TileMatrixMetadata(string path)
+		public Vector2 StartPosition { get; private set; }
+
+		public TileMatrixMetadata(string path, Vector2 start)
 		{
 			using (Stream stream = File.OpenRead(path))
 			using (TextReader textReader = new StreamReader(stream))
@@ -39,6 +42,8 @@ namespace MarianX.World.Platform
 					Tiles[record.X, record.Y] = tile;
 				}
 			}
+
+			StartPosition = start;
 		}
 	}
 }

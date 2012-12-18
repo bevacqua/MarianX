@@ -3,12 +3,14 @@ using System.IO;
 using System.Linq;
 using CsvHelper;
 using MarianX.World.Platform;
+using Microsoft.Xna.Framework;
 
 namespace MarianX.Map.Builder
 {
 	public abstract class TileMatrixBuilder
 	{
 		public abstract int Level { get; }
+		public abstract Vector2 StartPosition { get; }
 		protected abstract int Columns { get; }
 		protected abstract int Rows { get; }
 

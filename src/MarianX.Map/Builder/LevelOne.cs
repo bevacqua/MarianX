@@ -1,4 +1,5 @@
 using MarianX.World.Platform;
+using Microsoft.Xna.Framework;
 
 namespace MarianX.Map.Builder
 {
@@ -7,6 +8,11 @@ namespace MarianX.Map.Builder
 		public override int Level
 		{
 			get { return 1; }
+		}
+
+		public override Vector2 StartPosition
+		{
+			get { return new Vector2(85, 450); }
 		}
 
 		protected override int Columns
@@ -25,11 +31,11 @@ namespace MarianX.Map.Builder
 
 			if (y == Rows - 2)
 			{
-				return tileTypes[9];
+				return tileTypes[7];
 			}
 			else if (y > Rows - 2)
 			{
-				return tileTypes[10];
+				return tileTypes[8];
 			}
 
 			if (x > 100 && x < 106)

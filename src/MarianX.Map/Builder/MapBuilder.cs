@@ -39,7 +39,7 @@ namespace MarianX.Map.Builder
 			};
 			// metadata actually used for rendering maps.
 			FragmentedPersistance fragmentedPersistance = new FragmentedPersistance(getTileFileStream);
-			fragmentedPersistance.SaveFragmentMetadata(map, string.Concat(level, "/map.idx"), builder.Level);
+			fragmentedPersistance.SaveFragmentMetadata(map, string.Concat(level, "/map.idx"), builder);
 			fragmentedPersistance.SaveTileMap(map, string.Concat(level, "/map_{0}_{1}.png"));
 			fragmentedPersistance.SaveTileMatrix(map, string.Concat(level, "/map.csv"));
 

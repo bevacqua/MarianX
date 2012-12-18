@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using MarianX.Diagnostics;
 using MarianX.Effects;
 using MarianX.Interface;
@@ -14,6 +15,9 @@ namespace MarianX.Core
 		public static GameCore Instance { get; private set; }
 
 		private readonly ViewportManager viewportManager;
+		private readonly IList<LevelBackground> levels;
+
+		private Marian marian;
 
 		public GameCore()
 		{
@@ -30,37 +34,57 @@ namespace MarianX.Core
 
 			IsMouseVisible = true;
 			viewportManager = new ViewportManager();
+			levels = new List<LevelBackground>();
 		}
 
 		protected override void Initialize()
 		{
 			viewportManager.Initialize();
-			var levelOne = new LevelBackground(1);
-			var marian = new Marian();
 
+			InitializeMap();
+			InitializeMarian();
+			InitializeEffects();
+			SetLevel(0);
+
+			base.Initialize();
+		}
+
+		private void InitializeMap()
+		{
+			levels.Add(new LevelBackground(1));
+
+			foreach (LevelBackground level in levels)
+			{
+				AddManagedContent(level);
+			}
+		}
+
+		private void InitializeMarian()
+		{
+			marian = new Marian();
 			marian.Move += viewportManager.CharacterMove;
 
-			AddManagedContent(levelOne);
 			AddManagedContent(marian);
+
 
 			var collisionDetection = marian.Movement.CollisionDetection as IGameContent;
 			if (collisionDetection != null)
 			{
 				AddContent(collisionDetection);
 			}
-
-			var songManager = new SongManager();
-			AddContent(songManager);
-
-			SetLevel(1);
-
-			base.Initialize();
 		}
 
-		public void SetLevel(int level)
+		private void InitializeEffects()
 		{
-			string format = "Content/Map/level_{0}/map.csv";
-			TileMatrix.Use(string.Format(format, level));
+			AddContent(new SongManager());
+		}
+
+		public void SetLevel(int index)
+		{
+			LevelBackground level = levels[index];
+			TileMatrix.Use(level);
+
+			marian.Initialize();
 		}
 
 		protected void AddManagedContent(IGameContent content)

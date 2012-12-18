@@ -14,9 +14,6 @@ namespace MarianX.World.Configuration
 		public const int HitBoxWidth = 1;
 		public const int HitBoxHeight = 2;
 
-		public const float StartX = 85;
-		public const float StartY = 450;
-
 		public static readonly Vector2 PositiveLimit = new Vector2(500, 450);
 		public static readonly Vector2 NegativeLimit = new Vector2(-500, -450);
 

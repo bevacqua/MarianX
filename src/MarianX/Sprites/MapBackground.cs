@@ -13,7 +13,9 @@ namespace MarianX.Sprites
 	{
 		private readonly ScrollingBackground scrollingBackground;
 
-		public MapBackground(string path, string format)
+		public Vector2 Start { get; private set; }
+
+		protected MapBackground(string path, string format)
 		{
 			IList<ScrollingBackgroundAsset> assetNames = FindAssetNames(path, format);
 			scrollingBackground = new ScrollingBackground(assetNames);
@@ -29,9 +31,16 @@ namespace MarianX.Sprites
 				string width = reader.ReadLine();
 				string height = reader.ReadLine();
 				string level = reader.ReadLine();
+				string startX = reader.ReadLine();
+				string startY = reader.ReadLine();
 
 				int w = int.Parse(width);
 				int h = int.Parse(height);
+
+				float xS = float.Parse(startX);
+				float yS = float.Parse(startY);
+
+				Start = new Vector2(xS, yS);
 
 				for (int x = 0; x < w; x++)
 				{
