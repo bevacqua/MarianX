@@ -11,6 +11,9 @@ namespace MarianX.World.Configuration
 		public const int FrameWidth = 48;
 		public const int FrameHeight = 72;
 
+		public const int GloopFrameWidth = 64;
+		public const int GloopFrameHeight = 48;
+
 		public const int HitBoxWidth = 1;
 		public const int HitBoxHeight = 2;
 

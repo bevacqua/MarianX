@@ -1,4 +1,5 @@
 using MarianX.World.Extensions;
+using MarianX.World.Interface;
 
 namespace MarianX.Sprites
 {

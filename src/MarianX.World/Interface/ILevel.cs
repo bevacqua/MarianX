@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 
-namespace MarianX.World.Extensions
+namespace MarianX.World.Interface
 {
 	public interface ILevel
 	{

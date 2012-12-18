@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using MarianX.World.Extensions;
+using MarianX.World.Interface;
 using MarianX.World.Physics;
 using Microsoft.Xna.Framework;
 

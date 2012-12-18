@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MarianX.Effects
 {
-	public class Animation
+	public class PlayerAnimation
 	{
 		private readonly FrameSet idleRight = new FrameSet { Row = 0, Frames = 1 };
 		private readonly FrameSet idleLeft = new FrameSet { Row = 0, Frames = 1, Effects = SpriteEffects.FlipHorizontally };
@@ -22,7 +22,7 @@ namespace MarianX.Effects
 		private bool lastFacedLeft;
 		private readonly Mobile mobile;
 
-		public Animation(Mobile mobile)
+		public PlayerAnimation(Mobile mobile)
 		{
 			this.mobile = mobile;
 		}

@@ -42,7 +42,7 @@ namespace MarianX.Mobiles
 			}
 		}
 
-		private readonly Animation animation;
+		private readonly PlayerAnimation animation;
 		private readonly PlayerSoundManager soundManager;
 
 		public bool Invulnerable { get; set; }
@@ -50,7 +50,7 @@ namespace MarianX.Mobiles
 		public PlayerMobile(string assetName)
 			: base(assetName, settings)
 		{
-			animation = new Animation(this);
+			animation = new PlayerAnimation(this);
 			soundManager = new PlayerSoundManager();
 		}
 
