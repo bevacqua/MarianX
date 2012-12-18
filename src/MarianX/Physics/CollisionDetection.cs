@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MarianX.Diagnostics;
 using MarianX.Enum;
 using MarianX.World.Physics;
 using MarianX.World.Platform;
@@ -8,65 +9,123 @@ namespace MarianX.Physics
 {
 	public class CollisionDetection
 	{
-		public virtual MoveResult CanMove(FloatRectangle bounds, Vector2 interpolation)
+		public virtual MoveResult CanMove(FloatRectangle bounds, Vector2 interpolation, DetectionType detectionType)
 		{
 			MoveResult flags = MoveResult.None;
 
-			if (bounds.X - interpolation.X < Tile.Width)
-			{
-				flags |= MoveResult.BlockedOnX;
-			}
-
-			if (bounds.Y - interpolation.Y < Tile.Height)
-			{
-				flags |= MoveResult.BlockedOnY;
-			}
-
-			FloatRectangle xTarget = bounds.Extended(interpolation * Direction.Right);
-			FloatRectangle yTarget = bounds.Extended(interpolation * Direction.Down);
+			FloatRectangle xTarget = bounds.Displaced(interpolation * Direction.Right);
+			FloatRectangle yTarget = bounds.Displaced(interpolation * Direction.Down);
+			FloatRectangle target = bounds.Displaced(interpolation);
 
 			FitResult fitX = CanFitInMatrix(xTarget);
 			FitResult fitY = CanFitInMatrix(yTarget);
+			FitResult fit = CanFitInMatrix(target);
 
-			if (fitX == FitResult.Mortal || fitY == FitResult.Mortal)
+			try
 			{
-				return flags | MoveResult.Died;
-			}
-			if (fitX == FitResult.Solid && fitY == FitResult.Solid)
-			{
-				return MoveResult.Blocked;
-			}
-			FloatRectangle target = bounds.Extended(interpolation);
+				if (detectionType == DetectionType.Collision) // senseless to test this when retracing.
+				{
+					flags |= CheckInboundMapLimits(bounds, interpolation);
+				}
 
-			var fit = CanFitInMatrix(target);
-			if (fit == FitResult.Mortal)
-			{
-				return flags | MoveResult.Died;
+				if (fitX == FitResult.Mortal || fitY == FitResult.Mortal)
+				{
+					flags |= MoveResult.Died;
+					return flags;
+				}
+
+				if (fitX == FitResult.Solid && fitY == FitResult.Solid)
+				{
+					flags = MoveResult.Blocked;
+					return flags;
+				}
+
+				if (fit == FitResult.Mortal)
+				{
+					flags |= MoveResult.Died;
+					return flags;
+				}
+				if (fit == FitResult.Ok)
+				{
+					flags |= MoveResult.X | MoveResult.Y;
+					return flags;
+				}
+
+				flags |= AdjustFlags(interpolation, fitX, fitY);
+
+				return flags;
 			}
-			if (fit == FitResult.Ok)
+			finally
 			{
-				return flags | MoveResult.X | MoveResult.Y;
+				if (detectionType == DetectionType.Collision)
+				{
+					Diagnostic.Write("fit ", fit);
+					Diagnostic.Write("fitX", fitX);
+					Diagnostic.Write("fitY", fitY);
+					Diagnostic.Write("rslt", flags);
+				}
+				else if (detectionType == DetectionType.Retrace)
+				{
+					Diagnostic.Write("rFt ", fit);
+					Diagnostic.Write("rFtX", fitX);
+					Diagnostic.Write("rFtY", fitY);
+					Diagnostic.Write("RSLT", flags);
+				}
 			}
+		}
+
+		private MoveResult CheckInboundMapLimits(FloatRectangle bounds, Vector2 interpolation)
+		{
+			if (interpolation.X < 0 && bounds.X + interpolation.X < Tile.Width)
+			{
+				return MoveResult.BlockedOnNegativeX | MoveResult.FlattenXSpeed;
+			}
+
+			if (interpolation.Y < 0 && bounds.Y + interpolation.Y < Tile.Height)
+			{
+				return MoveResult.BlockedOnNegativeY | MoveResult.FlattenYSpeed;
+			}
+
+			return MoveResult.None;
+		}
+
+		private MoveResult AdjustFlags(Vector2 interpolation, FitResult fitX, FitResult fitY)
+		{
+			MoveResult adjustments = MoveResult.None;
 
 			if (fitX == FitResult.Ok)
 			{
-				flags |= MoveResult.X;
+				adjustments |= MoveResult.X;
 			}
 			else
 			{
-				flags |= MoveResult.BlockedOnX;
+				if (interpolation.X > 0)
+				{
+					adjustments |= MoveResult.BlockedOnPositiveX;
+				}
+				else if (interpolation.Y < 0)
+				{
+					adjustments |= MoveResult.BlockedOnNegativeX;
+				}
 			}
 
 			if (fitY == FitResult.Ok)
 			{
-				flags |= MoveResult.Y;
+				adjustments |= MoveResult.Y;
 			}
 			else
 			{
-				flags |= MoveResult.BlockedOnY;
+				if (interpolation.Y > 0)
+				{
+					adjustments |= MoveResult.BlockedOnPositiveY;
+				}
+				else if (interpolation.Y < 0)
+				{
+					adjustments |= MoveResult.BlockedOnNegativeY;
+				}
 			}
 
-			return flags;
+			return adjustments;
 		}
 
 		protected virtual IList<Tile> GetIntersection(FloatRectangle bounds)

@@ -59,12 +59,11 @@ namespace MarianX.Physics
 				target.X /= MagicNumbers.DirectionChangeSpeedPenalty;
 			}
 
-			if (mobile.State == HitBoxState.Surfaced && mobile.Direction == Direction.None && target.X != 0)
+			if (mobile.State == HitBoxState.Surfaced && mobile.Direction == Direction.None)
 			{
 				if (target.X < 0)
 				{
 					target.X = Math.Min(target.X + MagicNumbers.Friction, 0);
-
 				}
 				else if (target.X > 0)
 				{
@@ -77,9 +76,9 @@ namespace MarianX.Physics
 
 		private Vector2 VerticalSpeedChanges(Vector2 target, Vector2 gravity)
 		{
-			if (mobile.State == HitBoxState.Surfaced && gravity.Y > 0)
+			if (mobile.State == HitBoxState.Surfaced && target.Y > 0)
 			{
-				target -= gravity;
+				target.Y = gravity.Y; // on surfaces, cap gravity at a single tick.
 			}
 			return target;
 		}

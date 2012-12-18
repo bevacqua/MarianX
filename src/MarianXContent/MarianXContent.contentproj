@@ -50,8 +50,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Fonts\Diagnostic.spritefont">
-      <Name>Diagnostic</Name>
+    <Compile Include="Fonts\Diagnostics.spritefont">
+      <Name>Diagnostics</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
@@ -192,6 +192,11 @@
   <ItemGroup>
     <Compile Include="Mobiles\jail.png">
       <Name>jail</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Mobiles\marian_guided.png">
+      <Name>marian_guided</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

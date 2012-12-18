@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace MarianX.Diagnostics
 {
-	public static class Diagnostics
+	public static class Diagnostic
 	{
 		public static void Write(string title, string message, params object[] args)
 		{
