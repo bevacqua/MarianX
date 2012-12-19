@@ -46,6 +46,8 @@ namespace MarianX.Core
 			InitializeEffects();
 			SetLevelByIndex(0);
 
+			AddManagedContent(new Gloop());
+
 			base.Initialize();
 		}
 

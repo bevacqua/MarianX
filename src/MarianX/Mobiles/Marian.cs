@@ -69,7 +69,7 @@ namespace MarianX.Mobiles
 			state = HitBoxState.Airborne;
 			Speed = Vector2.Zero;
 			Direction = Direction.None;
-			Position = TileMatrix.Instance.StartPosition;
+			Position = new Vector2(48, 48); //TileMatrix.Instance.StartPosition;
 			IdleEffects();
 		}
 

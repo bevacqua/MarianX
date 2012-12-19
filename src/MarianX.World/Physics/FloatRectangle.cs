@@ -22,7 +22,7 @@ namespace MarianX.World.Physics
 			Height = height;
 		}
 
-		private FloatRectangle(FloatRectangle source)
+		public FloatRectangle(FloatRectangle source)
 			: this(source.X, source.Y, source.Width, source.Height)
 		{
 		}
@@ -40,7 +40,7 @@ namespace MarianX.World.Physics
 			return new FloatRectangle(r.X, r.Y, r.Width, r.Height);
 		}
 
-		public FloatRectangle Displaced(Vector2 vector)
+		public FloatRectangle Displace(Vector2 vector)
 		{
 			FloatRectangle extended = new FloatRectangle(this);
 			var x = vector.X;
@@ -60,6 +60,13 @@ namespace MarianX.World.Physics
 			extended.Height += y;
 
 			return extended;
+		}
+
+		public FloatRectangle Offset(float offsetX, float offsetY)
+		{
+			X += offsetX;
+			Y += offsetY;
+			return this;
 		}
 
 		public bool Intersects(Rectangle value)

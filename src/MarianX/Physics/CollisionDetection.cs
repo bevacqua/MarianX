@@ -11,11 +11,27 @@ namespace MarianX.Physics
 	{
 		public virtual MoveResult CanMove(FloatRectangle bounds, Vector2 interpolation, DetectionType detectionType)
 		{
-			MoveResult flags = MoveResult.None;
+			FloatRectangle xTarget = bounds.Displace(interpolation * Direction.Right);
+			FloatRectangle yTarget = bounds.Displace(interpolation * Direction.Down);
+			FloatRectangle target = bounds.Displace(interpolation);
 
-			FloatRectangle xTarget = bounds.Displaced(interpolation * Direction.Right);
-			FloatRectangle yTarget = bounds.Displaced(interpolation * Direction.Down);
-			FloatRectangle target = bounds.Displaced(interpolation);
+			return CanMove(bounds, interpolation, detectionType, xTarget, yTarget, target);
+		}
+
+		public MoveResult CanMoveInterpolated(FloatRectangle bounds, Vector2 interpolation, DetectionType detectionType)
+		{
+			FloatRectangle xTarget = new FloatRectangle(bounds).Offset(interpolation.X, 0);
+			FloatRectangle yTarget = new FloatRectangle(bounds).Offset(0, interpolation.Y);
+			FloatRectangle target = new FloatRectangle(bounds).Offset(interpolation.X, interpolation.Y);
+
+			return CanMove(bounds, interpolation, detectionType, xTarget, yTarget, target);
+		}
+
+		public MoveResult CanMove(
+			FloatRectangle bounds, Vector2 interpolation, DetectionType detectionType,
+			FloatRectangle xTarget, FloatRectangle yTarget, FloatRectangle target)
+		{
+			MoveResult flags = MoveResult.None;
 
 			FitResult fitX = CanFitInMatrix(xTarget);
 			FitResult fitY = CanFitInMatrix(yTarget);

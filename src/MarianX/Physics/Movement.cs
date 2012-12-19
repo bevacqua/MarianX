@@ -111,10 +111,4 @@ namespace MarianX.Physics
 			return InterpolationCalculator.CalculateInterpolation(gameTime);
 		}
 	}
-
-	public enum DetectionType
-	{
-		Collision,
-		Retrace
-	}
 }

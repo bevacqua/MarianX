@@ -2,9 +2,9 @@ using MarianX.Contents;
 
 namespace MarianX.Mobiles
 {
-	public class Npc : Mobile
+	public abstract class Npc : Mobile
 	{
-		public Npc(string assetName, SpriteSheetSettings settings)
+		protected Npc(string assetName, SpriteSheetSettings settings)
 			: base(assetName, settings)
 		{
 		}

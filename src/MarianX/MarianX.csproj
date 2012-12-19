@@ -112,9 +112,11 @@
     <Compile Include="Diagnostics\DebuggableGame.cs" />
     <Compile Include="Diagnostics\DiagnosticGame.cs" />
     <Compile Include="Diagnostics\Diagnostic.cs" />
+    <Compile Include="Effects\Animation.cs" />
     <Compile Include="Effects\GloopAnimation.cs" />
     <Compile Include="Effects\SongManager.cs" />
     <Compile Include="Effects\ViewportManager.cs" />
+    <Compile Include="Enum\DetectionType.cs" />
     <Compile Include="Enum\FitResult.cs" />
     <Compile Include="Events\AnimationComplete.cs" />
     <Compile Include="Events\AnimationCompleteArgs.cs" />
@@ -126,6 +128,7 @@
     <Compile Include="Physics\AxisAlignedBoundingBox.cs" />
     <Compile Include="Physics\CollisionDetection.cs" />
     <Compile Include="Diagnostics\DiagnosticCollisionDetection.cs" />
+    <Compile Include="Physics\GloopBoundingBox.cs" />
     <Compile Include="Physics\Movement.cs" />
     <Compile Include="Physics\MarianBoundingBox.cs" />
     <Compile Include="Effects\PlayerSoundManager.cs" />

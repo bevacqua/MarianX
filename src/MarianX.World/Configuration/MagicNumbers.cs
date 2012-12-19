@@ -11,9 +11,6 @@ namespace MarianX.World.Configuration
 		public const int FrameWidth = 48;
 		public const int FrameHeight = 72;
 
-		public const int GloopFrameWidth = 64;
-		public const int GloopFrameHeight = 48;
-
 		public const int HitBoxWidth = 1;
 		public const int HitBoxHeight = 2;
 
@@ -45,5 +42,14 @@ namespace MarianX.World.Configuration
 		public static readonly Vector2 FallEffect = new Vector2(0, 24);
 
 		public const float AcceptableSurfaceDistance = 4;
+
+		public const int GloopFrameWidth = 64;
+		public const int GloopFrameHeight = 48;
+
+		public const int GloopHitBoxWidth = 2;
+		public const int GloopHitBoxHeight = 1;
+
+		public static readonly Vector2 GloopInterpolationMargin = new Vector2(GloopFrameWidth, 0);
+		public static readonly Vector2 GloopVertigoMargin = new Vector2(0, 20);
 	}
 }
