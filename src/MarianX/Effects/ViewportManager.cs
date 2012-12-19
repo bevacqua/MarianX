@@ -41,16 +41,21 @@ namespace MarianX.Effects
 
 		public void CharacterMove(Mobile sender, MoveArgs args)
 		{
-			UpdateRelativePosition(sender);
+			UpdatePositionRelativeToOwner(sender);
 
-			foreach (IGameContent content in contents) // update relative screen position.
+			// update relative screen position for everything else.
+			foreach (IGameContent content in contents)
 			{
-				Vector2 screenPosition = content.Position - position;
-				content.UpdateScreenPosition(screenPosition);
+				UpdateScreenPosition(content);
 			}
 		}
 
-		private void UpdateRelativePosition(Mobile sender)
+		public void NpcMove(Mobile sender, MoveArgs args)
+		{
+			UpdateScreenPosition(sender);
+		}
+
+		private void UpdatePositionRelativeToOwner(Mobile sender)
 		{
 			Vector2 relative = sender.Position - position;
 
@@ -83,6 +88,12 @@ namespace MarianX.Effects
 				int h = TileMatrix.Instance.Height - bounds.Height;
 				position.Y = Math.Min(y, h);
 			}
+		}
+
+		private void UpdateScreenPosition(IGameContent content)
+		{
+			Vector2 screenPosition = content.Position - position;
+			content.UpdateScreenPosition(screenPosition);
 		}
 	}
 }

@@ -46,7 +46,9 @@ namespace MarianX.Core
 			InitializeEffects();
 			SetLevelByIndex(0);
 
-			AddManagedContent(new Gloop());
+			Gloop gloop = new Gloop();
+			gloop.Move += viewportManager.NpcMove;
+			AddManagedContent(gloop);
 
 			base.Initialize();
 		}
@@ -72,7 +74,7 @@ namespace MarianX.Core
 			marian.Move += viewportManager.CharacterMove;
 
 			AddManagedContent(marian);
-			
+
 			var collisionDetection = marian.Movement.CollisionDetection as IGameContent;
 			if (collisionDetection != null)
 			{
