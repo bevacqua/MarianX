@@ -3,6 +3,7 @@ using MarianX.Diagnostics;
 using MarianX.Effects;
 using MarianX.Interface;
 using MarianX.Mobiles;
+using MarianX.Physics;
 using MarianX.Sprites;
 using MarianX.World.Platform;
 using Microsoft.Xna.Framework;
@@ -13,11 +14,13 @@ namespace MarianX.Core
 	public class GameCore : DebuggableGame
 	{
 		public static GameCore Instance { get; private set; }
-
-		private readonly ViewportManager viewportManager;
+		
 		private readonly IList<LevelBackground> levels;
 
+		public ViewportManager ViewportManager { get; private set; }
+
 		private Marian marian;
+		public MobileCollisionDetectionEngine MobileCollisionDetection { get; private set; }
 
 		public GameCore()
 		{
@@ -33,21 +36,20 @@ namespace MarianX.Core
 			};
 
 			IsMouseVisible = true;
-			viewportManager = new ViewportManager();
+			ViewportManager = new ViewportManager();
 			levels = new List<LevelBackground>();
 		}
 
 		protected override void Initialize()
 		{
-			viewportManager.Initialize();
+			ViewportManager.Initialize();
 
 			InitializeMap();
 			InitializeMarian();
 			InitializeEffects();
 			SetLevelByIndex(0);
 
-			Gloop gloop = new Gloop();
-			gloop.Move += viewportManager.NpcMove;
+			Gloop gloop = new Gloop(new Vector2(90, 60));
 			AddManagedContent(gloop);
 
 			base.Initialize();
@@ -71,7 +73,7 @@ namespace MarianX.Core
 		private void InitializeMarian()
 		{
 			marian = new Marian();
-			marian.Move += viewportManager.CharacterMove;
+			marian.Move += ViewportManager.CharacterMove;
 
 			AddManagedContent(marian);
 
@@ -80,6 +82,8 @@ namespace MarianX.Core
 			{
 				AddContent(collisionDetection);
 			}
+
+			MobileCollisionDetection = new MobileCollisionDetectionEngine(marian);
 		}
 
 		private void InitializeEffects()
@@ -103,7 +107,7 @@ namespace MarianX.Core
 		protected void AddManagedContent(IGameContent content)
 		{
 			base.AddContent(content);
-			viewportManager.Manage(content);
+			ViewportManager.Manage(content);
 		}
 
 		protected override void UpdateInput(GameTime gameTime)

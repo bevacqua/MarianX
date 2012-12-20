@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace MarianX.Physics
 {
-	public class CollisionDetection
+	public class StaticCollisionDetection
 	{
 		public virtual MoveResult CanMove(FloatRectangle bounds, Vector2 interpolation, DetectionType detectionType)
 		{

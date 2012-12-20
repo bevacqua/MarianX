@@ -1,4 +1,5 @@
 using MarianX.Contents;
+using MarianX.Core;
 using MarianX.Effects;
 using MarianX.Enum;
 using MarianX.Physics;
@@ -27,11 +28,36 @@ namespace MarianX.Mobiles
 
 		private readonly GloopAnimation animation;
 
-		public Gloop()
+		public override Direction Direction
+		{
+			get
+			{
+				return base.Direction;
+			}
+			set
+			{
+				if (Direction != Direction.None && Direction == value)
+				{
+					return;
+				}
+				base.Direction = value;
+
+				animation.UpdateFace();
+				animation.Update();
+			}
+		}
+
+		private readonly Vector2 startPosition;
+
+		public Gloop(Vector2 startPosition)
 			: base(AssetName, settings)
 		{
-			BoundingBox = new GloopBoundingBox();
 			animation = new GloopAnimation(this);
+
+			BoundingBox = new GloopBoundingBox();
+			Move += GameCore.Instance.ViewportManager.NpcMove;
+
+			this.startPosition = startPosition;
 		}
 
 		public override void Initialize()
@@ -41,7 +67,7 @@ namespace MarianX.Mobiles
 			IdleEffects();
 			Speed = Vector2.Zero;
 			Direction = Direction.Right;
-			Position = TileMatrix.Instance.StartPosition;
+			Position = startPosition;
 		}
 
 		protected void IdleEffects()
@@ -68,8 +94,8 @@ namespace MarianX.Mobiles
 				return interpolation;
 			}
 
-			Vector2 interpolationPlusMargin = AddMargin(interpolation) + MagicNumbers.GloopVertigoMargin;
-			MoveResult predicted = Movement.CollisionDetection.CanMoveInterpolated(aabb, interpolationPlusMargin, DetectionType.Collision);
+			Vector2 movement = AddMargin(interpolation) + MagicNumbers.GloopVertigoMargin;
+			MoveResult predicted = Movement.CollisionDetection.CanMoveInterpolated(aabb, movement, DetectionType.Collision);
 
 			if (!predicted.HasFlag(MoveResult.BlockedOnNegativeX) &&
 				!predicted.HasFlag(MoveResult.BlockedOnPositiveX) &&

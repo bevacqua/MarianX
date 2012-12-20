@@ -200,7 +200,7 @@ namespace MarianX.Mobiles
 			return result;
 		}
 
-		private void Die()
+		public void Die()
 		{
 			if (State != HitBoxState.Dead) // sanity.
 			{

@@ -1,4 +1,5 @@
 using MarianX.Contents;
+using MarianX.Core;
 
 namespace MarianX.Mobiles
 {
@@ -7,6 +8,7 @@ namespace MarianX.Mobiles
 		protected Npc(string assetName, SpriteSheetSettings settings)
 			: base(assetName, settings)
 		{
+			GameCore.Instance.MobileCollisionDetection.AddNpc(this);
 		}
 	}
 }

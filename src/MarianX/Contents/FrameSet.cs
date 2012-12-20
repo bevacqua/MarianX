@@ -17,6 +17,8 @@ namespace MarianX.Contents
 			get { return Frames + Start; }
 		}
 
+		public float Tilt { get; set; }
+
 		public FrameSet()
 		{
 			Loop = true;

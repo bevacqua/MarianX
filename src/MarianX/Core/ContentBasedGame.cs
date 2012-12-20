@@ -11,6 +11,8 @@ namespace MarianX.Core
 
 		protected SpriteBatch spriteBatch { get; private set; }
 
+		public bool CanRaiseEvents { get; protected set; }
+
 		public ContentBasedGame()
 		{
 			contents = new List<IGameContent>();
@@ -41,6 +43,8 @@ namespace MarianX.Core
 			}
 
 			base.LoadContent();
+
+			CanRaiseEvents = true;
 		}
 
 		protected override void UnloadContent()

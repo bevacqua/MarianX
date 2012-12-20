@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MarianX.Diagnostics
 {
-	public class DiagnosticCollisionDetection : CollisionDetection, IGameContent
+	public class DiagnosticCollisionDetection : StaticCollisionDetection, IGameContent
 	{
 		private SquareGrid movementGrid;
 		private SquareGrid matchGrid;

@@ -10,10 +10,10 @@ namespace MarianX.Physics
 {
 	public class Movement
 	{
-		public CollisionDetection CollisionDetection { get; private set; }
+		public StaticCollisionDetection CollisionDetection { get; private set; }
 		public InterpolationCalculator InterpolationCalculator { get; private set; }
 
-		public Movement(CollisionDetection collisionDetection, InterpolationCalculator interpolationCalculator)
+		public Movement(StaticCollisionDetection collisionDetection, InterpolationCalculator interpolationCalculator)
 		{
 			CollisionDetection = collisionDetection;
 			InterpolationCalculator = interpolationCalculator;

@@ -17,7 +17,7 @@ namespace MarianX.Contents
 		public virtual Vector2 ScreenPosition { get; set; }
 
 		public Color Tint { get; set; }
-		public float Tilt { get; set; }
+		public virtual float Tilt { get; set; }
 
 		public Sprite(string assetName)
 			: base(assetName)

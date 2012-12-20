@@ -4,6 +4,8 @@ namespace MarianX.World.Physics
 {
 	public struct FloatRectangle
 	{
+		private static readonly FloatRectangle Empty = new FloatRectangle();
+
 		public float X;
 		public float Y;
 		public float Width;
@@ -38,6 +40,22 @@ namespace MarianX.World.Physics
 		public static implicit operator FloatRectangle(Rectangle r)
 		{
 			return new FloatRectangle(r.X, r.Y, r.Width, r.Height);
+		}
+
+		public static bool operator ==(FloatRectangle a, FloatRectangle b)
+		{
+			if (a.X == b.X && a.Y == b.Y && a.Width == b.Width)
+				return a.Height == b.Height;
+			else
+				return false;
+		}
+
+		public static bool operator !=(FloatRectangle a, FloatRectangle b)
+		{
+			if (a.X == b.X && a.Y == b.Y && a.Width == b.Width)
+				return a.Height != b.Height;
+			else
+				return true;
 		}
 
 		public FloatRectangle Displace(Vector2 vector)
@@ -76,6 +94,12 @@ namespace MarianX.World.Physics
 				return Y < value.Y + value.Height;
 			}
 			return false;
+		}
+
+		public bool Intersects(FloatRectangle value)
+		{
+			FloatRectangle rectangle = Intersect(this, value);
+			return rectangle != Empty;
 		}
 
 		public static FloatRectangle Intersect(FloatRectangle source, FloatRectangle target)

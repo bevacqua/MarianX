@@ -26,6 +26,18 @@ namespace MarianX.Contents
 			get { return settings.Height; }
 		}
 
+		public override float Tilt
+		{
+			get
+			{
+				return frameSet.Tilt;
+			}
+			set
+			{
+				frameSet.Tilt = value;
+			}
+		}
+
 		public SpriteSheet(string assetName, SpriteSheetSettings settings)
 			: base(assetName)
 		{

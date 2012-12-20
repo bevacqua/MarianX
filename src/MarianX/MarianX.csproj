@@ -126,7 +126,9 @@
     <Compile Include="Mobiles\Gloop.cs" />
     <Compile Include="Mobiles\Npc.cs" />
     <Compile Include="Physics\AxisAlignedBoundingBox.cs" />
-    <Compile Include="Physics\CollisionDetection.cs" />
+    <Compile Include="Physics\MobileCollisionDetection.cs" />
+    <Compile Include="Physics\MobileCollisionDetectionEngine.cs" />
+    <Compile Include="Physics\StaticCollisionDetection.cs" />
     <Compile Include="Diagnostics\DiagnosticCollisionDetection.cs" />
     <Compile Include="Physics\GloopBoundingBox.cs" />
     <Compile Include="Physics\Movement.cs" />

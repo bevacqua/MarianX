@@ -1,4 +1,5 @@
 using MarianX.Contents;
+using MarianX.Core;
 using MarianX.Diagnostics;
 using MarianX.Enum;
 using MarianX.Events;
@@ -41,7 +42,7 @@ namespace MarianX.Mobiles
 
 		private void RaiseMoved(Vector2 oldPosition, Vector2 currentPosition)
 		{
-			if (Move != null)
+			if (Move != null && GameCore.Instance.CanRaiseEvents)
 			{
 				Move(this, new MoveArgs
 				{

@@ -6,8 +6,8 @@ namespace MarianX.Effects
 {
 	public class GloopAnimation : Animation
 	{
-		private readonly FrameSet faceRight = new FrameSet { Row = 0, Frames = 13 };
-		private readonly FrameSet faceLeft = new FrameSet { Row = 0, Frames = 13, Effects = SpriteEffects.FlipHorizontally };
+		private readonly FrameSet faceLeft = new FrameSet { Row = 0, Frames = 13, Tilt = 0.01f };
+		private readonly FrameSet faceRight = new FrameSet { Row = 0, Frames = 13, Tilt = -0.01f, Effects = SpriteEffects.FlipHorizontally };
 
 		public GloopAnimation(Mobile mobile)
 			: base(mobile)

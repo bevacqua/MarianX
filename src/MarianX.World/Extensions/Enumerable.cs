@@ -8,7 +8,7 @@ namespace MarianX.World.Extensions
 	{
 		public static T Random<T>(this IEnumerable<T> enumerable)
 		{
-			return enumerable.OrderBy(i => Guid.NewGuid()).First();
+			return enumerable.OrderBy(i => Guid.NewGuid()).FirstOrDefault();
 		}
 	}
 }
