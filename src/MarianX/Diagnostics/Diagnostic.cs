@@ -12,7 +12,7 @@ namespace MarianX.Diagnostics
 
 		public static void Write<TEnum>(string title, TEnum @enum) where TEnum : struct
 		{
-			Write(title, @enum.ToString());
+			 Write(title, @enum.ToString());
 		}
 
 		public static void Write(string title, Vector2 vector)
