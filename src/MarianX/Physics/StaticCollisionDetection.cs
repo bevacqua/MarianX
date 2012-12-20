@@ -50,6 +50,12 @@ namespace MarianX.Physics
 					return flags;
 				}
 
+				if (fitX == FitResult.LevelComplete || fitY == FitResult.LevelComplete)
+				{
+					flags |= MoveResult.LevelCompleted;
+					return flags;
+				}
+
 				if (fitX == FitResult.Solid && fitY == FitResult.Solid)
 				{
 					flags = MoveResult.Blocked;
@@ -61,6 +67,13 @@ namespace MarianX.Physics
 					flags |= MoveResult.Died;
 					return flags;
 				}
+
+				if (fit == FitResult.LevelComplete)
+				{
+					flags |= MoveResult.LevelCompleted;
+					return flags;
+				}
+
 				if (fit == FitResult.Ok)
 				{
 					flags |= MoveResult.X | MoveResult.Y;
@@ -73,20 +86,25 @@ namespace MarianX.Physics
 			}
 			finally
 			{
-				if (detectionType == DetectionType.Collision)
-				{
-					Diagnostic.Write("fit ", fit);
-					Diagnostic.Write("fitX", fitX);
-					Diagnostic.Write("fitY", fitY);
-					Diagnostic.Write("rslt", flags);
-				}
-				else if (detectionType == DetectionType.Retrace)
-				{
-					Diagnostic.Write("rFt ", fit);
-					Diagnostic.Write("rFtX", fitX);
-					Diagnostic.Write("rFtY", fitY);
-					Diagnostic.Write("RSLT", flags);
-				}
+				RefreshDiagnostics(detectionType, fit, fitX, fitY, flags);
+			}
+		}
+
+		private void RefreshDiagnostics(DetectionType detectionType, FitResult fit, FitResult fitX, FitResult fitY, MoveResult flags)
+		{
+			if (detectionType == DetectionType.Collision)
+			{
+				Diagnostic.Write("fit ", fit);
+				Diagnostic.Write("fitX", fitX);
+				Diagnostic.Write("fitY", fitY);
+				Diagnostic.Write("rslt", flags);
+			}
+			else if (detectionType == DetectionType.Retrace)
+			{
+				Diagnostic.Write("rFt ", fit);
+				Diagnostic.Write("rFtX", fitX);
+				Diagnostic.Write("rFtY", fitY);
+				Diagnostic.Write("RSLT", flags);
 			}
 		}
 
@@ -170,6 +188,10 @@ namespace MarianX.Physics
 				if (tile.Deathly)
 				{
 					return FitResult.Mortal; // died.
+				}
+				if (tile.Clear)
+				{
+					return FitResult.LevelComplete;
 				}
 				if (tile.Impassable)
 				{

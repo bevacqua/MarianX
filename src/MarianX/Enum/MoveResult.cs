@@ -17,6 +17,7 @@ namespace MarianX.Enum
 		Blocked				= BlockedOnX | BlockedOnY,
 		Died				= 1 << 6,
 		FlattenXSpeed		= 1 << 7,
-		FlattenYSpeed		= 1 << 8
+		FlattenYSpeed		= 1 << 8,
+		LevelCompleted		= 1 << 9
 	}
 }

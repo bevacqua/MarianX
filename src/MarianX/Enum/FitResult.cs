@@ -4,6 +4,7 @@ namespace MarianX.Enum
 	{
 		Ok,
 		Solid,
-		Mortal
+		Mortal,
+		LevelComplete
 	}
 }

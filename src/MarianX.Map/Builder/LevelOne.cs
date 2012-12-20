@@ -29,7 +29,65 @@ namespace MarianX.Map.Builder
 		{
 			TileType tile = GetBaseTileSet(tileTypes, x, y);
 			tile = GetDeeperTileSet(tile, tileTypes, x, y);
+			tile = GetSpecificTileSet(tile, tileTypes, x, y);
+			tile = OverrideWithDoorTileSet(tile, tileTypes, x, y);
 
+			return tile;
+		}
+
+		private TileType OverrideWithDoorTileSet(TileType tile, TileType[] tileTypes, int x, int y)
+		{
+			if (y == Rows - 25)
+			{
+				if (x == Columns - 7)
+				{
+					tile = tileTypes[14];
+				}
+				else if (x == Columns - 6)
+				{
+					tile = tileTypes[15];
+				}
+				else if (x == Columns - 5)
+				{
+					tile = tileTypes[16];
+				}
+			}
+			else if (y == Rows - 24)
+			{
+				if (x == Columns - 7)
+				{
+					tile = tileTypes[17];
+				}
+				else if (x == Columns - 6)
+				{
+					tile = tileTypes[18];
+				}
+				else if (x == Columns - 5)
+				{
+					tile = tileTypes[19];
+				}
+			}
+			else if (y == Rows - 23)
+			{
+				if (x == Columns - 7)
+				{
+					tile = tileTypes[20];
+				}
+				else if (x == Columns - 6)
+				{
+					tile = tileTypes[21];
+				}
+				else if (x == Columns - 5)
+				{
+					tile = tileTypes[22];
+				}
+			}
+
+			return tile;
+		}
+
+		private TileType GetSpecificTileSet(TileType tile, TileType[] tileTypes, int x, int y)
+		{
 			if (x > 98 && x < 101)
 			{
 				if (y == 22)

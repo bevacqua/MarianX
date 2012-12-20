@@ -13,6 +13,7 @@ namespace MarianX.World.Platform
 		public string Sound { get; set; }
 
 		public bool Deathly { get; set; }
+		public bool Clear { get; set; }
 
 		static TileType()
 		{

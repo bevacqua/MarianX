@@ -23,7 +23,24 @@ namespace MarianX.Physics
 		{
 			AxisAlignedBoundingBox aabb = hitBox.BoundingBox;
 
-			MoveResult result = CollisionDetection.CanMove(aabb.Bounds, interpolation, DetectionType.Collision);
+			var result = CollisionDetection.CanMove(aabb.Bounds, interpolation, DetectionType.Collision);
+			if (result.HasFlag(MoveResult.LevelCompleted))
+			{
+				result = MoveResult.LevelCompleted;
+			}
+			else
+			{
+				result = Reposition(hitBox, result, interpolation);
+			}
+
+			Diagnostic.Write("aabb", aabb.Position);
+
+			return result;
+		}
+
+		private MoveResult Reposition(IHitBox hitBox, MoveResult result, Vector2 interpolation)
+		{
+			AxisAlignedBoundingBox aabb = hitBox.BoundingBox;
 
 			var moveX = result.HasFlag(MoveResult.X)
 				&& !result.HasFlag(MoveResult.BlockedOnNegativeX)
@@ -81,8 +98,6 @@ namespace MarianX.Physics
 					result &= ~MoveResult.Y;
 				}
 			}
-
-			Diagnostic.Write("aabb", aabb.Position);
 
 			return result;
 		}
