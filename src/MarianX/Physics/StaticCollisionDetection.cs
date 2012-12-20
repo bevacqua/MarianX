@@ -97,9 +97,19 @@ namespace MarianX.Physics
 				return MoveResult.BlockedOnNegativeX | MoveResult.FlattenXSpeed;
 			}
 
+			if (interpolation.X > 0 && bounds.X + interpolation.X > TileMatrix.Instance.Width - Tile.Width)
+			{
+				return MoveResult.BlockedOnPositiveX | MoveResult.FlattenXSpeed;
+			}
+
 			if (interpolation.Y < 0 && bounds.Y + interpolation.Y < Tile.Height)
 			{
 				return MoveResult.BlockedOnNegativeY | MoveResult.FlattenYSpeed;
+			}
+
+			if (interpolation.Y > 0 && bounds.Y + interpolation.Y > TileMatrix.Instance.Height - Tile.Height)
+			{
+				return MoveResult.BlockedOnPositiveY | MoveResult.FlattenYSpeed;
 			}
 
 			return MoveResult.None;
