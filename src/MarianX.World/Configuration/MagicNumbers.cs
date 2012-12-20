@@ -35,9 +35,9 @@ namespace MarianX.World.Configuration
 		public const int RelativeScreenTop = 144;
 		public const int RelativeScreenBottom = 144;
 
-		public static readonly TimeSpan Flash = TimeSpan.FromSeconds(2.8);
-		public static readonly Color FlashTint = Color.LightGray;
-		public const int FlashFrame = 7;
+		public static readonly TimeSpan InvulnerableTimeout = TimeSpan.FromSeconds(4.5);
+		public static readonly Color InvulnerableTint = Color.LightGray;
+		public const int InvulnerableFrameInterval = 7;
 
 		public static readonly Vector2 FallEffect = new Vector2(0, 24);
 

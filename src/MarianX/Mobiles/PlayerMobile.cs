@@ -93,16 +93,16 @@ namespace MarianX.Mobiles
 			flashFrame = 0;
 			flashStart = DateTime.UtcNow;
 			tintBeforeFlash = Tint;
-			Tint = MagicNumbers.FlashTint;
+			Tint = MagicNumbers.InvulnerableTint;
 		}
 
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
 			if (Invulnerable)
 			{
-				if (flashStart + MagicNumbers.Flash > DateTime.UtcNow)
+				if (flashStart + MagicNumbers.InvulnerableTimeout > DateTime.UtcNow)
 				{
-					hideFrame = ++flashFrame % MagicNumbers.FlashFrame == 0;
+					hideFrame = ++flashFrame % MagicNumbers.InvulnerableFrameInterval == 0;
 					
 					if (hideFrame)
 					{

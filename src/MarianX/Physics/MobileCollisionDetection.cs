@@ -10,7 +10,10 @@ namespace MarianX.Physics
 			var aabbNpc = npc.BoundingBox.Bounds;
 			if (aabbNpc.Intersects(aabb))
 			{
-				marian.Die();
+				if (!marian.Invulnerable)
+				{
+					marian.Die();
+				}
 			}
 		}
 	}
