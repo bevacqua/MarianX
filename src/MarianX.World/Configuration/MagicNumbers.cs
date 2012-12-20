@@ -20,7 +20,7 @@ namespace MarianX.World.Configuration
 		public static readonly Vector2 DefaultAcceleration = new Vector2(8000, 0);
 		public static readonly Vector2 GravityAcceleration = new Vector2(0, 13000);
 
-		public const int JumpSpeed = -330;
+		public const int JumpSpeed = -390;
 		public const float AerialSpeedPenaltyOnX = 1.45f;
 		public const float AerialAccelerationPenaltyOnX = 1.30f;
 
@@ -51,5 +51,7 @@ namespace MarianX.World.Configuration
 
 		public static readonly Vector2 GloopInterpolationMargin = new Vector2(GloopFrameWidth, 0);
 		public static readonly Vector2 GloopVertigoMargin = new Vector2(0, 20);
+
+		public const double GameSpeedPower = 1.85;
 	}
 }

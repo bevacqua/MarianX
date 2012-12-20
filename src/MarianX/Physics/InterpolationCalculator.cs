@@ -47,7 +47,7 @@ namespace MarianX.Physics
 				accel.X /= MagicNumbers.AerialAccelerationPenaltyOnX;
 			}
 
-			Vector2 velocity = accel * direction * (float)Math.Pow(time, 2);
+			Vector2 velocity = accel * direction * (float)Math.Pow(time, MagicNumbers.GameSpeedPower);
 			return velocity;
 		}
 
@@ -92,6 +92,12 @@ namespace MarianX.Physics
 			{
 				negative.X /= MagicNumbers.AerialSpeedPenaltyOnX;
 				positive.X /= MagicNumbers.AerialSpeedPenaltyOnX;
+			}
+
+			if (mobile.State == HitBoxState.Dead)
+			{
+				negative.X = 0;
+				positive.X = 0;
 			}
 
 			Vector2 constrained = target.Constrained(negative, positive);

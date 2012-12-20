@@ -3,6 +3,7 @@ using MarianX.Contents;
 using MarianX.Diagnostics;
 using MarianX.Effects;
 using MarianX.Physics;
+using MarianX.Sprites;
 using MarianX.World.Configuration;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -100,7 +101,14 @@ namespace MarianX.Mobiles
 		{
 			if (Invulnerable)
 			{
-				if (flashStart + MagicNumbers.InvulnerableTimeout > DateTime.UtcNow)
+				bool flashing = flashStart + MagicNumbers.InvulnerableTimeout > DateTime.UtcNow;
+				if (!flashing || State == HitBoxState.Dead)
+				{
+					Invulnerable = false;
+					hideFrame = false;
+					Tint = tintBeforeFlash;
+				}
+				else
 				{
 					hideFrame = ++flashFrame % MagicNumbers.InvulnerableFrameInterval == 0;
 					
@@ -108,12 +116,6 @@ namespace MarianX.Mobiles
 					{
 						flashFrame = 0;
 					}
-				}
-				else
-				{
-					Invulnerable = false;
-					hideFrame = false;
-					Tint = tintBeforeFlash;
 				}
 			}
 
