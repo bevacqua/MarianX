@@ -83,6 +83,11 @@ namespace MarianX.Mobiles
 			soundManager.Die();
 		}
 
+		protected void LevelCompleteEffects()
+		{
+			animation.LevelComplete();
+		}
+
 		private Color tintBeforeFlash;
 		private DateTime flashStart;
 		private int flashFrame;

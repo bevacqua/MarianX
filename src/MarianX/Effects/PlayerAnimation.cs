@@ -18,6 +18,8 @@ namespace MarianX.Effects
 		private readonly FrameSet steerLeft = new FrameSet { Row = 2, Frames = 1, Start = 3, Loop = false, Effects = SpriteEffects.FlipHorizontally };
 		private readonly FrameSet deathRight = new FrameSet { Row = 3, Frames = 16, Loop = false };
 		private readonly FrameSet deathLeft = new FrameSet { Row = 3, Frames = 16, Loop = false, Effects = SpriteEffects.FlipHorizontally };
+		private readonly FrameSet completeRight = new FrameSet { Row = 3, Frames = 16, Loop = false };
+		private readonly FrameSet completeLeft = new FrameSet { Row = 3, Frames = 16, Loop = false, Effects = SpriteEffects.FlipHorizontally };
 
 		public PlayerAnimation(Mobile mobile)
 			: base(mobile)
@@ -51,6 +53,11 @@ namespace MarianX.Effects
 		public void Die()
 		{
 			mobile.SetFrameSet(lastFacedLeft ? deathLeft : deathRight);
+		}
+
+		public void LevelComplete()
+		{
+			mobile.SetFrameSet(lastFacedLeft ? completeLeft : completeRight);
 		}
 	}
 }

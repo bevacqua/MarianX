@@ -4,6 +4,7 @@ namespace MarianX.Sprites
 	{
 		Surfaced,
 		Airborne,
-		Dead
+		Dead,
+		LevelCompleteAnimation
 	}
 }

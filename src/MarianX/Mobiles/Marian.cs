@@ -78,7 +78,7 @@ namespace MarianX.Mobiles
 			SetStartPosition();
 			Flash();
 		}
-
+		
 		private KeyboardState keyboardState;
 
 		public override void UpdateInput(GameTime gameTime)
@@ -184,6 +184,10 @@ namespace MarianX.Mobiles
 			{
 				Die();
 			}
+			else if (result == MoveResult.LevelCompleted)
+			{
+				CompleteLevel();
+			}
 			else if (wasAirborne)
 			{
 				if (jumpStartPosition.HasValue && Position.Y > jumpStartPosition.Value.Y)
@@ -200,6 +204,15 @@ namespace MarianX.Mobiles
 			return result;
 		}
 
+		private void CompleteLevel()
+		{
+			if (State != HitBoxState.LevelCompleteAnimation)
+			{
+				State = HitBoxState.LevelCompleteAnimation;
+				LevelCompleteEffects();
+			}
+		}
+
 		public void Die()
 		{
 			if (State != HitBoxState.Dead) // sanity.
@@ -214,6 +227,10 @@ namespace MarianX.Mobiles
 			if (State == HitBoxState.Dead)
 			{
 				SetRestartPosition();
+			}
+			else if (State == HitBoxState.LevelCompleteAnimation)
+			{
+				GameCore.Instance.AdvanceLevel();
 			}
 		}
 	}

@@ -68,7 +68,8 @@ namespace MarianX.Mobiles
 		{
 			MoveResult result = Movement.Move(this, interpolation);
 
-			if (result.HasFlag(MoveResult.Blocked)) // collided.
+			var blocked = result.HasFlag(MoveResult.Blocked);
+			if (blocked) // collided.
 			{
 				Direction = Direction.None;
 				Speed = Vector2.Zero;

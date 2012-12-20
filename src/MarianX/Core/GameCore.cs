@@ -14,7 +14,7 @@ namespace MarianX.Core
 	public class GameCore : DebuggableGame
 	{
 		public static GameCore Instance { get; private set; }
-		
+
 		private readonly IList<LevelBackground> levels;
 
 		public ViewportManager ViewportManager { get; private set; }
@@ -47,7 +47,7 @@ namespace MarianX.Core
 			InitializeMap();
 			InitializeMarian();
 			InitializeEffects();
-			SetLevelByIndex(0);
+			AdvanceLevel();
 
 			Gloop gloop = new Gloop(new Vector2(90, 60));
 			AddManagedContent(gloop);
@@ -91,6 +91,13 @@ namespace MarianX.Core
 			AddContent(new SongManager());
 		}
 
+		private int levelIndex = -1;
+
+		public void AdvanceLevel()
+		{
+			SetLevelByIndex(++levelIndex);
+		}
+
 		public void SetLevelByIndex(int index)
 		{
 			foreach (LevelBackground level in levels)
@@ -101,6 +108,7 @@ namespace MarianX.Core
 			TileMatrix.Use(target);
 			target.Active = true;
 
+			levelIndex = index;
 			marian.Initialize();
 		}
 
