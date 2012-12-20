@@ -38,6 +38,7 @@ namespace MarianX.Core
 			IsMouseVisible = true;
 			ViewportManager = new ViewportManager();
 			levels = new List<LevelBackground>();
+			LevelIndex = -1;
 		}
 
 		protected override void Initialize()
@@ -91,11 +92,11 @@ namespace MarianX.Core
 			AddContent(new SongManager());
 		}
 
-		private int levelIndex = -1;
+		public int LevelIndex { get; private set; }
 
 		public void AdvanceLevel()
 		{
-			SetLevelByIndex(++levelIndex);
+			SetLevelByIndex(++LevelIndex);
 		}
 
 		public void SetLevelByIndex(int index)
@@ -108,7 +109,7 @@ namespace MarianX.Core
 			TileMatrix.Use(target);
 			target.Active = true;
 
-			levelIndex = index;
+			LevelIndex = index;
 			marian.Initialize();
 		}
 

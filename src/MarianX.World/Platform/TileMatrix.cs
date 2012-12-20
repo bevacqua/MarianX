@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using MarianX.World.Extensions;
 using MarianX.World.Interface;
 using MarianX.World.Physics;
 using Microsoft.Xna.Framework;
@@ -15,13 +14,18 @@ namespace MarianX.World.Platform
 		{
 			get { return instance; }
 		}
-		
+
 		public static void Use(ILevel metadata)
 		{
 			string format = "Content/Map/level_{0}/map.csv";
 			string path = string.Format(format, metadata.Level);
-			instance = new TileMatrix(path, metadata.Start);
+			instance = new TileMatrix(path, metadata.Start)
+			{
+				Metadata = metadata
+			};
 		}
+
+		public ILevel Metadata { get; private set; }
 
 		private TileMatrix(string path, Vector2 start)
 			: base(path, start)
