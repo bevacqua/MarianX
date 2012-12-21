@@ -2996,6 +2996,6 @@ X,Y,Type,Impassable,SlopeLeft,SlopeRight,Sound,Deathly,Clear
 124,18,blank,False,0,0,,False,False
 124,19,blank,False,0,0,,False,False
 124,20,blank,False,0,0,,False,False
-124,21,blank,False,0,0,,False,False
-124,22,blank,False,0,0,,False,False
-124,23,blank,False,0,0,,False,False
+124,21,dirt,True,0,0,,False,False
+124,22,dirt,True,0,0,,False,False
+124,23,dirt,True,0,0,,False,False

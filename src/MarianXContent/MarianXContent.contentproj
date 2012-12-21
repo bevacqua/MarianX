@@ -107,6 +107,10 @@
       <Name>map</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Map\level_1\map.npc">
+      <Name>map</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Map\level_2\map.csv">
       <Name>map</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -115,6 +119,10 @@
       <Name>map</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="Map\level_2\map.npc">
+      <Name>map</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Sounds\death0.wma">

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.IO;
+using MarianX.Map.Interface;
 using MarianX.World.Platform;
 
-namespace MarianX.Map.Builder
+namespace MarianX.Map.Imaging
 {
 	public class FragmentedPersistance : Persistance
 	{
@@ -48,7 +49,7 @@ namespace MarianX.Map.Builder
 			}
 		}
 
-		public void SaveFragmentMetadata(TileType[,] map, string path, TileMatrixBuilder builder)
+		public void SaveFragmentMetadata(TileType[,] map, string path, IBuilder builder)
 		{
 			int colTotal = map.GetLength(0);
 			int rowTotal = map.GetLength(1);

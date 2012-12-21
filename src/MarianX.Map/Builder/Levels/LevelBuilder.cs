@@ -9,9 +9,10 @@ using Microsoft.Xna.Framework;
 
 namespace MarianX.Map.Builder.Levels
 {
-	public class LevelBuilder : TileMatrixBuilder
+	public class LevelBuilder : Builder
 	{
-		private const string file = "data/levels/{0}/level.{1}";
+		public const string FileFormat = "data/levels/{0}/level.{1}";
+
 		private readonly int level;
 		private LevelBuilderInfo info;
 		private IList<LevelBuilderRule> rules;
@@ -46,7 +47,7 @@ namespace MarianX.Map.Builder.Levels
 
 		private void LoadMetadata(string from, Action<CsvReader> action)
 		{
-			string path = string.Format(file, level, from);
+			string path = string.Format(FileFormat, level, from);
 
 			using (TextReader textReader = new StreamReader(path))
 			using (CsvReader reader = new CsvReader(textReader, new CsvConfiguration { IsStrictMode = false }))
@@ -69,6 +70,11 @@ namespace MarianX.Map.Builder.Levels
 			Action<CsvReader> action = reader =>
 			{
 				rules = reader.GetRecords<LevelBuilderRule>().ToList();
+
+				foreach (var rule in rules)
+				{
+					rule.Process(info.Columns, info.Rows);
+				}
 			};
 			LoadMetadata("rules", action);
 		}

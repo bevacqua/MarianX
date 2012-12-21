@@ -6,7 +6,7 @@ namespace MarianX.Map
 	{
 		public static void Main(string[] args)
 		{
-			var builder = new FullMapBuilder();
+			var builder = new WorldBuilder();
 			builder.FullBuild();
 		}
 	}

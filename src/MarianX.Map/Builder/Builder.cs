@@ -2,12 +2,13 @@
 using System.IO;
 using System.Linq;
 using CsvHelper;
+using MarianX.Map.Interface;
 using MarianX.World.Platform;
 using Microsoft.Xna.Framework;
 
 namespace MarianX.Map.Builder
 {
-	public abstract class TileMatrixBuilder
+	public abstract class Builder : IBuilder
 	{
 		public abstract int Level { get; }
 		public abstract Vector2 StartPosition { get; }

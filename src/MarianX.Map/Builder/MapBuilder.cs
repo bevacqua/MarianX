@@ -1,5 +1,8 @@
 ﻿using System;
 using System.IO;
+using MarianX.Map.Builder.Levels;
+using MarianX.Map.Imaging;
+using MarianX.Map.Interface;
 using MarianX.World.Platform;
 
 namespace MarianX.Map.Builder
@@ -8,7 +11,7 @@ namespace MarianX.Map.Builder
 	{
 		private TileType[] tileTypes;
 
-		public void BuildAndSave(TileMatrixBuilder[] levels)
+		public void BuildAndSave(IBuilder[] levels)
 		{
 			if (levels == null || levels.Length == 0)
 			{
@@ -18,7 +21,7 @@ namespace MarianX.Map.Builder
 
 			tileTypes = levels[0].LoadTileTypes("../data/tiles.csv");
 
-			foreach (TileMatrixBuilder level in levels)
+			foreach (Builder level in levels)
 			{
 				BuildLevel(level);
 			}
@@ -26,7 +29,7 @@ namespace MarianX.Map.Builder
 			CopyFilesOverToContent();
 		}
 
-		private void BuildLevel(TileMatrixBuilder builder)
+		private void BuildLevel(IBuilder builder)
 		{
 			string level = string.Format("level_{0}", builder.Level);
 
@@ -42,15 +45,28 @@ namespace MarianX.Map.Builder
 				string path = string.Format("../data/tiles/{0}.png", tileType);
 				return File.OpenRead(path);
 			};
+
+			string indexTarget = string.Concat(level, "/map.idx");
+			string csvTarget = string.Concat(level, "/map.csv");
+			string fragmentTarget = string.Concat(level, "/map_{0}_{1}.png");
+
+			string npc = string.Format(LevelBuilder.FileFormat, builder.Level, "npc");
+			string npcRelative = string.Concat("../", npc);
+			string npcTarget = string.Concat(level, "/map.npc");
+			string mapTarget = string.Concat(level, "/map.png");
+
 			// metadata actually used for rendering maps.
 			FragmentedPersistance fragmentedPersistance = new FragmentedPersistance(getTileFileStream);
-			fragmentedPersistance.SaveFragmentMetadata(map, string.Concat(level, "/map.idx"), builder);
-			fragmentedPersistance.SaveTileMap(map, string.Concat(level, "/map_{0}_{1}.png"));
-			fragmentedPersistance.SaveTileMatrix(map, string.Concat(level, "/map.csv"));
+			fragmentedPersistance.SaveFragmentMetadata(map, indexTarget, builder);
+			fragmentedPersistance.SaveTileMap(map, fragmentTarget);
+			fragmentedPersistance.SaveTileMatrix(map, csvTarget);
 
 			// full map for preview for viewing and debugging.
 			Persistance persistance = new Persistance(getTileFileStream);
-			persistance.SaveTileMap(map, string.Concat(level, "/map.png"));
+			persistance.SaveTileMap(map, mapTarget);
+
+			// npc metadata: just copy over.
+			File.Copy(npcRelative, npcTarget, true);
 		}
 
 		private void SetupDirectory()

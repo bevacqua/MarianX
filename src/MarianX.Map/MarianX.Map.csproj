@@ -35,6 +35,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=2.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.2.2.0\lib\net40\AutoMapper.dll</HintPath>
@@ -53,20 +56,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builder\FragmentedPersistance.cs" />
-    <Compile Include="Builder\FullMapBuilder.cs" />
+    <Compile Include="Interface\IBuilder.cs" />
+    <Compile Include="Imaging\FragmentedPersistance.cs" />
+    <Compile Include="Builder\WorldBuilder.cs" />
     <Compile Include="Builder\Levels\LevelBuilder.cs" />
     <Compile Include="Builder\Levels\LevelBuilderInfo.cs" />
     <Compile Include="Builder\Levels\LevelBuilderRule.cs" />
     <Compile Include="Builder\Levels\LevelOne.cs" />
-    <Compile Include="Builder\Levels\LevelTwo.cs" />
     <Compile Include="Builder\MapBuilder.cs" />
-    <Compile Include="Builder\Persistance.cs" />
-    <Compile Include="Builder\TileMatrixBuilder.cs" />
+    <Compile Include="Imaging\Persistance.cs" />
+    <Compile Include="Builder\Builder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app.ico" />
     <Content Include="Data\Tiles\blank.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -138,10 +142,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Data\Levels\1\level.npc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\Levels\2\level.info">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Data\Levels\2\level.npcs">
+    <None Include="Data\Levels\2\level.npc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <EmbeddedResource Include="Data\Levels\2\level.rules">

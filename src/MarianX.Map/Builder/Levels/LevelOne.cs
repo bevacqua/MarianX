@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace MarianX.Map.Builder.Levels
 {
-	public class LevelOne : TileMatrixBuilder
+	public class LevelOne : Builder
 	{
 		public override int Level
 		{

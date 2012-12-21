@@ -7,7 +7,7 @@ using AutoMapper;
 using CsvHelper;
 using MarianX.World.Platform;
 
-namespace MarianX.Map.Builder
+namespace MarianX.Map.Imaging
 {
 	public class Persistance
 	{
