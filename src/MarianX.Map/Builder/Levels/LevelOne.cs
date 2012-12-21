@@ -1,7 +1,7 @@
 using MarianX.World.Platform;
 using Microsoft.Xna.Framework;
 
-namespace MarianX.Map.Builder
+namespace MarianX.Map.Builder.Levels
 {
 	public class LevelOne : TileMatrixBuilder
 	{

@@ -55,8 +55,11 @@
   <ItemGroup>
     <Compile Include="Builder\FragmentedPersistance.cs" />
     <Compile Include="Builder\FullMapBuilder.cs" />
-    <Compile Include="Builder\LevelOne.cs" />
-    <Compile Include="Builder\LevelTwo.cs" />
+    <Compile Include="Builder\Levels\LevelBuilder.cs" />
+    <Compile Include="Builder\Levels\LevelBuilderInfo.cs" />
+    <Compile Include="Builder\Levels\LevelBuilderRule.cs" />
+    <Compile Include="Builder\Levels\LevelOne.cs" />
+    <Compile Include="Builder\Levels\LevelTwo.cs" />
     <Compile Include="Builder\MapBuilder.cs" />
     <Compile Include="Builder\Persistance.cs" />
     <Compile Include="Builder\TileMatrixBuilder.cs" />
@@ -64,78 +67,87 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Graphics\Tiles\blank.png">
+    <Content Include="Data\Tiles\blank.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Graphics\Tiles\dirt_cliff_left.png">
+    <Content Include="Data\Tiles\dirt_cliff_left.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Graphics\Tiles\dirt_cliff_right.png">
+    <Content Include="Data\Tiles\dirt_cliff_right.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Graphics\Tiles\exit_0_0.png">
+    <Content Include="Data\Tiles\exit_0_0.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Graphics\Tiles\exit_0_1.png">
+    <Content Include="Data\Tiles\exit_0_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Graphics\Tiles\exit_0_2.png">
+    <Content Include="Data\Tiles\exit_0_2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Graphics\Tiles\exit_1_0.png">
+    <Content Include="Data\Tiles\exit_1_0.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Graphics\Tiles\exit_1_1.png">
+    <Content Include="Data\Tiles\exit_1_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Graphics\Tiles\exit_1_2.png">
+    <Content Include="Data\Tiles\exit_1_2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Graphics\Tiles\exit_2_0.png">
+    <Content Include="Data\Tiles\exit_2_0.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Graphics\Tiles\exit_2_1.png">
+    <Content Include="Data\Tiles\exit_2_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Graphics\Tiles\exit_2_2.png">
+    <Content Include="Data\Tiles\exit_2_2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Graphics\Tiles\grass_block.png">
+    <Content Include="Data\Tiles\grass_block.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Graphics\Tiles\grass_spikes_floor.png">
+    <Content Include="Data\Tiles\grass_spikes_floor.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Graphics\Tiles\lava.png">
+    <Content Include="Data\Tiles\lava.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Graphics\Tiles\land.png">
+    <Content Include="Data\Tiles\land.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Graphics\Tiles\dirt.png">
+    <Content Include="Data\Tiles\dirt.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Graphics\Tiles\grass.png">
+    <Content Include="Data\Tiles\grass.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Graphics\Tiles\spikes.png">
+    <Content Include="Data\Tiles\spikes.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Graphics\Tiles\spikes_floor.png">
+    <Content Include="Data\Tiles\spikes_floor.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Graphics\Tiles\stony.png">
+    <Content Include="Data\Tiles\stony.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Graphics\Tiles\lava_floor.png">
+    <Content Include="Data\Tiles\lava_floor.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Graphics\Tiles\stony_flowered.png">
+    <Content Include="Data\Tiles\stony_flowered.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Graphics\Tiles\metadata.csv">
+    <None Include="Data\Levels\2\level.info">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\Levels\2\level.npcs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <EmbeddedResource Include="Data\Levels\2\level.rules">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Include="Data\tiles.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />

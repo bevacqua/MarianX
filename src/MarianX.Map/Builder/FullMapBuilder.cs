@@ -1,3 +1,5 @@
+using MarianX.Map.Builder.Levels;
+
 namespace MarianX.Map.Builder
 {
 	public class FullMapBuilder : MapBuilder

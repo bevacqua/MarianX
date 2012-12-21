@@ -16,7 +16,7 @@ namespace MarianX.Map.Builder
 			}
 			SetupDirectory();
 
-			tileTypes = levels[0].LoadTileTypes("../graphics/tiles/metadata.csv");
+			tileTypes = levels[0].LoadTileTypes("../data/tiles.csv");
 
 			foreach (TileMatrixBuilder level in levels)
 			{
@@ -39,7 +39,7 @@ namespace MarianX.Map.Builder
 
 			Func<string, FileStream> getTileFileStream = tileType =>
 			{
-				string path = string.Format("../graphics/tiles/{0}.png", tileType);
+				string path = string.Format("../data/tiles/{0}.png", tileType);
 				return File.OpenRead(path);
 			};
 			// metadata actually used for rendering maps.
