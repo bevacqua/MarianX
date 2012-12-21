@@ -54,6 +54,11 @@ namespace MarianX.Map.Builder.Levels
 				text = text.Substring(1, text.Length - 1);
 			}
 
+			if (string.IsNullOrEmpty(text))
+			{
+				return offset;
+			}
+
 			int result = int.Parse(text);
 			return result + offset;
 		}

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
 using MarianX.Interface;
-using MarianX.Mobiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -10,23 +10,38 @@ namespace MarianX.Core
 	{
 		private readonly IList<IGameContent> contents;
 
+		protected IList<IGameContent> Contents
+		{
+			get { return contents.ToList(); }
+		}
+		
 		protected SpriteBatch spriteBatch { get; private set; }
 
-		public bool CanRaiseEvents { get; protected set; }
+		public bool HasContentLoaded { get; protected set; }
 
 		public ContentBasedGame()
 		{
 			contents = new List<IGameContent>();
 		}
 
-		protected virtual void AddContent(IGameContent gameContent)
+		protected virtual void ClearContent()
 		{
-			contents.Add(gameContent);
+			contents.Clear();
+		}
+
+		protected virtual void AddContent(IGameContent content)
+		{
+			contents.Add(content);
+
+			if (HasContentLoaded)
+			{
+				content.Load(Content);
+			}
 		}
 
 		protected override void Initialize()
 		{
-			foreach (IGameContent content in contents)
+			foreach (IGameContent content in Contents)
 			{
 				content.Initialize();
 			}
@@ -38,19 +53,19 @@ namespace MarianX.Core
 		{
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			foreach (IGameContent content in contents)
+			foreach (IGameContent content in Contents)
 			{
 				content.Load(Content);
 			}
 
 			base.LoadContent();
 
-			CanRaiseEvents = true;
+			HasContentLoaded = true;
 		}
 
 		protected override void UnloadContent()
 		{
-			foreach (IGameContent content in contents)
+			foreach (IGameContent content in Contents)
 			{
 				content.Unload();
 			}
@@ -68,7 +83,7 @@ namespace MarianX.Core
 
 		protected virtual void UpdateInput(GameTime gameTime)
 		{
-			foreach (IGameContent content in contents)
+			foreach (IGameContent content in Contents)
 			{
 				content.UpdateInput(gameTime);
 			}
@@ -76,7 +91,7 @@ namespace MarianX.Core
 
 		protected virtual void UpdateOutput(GameTime gameTime)
 		{
-			foreach (IGameContent content in contents)
+			foreach (IGameContent content in Contents)
 			{
 				content.UpdateOutput(gameTime);
 			}
@@ -86,7 +101,7 @@ namespace MarianX.Core
 		{
 			GraphicsDevice.Clear(Color.White);
 
-			foreach (IGameContent content in contents)
+			foreach (IGameContent content in Contents)
 			{
 				content.Draw(gameTime, spriteBatch);
 			}

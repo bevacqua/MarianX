@@ -84,7 +84,7 @@ namespace MarianX.Mobiles
 			return Think(gameTime);
 		}
 
-		private Vector2 Think(GameTime gameTime)
+		private Vector2 Think(GameTime gameTime, int thoughts = 3)
 		{
 			FloatRectangle aabb = BoundingBox.Bounds;
 			Vector2 interpolation = Movement.InterpolationCalculator.CalculateInterpolation(gameTime);
@@ -103,11 +103,15 @@ namespace MarianX.Mobiles
 			{
 				return interpolation;
 			}
-			else
+			else if (thoughts > 0)
 			{
 				ToggleDirection();
 
-				return Think(gameTime);
+				return Think(gameTime, --thoughts);
+			}
+			else
+			{
+				return Vector2.Zero;
 			}
 		}
 

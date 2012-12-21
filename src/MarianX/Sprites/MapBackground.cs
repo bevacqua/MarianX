@@ -15,8 +15,6 @@ namespace MarianX.Sprites
 
 		public Vector2 Start { get; private set; }
 
-		public bool Active { get; set; }
-
 		protected MapBackground(string path, string format)
 		{
 			IList<ScrollingBackgroundAsset> assetNames = FindAssetNames(path, format);
@@ -74,26 +72,16 @@ namespace MarianX.Sprites
 
 		public void UpdateInput(GameTime gameTime)
 		{
-			if (Active)
-			{
-				scrollingBackground.UpdateInput(gameTime);
-			}
+			scrollingBackground.UpdateInput(gameTime);
 		}
 
 		public void UpdateOutput(GameTime gameTime)
 		{
-			if (Active)
-			{
-				scrollingBackground.UpdateOutput(gameTime);
-			}
+			scrollingBackground.UpdateOutput(gameTime);
 		}
 
 		public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
 		{
-			if (!Active)
-			{
-				return;
-			}
 			if (Config.Diagnostic)
 			{
 				DrawDiagnosticTileGrid(spriteBatch);
@@ -109,10 +97,7 @@ namespace MarianX.Sprites
 
 		public void UpdateScreenPosition(Vector2 screenPosition)
 		{
-			if (Active)
-			{
-				scrollingBackground.UpdateScreenPosition(screenPosition);
-			}
+			scrollingBackground.UpdateScreenPosition(screenPosition);
 		}
 
 		public Vector2 Position

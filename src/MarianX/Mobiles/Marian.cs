@@ -27,7 +27,8 @@ namespace MarianX.Mobiles
 			}
 			set
 			{
-				if (State == HitBoxState.Dead) // ignore state changes when dead.
+				// ignore state changes when dead or completing a level.
+				if (State == HitBoxState.Dead || State == HitBoxState.LevelCompleteAnimation)
 				{
 					return;
 				}
@@ -78,7 +79,7 @@ namespace MarianX.Mobiles
 			SetStartPosition();
 			Flash();
 		}
-		
+
 		private KeyboardState keyboardState;
 
 		public override void UpdateInput(GameTime gameTime)

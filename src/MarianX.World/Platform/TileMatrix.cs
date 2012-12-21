@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using CsvHelper;
 using MarianX.World.Interface;
 using MarianX.World.Physics;
 using Microsoft.Xna.Framework;
@@ -60,6 +63,17 @@ namespace MarianX.World.Platform
 			}
 
 			return intersection;
+		}
+
+		public static IList<NpcRecord> GetNpcLocations()
+		{
+			string format = "content/map/level_{0}/map.npc";
+			string path = string.Format(format, Instance.Metadata.Level);
+			using(StreamReader streamReader = new StreamReader(path))
+			using (CsvReader csvReader = new CsvReader(streamReader))
+			{
+				return csvReader.GetRecords<NpcRecord>().ToList();
+			}
 		}
 	}
 }

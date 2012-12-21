@@ -119,10 +119,10 @@
       <Name>map</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Compile Include="Map\level_2\map.npc">
+    <None Include="Map\level_2\map.npc">
       <Name>map</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Sounds\death0.wma">

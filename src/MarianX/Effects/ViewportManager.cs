@@ -34,6 +34,11 @@ namespace MarianX.Effects
 			position = new Vector2(location.X, location.Y);
 		}
 
+		public void Clear()
+		{
+			contents.Clear();
+		}
+
 		public void Manage(IGameContent content)
 		{
 			contents.Add(content);

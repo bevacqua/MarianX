@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using MarianX.Diagnostics;
 using MarianX.Effects;
 using MarianX.Interface;
@@ -20,6 +21,8 @@ namespace MarianX.Core
 		public ViewportManager ViewportManager { get; private set; }
 
 		private Marian marian;
+		private SongManager songManager;
+
 		public MobileCollisionDetectionEngine MobileCollisionDetection { get; private set; }
 
 		public GameCore()
@@ -46,14 +49,7 @@ namespace MarianX.Core
 			ViewportManager.Initialize();
 
 			InitializeMap();
-			InitializeMarian();
-			InitializeEffects();
 			AdvanceLevel();
-
-			Gloop gloop = new Gloop(new Vector2(90, 60));
-			AddManagedContent(gloop);
-
-			base.Initialize();
 		}
 
 		private void InitializeMap()
@@ -62,21 +58,19 @@ namespace MarianX.Core
 
 			for (int i = 1; i <= levelCount; i++)
 			{
-				levels.Add(new LevelBackground(i));
-			}
-
-			foreach (LevelBackground level in levels)
-			{
-				AddManagedContent(level);
+				LevelBackground level = new LevelBackground(i);
+				levels.Add(level);
 			}
 		}
 
 		private void InitializeMarian()
 		{
-			marian = new Marian();
-			marian.Move += ViewportManager.CharacterMove;
-
-			AddManagedContent(marian);
+			if (marian == null)
+			{
+				marian = new Marian();
+				marian.Move += ViewportManager.CharacterMove;
+			}
+			AddAndTrack(marian);
 
 			var collisionDetection = marian.Movement.CollisionDetection as IGameContent;
 			if (collisionDetection != null)
@@ -89,7 +83,11 @@ namespace MarianX.Core
 
 		private void InitializeEffects()
 		{
-			AddContent(new SongManager());
+			if (songManager == null)
+			{
+				songManager = new SongManager();
+			}
+			AddContent(songManager);
 		}
 
 		public int LevelIndex { get; private set; }
@@ -101,21 +99,42 @@ namespace MarianX.Core
 
 		public void SetLevelByIndex(int index)
 		{
-			foreach (LevelBackground level in levels)
-			{
-				level.Active = false;
-			}
 			LevelBackground target = levels[index];
 			TileMatrix.Use(target);
-			target.Active = true;
 
 			LevelIndex = index;
-			marian.Initialize();
+			LoadLevel(target);
 		}
 
-		protected void AddManagedContent(IGameContent content)
+		private void LoadLevel(LevelBackground background)
 		{
-			base.AddContent(content);
+			ClearContent();
+			ViewportManager.Clear();
+
+			AddAndTrack(background);
+
+			InitializeMarian();
+			InitializeEffects();
+
+			AddAndTrackNpcs();
+
+			base.Initialize();
+		}
+
+		private void AddAndTrackNpcs()
+		{
+			IList<NpcRecord> locations = TileMatrix.GetNpcLocations();
+
+			foreach (NpcRecord location in locations)
+			{
+				Gloop gloop = new Gloop(location.Position);
+				AddAndTrack(gloop);
+			}
+		}
+
+		protected void AddAndTrack(IGameContent content)
+		{
+			AddContent(content);
 			ViewportManager.Manage(content);
 		}
 
