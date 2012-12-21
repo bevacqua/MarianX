@@ -9,7 +9,7 @@ namespace MarianX.World.Platform
 
 		public Vector2 Position
 		{
-			get { return new Vector2(X, Y); }
+			get { return new Vector2(X * Tile.Width, Y * Tile.Height); }
 		}
 	}
 }

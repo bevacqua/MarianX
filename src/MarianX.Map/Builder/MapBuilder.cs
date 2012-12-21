@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using MarianX.Map.Builder.Levels;
 using MarianX.Map.Imaging;
@@ -21,15 +22,23 @@ namespace MarianX.Map.Builder
 
 			tileTypes = levels[0].LoadTileTypes("../data/tiles.csv");
 
+			IList<Action> actions = new List<Action>();
+
 			foreach (Builder level in levels)
 			{
-				BuildLevel(level);
+				Action saveFullMapPng = BuildLevel(level);
+				actions.Add(saveFullMapPng);
 			}
 
 			CopyFilesOverToContent();
+
+			foreach (Action action in actions)
+			{
+				action();
+			}
 		}
 
-		private void BuildLevel(IBuilder builder)
+		private Action BuildLevel(IBuilder builder)
 		{
 			string level = string.Format("level_{0}", builder.Level);
 
@@ -60,13 +69,16 @@ namespace MarianX.Map.Builder
 			fragmentedPersistance.SaveFragmentMetadata(map, indexTarget, builder);
 			fragmentedPersistance.SaveTileMap(map, fragmentTarget);
 			fragmentedPersistance.SaveTileMatrix(map, csvTarget);
-
-			// full map for preview for viewing and debugging.
-			Persistance persistance = new Persistance(getTileFileStream);
-			persistance.SaveTileMap(map, mapTarget);
-
+			
 			// npc metadata: just copy over.
 			File.Copy(npcRelative, npcTarget, true);
+
+			return () =>
+			{
+				// full map for preview for viewing and debugging.
+				Persistance persistance = new Persistance(getTileFileStream);
+				persistance.SaveTileMap(map, mapTarget);
+			};
 		}
 
 		private void SetupDirectory()

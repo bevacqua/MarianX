@@ -1,4 +1,5 @@
 using System;
+using MarianX.World.Platform;
 using Microsoft.Xna.Framework;
 
 namespace MarianX.Map.Builder.Levels
@@ -20,7 +21,7 @@ namespace MarianX.Map.Builder.Levels
 
 		public LevelBuilderInfo()
 		{
-			start = new Lazy<Vector2>(() => new Vector2(StartX, StartY));
+			start = new Lazy<Vector2>(() => new Vector2(StartX * Tile.Width, StartY * Tile.Height));
 		}
 	}
 }

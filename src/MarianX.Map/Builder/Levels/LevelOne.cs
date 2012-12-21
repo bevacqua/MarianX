@@ -17,7 +17,7 @@ namespace MarianX.Map.Builder.Levels
 
 		protected override int Columns
 		{
-			get { return 200; }
+			get { return 140; }
 		}
 
 		protected override int Rows
