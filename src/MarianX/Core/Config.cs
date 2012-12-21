@@ -11,6 +11,11 @@ namespace MarianX.Core
 			Diagnostic = Bool(Get("Diagnostics")) ?? false;
 		}
 
+		public static int Start
+		{
+			get { return Int("Start") ?? 1; }
+		}
+
 		private static string Get(string property)
 		{
 			return ConfigurationManager.AppSettings[property];
@@ -20,6 +25,16 @@ namespace MarianX.Core
 		{
 			bool result;
 			if (bool.TryParse(property, out result))
+			{
+				return result;
+			}
+			return null;
+		}
+
+		private static int? Int(string property)
+		{
+			int result;
+			if (int.TryParse(property, out result))
 			{
 				return result;
 			}

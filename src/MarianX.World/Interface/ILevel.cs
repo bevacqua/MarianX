@@ -6,5 +6,10 @@ namespace MarianX.World.Interface
 	{
 		int Level { get; }
 		Vector2 Start { get; }
+
+		int ScreenTop { get; }
+		int ScreenLeft { get; }
+		int ScreenBottom { get; }
+		int ScreenRight { get; }
 	}
 }

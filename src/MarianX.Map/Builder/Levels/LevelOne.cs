@@ -15,6 +15,26 @@ namespace MarianX.Map.Builder.Levels
 			get { return new Vector2(85, 450); }
 		}
 
+		public override int ScreenTop
+		{
+			get { return 144; }
+		}
+
+		public override int ScreenLeft
+		{
+			get { return 288; }
+		}
+
+		public override int ScreenBottom
+		{
+			get { return 144; }
+		}
+
+		public override int ScreenRight
+		{
+			get { return 288; }
+		}
+
 		protected override int Columns
 		{
 			get { return 140; }

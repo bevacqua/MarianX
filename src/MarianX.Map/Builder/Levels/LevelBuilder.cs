@@ -27,6 +27,26 @@ namespace MarianX.Map.Builder.Levels
 			get { return info.Start; }
 		}
 
+		public override int ScreenTop
+		{
+			get { return info.ScreenTop; }
+		}
+
+		public override int ScreenLeft
+		{
+			get { return info.ScreenLeft; }
+		}
+
+		public override int ScreenBottom
+		{
+			get { return info.ScreenBottom; }
+		}
+
+		public override int ScreenRight
+		{
+			get { return info.ScreenRight; }
+		}
+
 		protected override int Columns
 		{
 			get { return info.Columns; }
@@ -81,7 +101,7 @@ namespace MarianX.Map.Builder.Levels
 
 		protected override TileType SelectTileType(TileType[] tileTypes, int x, int y)
 		{
-			int index = 0;
+			TileType tile = tileTypes[0];
 
 			foreach (LevelBuilderRule rule in rules)
 			{
@@ -89,12 +109,21 @@ namespace MarianX.Map.Builder.Levels
 				{
 					if (y >= rule.Y && y < rule.Bottom)
 					{
-						index = rule.Tile; // don't break, so rules can be overwritten.
+						int index;
+						
+						if (int.TryParse(rule.Tile, out index))
+						{
+							tile = tileTypes[index];
+						}
+						else
+						{
+							tile = tileTypes.First(t => t.Type == rule.Tile);
+						}
 					}
 				}
 			}
 
-			return tileTypes[index];
+			return tile;
 		}
 	}
 }

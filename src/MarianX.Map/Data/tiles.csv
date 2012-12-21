@@ -22,3 +22,15 @@ exit_2_1,false,0,0,,false,false
 exit_0_2,false,0,0,,false,false
 exit_1_2,false,0,0,,false,true
 exit_2_2,false,0,0,,false,false
+wall_left,true,0,0,,false,false
+wall_left_cliff,true,0,0,,false,false
+wall_right,true,0,0,,false,false
+wall_right_cliff,true,0,0,,false,false
+wall,true,0,0,,false,false
+purpurine,false,0,0,,false,false
+purpurine_floor,true,0,0,,false,false
+purpurine_floor_base,true,0,0,,false,false
+wall_left_spike,false,0,0,,true,false
+wall_right_spike,false,0,0,,true,false
+wall_top_spike,false,0,0,,true,false
+wall_bottom_spike,false,0,0,,true,false

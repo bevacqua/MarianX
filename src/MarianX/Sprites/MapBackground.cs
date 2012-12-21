@@ -14,37 +14,42 @@ namespace MarianX.Sprites
 		private readonly ScrollingBackground scrollingBackground;
 
 		public Vector2 Start { get; private set; }
+		public int ScreenTop { get; private set; }
+		public int ScreenLeft { get; private set; }
+		public int ScreenBottom { get; private set; }
+		public int ScreenRight { get; private set; }
 
 		protected MapBackground(string path, string format)
 		{
-			IList<ScrollingBackgroundAsset> assetNames = FindAssetNames(path, format);
+			IList<ScrollingBackgroundAsset> assetNames = ReadInputFile(path, format);
 			scrollingBackground = new ScrollingBackground(assetNames);
 		}
 
-		private IList<ScrollingBackgroundAsset> FindAssetNames(string path, string nameFormat)
+		private IList<ScrollingBackgroundAsset> ReadInputFile(string path, string nameFormat)
 		{
 			IList<ScrollingBackgroundAsset> assetNames = new List<ScrollingBackgroundAsset>();
 
 			using (Stream stream = File.OpenRead(path))
 			using (TextReader reader = new StreamReader(stream))
 			{
-				string width = reader.ReadLine();
-				string height = reader.ReadLine();
-				string level = reader.ReadLine();
-				string startX = reader.ReadLine();
-				string startY = reader.ReadLine();
+				int width = ReadInt(reader);
+				int height = ReadInt(reader);
 
-				int w = int.Parse(width);
-				int h = int.Parse(height);
+				int level = ReadInt(reader);
 
-				float xS = float.Parse(startX);
-				float yS = float.Parse(startY);
+				float xS = ReadFloat(reader);
+				float yS = ReadFloat(reader);
 
 				Start = new Vector2(xS, yS);
 
-				for (int x = 0; x < w; x++)
+				ScreenTop = ReadInt(reader);
+				ScreenLeft = ReadInt(reader);
+				ScreenBottom = ReadInt(reader);
+				ScreenRight = ReadInt(reader);
+
+				for (int x = 0; x < width; x++)
 				{
-					for (int y = 0; y < h; y++)
+					for (int y = 0; y < height; y++)
 					{
 						string name = string.Format(nameFormat, level, x, y);
 						assetNames.Add(new ScrollingBackgroundAsset
@@ -58,6 +63,18 @@ namespace MarianX.Sprites
 			}
 
 			return assetNames;
+		}
+
+		private int ReadInt(TextReader reader)
+		{
+			string line = reader.ReadLine();
+			return int.Parse(line);
+		}
+
+		private float ReadFloat(TextReader reader)
+		{
+			string line = reader.ReadLine();
+			return float.Parse(line);
 		}
 
 		public void Initialize()

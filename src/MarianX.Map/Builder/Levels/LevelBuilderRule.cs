@@ -2,7 +2,7 @@ namespace MarianX.Map.Builder.Levels
 {
 	public class LevelBuilderRule
 	{
-		public int Tile { get; set; }
+		public string Tile { get; set; }
 		public int Width { get; set; }
 		public int Height { get; set; }
 		public int X { get; set; }

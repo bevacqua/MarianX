@@ -43,6 +43,11 @@ namespace MarianX.Map.Builder
 			return map;
 		}
 
+		public abstract int ScreenTop { get; }
+		public abstract int ScreenLeft { get; }
+		public abstract int ScreenBottom { get; }
+		public abstract int ScreenRight { get; }
+
 		protected abstract TileType SelectTileType(TileType[] tileTypes, int x, int y);
 	}
 }

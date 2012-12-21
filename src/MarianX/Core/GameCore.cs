@@ -49,7 +49,7 @@ namespace MarianX.Core
 			ViewportManager.Initialize();
 
 			InitializeMap();
-			AdvanceLevel();
+			SetLevelByIndex(Config.Start);
 		}
 
 		private void InitializeMap()

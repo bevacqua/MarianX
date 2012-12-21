@@ -65,6 +65,10 @@ namespace MarianX.Map.Imaging
 				writer.WriteLine(builder.Level);
 				writer.WriteLine(builder.StartPosition.X);
 				writer.WriteLine(builder.StartPosition.Y);
+				writer.WriteLine(builder.ScreenTop);
+				writer.WriteLine(builder.ScreenLeft);
+				writer.WriteLine(builder.ScreenBottom);
+				writer.WriteLine(builder.ScreenRight);
 			}
 		}
 	}

@@ -1,2 +1,2 @@
-Level,StartX,StartY,Columns,Rows
-2,3,7,125,24
+Level,StartX,StartY,Columns,Rows,ScreenTop,ScreenLeft,ScreenBottom,ScreenRight
+2,5,4,70,70,144,144,322,144
