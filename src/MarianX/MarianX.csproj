@@ -163,14 +163,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Error.resx</DependentUpon>
     </Compile>
-    <Compile Include="Sprites\ScrollingBackgroundAsset.cs" />
-    <Compile Include="Sprites\ScrollingBackgroundSprite.cs" />
+    <Compile Include="Sprites\BackgroundAsset.cs" />
+    <Compile Include="Sprites\BackgroundSprite.cs" />
     <Compile Include="Sprites\Square.cs" />
     <Compile Include="Sprites\SquareGrid.cs" />
     <Compile Include="Sprites\MapBackground.cs" />
     <Compile Include="Mobiles\Mobile.cs" />
     <Compile Include="Mobiles\Marian.cs" />
-    <Compile Include="Sprites\ScrollingBackground.cs" />
+    <Compile Include="Sprites\Background.cs" />
     <Compile Include="Contents\Sprite.cs" />
   </ItemGroup>
   <ItemGroup>

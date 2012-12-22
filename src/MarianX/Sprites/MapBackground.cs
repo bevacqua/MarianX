@@ -11,7 +11,7 @@ namespace MarianX.Sprites
 {
 	public abstract class MapBackground : IGameContent
 	{
-		private readonly ScrollingBackground scrollingBackground;
+		private readonly Background background;
 
 		public Vector2 Start { get; private set; }
 		public int ScreenTop { get; private set; }
@@ -21,13 +21,13 @@ namespace MarianX.Sprites
 
 		protected MapBackground(string path, string format)
 		{
-			IList<ScrollingBackgroundAsset> assetNames = ReadInputFile(path, format);
-			scrollingBackground = new ScrollingBackground(assetNames);
+			IList<BackgroundAsset> assetNames = ReadInputFile(path, format);
+			background = new Background(assetNames);
 		}
 
-		private IList<ScrollingBackgroundAsset> ReadInputFile(string path, string nameFormat)
+		private IList<BackgroundAsset> ReadInputFile(string path, string nameFormat)
 		{
-			IList<ScrollingBackgroundAsset> assetNames = new List<ScrollingBackgroundAsset>();
+			IList<BackgroundAsset> assetNames = new List<BackgroundAsset>();
 
 			using (Stream stream = File.OpenRead(path))
 			using (TextReader reader = new StreamReader(stream))
@@ -52,7 +52,7 @@ namespace MarianX.Sprites
 					for (int y = 0; y < height; y++)
 					{
 						string name = string.Format(nameFormat, level, x, y);
-						assetNames.Add(new ScrollingBackgroundAsset
+						assetNames.Add(new BackgroundAsset
 						{
 							Name = name,
 							X = x,
@@ -79,22 +79,22 @@ namespace MarianX.Sprites
 
 		public void Initialize()
 		{
-			scrollingBackground.Initialize();
+			background.Initialize();
 		}
 
 		public void Load(ContentManager content)
 		{
-			scrollingBackground.Load(content);
+			background.Load(content);
 		}
 
 		public void UpdateInput(GameTime gameTime)
 		{
-			scrollingBackground.UpdateInput(gameTime);
+			background.UpdateInput(gameTime);
 		}
 
 		public void UpdateOutput(GameTime gameTime)
 		{
-			scrollingBackground.UpdateOutput(gameTime);
+			background.UpdateOutput(gameTime);
 		}
 
 		public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -104,22 +104,22 @@ namespace MarianX.Sprites
 				DrawDiagnosticTileGrid(spriteBatch);
 				return;
 			}
-			scrollingBackground.Draw(gameTime, spriteBatch);
+			background.Draw(gameTime, spriteBatch);
 		}
 
 		public void Unload()
 		{
-			scrollingBackground.Unload();
+			background.Unload();
 		}
 
 		public void UpdateScreenPosition(Vector2 screenPosition)
 		{
-			scrollingBackground.UpdateScreenPosition(screenPosition);
+			background.UpdateScreenPosition(screenPosition);
 		}
 
 		public Vector2 Position
 		{
-			get { return scrollingBackground.Position; }
+			get { return background.Position; }
 		}
 
 		private ISquareGrid diagnosticTextureGrid;

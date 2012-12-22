@@ -7,24 +7,24 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MarianX.Sprites
 {
-	public class ScrollingBackground : IGameContent
+	public class Background : IGameContent
 	{
-		private readonly IList<ScrollingBackgroundAsset> assets;
-		private readonly IList<ScrollingBackgroundSprite> sprites;
+		private readonly IList<BackgroundAsset> assets;
+		private readonly IList<BackgroundSprite> sprites;
 
 		public Vector2 Position { get; private set; }
 
-		public ScrollingBackground(IList<ScrollingBackgroundAsset> assets)
+		public Background(IList<BackgroundAsset> assets)
 		{
 			this.assets = assets;
-			sprites = new List<ScrollingBackgroundSprite>();
+			sprites = new List<BackgroundSprite>();
 		}
 
 		public virtual void Initialize()
 		{
-			foreach (ScrollingBackgroundAsset asset in assets)
+			foreach (BackgroundAsset asset in assets)
 			{
-				var sprite = new ScrollingBackgroundSprite(asset);
+				var sprite = new BackgroundSprite(asset);
 				sprite.Initialize();
 				sprites.Add(sprite);
 			}
@@ -32,7 +32,7 @@ namespace MarianX.Sprites
 
 		public virtual void Load(ContentManager content)
 		{
-			foreach (ScrollingBackgroundSprite sprite in sprites)
+			foreach (BackgroundSprite sprite in sprites)
 			{
 				sprite.Load(content);
 			}
@@ -42,7 +42,7 @@ namespace MarianX.Sprites
 
 		private void Arrange()
 		{
-			foreach (ScrollingBackgroundSprite sprite in sprites)
+			foreach (BackgroundSprite sprite in sprites)
 			{
 				int x = sprites.Where(s => 
 					s.Asset.X < sprite.Asset.X && 
@@ -70,7 +70,7 @@ namespace MarianX.Sprites
 		{
 			spriteBatch.Begin();
 
-			foreach (ScrollingBackgroundSprite sprite in sprites)
+			foreach (BackgroundSprite sprite in sprites)
 			{
 				sprite.Draw(gameTime, spriteBatch);
 			}
@@ -84,7 +84,7 @@ namespace MarianX.Sprites
 
 		public void UpdateScreenPosition(Vector2 screenPosition)
 		{
-			foreach (ScrollingBackgroundSprite sprite in sprites)
+			foreach (BackgroundSprite sprite in sprites)
 			{
 				// relativize the portion of background to the provided ScreenPosition.
 				Vector2 relativeScreenPosition = screenPosition + sprite.Position;

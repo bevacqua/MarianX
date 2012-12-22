@@ -1,6 +1,6 @@
 namespace MarianX.Sprites
 {
-	public class ScrollingBackgroundAsset
+	public class BackgroundAsset
 	{
 		public string Name { get; set; }
 		public int X { get; set; }
