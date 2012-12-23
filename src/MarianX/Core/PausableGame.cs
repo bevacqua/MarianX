@@ -1,5 +1,6 @@
 using MarianX.Contents;
 using MarianX.Diagnostics;
+using MarianX.Enum;
 using MarianX.Geometry;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -45,7 +46,7 @@ namespace MarianX.Core
 		private void DrawGameOver()
 		{
 			string title = "SIAMO FUORI!";
-			string legend = "(premere un tasto qualsiasi per continuare)";
+			string legend = "(premere Enter per ricominciare)";
 
 			Square square = new Square
 			{
@@ -93,7 +94,7 @@ namespace MarianX.Core
 			KeyboardState keyboardState = Keyboard.GetState();
 			KeyboardConfiguration kb = new KeyboardConfiguration(keyboardState);
 
-			if (kb.IsAnyKeyPressed(oldState))
+			if (kb.IsKeyPressed(ActionKey.Resume, oldState))
 			{
 				gameOver = false;
 				Restart();

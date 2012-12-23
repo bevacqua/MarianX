@@ -9,6 +9,7 @@ namespace MarianX.Enum
 		ToggleDebugMode,
 		UpdateInNextFrame,
 		Suicide,
-		ToggleDiagnosticMode
+		ToggleDiagnosticMode,
+		Resume
 	}
 }

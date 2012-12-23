@@ -21,6 +21,7 @@ namespace MarianX.Core
 				{ActionKey.ToggleDebugMode, Keys.Divide},
 				{ActionKey.UpdateInNextFrame, Keys.Multiply},
 				{ActionKey.Suicide, Keys.Subtract},
+				{ActionKey.Resume, Keys.Enter},
 			};
 		}
 
@@ -49,13 +50,6 @@ namespace MarianX.Core
 			bool wasDown = IsKeyDown(key, oldState);
 
 			return down && !wasDown;
-		}
-
-		public bool IsAnyKeyPressed(KeyboardState oldState)
-		{
-			Keys[] oldKeys = oldState.GetPressedKeys();
-			Keys[] newKeys = keyboardState.GetPressedKeys();
-			return !newKeys.All(oldKeys.Contains);
 		}
 	}
 }
