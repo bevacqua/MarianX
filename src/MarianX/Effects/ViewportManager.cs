@@ -4,7 +4,6 @@ using MarianX.Core;
 using MarianX.Events;
 using MarianX.Interface;
 using MarianX.Mobiles;
-using MarianX.World.Configuration;
 using MarianX.World.Interface;
 using MarianX.World.Platform;
 using Microsoft.Xna.Framework;
@@ -56,7 +55,7 @@ namespace MarianX.Effects
 			}
 		}
 
-		public void NpcMove(Mobile sender, MoveArgs args)
+		public void OnMobileMoved(Mobile sender, MoveArgs args)
 		{
 			UpdateScreenPosition(sender);
 		}

@@ -107,6 +107,10 @@
       <Name>map</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Map\level_1\map.item">
+      <Name>map</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Map\level_1\map.npc">
       <Name>map</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -119,6 +123,10 @@
       <Name>map</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Map\level_2\map.item">
+      <Name>map</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Map\level_2\map.npc">
       <Name>map</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -128,6 +136,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Map\level_3\map.idx">
+      <Name>map</Name>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Map\level_3\map.item">
       <Name>map</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -170,6 +182,7 @@
       <Name>jail</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ColorKeyColor>255, 255, 255, 255</ProcessorParameters_ColorKeyColor>
     </Compile>
     <Compile Include="Mobiles\marian_guided.png">
       <Name>marian_guided</Name>
@@ -283,6 +296,23 @@
   <ItemGroup>
     <Compile Include="Map\level_3\map_2_0.png">
       <Name>map_2_0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Map\level_3\map_0_1.png">
+      <Name>map_0_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Map\level_3\map_1_1.png">
+      <Name>map_1_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Map\level_3\map_2_1.png">
+      <Name>map_2_1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

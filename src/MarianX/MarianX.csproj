@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contents\Font.cs" />
+    <Compile Include="Core\LevelManager.cs" />
     <Compile Include="Diagnostics\DebuggableGame.cs" />
     <Compile Include="Diagnostics\DiagnosticGame.cs" />
     <Compile Include="Diagnostics\Diagnostic.cs" />
@@ -124,9 +125,11 @@
     <Compile Include="Events\MoveArgs.cs" />
     <Compile Include="Interface\ISquareGrid.cs" />
     <Compile Include="Items\Item.cs" />
+    <Compile Include="Items\Jail.cs" />
     <Compile Include="Mobiles\NPC\Gloop.cs" />
     <Compile Include="Mobiles\NPC\Npc.cs" />
     <Compile Include="Physics\AxisAlignedBoundingBox.cs" />
+    <Compile Include="Physics\BoundingBox2.cs" />
     <Compile Include="Physics\DynamicCollisionDetection.cs" />
     <Compile Include="Physics\DynamicCollisionDetectionEngine.cs" />
     <Compile Include="Physics\StaticCollisionDetection.cs" />

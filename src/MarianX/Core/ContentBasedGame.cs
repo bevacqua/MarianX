@@ -24,12 +24,12 @@ namespace MarianX.Core
 			contents = new List<IGameContent>();
 		}
 
-		protected virtual void ClearContent()
+		public virtual void ClearContent()
 		{
 			contents.Clear();
 		}
 
-		protected virtual void AddContent(IGameContent content)
+		public virtual void AddContent(IGameContent content)
 		{
 			contents.Add(content);
 

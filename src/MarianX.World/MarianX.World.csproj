@@ -88,6 +88,8 @@
     <Compile Include="Interface\ILevel.cs" />
     <Compile Include="Extensions\Vector2.cs" />
     <Compile Include="Physics\FloatRectangle.cs" />
+    <Compile Include="Platform\ItemRecord.cs" />
+    <Compile Include="Platform\MobileRecord.cs" />
     <Compile Include="Platform\NpcRecord.cs" />
     <Compile Include="Platform\TileRecord.cs" />
     <Compile Include="Platform\Tile.cs" />

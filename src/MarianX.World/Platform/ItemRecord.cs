@@ -1,6 +1,6 @@
 namespace MarianX.World.Platform
 {
-	public class NpcRecord : MobileRecord
+	public class ItemRecord : MobileRecord
 	{
 	}
 }

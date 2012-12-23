@@ -1,8 +1,8 @@
-X,Y
-22,14
-15,35
-19,25
-5,50
-46,40
-60,6
-45,30
+TypeName,X,Y
+MarianX.Mobiles.NPC.Gloop,22,14
+MarianX.Mobiles.NPC.Gloop,15,35
+MarianX.Mobiles.NPC.Gloop,19,25
+MarianX.Mobiles.NPC.Gloop,5,50
+MarianX.Mobiles.NPC.Gloop,46,40
+MarianX.Mobiles.NPC.Gloop,60,6
+MarianX.Mobiles.NPC.Gloop,45,30

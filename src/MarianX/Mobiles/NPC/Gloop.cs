@@ -1,5 +1,4 @@
 using MarianX.Contents;
-using MarianX.Core;
 using MarianX.Effects;
 using MarianX.Enum;
 using MarianX.Physics;
@@ -45,17 +44,11 @@ namespace MarianX.Mobiles.NPC
 			}
 		}
 
-		private readonly Vector2 startPosition;
-
-		public Gloop(Vector2 startPosition)
+		public Gloop()
 			: base(AssetName, settings)
 		{
 			animation = new GloopAnimation(this);
-
 			BoundingBox = new GloopBoundingBox();
-			Move += GameCore.Instance.ViewportManager.NpcMove;
-
-			this.startPosition = startPosition;
 		}
 
 		public override void Initialize()
@@ -65,7 +58,6 @@ namespace MarianX.Mobiles.NPC
 			IdleEffects();
 			Speed = Vector2.Zero;
 			Direction = Direction.Right;
-			Position = startPosition;
 		}
 
 		protected void IdleEffects()

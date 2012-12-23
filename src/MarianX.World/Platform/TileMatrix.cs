@@ -75,5 +75,16 @@ namespace MarianX.World.Platform
 				return csvReader.GetRecords<NpcRecord>().ToList();
 			}
 		}
+
+		public static IList<ItemRecord> GetItemMetadata()
+		{
+			string format = "content/map/level_{0}/map.item";
+			string path = string.Format(format, Instance.Metadata.Level);
+			using (StreamReader streamReader = new StreamReader(path))
+			using (CsvReader csvReader = new CsvReader(streamReader))
+			{
+				return csvReader.GetRecords<ItemRecord>().ToList();
+			}
+		}
 	}
 }

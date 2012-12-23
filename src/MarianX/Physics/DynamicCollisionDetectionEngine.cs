@@ -20,6 +20,8 @@ namespace MarianX.Physics
 			this.marian = marian;
 
 			npcs = new List<Npc>();
+			items = new List<Item>();
+
 			collisionDetection = new DynamicCollisionDetection();
 
 			marian.Move += marian_Move;

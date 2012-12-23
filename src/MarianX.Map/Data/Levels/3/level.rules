@@ -4,35 +4,35 @@ stone_1,0,0,*,*,0.30
 stone_2,0,0,*,*,0.30
 stone_3,0,0,*,*,0.30
 
-stone_floor,0,8,*,1
-stone_floor_base,0,9,*,*
+stone_floor,0,15,*,1
+stone_floor_base,0,16,*,*
 
-stone_0,15,0,8,*
-stone_1,15,0,8,*,0.30
-stone_2,15,0,8,*,0.30
-stone_3,15,0,8,*,0.30
+stone_0,15,0,15,*
+stone_1,15,0,15,*,0.30
+stone_2,15,0,15,*,0.30
+stone_3,15,0,15,*,0.30
 
-lava_stone,15,*-17,8,1
-lava_floor,15,*-16,8,1
-black,15,*-15,8,*
+lava_stone,15,*-22,8,1
+lava_floor,15,*-21,8,1
+black,15,*-20,8,*
 
 stone_0,35,0,3,*
 stone_1,35,0,3,*,0.30
 stone_2,35,0,3,*,0.30
 stone_3,35,0,3,*,0.30
 
-lava_stone,35,*-17,3,1
-lava_floor,35,*-16,3,1
-black,35,*-15,3,*
+lava_stone,35,*-22,3,1
+lava_floor,35,*-21,3,1
+black,35,*-20,3,*
 
 stone_0,60,0,13,*
 stone_1,60,0,13,*,0.30
 stone_2,60,0,13,*,0.30
 stone_3,60,0,13,*,0.30
 
-lava_stone,60,*-17,13,1
-lava_floor,60,*-16,13,1
-black,60,*-15,13,*
+lava_stone,60,*-22,13,1
+lava_floor,60,*-21,13,1
+black,60,*-20,13,*
 
-stone_floor,87,7,*,1
-stone_floor_base,87,8,*,*
+stone_floor,87,14,*,1
+stone_floor_base,87,15,*,*

@@ -10,7 +10,7 @@ namespace MarianX.World.Configuration
 
 		public const int FrameWidth = 48;
 		public const int FrameHeight = 72;
-
+		
 		public const int HitBoxWidth = 1;
 		public const int HitBoxHeight = 2;
 
@@ -48,5 +48,11 @@ namespace MarianX.World.Configuration
 		public static readonly Vector2 GloopVertigoMargin = new Vector2(0, 20);
 
 		public const double GameSpeedPower = 1.85;
+
+		public const int JailFrameWidth = 120;
+		public const int JailFrameHeight = 96;
+
+		public const int JailHitBoxWidth = 3;
+		public const int JailHitBoxHeight = 2;
 	}
 }
