@@ -101,7 +101,6 @@ namespace MarianX.Mobiles.NPC
 			}
 			else
 			{
-				Direction = Direction.None;
 				return Vector2.Zero;
 			}
 		}

@@ -1,6 +1,7 @@
 using MarianX.Contents;
 using MarianX.Core;
 using MarianX.Mobiles;
+using MarianX.Mobiles.Player;
 using Microsoft.Xna.Framework;
 
 namespace MarianX.Items
@@ -33,5 +34,7 @@ namespace MarianX.Items
 
 			Position = StartPosition;
 		}
+
+		public abstract void PickUp(Marian marian);
 	}
 }

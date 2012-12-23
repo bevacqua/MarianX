@@ -7,6 +7,7 @@ using MarianX.Items;
 using MarianX.Mobiles.NPC;
 using MarianX.Mobiles.Player;
 using MarianX.Physics;
+using MarianX.UI;
 using MarianX.World.Platform;
 
 namespace MarianX.Core
@@ -49,11 +50,17 @@ namespace MarianX.Core
 		public void Initialize()
 		{
 			InitializeMap();
+			LifeManager.Instance.SetLives(Config.Lives);
 			SetLevelByIndex(Config.Start);
 		}
 
 		private void InitializeMap()
 		{
+			if (levels.Count > 0) // sanity.
+			{
+				return;
+			}
+
 			for (int i = 1; i <= Count; i++)
 			{
 				LevelBackground level = new LevelBackground(i);
@@ -88,7 +95,12 @@ namespace MarianX.Core
 			AddAndTrackNpcs();
 			AddAndTrackItems();
 
+			game.AddAndTrack(marian);
 			game.InitializeBase();
+
+			LifeManager.Instance.Initialize();
+
+			game.AddPersistantContent();
 		}
 
 		private void AddAndTrackNpcs()
@@ -114,7 +126,7 @@ namespace MarianX.Core
 				game.AddAndTrack(item);
 			}
 		}
-		
+
 		private void InitializeMarian()
 		{
 			if (marian == null)
@@ -122,7 +134,6 @@ namespace MarianX.Core
 				marian = new Marian();
 				marian.Move += game.ViewportManager.CharacterMove;
 			}
-			game.AddAndTrack(marian);
 
 			var collisionDetection = marian.Movement.CollisionDetection as IGameContent;
 			if (collisionDetection != null)

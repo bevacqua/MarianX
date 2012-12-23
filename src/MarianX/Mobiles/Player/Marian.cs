@@ -3,6 +3,7 @@ using MarianX.Core;
 using MarianX.Enum;
 using MarianX.Events;
 using MarianX.Physics;
+using MarianX.UI;
 using MarianX.World.Configuration;
 using MarianX.World.Platform;
 using Microsoft.Xna.Framework;
@@ -12,7 +13,7 @@ namespace MarianX.Mobiles.Player
 {
 	public class Marian : PlayerMobile
 	{
-		private const string AssetName = "Mobiles/marian";
+		public const string AssetName = "Mobiles/marian";
 
 		private TimeSpan? lastJumpStarted;
 		private Vector2? jumpStartPosition;
@@ -26,10 +27,11 @@ namespace MarianX.Mobiles.Player
 			}
 			set
 			{
-				// ignore state changes when dead or completing a level.
-				if (State == HitBoxState.Dead || State == HitBoxState.LevelCompleteAnimation)
+				if (State == HitBoxState.Dead ||
+					State == HitBoxState.LevelCompleteAnimation ||
+					State == HitBoxState.GameCompleteAnimation)
 				{
-					return;
+					return; // ignore state changes when dead or completing a level.
 				}
 				state = value;
 			}
@@ -71,12 +73,6 @@ namespace MarianX.Mobiles.Player
 			Direction = Direction.None;
 			Position = TileMatrix.Instance.StartPosition;
 			IdleEffects();
-		}
-
-		private void SetRestartPosition()
-		{
-			SetStartPosition();
-			Flash();
 		}
 
 		private KeyboardState keyboardState;
@@ -204,9 +200,18 @@ namespace MarianX.Mobiles.Player
 			return result;
 		}
 
+		protected override Vector2 CalculateInterpolation(GameTime gameTime)
+		{
+			if (State == HitBoxState.LevelCompleteAnimation || State == HitBoxState.GameCompleteAnimation)
+			{
+				return Vector2.Zero;
+			}
+			return base.CalculateInterpolation(gameTime);
+		}
+
 		private void CompleteLevel()
 		{
-			if (State != HitBoxState.LevelCompleteAnimation)
+			if (State != HitBoxState.LevelCompleteAnimation) // sanity.
 			{
 				State = HitBoxState.LevelCompleteAnimation;
 				LevelCompleteEffects();
@@ -222,15 +227,43 @@ namespace MarianX.Mobiles.Player
 			}
 		}
 
+		private void DieComplete()
+		{
+			var alive = LifeManager.Instance.Subtract();
+			if (alive)
+			{
+				SetStartPosition();
+				Flash();
+			}
+			else
+			{
+				GameCore.Instance.GameOver();
+			}
+		}
+
 		private void Marian_AnimationComplete(object sender, AnimationCompleteArgs args)
 		{
 			if (State == HitBoxState.Dead)
 			{
-				SetRestartPosition();
+				DieComplete();
 			}
 			else if (State == HitBoxState.LevelCompleteAnimation)
 			{
 				GameCore.Instance.AdvanceLevel();
+			}
+			else if (State == HitBoxState.GameCompleteAnimation)
+			{
+				GameCompleteEffects(); // loop animation forever.
+			}
+		}
+
+		public void BreakOut()
+		{
+			if (State != HitBoxState.GameCompleteAnimation) // sanity.
+			{
+				State = HitBoxState.GameCompleteAnimation;
+				Speed = Vector2.Zero;
+				GameCompleteEffects();
 			}
 		}
 	}

@@ -5,6 +5,7 @@ namespace MarianX.Enum
 		Surfaced,
 		Airborne,
 		Dead,
-		LevelCompleteAnimation
+		LevelCompleteAnimation,
+		GameCompleteAnimation
 	}
 }

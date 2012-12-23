@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using MarianX.Enum;
 using Microsoft.Xna.Framework.Input;
 
@@ -23,7 +24,7 @@ namespace MarianX.Core
 			};
 		}
 
-		private readonly KeyboardState keyboardState;
+		private KeyboardState keyboardState;
 
 		public KeyboardConfiguration(KeyboardState keyboardState)
 		{
@@ -48,6 +49,13 @@ namespace MarianX.Core
 			bool wasDown = IsKeyDown(key, oldState);
 
 			return down && !wasDown;
+		}
+
+		public bool IsAnyKeyPressed(KeyboardState oldState)
+		{
+			Keys[] oldKeys = oldState.GetPressedKeys();
+			Keys[] newKeys = keyboardState.GetPressedKeys();
+			return !newKeys.All(oldKeys.Contains);
 		}
 	}
 }

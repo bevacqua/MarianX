@@ -1,3 +1,4 @@
+using MarianX.Core;
 using MarianX.Enum;
 using MarianX.Interface;
 using MarianX.Physics;
@@ -67,6 +68,7 @@ namespace MarianX.Contents
 
 		public virtual void Unload()
 		{
+			GameCore.Instance.RemoveContent(this);
 		}
 	}
 }

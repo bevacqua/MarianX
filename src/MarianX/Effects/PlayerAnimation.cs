@@ -18,8 +18,8 @@ namespace MarianX.Effects
 		private readonly FrameSet steerLeft = new FrameSet { Row = 2, Frames = 1, Start = 3, Loop = false, Effects = SpriteEffects.FlipHorizontally };
 		private readonly FrameSet deathRight = new FrameSet { Row = 3, Frames = 16, Loop = false };
 		private readonly FrameSet deathLeft = new FrameSet { Row = 3, Frames = 16, Loop = false, Effects = SpriteEffects.FlipHorizontally };
-		private readonly FrameSet completeRight = new FrameSet { Row = 3, Frames = 16, Loop = false };
-		private readonly FrameSet completeLeft = new FrameSet { Row = 3, Frames = 16, Loop = false, Effects = SpriteEffects.FlipHorizontally };
+		private readonly FrameSet cheerRight = new FrameSet { Row = 4, Frames = 14, Loop = false };
+		private readonly FrameSet cheerLeft = new FrameSet { Row = 4, Frames = 14, Loop = false, Effects = SpriteEffects.FlipHorizontally };
 
 		public PlayerAnimation(Mobile mobile)
 			: base(mobile)
@@ -55,9 +55,9 @@ namespace MarianX.Effects
 			mobile.SetFrameSet(lastFacedLeft ? deathLeft : deathRight);
 		}
 
-		public void LevelComplete()
+		public void Cheer()
 		{
-			mobile.SetFrameSet(lastFacedLeft ? completeLeft : completeRight);
+			mobile.SetFrameSet(lastFacedLeft ? cheerLeft : cheerRight, true);
 		}
 	}
 }

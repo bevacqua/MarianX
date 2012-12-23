@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using MarianX.Contents;
 using MarianX.Interface;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -14,7 +15,7 @@ namespace MarianX.Core
 		{
 			get { return contents.ToList(); }
 		}
-		
+
 		protected SpriteBatch spriteBatch { get; private set; }
 
 		public bool HasContentLoaded { get; protected set; }
@@ -37,6 +38,11 @@ namespace MarianX.Core
 			{
 				content.Load(Content);
 			}
+		}
+
+		public void RemoveContent(IGameContent content)
+		{
+			contents.Remove(content);
 		}
 
 		protected override void Initialize()

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using MarianX.Core;
 using MarianX.Events;
+using MarianX.World.Configuration;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

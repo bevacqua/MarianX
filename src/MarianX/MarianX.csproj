@@ -110,6 +110,9 @@
   <ItemGroup>
     <Compile Include="Contents\Font.cs" />
     <Compile Include="Core\LevelManager.cs" />
+    <Compile Include="Core\PausableGame.cs" />
+    <Compile Include="UI\Life.cs" />
+    <Compile Include="UI\LifeManager.cs" />
     <Compile Include="Diagnostics\DebuggableGame.cs" />
     <Compile Include="Diagnostics\DiagnosticGame.cs" />
     <Compile Include="Diagnostics\Diagnostic.cs" />

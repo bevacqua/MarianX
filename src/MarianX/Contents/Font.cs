@@ -1,4 +1,3 @@
-using System;
 using MarianX.Interface;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -48,12 +47,23 @@ namespace MarianX.Contents
 
 		public void UpdateScreenPosition(Vector2 screenPosition)
 		{
-			throw new NotImplementedException();
 		}
 
 		public Vector2 Position
 		{
-			get { throw new NotImplementedException(); }
+			get { return Vector2.Zero; }
+		}
+
+		public void Write(string message, Vector2 position, SpriteBatch spriteBatch, Color color)
+		{
+			SpriteFont spriteFont = this;
+			spriteBatch.DrawString(spriteFont, message, position, color);
+		}
+
+		public Vector2 MeasureString(string message)
+		{
+			SpriteFont spriteFont = this;
+			return spriteFont.MeasureString(message);
 		}
 	}
 }

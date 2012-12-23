@@ -1,5 +1,6 @@
-using MarianX.Diagnostics;
+using MarianX.Contents;
 using MarianX.Effects;
+using MarianX.Geometry;
 using MarianX.Interface;
 using MarianX.Physics;
 using Microsoft.Xna.Framework;
@@ -7,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MarianX.Core
 {
-	public class GameCore : DebuggableGame
+	public class GameCore : PausableGame
 	{
 		public static GameCore Instance { get; private set; }
 
@@ -35,7 +36,7 @@ namespace MarianX.Core
 		protected override void Initialize()
 		{
 			ViewportManager.Initialize();
-			LevelManager.Instance.Initialize();
+			Restart();
 		}
 
 		public void InitializeBase()
@@ -62,6 +63,11 @@ namespace MarianX.Core
 			}
 
 			base.UpdateInput(gameTime);
+		}
+
+		protected override void Restart()
+		{
+			LevelManager.Instance.Initialize();
 		}
 	}
 }

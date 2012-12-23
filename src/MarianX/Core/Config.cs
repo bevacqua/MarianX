@@ -16,6 +16,11 @@ namespace MarianX.Core
 			get { return Int(Get("Start")) ?? 1; }
 		}
 
+		public static int Lives
+		{
+			get { return Int(Get("Lives")) ?? 3; }
+		}
+
 		private static string Get(string property)
 		{
 			return ConfigurationManager.AppSettings[property];

@@ -26,7 +26,7 @@ namespace MarianX.Physics
 			var aabbItem = item.BoundingBox.Bounds;
 			if (aabbItem.Intersects(aabb))
 			{
-				throw new NotImplementedException();
+				item.PickUp(marian);
 			}
 		}
 	}

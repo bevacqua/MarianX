@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using MarianX.Contents;
 using MarianX.Core;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace MarianX.Diagnostics
 {
@@ -42,16 +41,15 @@ namespace MarianX.Diagnostics
 
 			spriteBatch.Begin();
 
-			SpriteFont spriteFont = font;
 			Vector2 position = new Vector2(8, 8);
 
 			foreach (var entry in messages)
 			{
 				string message = string.Concat(entry.Key, " ", entry.Value);
 
-				spriteBatch.DrawString(spriteFont, message, position, Color.DarkViolet);
+				font.Write(message, position, spriteBatch, Color.DarkViolet);
 
-				position.Y += spriteFont.MeasureString(message).Y;
+				position.Y += font.MeasureString(message).Y;
 			}
 
 			spriteBatch.End();

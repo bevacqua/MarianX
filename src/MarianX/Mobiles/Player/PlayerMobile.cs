@@ -85,7 +85,27 @@ namespace MarianX.Mobiles.Player
 
 		protected void LevelCompleteEffects()
 		{
-			animation.LevelComplete();
+			animation.Cheer();
+		}
+
+		private float offset;
+
+		protected void GameCompleteEffects()
+		{
+			if (Tint == Color.White)
+			{
+				Tint = Color.FromNonPremultiplied(240, 40, 40,255);
+			}
+			if (Scale + .2f < 1.8f)
+			{
+				Scale += .2f;
+				Tint = Color.Multiply(Tint, 0.8f);
+				offset = ContentHeight * .2f;
+				float x = Position.X;
+				float y = Position.Y - offset;
+				Position = new Vector2(x, y);
+			}
+			animation.Cheer();
 		}
 
 		private Color tintBeforeFlash;
@@ -116,7 +136,7 @@ namespace MarianX.Mobiles.Player
 				else
 				{
 					hideFrame = ++flashFrame % MagicNumbers.InvulnerableFrameInterval == 0;
-					
+
 					if (hideFrame)
 					{
 						flashFrame = 0;

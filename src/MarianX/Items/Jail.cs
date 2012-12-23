@@ -1,4 +1,5 @@
 using MarianX.Contents;
+using MarianX.Mobiles.Player;
 using MarianX.Physics;
 using MarianX.World.Configuration;
 using Microsoft.Xna.Framework.Content;
@@ -20,7 +21,7 @@ namespace MarianX.Items
 			};
 		}
 
-		private readonly FrameSet frameSet = new FrameSet { Row = 0, Frames = 3 };
+		private readonly FrameSet frameSet = new FrameSet { Row = 0, Frames = 6 };
 
 		public Jail()
 			: base(AssetName, settings)
@@ -32,6 +33,11 @@ namespace MarianX.Items
 		{
 			base.Load(content);
 			SetFrameSet(frameSet);
+		}
+
+		public override void PickUp(Marian marian)
+		{
+			marian.BreakOut();
 		}
 	}
 }

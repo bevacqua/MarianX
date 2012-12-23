@@ -54,5 +54,9 @@ namespace MarianX.World.Configuration
 
 		public const int JailHitBoxWidth = 3;
 		public const int JailHitBoxHeight = 2;
+
+		public const int LifeTop = 12;
+		public const int LifeRight = 8;
+		public const int LifeWidth = 32;
 	}
 }

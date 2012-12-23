@@ -34,7 +34,7 @@ namespace MarianX.Contents
 		public float Scale
 		{
 			get { return scale; }
-			private set
+			protected set
 			{
 				scale = value;
 				InvalidateTextureScale();
