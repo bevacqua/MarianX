@@ -12,9 +12,9 @@ namespace MarianX.Map.Builder
 	{
 		private TileType[] tileTypes;
 
-		public void BuildAndSave(IBuilder[] levels)
+		public void BuildAndSave(IList<IBuilder> levels)
 		{
-			if (levels == null || levels.Length == 0)
+			if (levels == null || levels.Count == 0)
 			{
 				throw new ArgumentException("levels");
 			}
@@ -59,9 +59,9 @@ namespace MarianX.Map.Builder
 			string csvTarget = string.Concat(level, "/map.csv");
 			string fragmentTarget = string.Concat(level, "/map_{0}_{1}.png");
 
-			string npc = string.Format(LevelBuilder.FileFormat, builder.Level, "npc");
-			string npcRelative = string.Concat("../", npc);
-			string npcTarget = string.Concat(level, "/map.npc");
+			string metadata = string.Format(LevelBuilder.FileFormat, builder.Level, "{0}");
+			string metadataRelative = string.Concat("../", metadata);
+			string metadataTarget = string.Concat(level, "/map.{0}");
 			string mapTarget = string.Concat(level, "/map.png");
 
 			// metadata actually used for rendering maps.
@@ -69,9 +69,16 @@ namespace MarianX.Map.Builder
 			fragmentedPersistance.SaveFragmentMetadata(map, indexTarget, builder);
 			fragmentedPersistance.SaveTileMap(map, fragmentTarget);
 			fragmentedPersistance.SaveTileMatrix(map, csvTarget);
-			
-			// npc metadata: just copy over.
-			File.Copy(npcRelative, npcTarget, true);
+
+			// other metadata: just copy over.
+			string npcSource = string.Format(metadataRelative, "npc");
+			string npcTarget = string.Format(metadataTarget, "npc");
+
+			string itemSource = string.Format(metadataRelative, "item");
+			string itemTarget = string.Format(metadataTarget, "item");
+
+			File.Copy(npcSource, npcTarget, true);
+			File.Copy(itemSource, itemTarget, true);
 
 			return () =>
 			{

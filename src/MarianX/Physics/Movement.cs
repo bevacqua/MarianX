@@ -1,7 +1,6 @@
 using MarianX.Diagnostics;
 using MarianX.Enum;
 using MarianX.Interface;
-using MarianX.Sprites;
 using MarianX.World.Configuration;
 using MarianX.World.Physics;
 using Microsoft.Xna.Framework;

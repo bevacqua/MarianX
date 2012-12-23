@@ -123,11 +123,12 @@
     <Compile Include="Events\Move.cs" />
     <Compile Include="Events\MoveArgs.cs" />
     <Compile Include="Interface\ISquareGrid.cs" />
-    <Compile Include="Mobiles\Gloop.cs" />
-    <Compile Include="Mobiles\Npc.cs" />
+    <Compile Include="Items\Item.cs" />
+    <Compile Include="Mobiles\NPC\Gloop.cs" />
+    <Compile Include="Mobiles\NPC\Npc.cs" />
     <Compile Include="Physics\AxisAlignedBoundingBox.cs" />
-    <Compile Include="Physics\MobileCollisionDetection.cs" />
-    <Compile Include="Physics\MobileCollisionDetectionEngine.cs" />
+    <Compile Include="Physics\DynamicCollisionDetection.cs" />
+    <Compile Include="Physics\DynamicCollisionDetectionEngine.cs" />
     <Compile Include="Physics\StaticCollisionDetection.cs" />
     <Compile Include="Diagnostics\DiagnosticCollisionDetection.cs" />
     <Compile Include="Physics\GloopBoundingBox.cs" />
@@ -152,25 +153,25 @@
     <Compile Include="Interface\IGameContent.cs" />
     <Compile Include="Enum\ActionKey.cs" />
     <Compile Include="Core\KeyboardConfiguration.cs" />
-    <Compile Include="Mobiles\PlayerMobile.cs" />
+    <Compile Include="Mobiles\Player\PlayerMobile.cs" />
     <Compile Include="Interface\IHitBox.cs" />
     <Compile Include="Diagnostics\DiagnosticMobile.cs" />
-    <Compile Include="Sprites\FragmentedSquareGrid.cs" />
-    <Compile Include="Sprites\HitBoxState.cs" />
-    <Compile Include="Sprites\LevelBackground.cs" />
-    <Compile Include="Sprites\Resources\Error.Designer.cs">
+    <Compile Include="Geometry\FragmentedSquareGrid.cs" />
+    <Compile Include="Enum\HitBoxState.cs" />
+    <Compile Include="Backgrounds\LevelBackground.cs" />
+    <Compile Include="Backgrounds\Resources\Error.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Error.resx</DependentUpon>
     </Compile>
-    <Compile Include="Sprites\BackgroundAsset.cs" />
-    <Compile Include="Sprites\BackgroundSprite.cs" />
-    <Compile Include="Sprites\Square.cs" />
-    <Compile Include="Sprites\SquareGrid.cs" />
-    <Compile Include="Sprites\MapBackground.cs" />
+    <Compile Include="Backgrounds\BackgroundAsset.cs" />
+    <Compile Include="Backgrounds\BackgroundSprite.cs" />
+    <Compile Include="Geometry\Square.cs" />
+    <Compile Include="Geometry\SquareGrid.cs" />
+    <Compile Include="Backgrounds\MapBackground.cs" />
     <Compile Include="Mobiles\Mobile.cs" />
-    <Compile Include="Mobiles\Marian.cs" />
-    <Compile Include="Sprites\Background.cs" />
+    <Compile Include="Mobiles\Player\Marian.cs" />
+    <Compile Include="Backgrounds\Background.cs" />
     <Compile Include="Contents\Sprite.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -231,7 +232,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Sprites\Resources\Error.resx">
+    <EmbeddedResource Include="Backgrounds\Resources\Error.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Error.Designer.cs</LastGenOutput>
     </EmbeddedResource>

@@ -1,6 +1,6 @@
 using System;
+using MarianX.Enum;
 using MarianX.Mobiles;
-using MarianX.Sprites;
 using MarianX.World.Configuration;
 using MarianX.World.Extensions;
 using Microsoft.Xna.Framework;

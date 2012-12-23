@@ -6,7 +6,6 @@ using MarianX.Enum;
 using MarianX.Events;
 using MarianX.Interface;
 using MarianX.Physics;
-using MarianX.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

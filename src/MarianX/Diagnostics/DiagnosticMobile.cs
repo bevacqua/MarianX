@@ -1,7 +1,7 @@
 using MarianX.Contents;
 using MarianX.Core;
+using MarianX.Geometry;
 using MarianX.Mobiles;
-using MarianX.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

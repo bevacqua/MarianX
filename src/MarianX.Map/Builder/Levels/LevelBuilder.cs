@@ -13,6 +13,7 @@ namespace MarianX.Map.Builder.Levels
 	{
 		public const string FileFormat = "data/levels/{0}/level.{1}";
 
+		private readonly Random random;
 		private readonly int level;
 		private LevelBuilderInfo info;
 		private IList<LevelBuilderRule> rules;
@@ -59,6 +60,8 @@ namespace MarianX.Map.Builder.Levels
 
 		public LevelBuilder(int level)
 		{
+			random = new Random();
+
 			this.level = level;
 
 			LoadLevelInfo();
@@ -70,9 +73,16 @@ namespace MarianX.Map.Builder.Levels
 			string path = string.Format(FileFormat, level, from);
 
 			using (TextReader textReader = new StreamReader(path))
-			using (CsvReader reader = new CsvReader(textReader, new CsvConfiguration { IsStrictMode = false }))
 			{
-				action(reader);
+				CsvConfiguration config = new CsvConfiguration
+				{
+					IsStrictMode = false,
+					SkipEmptyRecords = true
+				};
+				using (CsvReader reader = new CsvReader(textReader, config))
+				{
+					action(reader);
+				}
 			}
 		}
 
@@ -91,7 +101,7 @@ namespace MarianX.Map.Builder.Levels
 			{
 				rules = reader.GetRecords<LevelBuilderRule>().ToList();
 
-				foreach (var rule in rules)
+				foreach (LevelBuilderRule rule in rules)
 				{
 					rule.Process(info.Columns, info.Rows);
 				}
@@ -109,21 +119,33 @@ namespace MarianX.Map.Builder.Levels
 				{
 					if (y >= rule.Y && y < rule.Bottom)
 					{
-						int index;
-						
-						if (int.TryParse(rule.Tile, out index))
+						if (rule.Incidence.HasValue)
 						{
-							tile = tileTypes[index];
+							var incidence = rule.Incidence.Value;
+							if (incidence < random.NextDouble())
+							{
+								continue;
+							}
 						}
-						else
-						{
-							tile = tileTypes.First(t => t.Type == rule.Tile);
-						}
+
+						tile = ParseTileFromRule(rule, tileTypes);
 					}
 				}
 			}
 
 			return tile;
+		}
+
+		private TileType ParseTileFromRule(LevelBuilderRule rule, TileType[] tileTypes)
+		{
+			int index;
+
+			if (int.TryParse(rule.Tile, out index))
+			{
+				return tileTypes[index];
+			}
+
+			return tileTypes.First(t => t.Type == rule.Tile);
 		}
 	}
 }

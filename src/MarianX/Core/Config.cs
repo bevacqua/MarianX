@@ -13,7 +13,7 @@ namespace MarianX.Core
 
 		public static int Start
 		{
-			get { return Int("Start") ?? 1; }
+			get { return Int(Get("Start")) ?? 1; }
 		}
 
 		private static string Get(string property)

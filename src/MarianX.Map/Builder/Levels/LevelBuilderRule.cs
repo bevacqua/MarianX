@@ -23,6 +23,8 @@ namespace MarianX.Map.Builder.Levels
 			get { return Y + Height; }
 		}
 
+		public double? Incidence { get; set; }
+
 		private bool processed;
 
 		public void Process(int columns, int rows)

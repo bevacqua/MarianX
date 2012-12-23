@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.IO;
+using MarianX.Backgrounds;
 using MarianX.Diagnostics;
 using MarianX.Effects;
 using MarianX.Interface;
 using MarianX.Mobiles;
+using MarianX.Mobiles.NPC;
+using MarianX.Mobiles.Player;
 using MarianX.Physics;
-using MarianX.Sprites;
 using MarianX.World.Platform;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -23,7 +25,7 @@ namespace MarianX.Core
 		private Marian marian;
 		private SongManager songManager;
 
-		public MobileCollisionDetectionEngine MobileCollisionDetection { get; private set; }
+		public DynamicCollisionDetectionEngine DynamicCollisionDetection { get; private set; }
 
 		public GameCore()
 		{
@@ -54,7 +56,7 @@ namespace MarianX.Core
 
 		private void InitializeMap()
 		{
-			int levelCount = 2;
+			int levelCount = 3;
 
 			for (int i = 1; i <= levelCount; i++)
 			{
@@ -78,7 +80,7 @@ namespace MarianX.Core
 				AddContent(collisionDetection);
 			}
 
-			MobileCollisionDetection = new MobileCollisionDetectionEngine(marian);
+			DynamicCollisionDetection = new DynamicCollisionDetectionEngine(marian);
 		}
 
 		private void InitializeEffects()

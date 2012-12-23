@@ -1,5 +1,5 @@
+using MarianX.Enum;
 using MarianX.Physics;
-using MarianX.Sprites;
 
 namespace MarianX.Interface
 {
