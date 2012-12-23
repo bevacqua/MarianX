@@ -25,7 +25,7 @@ namespace MarianX.Core
 			};
 		}
 
-		private KeyboardState keyboardState;
+		private readonly KeyboardState keyboardState;
 
 		public KeyboardConfiguration(KeyboardState keyboardState)
 		{

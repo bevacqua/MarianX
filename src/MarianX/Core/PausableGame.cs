@@ -12,7 +12,7 @@ namespace MarianX.Core
 		private readonly Font titleFont;
 		private readonly Font regularFont;
 
-		private bool gameOver = true;
+		private bool gameOver;
 		private KeyboardState oldState;
 
 		public PausableGame()
@@ -58,7 +58,7 @@ namespace MarianX.Core
 			spriteBatch.Begin();
 			square.Draw(spriteBatch, Vector2.Zero);
 			DrawText(title, titleFont, new Vector2(0, -30), Color.BlanchedAlmond);
-			DrawText(legend, regularFont, new Vector2(200, 25), Color.AliceBlue);
+			DrawText(legend, regularFont, new Vector2(160, 25), Color.AliceBlue);
 			spriteBatch.End();
 		}
 

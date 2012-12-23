@@ -1,6 +1,4 @@
-using MarianX.Contents;
 using MarianX.Effects;
-using MarianX.Geometry;
 using MarianX.Interface;
 using MarianX.Physics;
 using Microsoft.Xna.Framework;
