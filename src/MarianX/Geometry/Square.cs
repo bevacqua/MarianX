@@ -25,6 +25,11 @@ namespace MarianX.Geometry
 		public Rectangle Bounds { get; set; }
 		public Color Color { get; set; }
 
+		public void Draw(SpriteBatch spriteBatch)
+		{
+			Draw(spriteBatch, Vector2.Zero);
+		}
+
 		public void Draw(SpriteBatch spriteBatch, Vector2 position)
 		{
 			GraphicsDevice device = GameCore.Instance.GraphicsDevice;

@@ -80,7 +80,12 @@ namespace MarianX.Contents
 					if (!signaledAnimationCompleted)
 					{
 						signaledAnimationCompleted = true;
-						InvokeAnimationComplete(new AnimationCompleteArgs());
+
+						InvokeAnimationComplete(new AnimationCompleteArgs
+						{
+							FrameSet = frameSet,
+							GameTime = gameTime
+						});
 					}
 				}
 			}

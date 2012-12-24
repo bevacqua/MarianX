@@ -227,11 +227,12 @@ namespace MarianX.Mobiles.Player
 			}
 		}
 
-		private void DieComplete()
+		private void DieComplete(GameTime gameTime)
 		{
 			var alive = LifeManager.Instance.Subtract();
 			if (alive)
 			{
+				GameCore.Instance.BlackOut(gameTime, TimeSpan.FromSeconds(2.2));
 				SetStartPosition();
 				Flash();
 			}
@@ -245,7 +246,7 @@ namespace MarianX.Mobiles.Player
 		{
 			if (State == HitBoxState.Dead)
 			{
-				DieComplete();
+				DieComplete(args.GameTime);
 			}
 			else if (State == HitBoxState.LevelCompleteAnimation)
 			{

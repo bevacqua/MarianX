@@ -56,7 +56,7 @@ namespace MarianX.Core
 			};
 
 			spriteBatch.Begin();
-			square.Draw(spriteBatch, Vector2.Zero);
+			square.Draw(spriteBatch);
 			DrawText(title, titleFont, new Vector2(0, -30), Color.BlanchedAlmond);
 			DrawText(legend, regularFont, new Vector2(160, 25), Color.AliceBlue);
 			spriteBatch.End();

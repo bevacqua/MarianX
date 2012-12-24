@@ -1,4 +1,6 @@
+using System;
 using MarianX.Effects;
+using MarianX.Geometry;
 using MarianX.Interface;
 using MarianX.Physics;
 using Microsoft.Xna.Framework;
@@ -66,6 +68,47 @@ namespace MarianX.Core
 		protected override void Restart()
 		{
 			LevelManager.Instance.Initialize();
+		}
+
+		private TimeSpan? blackOutStart;
+		private TimeSpan? blackOutDuration;
+
+		public void BlackOut(GameTime gameTime, TimeSpan duration)
+		{
+			blackOutStart = gameTime.TotalGameTime;
+			blackOutDuration = duration;
+		}
+
+		protected override void Draw(GameTime gameTime)
+		{
+			base.Draw(gameTime);
+
+			if (!blackOutStart.HasValue || !blackOutDuration.HasValue)
+			{
+				return;
+			}
+
+			var difference = gameTime.TotalGameTime - blackOutStart.Value;
+			if (difference > blackOutDuration)
+			{
+				blackOutStart = null;
+				blackOutDuration = null;
+			}
+			else
+			{
+				double alpha = 1 - difference.TotalMilliseconds / blackOutDuration.Value.TotalMilliseconds;
+
+				Square square = new Square
+				{
+					Bounds = GraphicsDevice.Viewport.Bounds,
+					Color = Color.Black,
+					Alpha = (float)Math.Max(0.01, Math.Min(alpha, 1))
+				};
+
+				spriteBatch.Begin();
+				square.Draw(spriteBatch);
+				spriteBatch.End();
+			}
 		}
 	}
 }
